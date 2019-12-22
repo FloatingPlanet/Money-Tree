@@ -1,27 +1,22 @@
 export class User {
-  $key: string;
-  userName: string;
-  emailId: string;
-  password: string;
-  location: {
+  uid: string;
+  username: string;
+  email: string;
+  password?: string;
+  location?: {
     lat: number;
     lon: number;
   };
   phoneNumber: string;
-  createdOn: string;
+  verified_email: boolean;
+  createdOn?: Date;
   isAdmin: boolean;
   avatar: string;
-}
-
-export class UserDetail {
-  $key: string;
-  firstName: string;
-  lastName: string;
-  userName: string;
-  emailId: string;
-  address1: string;
-  address2: string;
-  country: string;
-  state: string;
-  zip: number;
+  firstName?: string;
+  lastName?: string;
+  address1?: string;
+  address2?: string;
+  country?: string;
+  state?: string;
+  zip?: number;
 }

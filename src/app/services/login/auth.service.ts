@@ -10,7 +10,7 @@ import { UserService } from "../user/user.service";
 export class AuthService {
   user: Observable<firebase.User>;
   userDetails: firebase.User = null;
-  loggedUser;
+
   dbUser;
   constructor(
     private firebaseAuth: AngularFireAuth,
@@ -18,23 +18,6 @@ export class AuthService {
     private userService: UserService
   ) {
     this.user = firebaseAuth.authState;
-    this.dbUser = new User();
-    this.user.subscribe(user => {
-      if (user) {
-        this.userDetails = user;
-        userService
-          .isAdmin(this.userDetails.email)
-          .snapshotChanges()
-          .subscribe(data => {
-            data.forEach(el => {
-              const y = el.payload.toJSON();
-              this.dbUser = y;
-            });
-          });
-      } else {
-        this.userDetails = null;
-      }
-    });
   }
 
   isLoggedIn(): boolean {
@@ -44,7 +27,7 @@ export class AuthService {
   }
 
   logout() {
-    this.loggedUser = null;
+    // this.loggedUser = null;
     this.firebaseAuth.auth.signOut().then(res => this.router.navigate(["/"]));
   }
 
@@ -59,20 +42,6 @@ export class AuthService {
     const loggedUser: User = new User();
     const user = this.firebaseAuth.auth.currentUser;
 
-    if (user) {
-      this.userDetails = user;
-      if (user != null) {
-        loggedUser.$key = user.uid;
-        loggedUser.userName = user.displayName;
-        loggedUser.emailId = user.email;
-        loggedUser.phoneNumber = user.phoneNumber;
-        loggedUser.avatar = user.photoURL;
-        loggedUser.isAdmin = this.dbUser["isAdmin"];
-      }
-    } else {
-      this.userDetails = null;
-    }
-
     return loggedUser;
   }
 
@@ -80,9 +49,7 @@ export class AuthService {
     const user = this.getLoggedInUser();
     // console.log("loggedUSer", user)
     if (user != null) {
-      if (user.isAdmin === true) {
-        return true;
-      }
+      return user.isAdmin;
     }
   }
 

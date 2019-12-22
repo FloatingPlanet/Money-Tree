@@ -1,1 +1,30 @@
-<p>login-page works!</p>
+<div class="login-form">
+    <h1> Log in</h1>
+    <form #loginForm>
+        <mat-form-field>
+            <input name="login-email" type="email" matInput placeholder="xxx@yyy.com" />
+        </mat-form-field>
+
+        <mat-form-field>
+            <input name="login-password" type="password" matInput placeholder="password" />
+        </mat-form-field>
+    </form>
+</div>
+<div class="signup-form">
+    <h1> Sign up</h1>
+    <form #loginForm>
+        <mat-form-field>
+            <input name="signup-email" type="email" matInput placeholder="xxx@yyy.com" />
+        </mat-form-field>
+
+        <mat-form-field>
+            <input name="signup-password" type="password" matInput placeholder="password" />
+        </mat-form-field>
+
+        <mat-form-field>
+            <input name="password-confirm" type="password" matInput placeholder="password" />
+        </mat-form-field>
+    </form>
+</div>
+
+<button class="btn btn-secondary" (click)="signinWithGoogle()">log in with google</button>

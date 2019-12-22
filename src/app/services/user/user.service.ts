@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { AngularFireDatabase, AngularFireList } from "angularfire2/database";
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 
 import * as moment from "moment";
 import { User } from "../../models/user";
@@ -7,37 +7,37 @@ import { User } from "../../models/user";
 @Injectable()
 export class UserService {
   selectedUser: User = new User();
-  users: AngularFireList<User>;
+  users: AngularFirestoreCollection<User>;
 
   location = {
     lat: null,
     lon: null
   };
 
-  constructor(private db: AngularFireDatabase) {
+  constructor(private db: AngularFirestore) {
     this.getUsers();
   }
 
   getUsers() {
-    this.users = this.db.list("clients");
+    this.users = this.db.collection("users");
     return this.users;
   }
 
-  createUser(data: any) {
-    data.location = this.location;
-    data.createdOn = moment(new Date()).format("X");
-    data.isAdmin = false;
-    this.users.push(data);
+  createUser(user: User) {
+    user.location = this.location;
+    user.createdOn = new Date();
+    user.isAdmin = false;
+    this.users.add(user);
   }
 
-  isAdmin(emailId: string) {
-    return this.db.list("clients", ref =>
-      ref.orderByChild("email").equalTo(emailId)
-    );
-  }
+  // isAdmin(email: string): Promise<boolean> {
+  //   // return this.users.doc(email).snapshotChanges().toPromise().then((user: User)=>{
+  //   //   return user.isAdmin;
+  //   // });
+  // }
 
   updateUser(user: User) {
-    this.users.update(user.$key, user);
+    this.users.doc(user.uid).update(user);
   }
 
   setLocation(lat, lon) {

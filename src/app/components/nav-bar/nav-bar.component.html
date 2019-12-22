@@ -1,7 +1,10 @@
-<mat-toolbar-row>
-    <span>Third Line</span>
-    <span class="example-spacer"></span>
-    <mat-icon class="example-icon" aria-hidden="false" aria-label="Example heart icon">favorite</mat-icon>
-    <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">delete</mat-icon>
-</mat-toolbar-row>
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <span>LOGO</span>
+        <span class="spacer"></span>
+        <a [routerLink]="['/login']" mat-icon-button aria-hidden="false" aria-label="Example log icon">
+            <mat-icon aria-hidden="false" aria-label="Example log icon">people</mat-icon>
+        </a>
+
+    </mat-toolbar-row>
 </mat-toolbar>

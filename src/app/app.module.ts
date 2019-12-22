@@ -2,7 +2,42 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from 'angularfire2';
-
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import {
+  MatCheckboxModule,
+  MatButtonModule,
+  MatInputModule,
+  MatAutocompleteModule,
+  MatDatepickerModule,
+  MatFormFieldModule,
+  MatRadioModule,
+  MatSelectModule,
+  MatSliderModule,
+  MatSlideToggleModule,
+  MatMenuModule,
+  MatSidenavModule,
+  MatToolbarModule,
+  MatListModule,
+  MatGridListModule,
+  MatCardModule,
+  MatStepperModule,
+  MatTabsModule,
+  MatExpansionModule,
+  MatButtonToggleModule,
+  MatChipsModule,
+  MatIconModule,
+  MatProgressSpinnerModule,
+  MatProgressBarModule,
+  MatDialogModule,
+  MatTooltipModule,
+  MatSnackBarModule,
+  MatTableModule,
+  MatSortModule,
+  MatPaginatorModule
+} from '@angular/material';
+import { ToastrModule } from 'ngx-toastr';
 // Our stuff ---- ❤❤❤
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +53,11 @@ import { CheckoutPageComponent } from './pages/checkout-page/checkout-page.compo
 import { NoAccessComponent } from './pages/no-access/no-access.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { environment } from 'src/environments/environment';
+import { AuthService } from './services/login/auth.service';
+import { UserService } from './services/user/user.service';
+import { FlashMessageService } from './services/flashMessage/flash-message.service';
+import { ProductService } from './services/product/product.service';
+
 
 
 @NgModule({
@@ -35,12 +75,53 @@ import { environment } from 'src/environments/environment';
     PageNotFoundComponent
   ],
   imports: [
-    AngularFireModule.initializeApp(environment),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireStorageModule,
+    AngularFirestoreModule,
     BrowserModule,
+    ToastrModule.forRoot(),
     AppRoutingModule,
-    BrowserAnimationsModule
+    AngularFireAuthModule,
+    // material design stuff
+    BrowserAnimationsModule,
+    MatCheckboxModule,
+    MatCheckboxModule,
+    MatButtonModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatMenuModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatListModule,
+    MatGridListModule,
+    MatCardModule,
+    MatStepperModule,
+    MatTabsModule,
+    MatExpansionModule,
+    MatButtonToggleModule,
+    MatChipsModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
+    MatProgressBarModule,
+    MatDialogModule,
+    MatTooltipModule,
+    MatSnackBarModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    UserService,
+    FlashMessageService,
+    ProductService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
