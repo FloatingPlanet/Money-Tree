@@ -1,6 +1,9 @@
+// Other people's stuff ---- dependencies
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { AngularFireModule } from 'angularfire2';
 
+// Our stuff ---- ❤❤❤
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,6 +17,8 @@ import { ShoppingCartComponent } from './pages/shopping-cart/shopping-cart.compo
 import { CheckoutPageComponent } from './pages/checkout-page/checkout-page.component';
 import { NoAccessComponent } from './pages/no-access/no-access.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { environment } from 'src/environments/environment';
+
 
 @NgModule({
   declarations: [
@@ -30,6 +35,7 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
     PageNotFoundComponent
   ],
   imports: [
+    AngularFireModule.initializeApp(environment),
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule
