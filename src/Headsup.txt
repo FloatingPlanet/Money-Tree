@@ -1,0 +1,5 @@
+Whenever you create a branch, please add the ClickUp task ID in any part of the branch name with a hashtag in front of it.
+
+When a branch is attached to a task, all commits in that branch will be logged to the task, without having to add the Task ID to the commit message.
+
+Example: feature_#12345
