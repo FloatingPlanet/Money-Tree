@@ -1,8 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { NoAccessComponent } from './pages/no-access/no-access.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { MainPageComponent } from './pages/main-page/main-page.component';
 
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: '', component: MainPageComponent
+  },
+  { path: 'no-access', component: NoAccessComponent },
+  { path: '**', component: PageNotFoundComponent }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
