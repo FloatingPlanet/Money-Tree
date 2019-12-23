@@ -1,7 +1,7 @@
 <div class="container margin-top-20" fxLayout="row wrap" fxLayoutAlign="space-evenly stretch" fxLayoutGap="20px">
 
-    <mat-card fxFlex="33" fxLayout="column" class="product-card" *ngFor="let product of products; let i = index">
-
+    <mat-card fxFlex="0 1 calc(20% - 20px)" *ngFor="let product of products; let i = index" class="product"
+        fxLayout="column">
         <img mat-card-image src="{{product.picture.uri}}">
         <mat-card-header>
             <!-- <div mat-card-avatar class="product-header-image"></div> -->
