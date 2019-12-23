@@ -57,6 +57,7 @@ import { AuthService } from './services/login/auth.service';
 import { UserService } from './services/user/user.service';
 import { FlashMessageService } from './services/flashMessage/flash-message.service';
 import { ProductService } from './services/product/product.service';
+import { ProductItemComponent } from './components/product-item/product-item.component';
 
 
 
@@ -72,7 +73,8 @@ import { ProductService } from './services/product/product.service';
     ShoppingCartComponent,
     CheckoutPageComponent,
     NoAccessComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ProductItemComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
