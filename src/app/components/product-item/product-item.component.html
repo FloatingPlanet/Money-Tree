@@ -1,11 +1,19 @@
 <p>product-item works!</p>
-<div class="media" *ngFor="let product of products; let i = index">
-    <img class="mr-3" class="img-thumbnail" class="thumbNail" src="{{product.picture.thumbNail}}"
-        alt="Generic placeholder image" height="100">
-    <div class="media-body">
-        <h5 class="mt-0">{{product.name}}</h5>
-        <button>
-            View details</button>
-        <!--TODO MODEL POP WINDOW SHOWS DETAIL  -->
-    </div>
+
+<div class="container-fluid">
+    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+        <div class="bd-example">
+            <div class="media" *ngFor="let product of products; let i = index">
+                <img class="mr-3" class="img-thumbnail" class="thumbNail" src="{{product.picture.thumbNail}}"
+                    alt="Generic placeholder image" height="100">
+                <div class="media-body">
+                    <h5 class="mt-0" class="text">{{product.name}}</h5>
+                    <h6 class=" mt-0">{{product.price}}</h6>
+                    <button>
+                        View details</button>
+                    <!--TODO MODEL POP WINDOW SHOWS DETAIL  -->
+                </div>
+            </div>
+        </div>
+    </main>
 </div>
