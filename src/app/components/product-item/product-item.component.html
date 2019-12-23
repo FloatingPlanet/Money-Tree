@@ -1,1 +1,11 @@
 <p>product-item works!</p>
+<div class="media" *ngFor="let product of products; let i = index">
+    <img class="mr-3" class="img-thumbnail" class="thumbNail" src="{{product.picture.thumbNail}}"
+        alt="Generic placeholder image" height="100">
+    <div class="media-body">
+        <h5 class="mt-0">{{product.name}}</h5>
+        <button>
+            View details</button>
+        <!--TODO MODEL POP WINDOW SHOWS DETAIL  -->
+    </div>
+</div>

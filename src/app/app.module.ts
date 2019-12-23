@@ -5,6 +5,8 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireStorageModule } from '@angular/fire/storage';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 import {
   MatCheckboxModule,
   MatButtonModule,
@@ -85,6 +87,7 @@ import { ProductItemComponent } from './components/product-item/product-item.com
     AppRoutingModule,
     AngularFireAuthModule,
     // material design stuff
+    NgbModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
     MatCheckboxModule,
