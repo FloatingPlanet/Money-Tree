@@ -1,4 +1,21 @@
-mat-card {
-  width: 300px;
-  height: 300px;
+
+.container{
+  height: 100vh;
+  margin: 20px;
+  padding: 0 ;
+}
+
+.product{
+  min-width: 180px;
+  text-align: center;
+  margin-bottom: 20px; /* same as fxLayoutGap for even distribution */
+}
+
+.product img{
+  height: 150px;
+  object-fit: contain;
+}
+
+.margin-top-20{
+  margin-top:20px;
 }

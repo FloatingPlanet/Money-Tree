@@ -1,15 +1,13 @@
-<div class="margin-top-20" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="15px">
+<div class="container margin-top-20" fxLayout="row wrap" fxLayoutAlign="space-evenly stretch" fxLayoutGap="20px">
 
-    <mat-card class="product-card">
+    <mat-card fxFlex="33" fxLayout="column" class="product-card" *ngFor="let product of products; let i = index">
 
-        <img mat-card-image
-            src="https://c.static-nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/unojjgh3yejimfsaizar/air-max-tailwind-iv-shoe-JK03lR.jpg"
-            alt="Photo of a Nike Shoes">
+        <img mat-card-image src="{{product.picture.uri}}">
         <mat-card-header>
             <!-- <div mat-card-avatar class="product-header-image"></div> -->
-            <mat-card-title class="title">Nike Shoes</mat-card-title>
-            <mat-card-subtitle class="subTitle">Best Shoes Ever</mat-card-subtitle>
-            <mat-card-subtitle class="price">CAD 130</mat-card-subtitle>
+            <mat-card-title class="title">{{product.titles.title}}</mat-card-title>
+            <mat-card-subtitle class="subTitle">{{product.titles.subTitle}}</mat-card-subtitle>
+            <mat-card-subtitle class="price">{{product.titles.price}}</mat-card-subtitle>
         </mat-card-header>
         <!-- <mat-card-content>
         </mat-card-content> -->
