@@ -5,9 +5,10 @@
         <img mat-card-image src="{{product.picture.uri}}">
         <mat-card-header>
             <!-- <div mat-card-avatar class="product-header-image"></div> -->
-            <mat-card-title class="title">{{product.titles.title}}</mat-card-title>
+            <mat-card-title class="title">{{product.name}}</mat-card-title>
+            <mat-card-subtitle class="title">{{product.titles.title}}</mat-card-subtitle>
             <mat-card-subtitle class="subTitle">{{product.titles.subTitle}}</mat-card-subtitle>
-            <mat-card-subtitle class="price">{{product.titles.price}}</mat-card-subtitle>
+            <mat-card-subtitle class="price">CAD {{product.price}}</mat-card-subtitle>
         </mat-card-header>
         <!-- <mat-card-content>
         </mat-card-content> -->

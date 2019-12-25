@@ -1,0 +1,33 @@
+<p>order-summary works!</p>
+<div class="container-fluid">
+    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+        <div class="card" style="width: 18rem;">
+            <header>
+                <div class="card-body">
+                    <h5 class="card-title">Order Summary</h5>
+                    <p class="card-text">Your Order Total</p>
+                    <p class="card-text">{{totalItems}} item(s)</p>
+                </div>
+            </header>
+            <div>
+
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Subtotal: {{subtotal}}</li>
+                    <li class="list-group-item">Shipping: {{shipping}}</li>
+                    <li class="list-group-item">Estimated Tax: {{estimatedTax}}</li>
+                    <li class="list-group-item">Recycling fee: {{recyclingFee}}</li>
+                    <li class="list-group-item">Your Total: {{total}}</li>
+                </ul>
+            </div>
+            <div class="card-body" class="product">
+                <mat-card-actions fxFlexAlign="end" align="end">
+                    <span class="spacer"></span>
+                    <button mat-button>
+                        <mat-icon aria-hidden="false" aria-label="proceed to checkout">payment
+                        </mat-icon>
+                    </button>
+                </mat-card-actions>
+            </div>
+        </div>
+    </main>
+</div>
