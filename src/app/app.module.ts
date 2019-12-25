@@ -61,7 +61,8 @@ import { FlashMessageService } from './services/flashMessage/flash-message.servi
 import { ProductService } from './services/product/product.service';
 import { ProductItemComponent } from './components/product-item/product-item.component';
 import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
-
+import { AdminPageComponent } from './pages/admin-page/admin-page.component';
+import { AddProductComponent } from './components/add-product/add-product.component';
 
 
 @NgModule({
@@ -78,7 +79,10 @@ import { OrderSummaryComponent } from './components/order-summary/order-summary.
     NoAccessComponent,
     PageNotFoundComponent,
     ProductItemComponent,
-    OrderSummaryComponent
+    OrderSummaryComponent,
+    AdminPageComponent,
+    AddProductComponent
+
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
