@@ -54,7 +54,6 @@ import { NoAccessComponent } from './pages/no-access/no-access.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './services/login/auth.service';
-import { UserService } from './services/user/user.service';
 import { FlashMessageService } from './services/flashMessage/flash-message.service';
 import { ProductService } from './services/product/product.service';
 
@@ -84,7 +83,6 @@ import { ProductService } from './services/product/product.service';
     AngularFireAuthModule,
     // material design stuff
     BrowserAnimationsModule,
-    MatCheckboxModule,
     MatCheckboxModule,
     MatButtonModule,
     MatInputModule,
@@ -118,7 +116,6 @@ import { ProductService } from './services/product/product.service';
   ],
   providers: [
     AuthService,
-    UserService,
     FlashMessageService,
     ProductService,
   ],

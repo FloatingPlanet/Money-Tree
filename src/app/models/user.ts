@@ -2,13 +2,12 @@ export class User {
   uid: string;
   username: string;
   email: string;
-  password?: string;
   location?: {
     lat: number;
     lon: number;
   };
   phoneNumber: string;
-  verified_email: boolean;
+  verifiedEmail: boolean;
   createdOn?: Date;
   isAdmin: boolean;
   avatar: string;
