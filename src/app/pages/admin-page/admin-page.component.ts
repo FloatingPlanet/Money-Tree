@@ -10,7 +10,7 @@ export class AdminPageComponent implements OnInit {
   private currentPage = 'orders';
   constructor(private ar: ActivatedRoute, private router: Router) {
     this.ar.params.subscribe((params) => {
-      if (params.p !== 'orders' || params.p !== 'products') {
+      if (params.p !== 'orders' && params.p !== 'products') {
         this.router.navigate(['admin/orders']);
       }
       this.currentPage = params.p;

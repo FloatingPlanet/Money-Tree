@@ -68,6 +68,7 @@ import { ModifyOrdersComponent } from './components/modify-orders/modify-orders.
 import { AdminOrdersComponent } from './components/admin-orders/admin-orders.component';
 import { AdminProductsComponent } from './components/admin-products/admin-products.component';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
+import { CategoryFormComponent } from './components/category-form/category-form.component';
 
 
 @NgModule({
@@ -90,7 +91,8 @@ import { SideNavComponent } from './components/side-nav/side-nav.component';
     ModifyOrdersComponent,
     AdminOrdersComponent,
     AdminProductsComponent,
-    SideNavComponent
+    SideNavComponent,
+    CategoryFormComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
