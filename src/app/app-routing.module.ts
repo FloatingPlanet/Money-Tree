@@ -6,7 +6,6 @@ import { MainPageComponent } from './pages/main-page/main-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { ShoppingCartComponent } from './pages/shopping-cart/shopping-cart.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
-import { AddProductComponent } from './components/add-product/add-product.component';
 
 
 const routes: Routes = [
@@ -14,8 +13,7 @@ const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
   { path: 'cart', component: ShoppingCartComponent },
   { path: 'no-access', component: NoAccessComponent },
-  { path: 'admin', component: AdminPageComponent },
-  { path: 'admin/product', component: AddProductComponent },
+  { path: 'admin/*', component: AdminPageComponent },
   { path: '**', component: PageNotFoundComponent },
 ];
 

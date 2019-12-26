@@ -6,6 +6,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import {
   MatCheckboxModule,
@@ -63,6 +64,8 @@ import { ProductItemComponent } from './components/product-item/product-item.com
 import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 import { AddProductComponent } from './components/add-product/add-product.component';
+import { ModifyProductsComponent } from './components/modify-products/modify-products.component';
+import { ModifyOrdersComponent } from './components/modify-orders/modify-orders.component';
 
 
 @NgModule({
@@ -81,7 +84,9 @@ import { AddProductComponent } from './components/add-product/add-product.compon
     ProductItemComponent,
     OrderSummaryComponent,
     AdminPageComponent,
-    AddProductComponent
+    AddProductComponent,
+    ModifyProductsComponent,
+    ModifyOrdersComponent
 
   ],
   imports: [
@@ -93,6 +98,7 @@ import { AddProductComponent } from './components/add-product/add-product.compon
     AppRoutingModule,
     AngularFireAuthModule,
     // material design stuff
+    ReactiveFormsModule,
     NgbModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
