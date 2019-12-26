@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class CategoryFormComponent implements OnInit {
 
   constructor() { }
-  typesOfShoes = ['a', 'b', 'c', 'd'];
+  categories = ['a', 'b', 'c', 'd'];
   ngOnInit() {
   }
 

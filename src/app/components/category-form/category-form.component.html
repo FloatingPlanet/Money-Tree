@@ -1,10 +1,10 @@
 <p>category-form works!</p>
 <mat-selection-list #shoes>
-	<mat-list-option *ngFor="let shoe of typesOfShoes">
-		{{shoe}}
+	<mat-list-option *ngFor="let c of categories">
+		{{c}}
 	</mat-list-option>
 </mat-selection-list>
-
+<input />
 <p>
 	Options selected: {{shoes.selectedOptions.selected.length}}
 </p>
