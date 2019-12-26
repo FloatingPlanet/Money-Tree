@@ -63,14 +63,13 @@ import { ProductService } from './services/product/product.service';
 import { ProductItemComponent } from './components/product-item/product-item.component';
 import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
-import { ModifyProductsComponent } from './components/modify-products/modify-products.component';
-import { ModifyOrdersComponent } from './components/modify-orders/modify-orders.component';
 import { AdminOrdersComponent } from './components/admin-orders/admin-orders.component';
 import { AdminProductsComponent } from './components/admin-products/admin-products.component';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { CategoryFormComponent } from './components/category-form/category-form.component';
-import { ProductInfoModalComponent } from './components/product-info-modal/product-info-modal.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { ModifyProductModalComponent } from './components/modify-product-modal/modify-product-modal.component';
+import { ModifyOrderModalComponent } from './components/modify-order-modal/modify-order-modal.component';
 
 
 @NgModule({
@@ -89,13 +88,12 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     ProductItemComponent,
     OrderSummaryComponent,
     AdminPageComponent,
-    ModifyProductsComponent,
-    ModifyOrdersComponent,
     AdminOrdersComponent,
     AdminProductsComponent,
     SideNavComponent,
     CategoryFormComponent,
-    ProductInfoModalComponent
+    ModifyProductModalComponent,
+    ModifyOrderModalComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

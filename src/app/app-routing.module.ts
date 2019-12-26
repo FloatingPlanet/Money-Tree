@@ -6,8 +6,6 @@ import { MainPageComponent } from './pages/main-page/main-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { ShoppingCartComponent } from './pages/shopping-cart/shopping-cart.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
-import { ModifyProductsComponent } from './components/modify-products/modify-products.component';
-import { ModifyOrdersComponent } from './components/modify-orders/modify-orders.component';
 
 
 const routes: Routes = [
