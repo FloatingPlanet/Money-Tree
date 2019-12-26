@@ -70,6 +70,7 @@ import { AdminProductsComponent } from './components/admin-products/admin-produc
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { CategoryFormComponent } from './components/category-form/category-form.component';
 import { ProductInfoModalComponent } from './components/product-info-modal/product-info-modal.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 @NgModule({
@@ -139,6 +140,7 @@ import { ProductInfoModalComponent } from './components/product-info-modal/produ
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
+    ModalModule.forRoot(),
   ],
   providers: [
     AuthService,
