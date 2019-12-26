@@ -1,1 +1,12 @@
 <p>admin-page works!</p>
+
+<div [ngSwitch]="currentPage">
+	<ng-template ngSwitchCase="orders">
+		<app-admin-orders></app-admin-orders>
+
+	</ng-template>
+	<ng-template ngSwitchCase="products">
+		<app-admin-products></app-admin-products>
+
+	</ng-template>
+</div>

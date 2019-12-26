@@ -63,9 +63,10 @@ import { ProductService } from './services/product/product.service';
 import { ProductItemComponent } from './components/product-item/product-item.component';
 import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
-import { AddProductComponent } from './components/add-product/add-product.component';
 import { ModifyProductsComponent } from './components/modify-products/modify-products.component';
 import { ModifyOrdersComponent } from './components/modify-orders/modify-orders.component';
+import { AdminOrdersComponent } from './components/admin-orders/admin-orders.component';
+import { AdminProductsComponent } from './components/admin-products/admin-products.component';
 
 
 @NgModule({
@@ -84,10 +85,10 @@ import { ModifyOrdersComponent } from './components/modify-orders/modify-orders.
     ProductItemComponent,
     OrderSummaryComponent,
     AdminPageComponent,
-    AddProductComponent,
     ModifyProductsComponent,
-    ModifyOrdersComponent
-
+    ModifyOrdersComponent,
+    AdminOrdersComponent,
+    AdminProductsComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
