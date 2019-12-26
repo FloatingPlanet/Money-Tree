@@ -1,0 +1,45 @@
+<p>product-form works!</p>
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+	<label>
+		SKU:
+		<input type="text" formControlName="SKU" required>
+	</label>
+
+	<label>
+		productId:
+		<input type="number" formControlName="productId">
+	</label>
+	<label>
+		productName:
+		<input type="text" formControlName="productName">
+	</label>
+	<label>
+		productSummary:
+		<input type="text" formControlName="productSummary">
+	</label>
+	<label>
+		productPrice:
+		<input type="number" formControlName="productPrice">
+	</label>
+	<label>
+		productDescription:
+		<input type="text" formControlName="productDescription">
+	</label>
+	<label>
+		productQuantity:
+		<input type="number" formControlName="productQuantity">
+	</label>
+	<label>
+		ratings:
+		<input type="number" formControlName="ratings">
+	</label>
+	<label>
+		productSeller:
+		<input type="text" formControlName="productSeller">
+	</label>
+
+	<p>
+		Form Value: {{ productForm.value | json }}
+	</p>
+	<button type="submit" [disabled]="!productForm.valid">Submit</button>
+</form>

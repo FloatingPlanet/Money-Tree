@@ -7,6 +7,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import {
   MatCheckboxModule,
@@ -70,6 +71,7 @@ import { CategoryFormComponent } from './components/category-form/category-form.
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ModifyProductModalComponent } from './components/modify-product-modal/modify-product-modal.component';
 import { ModifyOrderModalComponent } from './components/modify-order-modal/modify-order-modal.component';
+import { ProductFormComponent } from './components/product-form/product-form.component';
 
 
 @NgModule({
@@ -93,7 +95,8 @@ import { ModifyOrderModalComponent } from './components/modify-order-modal/modif
     SideNavComponent,
     CategoryFormComponent,
     ModifyProductModalComponent,
-    ModifyOrderModalComponent
+    ModifyOrderModalComponent,
+    ProductFormComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -101,11 +104,12 @@ import { ModifyOrderModalComponent } from './components/modify-order-modal/modif
     AngularFirestoreModule,
     BrowserModule,
     ToastrModule.forRoot(),
+    NgbModule.forRoot(),
     AppRoutingModule,
     AngularFireAuthModule,
     // material design stuff
     ReactiveFormsModule,
-    NgbModule,
+    FormsModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
     MatCheckboxModule,
