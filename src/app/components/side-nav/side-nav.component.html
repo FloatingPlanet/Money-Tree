@@ -1,0 +1,24 @@
+<!-- <mat-toolbar color="primary">
+	<button mat-icon-button (click)="sidenav.toggle()">
+		<mat-icon>menu</mat-icon>
+	</button>
+	Toolbar Title
+</mat-toolbar> -->
+<mat-sidenav-container>
+	<mat-sidenav opened="true" mode="side">
+		<div>
+			<a [routerLink]="['/admin/orders']">Orders</a>
+		</div>
+		<div>
+			<a [routerLink]="['/admin/products']">Products</a>
+		</div>
+
+	</mat-sidenav>
+
+	<mat-sidenav-content>
+		<p>What you gonna do?</p>
+		<div class="example-events">
+			<div>content here</div>
+		</div>
+	</mat-sidenav-content>
+</mat-sidenav-container>

@@ -38,7 +38,7 @@ import {
   MatSnackBarModule,
   MatTableModule,
   MatSortModule,
-  MatPaginatorModule
+  MatPaginatorModule,
 } from '@angular/material';
 import { ToastrModule } from 'ngx-toastr';
 // Our stuff ---- ❤❤❤
@@ -67,6 +67,7 @@ import { ModifyProductsComponent } from './components/modify-products/modify-pro
 import { ModifyOrdersComponent } from './components/modify-orders/modify-orders.component';
 import { AdminOrdersComponent } from './components/admin-orders/admin-orders.component';
 import { AdminProductsComponent } from './components/admin-products/admin-products.component';
+import { SideNavComponent } from './components/side-nav/side-nav.component';
 
 
 @NgModule({
@@ -88,7 +89,8 @@ import { AdminProductsComponent } from './components/admin-products/admin-produc
     ModifyProductsComponent,
     ModifyOrdersComponent,
     AdminOrdersComponent,
-    AdminProductsComponent
+    AdminProductsComponent,
+    SideNavComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -132,7 +134,7 @@ import { AdminProductsComponent } from './components/admin-products/admin-produc
     MatSnackBarModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
   ],
   providers: [
     AuthService,
