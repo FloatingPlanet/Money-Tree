@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ProductService } from 'src/app/services/product/product.service';
+import { CategoryFormComponent } from '../category-form/category-form.component';
+import { CategoryService } from 'src/app/services/category/category.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-product-form',
@@ -12,7 +15,7 @@ export class ProductFormComponent implements OnInit {
     SKU: [null, Validators.required],
     productId: [null, Validators.required],
     productName: [null, Validators.required],
-    productCategory: this.formBuilder.array([]),
+    productCategory: [],
     productSummary: null,
     productPrice: [null, Validators.required],
     productDescription: [null, Validators.required],
@@ -23,11 +26,18 @@ export class ProductFormComponent implements OnInit {
     favourite: false,
     productSeller: null,
   });
-  constructor(private formBuilder: FormBuilder, private ps: ProductService) { }
-
+  selectedCategories: string[];
+  subscription: Subscription;
+  constructor(private formBuilder: FormBuilder, private ps: ProductService, private cs: CategoryService) {
+    this.cs.getCategories().subscribe(categories => this.selectedCategories = categories);
+  }
+  ngOnDestory() {
+    this.subscription.unsubscribe();
+  }
   ngOnInit() {
   }
   onSubmit() {
+    this.productForm.patchValue({ productCategory: this.selectedCategories ? this.selectedCategories : [] });
     this.ps.addProduct(this.productForm.value);
   }
 

@@ -19,8 +19,13 @@ export class CategoryFormComponent implements OnInit {
   categoryForm = this.formBuilder.group({
     category: [null, [Validators.required, this.existCategory()]],
   })
+  selectedCatogries: string[];
+  onSelectionChange(selectedCatogries: string[]) {
+    this.cs.setCategories(selectedCatogries);
+  }
   constructor(private formBuilder: FormBuilder, private cs: CategoryService) { }
   ngOnInit() {
+    console.log(this.selectedCatogries);
   }
   onSubmit() {
     this.cs.addCategory(this.categoryForm.value);
