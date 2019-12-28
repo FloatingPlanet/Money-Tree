@@ -66,10 +66,10 @@ import { OrderSummaryComponent } from './components/order-summary/order-summary.
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 import { AdminOrdersComponent } from './components/admin-orders/admin-orders.component';
 import { AdminProductsComponent } from './components/admin-products/admin-products.component';
-import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { CategoryFormComponent } from './components/category-form/category-form.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ProductFormComponent } from './components/product-form/product-form.component';
+import { NewProductComponent } from './pages/new-product/new-product.component';
 
 
 @NgModule({
@@ -90,9 +90,9 @@ import { ProductFormComponent } from './components/product-form/product-form.com
     AdminPageComponent,
     AdminOrdersComponent,
     AdminProductsComponent,
-    SideNavComponent,
     CategoryFormComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    NewProductComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

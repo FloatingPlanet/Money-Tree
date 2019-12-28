@@ -1,10 +1,29 @@
-<app-side-nav></app-side-nav>
-<div [ngSwitch]="currentPage">
-	<ng-template ngSwitchCase="orders">
-		<app-admin-orders></app-admin-orders>
+<mat-drawer-container class="admin-container" autosize>
+	<mat-drawer #drawer class="admin-sidenav" opened="true" mode="side">
+		<h1>
+			Admin
+		</h1>
+		<mat-list>
+			<button [routerLink]="['/admin/orders']" mat-button>
+				Orders
+			</button>
+			<mat-divider></mat-divider>
+			<button [routerLink]=" ['/admin/products']" mat-button>
+				Products
+			</button>
+			<mat-divider></mat-divider>
+		</mat-list>
 
-	</ng-template>
-	<ng-template ngSwitchCase="products">
-		<app-admin-products></app-admin-products>
-	</ng-template>
-</div>
+	</mat-drawer>
+	<div class=" admin-sidenav-content">
+		<div [ngSwitch]="currentPage">
+			<ng-template ngSwitchCase="orders">
+				<app-admin-orders></app-admin-orders>
+
+			</ng-template>
+			<ng-template ngSwitchCase="products">
+				<app-admin-products></app-admin-products>
+			</ng-template>
+		</div>
+	</div>
+</mat-drawer-container>
