@@ -1,12 +1,10 @@
 <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
 	<div class="form-container">
-
 		<label>
 			<mat-form-field>
 				<input matInput type="text" formControlName="SKU" required placeholder="SKU">
 			</mat-form-field>
 		</label>
-
 		<label>
 			<mat-form-field>
 				<input matInput type="number" formControlName="productId" required placeholder="Product Id">
@@ -51,7 +49,6 @@
 					value="NA">
 			</mat-form-field>
 		</label>
-
 		<p>
 			Form Value: {{ productForm.value | json }}
 		</p>

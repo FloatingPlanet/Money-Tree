@@ -1,8 +1,22 @@
-<mat-grid-list cols="4">
-    <mat-grid-tile class="product-form" colspan=3 rowspan=3>
+<mat-grid-list cols="2">
+    <!-- <mat-grid-tile class=" product-form" colspan=1 rowspan=1>
         <app-product-form></app-product-form>
     </mat-grid-tile>
-    <mat-grid-tile class="category-form" colspan=1 rowspan=2>
+    <mat-grid-tile class="category-form" colspan=1 rowspan=1>
         <app-category-form></app-category-form>
     </mat-grid-tile>
+    <mat-grid-tile class="dummy-form" colspan=1 rowspan=1>
+    </mat-grid-tile> -->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9">
+                <h1>Product</h1>
+                <app-product-form></app-product-form>
+            </div>
+            <div class="col-sm-3">
+                <h1>Category</h1>
+                <app-category-form></app-category-form>
+            </div>
+        </div>
+    </div>
 </mat-grid-list>
