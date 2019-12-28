@@ -6,6 +6,7 @@ import { MainPageComponent } from './pages/main-page/main-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { ShoppingCartComponent } from './pages/shopping-cart/shopping-cart.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
+import { AdminOrdersComponent } from './components/admin-orders/admin-orders.component';
 
 
 const routes: Routes = [
@@ -13,8 +14,15 @@ const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
   { path: 'cart', component: ShoppingCartComponent },
   { path: 'no-access', component: NoAccessComponent },
-  { path: 'admin/:p', component: AdminPageComponent },
-  { path: 'admin', redirectTo: 'admin/orders' },
+  {
+    path: 'admin', component: AdminPageComponent,
+    children: [
+      { path: '', redirectTo: 'orders', pathMatch: 'full' },
+      { path: 'orders', component: AdminOrdersComponent },
+      { path: 'products', component: AdminOrdersComponent },
+    ]
+
+  },
   { path: '**', component: PageNotFoundComponent },
 ];
 

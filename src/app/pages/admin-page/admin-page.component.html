@@ -19,10 +19,12 @@
 		<div [ngSwitch]="currentPage">
 			<ng-template ngSwitchCase="orders">
 				<app-admin-orders></app-admin-orders>
-
 			</ng-template>
 			<ng-template ngSwitchCase="products">
 				<app-admin-products></app-admin-products>
+				<button mat-mini-fab color="primary" [routerLink]="['/cart']">
+					<mat-icon>add</mat-icon>
+				</button>
 			</ng-template>
 		</div>
 	</div>
