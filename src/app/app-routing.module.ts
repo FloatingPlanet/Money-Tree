@@ -8,6 +8,8 @@ import { ShoppingCartComponent } from './pages/shopping-cart/shopping-cart.compo
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 import { AdminOrdersComponent } from './components/admin-orders/admin-orders.component';
 import { AdminProductsComponent } from './components/admin-products/admin-products.component';
+import { ProductFormComponent } from './components/product-form/product-form.component';
+import { ModifyProductComponent } from './components/modify-product/modify-product.component';
 
 
 const routes: Routes = [
@@ -20,9 +22,9 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'orders', pathMatch: 'full' },
       { path: 'orders', component: AdminOrdersComponent },
-      { path: 'products', component: AdminProductsComponent },
+      { path: 'products', component: AdminProductsComponent, },
+      { path: 'products/add', component: ModifyProductComponent }
     ]
-
   },
   { path: '**', component: PageNotFoundComponent },
 ];

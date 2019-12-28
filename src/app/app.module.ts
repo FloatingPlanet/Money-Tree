@@ -70,6 +70,7 @@ import { CategoryFormComponent } from './components/category-form/category-form.
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ProductFormComponent } from './components/product-form/product-form.component';
 import { NewProductComponent } from './pages/new-product/new-product.component';
+import { ModifyProductComponent } from './components/modify-product/modify-product.component';
 
 
 @NgModule({
@@ -92,7 +93,8 @@ import { NewProductComponent } from './pages/new-product/new-product.component';
     AdminProductsComponent,
     CategoryFormComponent,
     ProductFormComponent,
-    NewProductComponent
+    NewProductComponent,
+    ModifyProductComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
