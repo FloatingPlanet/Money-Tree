@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class AdminPageComponent implements OnInit {
   private currentPage = 'orders';
-  constructor(private ar: ActivatedRoute, private router: Router) {
+  constructor() {
 
   }
 

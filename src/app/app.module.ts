@@ -71,6 +71,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { ProductFormComponent } from './components/product-form/product-form.component';
 import { NewProductComponent } from './pages/new-product/new-product.component';
 import { ModifyProductComponent } from './components/modify-product/modify-product.component';
+import { CategoryService } from './services/category/category.service';
 
 
 @NgModule({
@@ -147,6 +148,7 @@ import { ModifyProductComponent } from './components/modify-product/modify-produ
     UserService,
     FlashMessageService,
     ProductService,
+    CategoryService,
   ],
   bootstrap: [AppComponent]
 })

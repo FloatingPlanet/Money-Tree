@@ -11,20 +11,6 @@ import { Subscriber } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-// export class Product {
-//   SKU: string;
-//   productId: number;
-//   productName: string;
-//   productCategory: [string];
-//   productPrice: number;
-//   productDescription: string;
-//   productImageUrls: [string];
-//   productAddedAt: Date;
-//   productQuantity: number;
-//   ratings: number;
-//   favourite: boolean;
-//   productSeller?: string;
-// }
 export class ProductService {
   Products: AngularFirestoreCollection<Product>;// db ref
   public allProducts: Product[];
@@ -43,7 +29,7 @@ export class ProductService {
       // TODO check doc exsits or not
       .set(product)
       .then((res) => {
-        console.log(res);
+        console.log("add Product: " + res);
       }).catch(error => {
         console.error(error);
       });
