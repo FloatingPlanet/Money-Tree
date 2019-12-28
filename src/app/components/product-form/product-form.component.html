@@ -1,45 +1,62 @@
 <p>product-form works!</p>
 <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
-	<label>
-		SKU:
-		<input type="text" formControlName="SKU" required>
-	</label>
+	<div class="form-container">
 
-	<label>
-		productId:
-		<input type="number" formControlName="productId">
-	</label>
-	<label>
-		productName:
-		<input type="text" formControlName="productName">
-	</label>
-	<label>
-		productSummary:
-		<input type="text" formControlName="productSummary">
-	</label>
-	<label>
-		productPrice:
-		<input type="number" formControlName="productPrice">
-	</label>
-	<label>
-		productDescription:
-		<input type="text" formControlName="productDescription">
-	</label>
-	<label>
-		productQuantity:
-		<input type="number" formControlName="productQuantity">
-	</label>
-	<label>
-		ratings:
-		<input type="number" formControlName="ratings">
-	</label>
-	<label>
-		productSeller:
-		<input type="text" formControlName="productSeller">
-	</label>
+		<label>
+			<mat-form-field class="example-full-width">
+				<input matInput type="text" formControlName="SKU" required placeholder="SKU">
+			</mat-form-field>
+		</label>
 
-	<p>
-		Form Value: {{ productForm.value | json }}
-	</p>
-	<button type="submit" [disabled]="!productForm.valid">Submit</button>
+		<label>
+			<mat-form-field class="example-full-width">
+				<input matInput type="number" formControlName="productId" required placeholder="Product Id">
+			</mat-form-field>
+
+		</label>
+		<label>
+			<mat-form-field class="example-full-width">
+				<input matInput type="text" formControlName="productName" required placeholder="Product Name">
+			</mat-form-field>
+		</label>
+		<label>
+			<mat-form-field class="example-full-width">
+				<input matInput type="text" formControlName="productSummary" required placeholder="Product Summary">
+			</mat-form-field>
+		</label>
+		<label>
+			<mat-form-field class="example-full-width">
+				<input matInput type="number" formControlName="productPrice" required placeholder="Product Price">
+			</mat-form-field>
+		</label>
+		<label>
+			<mat-form-field class="example-full-width">
+				<input matInput type="text" formControlName="productDescription" required
+					placeholder="Product Description">
+			</mat-form-field>
+		</label>
+		<label>
+			<mat-form-field class="example-full-width">
+				<input matInput type="number" formControlName="productQuantity" required placeholder="Product Quantit">
+			</mat-form-field>
+		</label>
+		<label>
+			<mat-form-field class="example-full-width">
+
+				<input matInput type="number" formControlName="ratings" required placeholder="Ratings">
+			</mat-form-field>
+		</label>
+		<label>
+			<mat-form-field class="example-full-width">
+
+				<input matInput type="text" formControlName="productSeller" required placeholder="Product Seller"
+					value="NA">
+			</mat-form-field>
+		</label>
+
+		<p>
+			Form Value: {{ productForm.value | json }}
+		</p>
+		<button type="submit" [disabled]="!productForm.valid">Submit</button>
+	</div>
 </form>
