@@ -1,30 +1,24 @@
 <div class="login-form">
     <h1> Log in</h1>
-    <form #loginForm>
+    <form (ngSubmit)="emailLogin()" [formGroup]="loginForm">
         <mat-form-field>
-            <input formControlName="login-email" type="email" matInput placeholder="xxx@yyy.com" />
+            <input formControlName="email" type="email" matInput placeholder="xxx@yyy.com" />
+            
         </mat-form-field>
+        <div *ngIf="submitted && form.email.errors" class="invalid-feedback">
+          <div *ngIf="form.email.errors.required">Login email is required</div>
+          <div *ngIf="form.email.errors.email">Login email is not valid</div>
+        </div>
 
         <mat-form-field>
-            <input formControlName="login-password" type="password" matInput placeholder="password" />
+          <input formControlName="password" type="password" matInput placeholder="password" />
         </mat-form-field>
+        <div *ngIf="submitted && form.password.errors" class="invalid-feedback">
+          <div *ngIf="form.password.errors.required">Password is required</div>
+        </div>
+        <button mat-button type="submit">Log In</button>
     </form>
-</div>
-<div class="signup-form">
-    <h1> Sign up</h1>
-    <form #loginForm>
-        <mat-form-field>
-            <input formControlName="signup-email" type="email" matInput placeholder="xxx@yyy.com" />
-        </mat-form-field>
-
-        <mat-form-field>
-            <input formControlName="signup-password" type="password" matInput placeholder="password" />
-        </mat-form-field>
-
-        <mat-form-field>
-            <input formControlName="password-confirm" type="password" matInput placeholder="password" />
-        </mat-form-field>
-    </form>
+    <button class="btn btn-secondary" (click)="loginWithGoogle()">Log in with google</button>
+    <a [routerLink]="['/signup']">Don't have an account? Sign up</a>
 </div>
 
-<button class="btn btn-secondary" (click)="signinWithGoogle()">log in with google</button>

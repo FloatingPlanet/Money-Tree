@@ -5,6 +5,7 @@ import { User } from '../../models/user';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { User as FirebaseUser } from '@firebase/auth-types';
 
 @Injectable()
 export class AuthService {
@@ -18,6 +19,7 @@ export class AuthService {
       this.authState = auth;
     });
   }
+
 
   // Returns true if user is logged in
   get authenticated(): boolean {
@@ -100,8 +102,8 @@ export class AuthService {
 
   //// Email/Password Auth ////
 
-  emailSignUp(email: string, password: string) {
-    return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+  emailSignUp(login) {
+    return this.afAuth.auth.createUserWithEmailAndPassword(login.email, login.password)
       .then((user) => {
         this.authState = user;
         this.updateUserData();
@@ -109,8 +111,8 @@ export class AuthService {
       .catch(error => console.log(error));
   }
 
-  emailLogin(email: string, password: string) {
-    return this.afAuth.auth.signInWithEmailAndPassword(email, password)
+  emailLogin(login) {
+    return this.afAuth.auth.signInWithEmailAndPassword(login.email, login.password)
       .then((user) => {
         this.authState = user;
         this.updateUserData();

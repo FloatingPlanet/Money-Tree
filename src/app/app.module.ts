@@ -38,6 +38,7 @@ import {
   MatPaginatorModule
 } from '@angular/material';
 import { ToastrModule } from 'ngx-toastr';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // Our stuff ---- ❤❤❤
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -56,6 +57,7 @@ import { environment } from 'src/environments/environment';
 import { AuthService } from './services/login/auth.service';
 import { FlashMessageService } from './services/flashMessage/flash-message.service';
 import { ProductService } from './services/product/product.service';
+import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 
 
 
@@ -71,7 +73,8 @@ import { ProductService } from './services/product/product.service';
     ShoppingCartComponent,
     CheckoutPageComponent,
     NoAccessComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    SignupPageComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -112,7 +115,9 @@ import { ProductService } from './services/product/product.service';
     MatSnackBarModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     AuthService,
