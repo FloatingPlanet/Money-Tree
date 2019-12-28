@@ -5,14 +5,16 @@ import { User } from '../../models/user';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { User as FirebaseUser } from '@firebase/auth-types';
+import { User as FirebaseUser, UserCredential } from '@firebase/auth-types';
+import { FlashMessageService } from '../flashMessage/flash-message.service';
 
 @Injectable()
 export class AuthService {
-  authState: any = null;
+  authState: FirebaseUser = null;
   users: AngularFirestoreCollection<User>;
   constructor(private afAuth: AngularFireAuth,
               private db: AngularFirestore,
+              private fs: FlashMessageService,
               private router: Router) {
     this.users = this.db.collection('users');
     this.afAuth.authState.subscribe((auth) => {
@@ -93,8 +95,8 @@ export class AuthService {
 
   anonymousLogin() {
     return this.afAuth.auth.signInAnonymously()
-      .then((user) => {
-        this.authState = user;
+      .then((res: UserCredential) => {
+        this.authState = res.user;
         this.updateUserData();
       })
       .catch(error => console.log(error));
@@ -103,21 +105,33 @@ export class AuthService {
   //// Email/Password Auth ////
 
   emailSignUp(login) {
-    return this.afAuth.auth.createUserWithEmailAndPassword(login.email, login.password)
-      .then((user) => {
-        this.authState = user;
+    return this.afAuth.auth.createUserWithEmailAndPassword(login.email, login.password, )
+      .then((credential: UserCredential) => {
+        this.authState = credential.user;
         this.updateUserData();
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+          // Handle Errors here.
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          if (errorCode === 'auth/weak-password') {
+            this.fs.error('Sign up error', 'The password is too weak.');
+          } else {
+            alert(errorMessage);
+          }
+          console.log(error);
+      });
   }
 
   emailLogin(login) {
     return this.afAuth.auth.signInWithEmailAndPassword(login.email, login.password)
-      .then((user) => {
-        this.authState = user;
+      .then((res: UserCredential) => {
+        this.authState = res.user;
         this.updateUserData();
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   // Sends email allowing user to reset password

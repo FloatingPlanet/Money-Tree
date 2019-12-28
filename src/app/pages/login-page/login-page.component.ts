@@ -15,6 +15,7 @@ export class LoginPageComponent implements OnInit {
   submitted = false;
 
   loginForm: FormGroup;
+  resetForm: FormGroup;
   constructor(
     private as: AuthService,
     private fs: FlashMessageService,
@@ -36,6 +37,9 @@ export class LoginPageComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
+    this.resetForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]]
+    });
   }
   emailLogin() {
     this.submitted = true;
@@ -46,6 +50,9 @@ export class LoginPageComponent implements OnInit {
   }
   loginWithGoogle() {
     this.as.googleLogin();
+  }
+  resetPassword() {
+    this.as.resetPassword(this.resetForm.value.email);
   }
   reset() {
     this.submitted = false;
