@@ -51,7 +51,11 @@ export class LoginPageComponent implements OnInit {
   loginWithGoogle() {
     this.as.googleLogin();
   }
+
   resetPassword() {
+    if (this.resetForm.invalid) {
+      return;
+    }
     this.as.resetPassword(this.resetForm.value.email);
   }
   reset() {

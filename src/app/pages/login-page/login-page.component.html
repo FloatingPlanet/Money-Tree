@@ -19,7 +19,7 @@
     </form>
     <button class="btn btn-secondary" (click)="loginWithGoogle()">Log in with google</button>
     <a [routerLink]="['/signup']">Don't have an account? Sign up</a>
-    <form [formGroup]= "resetForm">
+    <form [formGroup]= "resetForm" (ngSubmit)="resetPassword()">
       <mat-form-field>
           <input formControlName="email" type="email" matInput placeholder="xxx@yyy.com" required/>
           
