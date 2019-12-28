@@ -6,14 +6,11 @@
 
 .product{
   min-width: 180px;
-  margin-bottom: 20px; /* same as fxLayoutGap for even distribution */
+  margin-bottom: 2vh; /* same as fxLayoutGap for even distribution */
+  margin-top: 2vh; /* same as fxLayoutGap for even distribution */
 }
 
 .product img{
   height: 150px;
   object-fit: contain;
-}
-
-.margin-top-20{
-  margin-top:20px;
 }
