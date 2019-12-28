@@ -16,17 +16,6 @@
 
 	</mat-drawer>
 	<div class=" admin-sidenav-content">
-		<div [ngSwitch]="currentPage">
-			<ng-template ngSwitchCase="orders">
-				<app-admin-orders></app-admin-orders>
-			</ng-template>
-			<ng-template ngSwitchCase="products">
-				<app-admin-products></app-admin-products>
-				<button mat-mini-fab color="primary" [routerLink]="['/cart']">
-					<mat-icon>add</mat-icon>
-				</button>
-			</ng-template>
-		</div>
+		<router-outlet></router-outlet>
 	</div>
-	<router-outlet></router-outlet>
 </mat-drawer-container>
