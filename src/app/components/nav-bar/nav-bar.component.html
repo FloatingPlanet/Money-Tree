@@ -1,14 +1,32 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
-        <span>LOGO</span>
-        <span class="spacer"></span>
-        <a [routerLink]="['/login']" mat-icon-button aria-hidden="false" aria-label="Example log icon">
-            <mat-icon aria-hidden="false" aria-label="Example log icon">account_circle</mat-icon>
+        <a [routerLink]="['/']">
+          LOGO
         </a>
+        <span class="spacer"></span>
+
         <a [routerLink]="['/cart']" mat-icon-button aria-hidden="false" aria-label="Example log icon">
             <mat-icon aria-hidden="false" aria-label="Example cart icon">shopping_cart
             </mat-icon>
         </a>
-
+       
+        <span *ngIf="!authState; else logoutBlock" >
+          <a [routerLink]="['/login']" mat-button aria-hidden="false" aria-label="Log in">
+              <mat-icon aria-hidden="false" aria-label="Example log icon">people</mat-icon>
+              &nbsp;
+              <span>Log in/Sign Up</span>
+          </a>
+        </span>
+        <ng-template #logoutBlock>
+              <!-- <a id="avatar-btn" class="nav-link"> -->
+          <img class="nav-avatar mr-1" width="20" height="20" [src]="avatarURL" />
+          &nbsp;
+          <span>
+            {{displayName}}
+          </span>
+          &nbsp;
+          <!-- </a> -->
+          <a class="nav-link" [routerLink]="['/']" (click)="logout()">Log Out</a>
+        </ng-template>
     </mat-toolbar-row>
 </mat-toolbar>

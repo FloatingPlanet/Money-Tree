@@ -1,0 +1,38 @@
+<div class="login-form">
+    <h1>Sign up</h1>
+    <form (ngSubmit)="signup()" [formGroup]="signupForm">
+        <mat-form-field>
+            <input formControlName="email" type="email" matInput placeholder="xxx@yyy.com" />
+        </mat-form-field>
+        <div *ngIf="submitted && form.email.errors" class="invalid-feedback">
+          <div *ngIf="form.email.errors.required">Email is required</div>
+          <div *ngIf="form.email.errors.email">Email is not valid</div>
+        </div>
+        <mat-form-field>
+            <input formControlName="username" type="text" matInput placeholder="Username" />
+        </mat-form-field>
+        <div *ngIf="submitted && form.username.errors" class="invalid-feedback">
+          <div *ngIf="form.username.errors.required">Username is required</div>
+        </div>
+
+        <mat-form-field>
+          <input formControlName="password" type="password" matInput placeholder="Password" />
+        </mat-form-field>
+        <div *ngIf="submitted && form.password.errors" class="invalid-feedback">
+          <div *ngIf="form.password.errors.required">Password is required</div>
+        </div>
+
+        <mat-form-field>
+          <input formControlName="confirmPassword" type="password" matInput placeholder="Confirm password" />
+        </mat-form-field>
+        <div *ngIf="submitted && form.confirmPassword.errors" class="invalid-feedback">
+          <div *ngIf="form.confirmPassword.errors.required">Please confirm your password</div>
+          <div *ngIf="form.confirmPassword.errors.mustMatch">Confirm password must match password</div>
+        </div>
+
+        <button mat-button type="submit">Sign up</button>
+    </form>
+    <button class="btn btn-secondary" (click)="signupWithGoogle()">Signup in with google</button>
+    <a [routerLink]="['/login']">Already have an account? Log in</a>
+</div>
+

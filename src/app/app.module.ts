@@ -6,9 +6,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ReactiveFormsModule } from '@angular/forms';
-import { FormsModule } from '@angular/forms';
-
+import { ToastrModule } from 'ngx-toastr';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   MatCheckboxModule,
   MatButtonModule,
@@ -41,7 +40,7 @@ import {
   MatSortModule,
   MatPaginatorModule,
 } from '@angular/material';
-import { ToastrModule } from 'ngx-toastr';
+
 // Our stuff ---- ❤❤❤
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -58,9 +57,9 @@ import { NoAccessComponent } from './pages/no-access/no-access.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './services/login/auth.service';
-import { UserService } from './services/user/user.service';
 import { FlashMessageService } from './services/flashMessage/flash-message.service';
 import { ProductService } from './services/product/product.service';
+import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { ProductItemComponent } from './components/product-item/product-item.component';
 import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
@@ -87,6 +86,7 @@ import { CategoryService } from './services/category/category.service';
     CheckoutPageComponent,
     NoAccessComponent,
     PageNotFoundComponent,
+    SignupPageComponent,
     ProductItemComponent,
     OrderSummaryComponent,
     AdminPageComponent,
@@ -103,14 +103,13 @@ import { CategoryService } from './services/category/category.service';
     AngularFirestoreModule,
     BrowserModule,
     ToastrModule.forRoot(),
-    NgbModule.forRoot(),
+    NgbModule,
     AppRoutingModule,
     AngularFireAuthModule,
     // material design stuff
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatCheckboxModule,
     MatCheckboxModule,
     MatButtonModule,
     MatInputModule,
@@ -141,11 +140,12 @@ import { CategoryService } from './services/category/category.service';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    ModalModule.forRoot(),
+    FormsModule,
+    ReactiveFormsModule,
+    ModalModule.forRoot()
   ],
   providers: [
     AuthService,
-    UserService,
     FlashMessageService,
     ProductService,
     CategoryService,
