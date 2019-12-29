@@ -7,7 +7,7 @@ import { AuthService } from 'src/app/services/login/auth.service';
   styleUrls: ['./nav-bar.component.scss']
 })
 export class NavBarComponent implements OnInit {
-  DEFAULT_AVATAR = '../../assets/default-avatar.png';
+  DEFAULT_AVATAR = '../../../assets/default-avatar.png';
   DEFAULT_NAME = 'Shady Individual';
   avatarURL = this.DEFAULT_AVATAR;
   displayName = this.DEFAULT_NAME;
@@ -20,8 +20,8 @@ export class NavBarComponent implements OnInit {
     this.as.currentUserObservable.subscribe((auth) => {
       this.authState = auth;
       if (auth) {
-        this.avatarURL = auth.photoURL;
-        this.displayName = auth.displayName;
+        this.avatarURL = auth.photoURL ? auth.photoURL : this.DEFAULT_AVATAR;
+        this.displayName = auth.displayName ? auth.displayName : this.DEFAULT_NAME;
       } else {
         this.avatarURL = this.DEFAULT_AVATAR;
         this.displayName = this.DEFAULT_NAME;

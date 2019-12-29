@@ -109,6 +109,8 @@ export class AuthService {
       .then((credential: UserCredential) => {
         this.authState = credential.user;
         this.updateUserData();
+        this.afAuth.auth.currentUser.updateProfile({displayName: login.username});
+        this.fs.success('Sign up success', 'You\'ve been logged in');
       })
       .catch(error => {
           // Handle Errors here.
@@ -117,7 +119,7 @@ export class AuthService {
           if (errorCode === 'auth/weak-password') {
             this.fs.error('Sign up error', 'The password is too weak.');
           } else {
-            alert(errorMessage);
+            this.fs.error('Sign up error', errorMessage);
           }
           console.log(error);
       });

@@ -3,11 +3,16 @@
     <form (ngSubmit)="signup()" [formGroup]="signupForm">
         <mat-form-field>
             <input formControlName="email" type="email" matInput placeholder="xxx@yyy.com" />
-            
         </mat-form-field>
         <div *ngIf="submitted && form.email.errors" class="invalid-feedback">
           <div *ngIf="form.email.errors.required">Email is required</div>
           <div *ngIf="form.email.errors.email">Email is not valid</div>
+        </div>
+        <mat-form-field>
+            <input formControlName="username" type="text" matInput placeholder="Username" />
+        </mat-form-field>
+        <div *ngIf="submitted && form.username.errors" class="invalid-feedback">
+          <div *ngIf="form.username.errors.required">Username is required</div>
         </div>
 
         <mat-form-field>

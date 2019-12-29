@@ -30,9 +30,15 @@ export class SignupPageComponent implements OnInit {
     this.signupForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
+      username: ['', Validators.required],
       confirmPassword: ['', Validators.required]
     }, {
       validator: MustMatch('password', 'confirmPassword')
+    });
+    this.as.currentUserObservable.subscribe((auth) => {
+    if (auth) {
+      this.router.navigate(['/']);
+    }
   });
   }
   signup() {

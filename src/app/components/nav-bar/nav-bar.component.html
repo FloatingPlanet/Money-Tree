@@ -9,13 +9,17 @@
           <a [routerLink]="['/login']" mat-button aria-hidden="false" aria-label="Log in">
               <mat-icon aria-hidden="false" aria-label="Example log icon">people</mat-icon>
               &nbsp;
-              <span>Log in</span>
+              <span>Log in/Sign Up</span>
           </a>
         </span>
         <ng-template #logoutBlock>
               <!-- <a id="avatar-btn" class="nav-link"> -->
-          <img class="nav-avatar mr-1" width="20" height="20" [src]="avatarURL" >
+          <img class="nav-avatar mr-1" width="20" height="20" [src]="avatarURL" />
+          &nbsp;
+          <span>
             {{displayName}}
+          </span>
+          &nbsp;
           <!-- </a> -->
           <a class="nav-link" [routerLink]="['/']" (click)="logout()">Log Out</a>
         </ng-template>
