@@ -36,11 +36,13 @@ export class ProductService {
               console.log("add Product: " + res);
             }).catch(error => {
               console.error(error);
+              reject("Add product failed");
             });
-          resolve('Added');
+          resolve(`doc ${product.SKU} added`);
         }
       }).catch((error) => {
         console.error(error);
+        reject(`fetch doc ${product.SKU} failed`);
       })
     })
 
