@@ -24,14 +24,25 @@ export class ProductService {
     });
   }
   public addProduct(product: Product) {
-    product.productSummary = product.productCategory.join(" ");
-    this.Products.doc(product.SKU)
-      // TODO check doc exsits or not
-      .set(product)
-      .then((res) => {
-        console.log("add Product: " + res);
-      }).catch(error => {
+    return new Promise((resolve, reject) => {
+      product.productSummary = product.productCategory.join(" ");
+      this.Products.doc(product.SKU).ref.get().then((doc) => {
+        if (doc.exists) {
+          reject(`SKU: ${product.SKU} exists`);
+        } else {
+          this.Products.doc(product.SKU)
+            .set(product)
+            .then((res) => {
+              console.log("add Product: " + res);
+            }).catch(error => {
+              console.error(error);
+            });
+          resolve('Added');
+        }
+      }).catch((error) => {
         console.error(error);
-      });
+      })
+    })
+
   }
 }

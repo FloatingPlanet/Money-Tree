@@ -38,7 +38,7 @@ export class ProductFormComponent implements OnInit {
   }
   onSubmit() {
     this.productForm.patchValue({ productCategory: this.selectedCategories ? this.selectedCategories : [] });
-    this.ps.addProduct(this.productForm.value);
+    this.ps.addProduct(this.productForm.value).then(result => console.log(result)).catch(error => console.error(error));
     this.productForm.reset();
   }
 
