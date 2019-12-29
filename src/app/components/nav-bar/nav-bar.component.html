@@ -4,6 +4,14 @@
           LOGO
         </a>
         <span class="spacer"></span>
+        <a [routerLink]="['/login']" mat-icon-button aria-hidden="false" aria-label="Example log icon">
+            <mat-icon aria-hidden="false" aria-label="Example log icon">account_circle</mat-icon>
+        </a>
+        <a [routerLink]="['/cart']" mat-icon-button aria-hidden="false" aria-label="Example log icon">
+            <mat-icon aria-hidden="false" aria-label="Example cart icon">shopping_cart
+            </mat-icon>
+        </a>
+        <span class="spacer"></span>
        
         <span *ngIf="!authState; else logoutBlock" >
           <a [routerLink]="['/login']" mat-button aria-hidden="false" aria-label="Log in">

@@ -2,13 +2,12 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Product } from 'src/app/models/product';
 
 @Component({
-  selector: 'app-product-card',
-  templateUrl: './product-card.component.html',
-  styleUrls: ['./product-card.component.scss']
+  selector: 'app-product-item',
+  templateUrl: './product-item.component.html',
+  styleUrls: ['./product-item.component.scss']
 })
+export class ProductItemComponent implements OnInit {
 
-export class ProductCardComponent implements OnInit {
-  like = false;
   constructor() { }
   @Input() product: Product;
   ngOnInit() {

@@ -5,6 +5,9 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireStorageModule } from '@angular/fire/storage';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrModule } from 'ngx-toastr';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   MatCheckboxModule,
   MatButtonModule,
@@ -35,10 +38,9 @@ import {
   MatSnackBarModule,
   MatTableModule,
   MatSortModule,
-  MatPaginatorModule
+  MatPaginatorModule,
 } from '@angular/material';
-import { ToastrModule } from 'ngx-toastr';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 // Our stuff ---- ❤❤❤
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -59,6 +61,17 @@ import { FlashMessageService } from './services/flashMessage/flash-message.servi
 import { ProductService } from './services/product/product.service';
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 
+import { ProductItemComponent } from './components/product-item/product-item.component';
+import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
+import { AdminPageComponent } from './pages/admin-page/admin-page.component';
+import { AdminOrdersComponent } from './components/admin-orders/admin-orders.component';
+import { AdminProductsComponent } from './components/admin-products/admin-products.component';
+import { CategoryFormComponent } from './components/category-form/category-form.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { ProductFormComponent } from './components/product-form/product-form.component';
+import { NewProductComponent } from './pages/new-product/new-product.component';
+import { ModifyProductComponent } from './components/modify-product/modify-product.component';
+import { CategoryService } from './services/category/category.service';
 
 
 @NgModule({
@@ -74,7 +87,16 @@ import { SignupPageComponent } from './pages/signup-page/signup-page.component';
     CheckoutPageComponent,
     NoAccessComponent,
     PageNotFoundComponent,
-    SignupPageComponent
+    SignupPageComponent,
+    ProductItemComponent,
+    OrderSummaryComponent,
+    AdminPageComponent,
+    AdminOrdersComponent,
+    AdminProductsComponent,
+    CategoryFormComponent,
+    ProductFormComponent,
+    NewProductComponent,
+    ModifyProductComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -82,9 +104,12 @@ import { SignupPageComponent } from './pages/signup-page/signup-page.component';
     AngularFirestoreModule,
     BrowserModule,
     ToastrModule.forRoot(),
+    NgbModule,
     AppRoutingModule,
     AngularFireAuthModule,
     // material design stuff
+    ReactiveFormsModule,
+    FormsModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
     MatButtonModule,
@@ -117,12 +142,14 @@ import { SignupPageComponent } from './pages/signup-page/signup-page.component';
     MatSortModule,
     MatPaginatorModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ModalModule.forRoot()
   ],
   providers: [
     AuthService,
     FlashMessageService,
     ProductService,
+    CategoryService,
   ],
   bootstrap: [AppComponent]
 })
