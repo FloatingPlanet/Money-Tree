@@ -60,7 +60,6 @@ import { AuthService } from './services/login/auth.service';
 import { FlashMessageService } from './services/flashMessage/flash-message.service';
 import { ProductService } from './services/product/product.service';
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
-
 import { ProductItemComponent } from './components/product-item/product-item.component';
 import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
