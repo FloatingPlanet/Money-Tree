@@ -1,1 +1,21 @@
-<p>admin-page works!</p>
+<mat-drawer-container class="admin-container" autosize>
+	<mat-drawer #drawer class="admin-sidenav" opened="true" mode="side">
+		<h1>
+			Admin
+		</h1>
+		<mat-list>
+			<button [routerLink]="['/admin/orders']" mat-button>
+				Orders
+			</button>
+			<mat-divider></mat-divider>
+			<button [routerLink]=" ['/admin/products']" mat-button>
+				Products
+			</button>
+			<mat-divider></mat-divider>
+		</mat-list>
+
+	</mat-drawer>
+	<div class=" admin-sidenav-content">
+		<router-outlet></router-outlet>
+	</div>
+</mat-drawer-container>

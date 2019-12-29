@@ -6,7 +6,10 @@ import { MainPageComponent } from './pages/main-page/main-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { ShoppingCartComponent } from './pages/shopping-cart/shopping-cart.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
-import { AddProductComponent } from './components/add-product/add-product.component';
+import { AdminOrdersComponent } from './components/admin-orders/admin-orders.component';
+import { AdminProductsComponent } from './components/admin-products/admin-products.component';
+import { ProductFormComponent } from './components/product-form/product-form.component';
+import { ModifyProductComponent } from './components/modify-product/modify-product.component';
 
 
 const routes: Routes = [
@@ -14,8 +17,15 @@ const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
   { path: 'cart', component: ShoppingCartComponent },
   { path: 'no-access', component: NoAccessComponent },
-  { path: 'admin', component: AdminPageComponent },
-  { path: 'admin/product', component: AddProductComponent },
+  {
+    path: 'admin', component: AdminPageComponent,
+    children: [
+      { path: '', redirectTo: 'orders', pathMatch: 'full' },
+      { path: 'orders', component: AdminOrdersComponent },
+      { path: 'products', component: AdminProductsComponent, },
+      { path: 'products/add', component: ModifyProductComponent }
+    ]
+  },
   { path: '**', component: PageNotFoundComponent },
 ];
 

@@ -1,5 +1,10 @@
-<p>order-list works!</p>
-<div>
-    <app-product-item *ngFor="let product of products" [product]="product"></app-product-item>
-    <app-order-summary></app-order-summary>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+            <app-product-item *ngFor="let product of ps.allProducts" [product]="product"></app-product-item>
+        </div>
+        <div class="col-sm-3">
+            <app-order-summary></app-order-summary>
+        </div>
+    </div>
 </div>

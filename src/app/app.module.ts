@@ -6,6 +6,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import {
   MatCheckboxModule,
@@ -37,7 +39,7 @@ import {
   MatSnackBarModule,
   MatTableModule,
   MatSortModule,
-  MatPaginatorModule
+  MatPaginatorModule,
 } from '@angular/material';
 import { ToastrModule } from 'ngx-toastr';
 // Our stuff ---- ❤❤❤
@@ -62,7 +64,14 @@ import { ProductService } from './services/product/product.service';
 import { ProductItemComponent } from './components/product-item/product-item.component';
 import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
-import { AddProductComponent } from './components/add-product/add-product.component';
+import { AdminOrdersComponent } from './components/admin-orders/admin-orders.component';
+import { AdminProductsComponent } from './components/admin-products/admin-products.component';
+import { CategoryFormComponent } from './components/category-form/category-form.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { ProductFormComponent } from './components/product-form/product-form.component';
+import { NewProductComponent } from './pages/new-product/new-product.component';
+import { ModifyProductComponent } from './components/modify-product/modify-product.component';
+import { CategoryService } from './services/category/category.service';
 
 
 @NgModule({
@@ -81,8 +90,12 @@ import { AddProductComponent } from './components/add-product/add-product.compon
     ProductItemComponent,
     OrderSummaryComponent,
     AdminPageComponent,
-    AddProductComponent
-
+    AdminOrdersComponent,
+    AdminProductsComponent,
+    CategoryFormComponent,
+    ProductFormComponent,
+    NewProductComponent,
+    ModifyProductComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -90,10 +103,12 @@ import { AddProductComponent } from './components/add-product/add-product.compon
     AngularFirestoreModule,
     BrowserModule,
     ToastrModule.forRoot(),
+    NgbModule.forRoot(),
     AppRoutingModule,
     AngularFireAuthModule,
     // material design stuff
-    NgbModule,
+    ReactiveFormsModule,
+    FormsModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
     MatCheckboxModule,
@@ -125,13 +140,15 @@ import { AddProductComponent } from './components/add-product/add-product.compon
     MatSnackBarModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    ModalModule.forRoot(),
   ],
   providers: [
     AuthService,
     UserService,
     FlashMessageService,
     ProductService,
+    CategoryService,
   ],
   bootstrap: [AppComponent]
 })

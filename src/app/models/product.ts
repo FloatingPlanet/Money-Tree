@@ -1,15 +1,15 @@
 export class Product {
-  $key: string;
+  SKU: string;
   productId: number;
   productName: string;
-  productCategory: string;
-  productTags: [string];
+  productCategory: [string];
+  productSummary?: string;
   productPrice: number;
   productDescription: string;
   productImageUrls: [string];
-  productAdded: number;
-  productQuatity: number;
+  productAddedAt: Date;
+  productQuantity: number;
   ratings: number;
   favourite: boolean;
-  productSeller: string;
+  productSeller?: string;
 }
