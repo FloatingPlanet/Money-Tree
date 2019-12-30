@@ -34,7 +34,4 @@ export class NavBarComponent implements OnInit {
     this.as.signOut();
   }
 
-  goToLogin() {
-    this.router.navigateByUrl('/login');
-  }
 }

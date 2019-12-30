@@ -1,17 +1,17 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
-        <a [routerLink]="['/']">
+        <button mat-button [routerLink]="['/']">
           LOGO
-        </a>
+        </button>
         <span class="spacer"></span>
 
-        <a [routerLink]="['/cart']" mat-icon-button aria-hidden="false" aria-label="Example log icon">
+        <button [routerLink]="['/cart']" mat-icon-button aria-hidden="false" aria-label="Example log icon">
           <mat-icon aria-hidden="false" aria-label="Example cart icon">shopping_cart
           </mat-icon>
-        </a>
+        </button>
        
         <span *ngIf="!authState; else logoutBlock" >
-          <button (click)="goToLogin()" mat-button aria-hidden="false" aria-label="Log in">
+          <button [routerLink]="['/login']" mat-button aria-hidden="false" aria-label="Log in">
             <mat-icon aria-hidden="false" aria-label="Example log icon">people</mat-icon>
             &nbsp;
             <span>Log in/Sign Up</span>
