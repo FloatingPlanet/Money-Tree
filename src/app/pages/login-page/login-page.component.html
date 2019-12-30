@@ -1,31 +1,34 @@
-<div class="login-form">
-    <h1> Log in</h1>
+<div class="container mt-5">
+  <mat-card class="login-fields">
+
+    <h1 class="text-center">LOG IN</h1>
     <form (ngSubmit)="emailLogin()" [formGroup]="loginForm">
-      <mat-form-field>
-          <input formControlName="email" type="email" matInput placeholder="xxx@yyy.com" required/>
+      <mat-form-field class="w-100">
+        <input formControlName="email" type="email" matInput placeholder="Email" required/>
       </mat-form-field>
       <div *ngIf="submitted && form.email.errors" class="invalid-feedback">
         <div *ngIf="form.email.errors.required">Login email is required</div>
         <div *ngIf="form.email.errors.email">Login email is not valid</div>
       </div>
-
-      <mat-form-field>
-        <input formControlName="password" type="password" matInput placeholder="password" />
+      
+      <mat-form-field class="w-100">
+        <input formControlName="password" type="password" matInput placeholder="Password" required />
       </mat-form-field>
       <div *ngIf="submitted && form.password.errors" class="invalid-feedback">
         <div *ngIf="form.password.errors.required">Password is required</div>
       </div>
-      <button mat-button type="submit">Log In</button>
+      <button class="w-100" mat-raised-button color="primary" type="submit">LOG IN</button>
     </form>
-    <button class="btn btn-secondary" (click)="loginWithGoogle()">Log in with google</button>
+    <button class="mt-2" mat-stroked-button (click)="loginWithGoogle()">Log in with google</button>
     <a [routerLink]="['/signup']">Don't have an account? Sign up</a>
     
-    <form [formGroup]= "resetForm" (ngSubmit)="resetPassword()">
-      <label for="resetEmail">Forgot password?</label>
+    <form class="mt-5" [formGroup]= "resetForm" (ngSubmit)="resetPassword()">
+      <label class="w-100" for="resetEmail">Forgot password?</label>
       <mat-form-field>
-          <input name="resetEmail" formControlName="email" type="email" matInput placeholder="xxx@yyy.com" required/>
+        <input name="resetEmail" formControlName="email" type="email" matInput placeholder="Email" required/>
       </mat-form-field>
       <button mat-button type="submit">Reset password</button>
     </form>
+  </mat-card>
 </div>
 
