@@ -12,10 +12,12 @@ import { FlashMessageService } from '../flashMessage/flash-message.service';
 export class AuthService {
   authState: FirebaseUser = null;
   users: AngularFirestoreCollection<User>;
-  constructor(private afAuth: AngularFireAuth,
-              private db: AngularFirestore,
-              private fs: FlashMessageService,
-              private router: Router) {
+  constructor(
+    private afAuth: AngularFireAuth,
+    private db: AngularFirestore,
+    private fs: FlashMessageService,
+    private router: Router
+  ) {
     this.users = this.db.collection('users');
     this.afAuth.authState.subscribe((auth) => {
       this.authState = auth;
@@ -81,13 +83,18 @@ export class AuthService {
     return this.socialSignIn(provider);
   }
 
-  private socialSignIn(provider) {
+  private socialSignIn(provider: firebase.auth.AuthProvider) {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((credential) => {
         this.authState = credential.user;
         this.updateUserData();
+        this.fs.success('3rd party log in successful', 'You\'ve been logged in with ' + provider.providerId);
+        console.log(provider);
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+        this.fs.error('3rd party login failed', error.message);
+        console.log(error);
+      });
   }
 
 
@@ -99,29 +106,31 @@ export class AuthService {
         this.authState = res.user;
         this.updateUserData();
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   //// Email/Password Auth ////
 
   emailSignUp(login) {
-    return this.afAuth.auth.createUserWithEmailAndPassword(login.email, login.password, )
+    return this.afAuth.auth.createUserWithEmailAndPassword(login.email, login.password)
       .then((credential: UserCredential) => {
         this.authState = credential.user;
         this.updateUserData();
-        this.afAuth.auth.currentUser.updateProfile({displayName: login.username});
+        this.afAuth.auth.currentUser.updateProfile({ displayName: login.username });
         this.fs.success('Sign up success', 'You\'ve been logged in');
       })
       .catch(error => {
-          // Handle Errors here.
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          if (errorCode === 'auth/weak-password') {
-            this.fs.error('Sign up error', 'The password is too weak.');
-          } else {
-            this.fs.error('Sign up error', errorMessage);
-          }
-          console.log(error);
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        if (errorCode === 'auth/weak-password') {
+          this.fs.error('Sign up error', 'The password is too weak.');
+        } else {
+          this.fs.error('Sign up error', errorMessage);
+        }
+        console.log(error);
       });
   }
 
@@ -130,9 +139,12 @@ export class AuthService {
       .then((res: UserCredential) => {
         this.authState = res.user;
         this.updateUserData();
+        this.fs.success('Log in', 'You\'ve been logged in');
       })
       .catch(error => {
         console.log(error);
+        this.fs.error('Log in failed', error.message);
+
       });
   }
 
@@ -141,7 +153,10 @@ export class AuthService {
     const auth = firebase.auth();
 
     return auth.sendPasswordResetEmail(email)
-      .then(() => console.log('email sent'))
+      .then(() => {
+        console.log('email sent');
+        this.fs.success('Password reset', 'An email with reset link has been sent to your email address. Please check your inbox');
+      })
       .catch((error) => console.log(error));
   }
 
@@ -149,7 +164,9 @@ export class AuthService {
   //// Sign Out ////
 
   signOut(): void {
-    this.afAuth.auth.signOut();
+    this.afAuth.auth.signOut().then(() => {
+      this.fs.success('Log out', 'You\'ve been logged out');
+    });
     this.router.navigate(['/']);
   }
 
