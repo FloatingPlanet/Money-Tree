@@ -18,10 +18,13 @@ export class ProductService {
     this.Products = db.collection('Products');
     this.loadProducts();
   }
-  public loadProducts() {
+  private loadProducts() {
     this.Products.valueChanges().subscribe((data) => {
       this.allProducts = data;
     });
+  }
+  get productsObservalbe() {
+    return this.Products.valueChanges();
   }
   public addProduct(product: Product) {
     return new Promise((resolve, reject) => {

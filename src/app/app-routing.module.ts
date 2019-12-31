@@ -25,7 +25,9 @@ const routes: Routes = [
       { path: '', redirectTo: 'orders', pathMatch: 'full' },
       { path: 'orders', component: AdminOrdersComponent },
       { path: 'products', component: AdminProductsComponent, },
-      { path: 'products/add', component: ModifyProductComponent }
+      { path: 'products/add', component: ModifyProductComponent },
+      { path: 'products/modify/:SKU', component: ModifyProductComponent }
+
     ]
   },
   { path: '**', component: PageNotFoundComponent },

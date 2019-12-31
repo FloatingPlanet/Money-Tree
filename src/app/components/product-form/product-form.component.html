@@ -1,4 +1,4 @@
-<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="productForm" (ngSubmit)="onSubmit($event)">
 	<div class="form-container">
 		<label>
 			<mat-form-field>
@@ -33,7 +33,7 @@
 		</label>
 		<label>
 			<mat-form-field>
-				<input matInput type="number" formControlName="productQuantity" required placeholder="Product Quantit">
+				<input matInput type="number" formControlName="productQuantity" required placeholder="Product Quantity">
 			</mat-form-field>
 		</label>
 		<label>
@@ -47,12 +47,6 @@
 				<input matInput type="text" formControlName="productSeller" placeholder="Product Seller" value="NA">
 			</mat-form-field>
 		</label>
-		<p>
-			Form Value: {{ productForm.value | json }}
-		</p>
-		<p>
-			cats: {{ selectedCategories | json }}
-		</p>
 		<button type="submit" [disabled]="!productForm.valid">Submit</button>
 	</div>
 </form>

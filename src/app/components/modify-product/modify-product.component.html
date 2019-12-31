@@ -2,11 +2,11 @@
     <div class="row">
         <div class="col-sm-9">
             <h1>Product</h1>
-            <app-product-form></app-product-form>
+            <app-product-form (onFormModified)="iNeedaUpdateProduct($event)"></app-product-form>
         </div>
         <div class="col-sm-3">
             <h1>Category</h1>
-            <app-category-form></app-category-form>
+            <app-category-form (selectedCategories)="gimmeDatCategories($event)"></app-category-form>
         </div>
     </div>
 </div>
