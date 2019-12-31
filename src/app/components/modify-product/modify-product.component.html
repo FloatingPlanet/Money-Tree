@@ -6,7 +6,7 @@
         </div>
         <div class="col-sm-3">
             <h1>Category</h1>
-            <app-category-form></app-category-form>
+            <app-category-form (selectedCategories)="doSomething($event)"></app-category-form>
         </div>
     </div>
 </div>

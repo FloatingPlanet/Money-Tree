@@ -24,7 +24,7 @@ export class AdminProductTableComponent implements OnInit {
       this.dataSource = new MatTableDataSource<Product>(this.products);
     });
   }
-  c: string[] = ['select', 'SKU', 'productName', 'productPrice', 'productQuantity', 'productCategory', 'productAddedAt'];
+  c: string[] = ['select', 'SKU', 'productName', 'productPrice', 'productQuantity', 'productCategory', 'productAddedAt', 'edit'];
   selection = new SelectionModel<Product>(true, []);
 
   isAllSelected() {

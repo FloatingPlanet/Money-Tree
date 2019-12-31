@@ -33,9 +33,6 @@ export class CategoryService {
         console.error(error);
       });
   }
-  public setCategories(Cs: string[]) {
-    this.selectedCategories.next(Cs);
-  }
   public getCategories(): Observable<string[]> {
     return this.selectedCategories.asObservable();
   }
