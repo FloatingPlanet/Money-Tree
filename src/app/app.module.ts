@@ -47,7 +47,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-import { OrderListComponent } from './components/order-list/order-list.component';
+
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
@@ -63,14 +63,15 @@ import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { ProductItemComponent } from './components/product-item/product-item.component';
 import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
-import { AdminOrdersComponent } from './components/admin-orders/admin-orders.component';
-import { AdminProductsComponent } from './components/admin-products/admin-products.component';
+import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
+import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { CategoryFormComponent } from './components/category-form/category-form.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ProductFormComponent } from './components/product-form/product-form.component';
 import { NewProductComponent } from './pages/new-product/new-product.component';
 import { ModifyProductComponent } from './components/modify-product/modify-product.component';
 import { CategoryService } from './services/category/category.service';
+import { AdminProductTableComponent } from './admin/admin-product-table/admin-product-table.component';
 
 
 @NgModule({
@@ -78,7 +79,6 @@ import { CategoryService } from './services/category/category.service';
     AppComponent,
     MainPageComponent,
     ProfileComponent,
-    OrderListComponent,
     ProductCardComponent,
     NavBarComponent,
     LoginPageComponent,
@@ -95,7 +95,8 @@ import { CategoryService } from './services/category/category.service';
     CategoryFormComponent,
     ProductFormComponent,
     NewProductComponent,
-    ModifyProductComponent
+    ModifyProductComponent,
+    AdminProductTableComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -107,6 +108,7 @@ import { CategoryService } from './services/category/category.service';
     AppRoutingModule,
     AngularFireAuthModule,
     // material design stuff
+
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
