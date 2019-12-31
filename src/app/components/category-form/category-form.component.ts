@@ -20,6 +20,7 @@ export class CategoryFormComponent implements OnInit {
   categoryForm = this.formBuilder.group({
     category: [null, [Validators.required, this.existCategory()]],
   })
+
   onSelectionChange(cats: string[]) {
     this.selectedCategories.emit(cats);
   }

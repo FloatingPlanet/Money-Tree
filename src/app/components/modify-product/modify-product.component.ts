@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { ProductService } from 'src/app/services/product/product.service';
 
 @Component({
@@ -14,15 +13,15 @@ export class ModifyProductComponent implements OnInit {
 
   ngOnInit() {
   }
-  public fetchCategories(cats: string[]) {
-    console.log(cats + " : I am parent, I got cats");
-    this.selectedCategories = cats;
+  public gimmeDatCategories(categoriesFromChild: string[]) {
+    console.log(categoriesFromChild + " : I am parent, I got cats");
+    this.selectedCategories = categoriesFromChild;
   }
-  public fetchProductDetail(fb: FormGroup) {
-    console.log(fb.value + " : I am parent, I got detail");
-    fb.patchValue({ productCategory: this.selectedCategories ? this.selectedCategories : [] });
-    this.ps.addProduct(fb.value).then(result => console.log(result)).catch(error => console.error(error));
-    fb.reset();
+  public iNeedaUpdateProduct(fg: FormGroup) {
+    console.log(fg.value + " : I am parent, I got detail");
+    fg.patchValue({ productCategory: this.selectedCategories ? this.selectedCategories : [] });
+    this.ps.addProduct(fg.value).then(result => console.log(result)).catch(error => console.error(error));
+    fg.reset();
   }
 }
 
