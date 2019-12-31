@@ -11,6 +11,12 @@ import { Category } from 'src/app/models/category';
 })
 export class CategoryFormComponent implements OnInit {
   @Output() public selectedCategories = new EventEmitter<string[]>();
+
+  constructor(private formBuilder: FormBuilder, private cs: CategoryService) { }
+
+  ngOnInit() {
+  }
+
   existCategory(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
       const exist = this.cs.allCategories.some(x => x.category === control.value);
@@ -25,10 +31,6 @@ export class CategoryFormComponent implements OnInit {
     this.selectedCategories.emit(cats);
   }
 
-  constructor(private formBuilder: FormBuilder, private cs: CategoryService) { }
-
-  ngOnInit() {
-  }
 
   onSubmit() {
     this.cs.addCategory(this.categoryForm.value);

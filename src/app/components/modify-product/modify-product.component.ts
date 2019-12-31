@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ProductService } from 'src/app/services/product/product.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-modify-product',
@@ -9,8 +10,9 @@ import { ProductService } from 'src/app/services/product/product.service';
 })
 export class ModifyProductComponent implements OnInit {
   selectedCategories: string[];
-  constructor(private ps: ProductService) { }
 
+  constructor(private ps: ProductService) {
+  }
   ngOnInit() {
   }
   public gimmeDatCategories(categoriesFromChild: string[]) {

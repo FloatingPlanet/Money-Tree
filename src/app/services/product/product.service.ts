@@ -30,22 +30,32 @@ export class ProductService {
     return new Promise((resolve, reject) => {
       product.productSummary = product.productCategory.join(" ");
       this.Products.doc(product.SKU).ref.get().then((doc) => {
-        if (doc.exists) {
-          reject(`SKU: ${product.SKU} exists`);
-        } else {
-          this.Products.doc(product.SKU)
-            .set(product)
-            .then((res) => {
-              console.log("add Product: " + res);
-            }).catch(error => {
-              console.error(error);
-              reject("Add product failed");
-            });
-          resolve(`doc ${product.SKU} added`);
-        }
+        this.Products.doc(product.SKU)
+          .set(product)
+          .then((res) => {
+            console.log("add Product: " + res);
+          }).catch(error => {
+            console.error(error);
+            reject("Add product failed");
+          });
+        resolve(`doc ${product.SKU} added`);
       }).catch((error) => {
         console.error(error);
         reject(`fetch doc ${product.SKU} failed`);
+      })
+    })
+  }
+  public fetchProduct(sku: string) {
+    return new Promise((resolve, reject) => {
+      this.Products.doc(sku).ref.get().then((doc) => {
+        if (doc.exists) {
+          resolve(doc.data());
+        } else {
+          reject(`${sku} does not exist`);
+        }
+      }).catch((error) => {
+        console.error(error);
+        reject(`fetch doc ${sku} failed`);
       })
     })
 

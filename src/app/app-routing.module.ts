@@ -27,7 +27,6 @@ const routes: Routes = [
       { path: 'products', component: AdminProductsComponent, },
       { path: 'products/add', component: ModifyProductComponent },
       { path: 'products/modify/:SKU', component: ModifyProductComponent }
-
     ]
   },
   { path: '**', component: PageNotFoundComponent },

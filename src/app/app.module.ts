@@ -71,7 +71,7 @@ import { ProductFormComponent } from './components/product-form/product-form.com
 import { NewProductComponent } from './pages/new-product/new-product.component';
 import { ModifyProductComponent } from './components/modify-product/modify-product.component';
 import { CategoryService } from './services/category/category.service';
-import { AdminProductTableComponent } from './admin/admin-product-table/admin-product-table.component';
+
 
 
 @NgModule({
@@ -96,7 +96,6 @@ import { AdminProductTableComponent } from './admin/admin-product-table/admin-pr
     ProductFormComponent,
     NewProductComponent,
     ModifyProductComponent,
-    AdminProductTableComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -108,7 +107,6 @@ import { AdminProductTableComponent } from './admin/admin-product-table/admin-pr
     AppRoutingModule,
     AngularFireAuthModule,
     // material design stuff
-
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
