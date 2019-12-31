@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormArray } from '@angular/forms';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, Validators, FormArray, FormGroup } from '@angular/forms';
 import { ProductService } from 'src/app/services/product/product.service';
 import { CategoryFormComponent } from '../category-form/category-form.component';
 import { CategoryService } from 'src/app/services/category/category.service';
@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./product-form.component.scss']
 })
 export class ProductFormComponent implements OnInit {
+  @Output() onFormModified: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
   productForm = this.formBuilder.group({
     SKU: [null, Validators.required],
     productId: [null, Validators.required],
@@ -37,9 +38,10 @@ export class ProductFormComponent implements OnInit {
   ngOnInit() {
   }
   onSubmit() {
-    this.productForm.patchValue({ productCategory: this.selectedCategories ? this.selectedCategories : [] });
-    this.ps.addProduct(this.productForm.value).then(result => console.log(result)).catch(error => console.error(error));
-    this.productForm.reset();
+    // this.productForm.patchValue({ productCategory: this.selectedCategories ? this.selectedCategories : [] });
+    // this.ps.addProduct(this.productForm.value).then(result => console.log(result)).catch(error => console.error(error));
+    // this.productForm.reset();
+    this.onFormModified.emit(this.productForm);
   }
 
 

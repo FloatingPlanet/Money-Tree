@@ -23,9 +23,12 @@ export class CategoryFormComponent implements OnInit {
   onSelectionChange(cats: string[]) {
     this.selectedCategories.emit(cats);
   }
+
   constructor(private formBuilder: FormBuilder, private cs: CategoryService) { }
+
   ngOnInit() {
   }
+
   onSubmit() {
     this.cs.addCategory(this.categoryForm.value);
     this.categoryForm.reset();

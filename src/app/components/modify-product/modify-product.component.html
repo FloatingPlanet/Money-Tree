@@ -2,11 +2,11 @@
     <div class="row">
         <div class="col-sm-9">
             <h1>Product</h1>
-            <app-product-form></app-product-form>
+            <app-product-form (onFormModified)="fetchProductDetail($event)"></app-product-form>
         </div>
         <div class="col-sm-3">
             <h1>Category</h1>
-            <app-category-form (selectedCategories)="doSomething($event)"></app-category-form>
+            <app-category-form (selectedCategories)="fetchCategories($event)"></app-category-form>
         </div>
     </div>
 </div>
