@@ -1,4 +1,4 @@
-<form [formGroup]="productForm" (ngSubmit)="onSubmit($event)">
+<form [formGroup]="productForm" (ngSubmit)="onSubmit(productForm)">
 	<div class="form-container">
 		<label>
 			<mat-form-field>
@@ -49,5 +49,4 @@
 		</label>
 		<button type="submit" [disabled]="!productForm.valid">Submit</button>
 	</div>
-	<p>{{detail}}</p>
 </form>

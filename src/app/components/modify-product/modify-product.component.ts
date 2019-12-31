@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ProductService } from 'src/app/services/product/product.service';
 import { ActivatedRoute } from '@angular/router';
-import { Product } from 'src/app/models/product';
 
 @Component({
   selector: 'app-modify-product',
@@ -16,9 +15,10 @@ export class ModifyProductComponent implements OnInit {
   constructor(private ps: ProductService, private route: ActivatedRoute) {
     this.SKU = this.route.snapshot.paramMap.get('SKU');
     if (this.SKU) {
-      this.detail = this.ps.fetchProduct(this.SKU).then(result => console.log(result)).catch(error => console.error(error));
+      this.ps.fetchProduct(this.SKU).then(result => {
+        this.detail = result;
+      }).catch(error => console.error(error));
     } else {
-
     }
   }
   ngOnInit() {

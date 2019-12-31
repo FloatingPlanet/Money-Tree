@@ -33,8 +33,5 @@ export class CategoryService {
         console.error(error);
       });
   }
-  public getCategories(): Observable<string[]> {
-    return this.selectedCategories.asObservable();
-  }
 
 }
