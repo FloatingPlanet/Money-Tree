@@ -108,6 +108,7 @@ import { AdminProductTableComponent } from './admin/admin-product-table/admin-pr
     AppRoutingModule,
     AngularFireAuthModule,
     // material design stuff
+
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
