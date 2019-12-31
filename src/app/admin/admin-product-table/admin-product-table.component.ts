@@ -13,7 +13,7 @@ import * as moment from 'moment';
 export class AdminProductTableComponent implements OnInit {
 
   products: Product[];
-  dataSource: MatTableDataSource<Product>;
+  dataSource = new MatTableDataSource<Product>([]);
   m = moment;
   constructor(private ps: ProductService, ) {
 
@@ -24,7 +24,7 @@ export class AdminProductTableComponent implements OnInit {
       this.dataSource = new MatTableDataSource<Product>(this.products);
     });
   }
-  displayedColumns: string[] = ['select', 'SKU', 'productName', 'productPrice', 'productQuantity', 'productCategory', 'productAddedAt'];
+  c: string[] = ['select', 'SKU', 'productName', 'productPrice', 'productQuantity', 'productCategory', 'productAddedAt'];
   selection = new SelectionModel<Product>(true, []);
 
   isAllSelected() {
