@@ -48,6 +48,20 @@ export class ProductService {
         reject(`fetch doc ${product.SKU} failed`);
       })
     })
+  }
+  public fetchProduct(sku: string) {
+    return new Promise((resolve, reject) => {
+      this.Products.doc(sku).ref.get().then((doc) => {
+        if (doc.exists) {
+          resolve(doc.data());
+        } else {
+          reject(`${sku} does not exist`);
+        }
+      }).catch((error) => {
+        console.error(error);
+        reject(`fetch doc ${sku} failed`);
+      })
+    })
 
   }
 }

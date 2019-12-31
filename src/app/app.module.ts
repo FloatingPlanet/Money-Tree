@@ -107,7 +107,6 @@ import { CategoryService } from './services/category/category.service';
     AppRoutingModule,
     AngularFireAuthModule,
     // material design stuff
-
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,

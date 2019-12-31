@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ProductService } from 'src/app/services/product/product.service';
 import { CategoryService } from 'src/app/services/category/category.service';
@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./product-form.component.scss']
 })
 export class ProductFormComponent implements OnInit {
+  @Input() detail: string;
   @Output() onFormModified: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
   productForm = this.formBuilder.group({
     SKU: [null, Validators.required],
