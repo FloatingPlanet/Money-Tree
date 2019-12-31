@@ -36,8 +36,8 @@ export class ProductFormComponent implements OnInit {
   }
   ngOnInit() {
   }
-  onSubmit(pf: FormGroup) {
-    this.onFormModified.emit(pf);
+  onSubmit(fg: FormGroup) {
+    this.onFormModified.emit(fg);
   }
 
 
