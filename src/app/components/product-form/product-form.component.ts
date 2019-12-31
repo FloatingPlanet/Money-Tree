@@ -3,6 +3,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ProductService } from 'src/app/services/product/product.service';
 import { Subscription } from 'rxjs';
 import { Product } from 'src/app/models/product';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product-form',
@@ -13,11 +14,12 @@ export class ProductFormComponent implements OnInit {
 
   @Input() detail: Product;
   @Output() onFormModified: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
-  selectedCategories: string[];
+
+  SKU: string;
   subscription: Subscription;
   productForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private ps: ProductService) {
+  constructor(private formBuilder: FormBuilder, private ps: ProductService, private route: ActivatedRoute) {
     this.productForm = this.formBuilder.group({
       SKU: [null, Validators.required],
       productId: [null, Validators.required],
@@ -33,6 +35,28 @@ export class ProductFormComponent implements OnInit {
       favourite: false,
       productSeller: null,
     });
+    this.SKU = this.route.snapshot.paramMap.get('SKU');
+    if (this.SKU) {
+      this.ps.fetchProduct(this.SKU).then(result => {
+        let product = <Product>result;
+        this.productForm.setValue({
+          SKU: product.SKU,
+          productId: product.productId,
+          productName: product.productName,
+          productCategory: product.productCategory,
+          productSummary: product.productSummary,
+          productPrice: product.productPrice,
+          productDescription: product.productDescription,
+          productImageUrls: product.productImageUrls,
+          productAddedAt: product.productAddedAt,
+          productQuantity: product.productQuantity,
+          ratings: product.ratings,
+          favourite: product.favourite,
+          productSeller: product.productSeller,
+        })
+      }).catch(error => console.error(error));
+    } else {
+    }
   }
   ngOnDestory() {
     this.subscription.unsubscribe();
@@ -40,29 +64,9 @@ export class ProductFormComponent implements OnInit {
   ngOnInit() { }
 
   ngOnChanges() {
-    if (this.detail) {
-      let product = this.detail;
-      this.productForm.setValue({
-        SKU: product.SKU,
-        productId: product.productId,
-        productName: product.productName,
-        productCategory: product.productCategory,
-        productSummary: product.productSummary,
-        productPrice: product.productPrice,
-        productDescription: product.productDescription,
-        productImageUrls: product.productImageUrls,
-        productAddedAt: product.productAddedAt,
-        productQuantity: product.productQuantity,
-        ratings: product.ratings,
-        favourite: product.favourite,
-        productSeller: product.productSeller,
-      })
-    }
+
   }
   onSubmit(fg: FormGroup) {
     this.onFormModified.emit(fg);
   }
-
-
-
 }

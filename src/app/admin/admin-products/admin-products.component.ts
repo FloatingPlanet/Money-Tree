@@ -12,10 +12,10 @@ import * as moment from 'moment';
 })
 export class AdminProductsComponent implements OnInit {
 
-
   products: Product[];
   dataSource = new MatTableDataSource<Product>([]);
   m = moment;
+
   constructor(private ps: ProductService, ) {
 
   }
@@ -25,6 +25,10 @@ export class AdminProductsComponent implements OnInit {
       this.dataSource = new MatTableDataSource<Product>(this.products);
     });
   }
+  ngOnDestory() {
+
+  }
+
   c: string[] = ['select', 'SKU', 'productName', 'productPrice', 'productQuantity', 'productCategory', 'productAddedAt', 'edit'];
   selection = new SelectionModel<Product>(true, []);
 

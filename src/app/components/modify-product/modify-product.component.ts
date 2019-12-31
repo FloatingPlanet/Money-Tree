@@ -10,16 +10,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ModifyProductComponent implements OnInit {
   selectedCategories: string[];
-  SKU: string;
-  detail: any;
-  constructor(private ps: ProductService, private route: ActivatedRoute) {
-    this.SKU = this.route.snapshot.paramMap.get('SKU');
-    if (this.SKU) {
-      this.ps.fetchProduct(this.SKU).then(result => {
-        this.detail = result;
-      }).catch(error => console.error(error));
-    } else {
-    }
+
+  constructor(private ps: ProductService) {
   }
   ngOnInit() {
   }
