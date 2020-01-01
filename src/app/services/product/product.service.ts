@@ -50,6 +50,7 @@ export class ProductService {
       this.Products.doc(sku).delete().then((res) => {
         resolve(`remove ${sku} successed`);
       }).catch((error) => {
+        console.error(error);
         reject(`remove ${sku} failed`);
       })
     })

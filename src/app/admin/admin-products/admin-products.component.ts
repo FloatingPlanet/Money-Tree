@@ -54,4 +54,8 @@ export class AdminProductsComponent implements OnInit {
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.SKU}`;
   }
+
+  deleteRow() {
+    console.log(this.selection.selected);
+  }
 }
