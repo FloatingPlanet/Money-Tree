@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ProductService } from 'src/app/services/product/product.service';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-modify-product',
