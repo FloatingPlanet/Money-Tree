@@ -45,7 +45,7 @@ export class ProductService {
       })
     })
   }
-  public deleteProduct(sku: string) {
+  public deleteProducts(sku: string) {
     return new Promise((resolve, reject) => {
       this.Products.doc(sku).delete().then((res) => {
         resolve(`remove ${sku} successed`);
