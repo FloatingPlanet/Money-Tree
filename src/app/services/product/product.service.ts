@@ -12,7 +12,7 @@ export class ProductService {
   Products: AngularFirestoreCollection<Product>;// db ref
   public allProducts: Product[];
   constructor(private db: AngularFirestore) {
-    this.Products = db.collection('Products', ref => ref.orderBy('productAddedAt').limit(5));
+    this.Products = db.collection('Products', ref => ref.orderBy('productAddedAt').limit(100));
     // TODO PAGINATION
     this.loadProducts();
   }
@@ -44,10 +44,10 @@ export class ProductService {
   public deleteProducts(sku: string) {
     return new Promise((resolve, reject) => {
       this.Products.doc(sku).delete().then((res) => {
-        resolve(`remove ${sku} successed`);
+        resolve(`remove SKU ${sku} successed`);
       }).catch((error) => {
         console.error(error);
-        reject(`remove ${sku} failed`);
+        reject(`remove SKU ${sku} failed`);
       })
     })
   }
