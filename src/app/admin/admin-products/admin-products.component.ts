@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product/product.service';
@@ -12,10 +12,10 @@ import * as moment from 'moment';
 })
 export class AdminProductsComponent implements OnInit {
 
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   products: Product[];
   dataSource = new MatTableDataSource<Product>([]);
   m = moment;
-
   constructor(private ps: ProductService, ) {
 
   }
@@ -23,6 +23,7 @@ export class AdminProductsComponent implements OnInit {
     this.ps.productsObservalbe.subscribe((res) => {
       this.products = res;
       this.dataSource = new MatTableDataSource<Product>(this.products);
+      this.dataSource.paginator = this.paginator;
     });
   }
   ngOnDestory() {
