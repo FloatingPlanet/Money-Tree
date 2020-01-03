@@ -32,9 +32,7 @@ export class ProductService {
       this.Products.doc(product.SKU).ref.get().then((doc) => {
         this.Products.doc(product.SKU)
           .set(product)
-          .then((res) => {
-            console.log("add Product: " + res);
-          }).catch(error => {
+          .catch(error => {
             console.error(error);
             reject("Add product failed");
           });
