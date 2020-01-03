@@ -57,8 +57,8 @@
                 </button>
             </td>
         </ng-container>
-        <tr mat-header-row *matHeaderRowDef="c"></tr>
-        <tr mat-row *matRowDef="let row; columns: c;">
+        <tr mat-header-row *matHeaderRowDef="cols"></tr>
+        <tr mat-row *matRowDef="let row; columns: cols;">
         </tr>
     </table>
     <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>

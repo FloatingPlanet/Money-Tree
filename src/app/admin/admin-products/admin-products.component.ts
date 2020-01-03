@@ -16,22 +16,22 @@ export class AdminProductsComponent implements OnInit {
   products: Product[];
   dataSource = new MatTableDataSource<Product>([]);
   m = moment;
-  constructor(private ps: ProductService, ) {
+  cols: string[] = ['select', 'SKU', 'productName', 'productPrice', 'productQuantity', 'productCategory', 'productAddedAt', 'edit'];
+  selection = new SelectionModel<Product>(true, []);
 
-  }
-  ngOnInit() {
+  constructor(private ps: ProductService, ) {
     this.ps.productsObservalbe.subscribe((res) => {
       this.products = res;
       this.dataSource = new MatTableDataSource<Product>(this.products);
       this.dataSource.paginator = this.paginator;
     });
   }
+
+  ngOnInit() {
+  }
   ngOnDestory() {
 
   }
-
-  c: string[] = ['select', 'SKU', 'productName', 'productPrice', 'productQuantity', 'productCategory', 'productAddedAt', 'edit'];
-  selection = new SelectionModel<Product>(true, []);
 
   isAllSelected() {
     const numSelected = this.selection.selected.length;
