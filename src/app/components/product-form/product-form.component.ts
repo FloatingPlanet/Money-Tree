@@ -20,21 +20,7 @@ export class ProductFormComponent implements OnInit {
   productForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private ps: ProductService, private route: ActivatedRoute) {
-    this.productForm = this.formBuilder.group({
-      SKU: [null, Validators.required],
-      productId: [null, Validators.required],
-      productName: [null, Validators.required],
-      productCategory: [],
-      productSummary: null,
-      productPrice: [null, Validators.required],
-      productDescription: [null, Validators.required],
-      productImageUrls: this.formBuilder.array(['https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mbp16touch-space-select-201911?wid=400&hei=400&fmt=jpeg&qlt=95&op_usm=0.5,1.5&fit=constrain&.v=1572825197207']),
-      productAddedAt: new Date(),
-      productQuantity: [null, [Validators.required, Validators.pattern('\\d*')]],
-      ratings: [null, Validators.required],
-      favourite: false,
-      productSeller: null,
-    });
+    this.resetForm();
     this.SKU = this.route.snapshot.paramMap.get('SKU');
     if (this.SKU) {
       this.ps.fetchProduct(this.SKU).then(result => {
@@ -68,5 +54,24 @@ export class ProductFormComponent implements OnInit {
   }
   onSubmit(fg: FormGroup) {
     this.onFormModified.emit(fg);
+    this.resetForm();
+  }
+
+  resetForm() {
+    this.productForm = this.formBuilder.group({
+      SKU: [null, Validators.required],
+      productId: [null, Validators.required],
+      productName: [null, Validators.required],
+      productCategory: [],
+      productSummary: null,
+      productPrice: [null, Validators.required],
+      productDescription: [null, Validators.required],
+      productImageUrls: this.formBuilder.array(['https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mbp16touch-space-select-201911?wid=400&hei=400&fmt=jpeg&qlt=95&op_usm=0.5,1.5&fit=constrain&.v=1572825197207']),
+      productAddedAt: new Date(),
+      productQuantity: [null, [Validators.required, Validators.pattern('\\d*')]],
+      ratings: [null, Validators.required],
+      favourite: false,
+      productSeller: null,
+    });
   }
 }

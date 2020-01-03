@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ProductService } from 'src/app/services/product/product.service';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-modify-product',
@@ -23,7 +22,6 @@ export class ModifyProductComponent implements OnInit {
     console.log(fg.value + " : I am parent, I got detail");
     fg.patchValue({ productCategory: this.selectedCategories ? this.selectedCategories : [] });
     this.ps.addProduct(fg.value).then(result => console.log(result)).catch(error => console.error(error));
-    fg.reset();
   }
 }
 

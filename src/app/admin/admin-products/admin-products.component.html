@@ -1,7 +1,7 @@
 <div class="product-list">
     <button mat-raised-button color="primary" class="mx-2" [routerLink]="['add']">Add</button>
-    <button mat-raised-button color="accent" class="" [routerLink]="['delete']">Delete</button>
-    <mat-form-field class="px-2">
+    <button mat-raised-button color="accent" class="" (click)="deleteProducts()">Delete</button>
+    <mat-form-field class=" px-2">
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
     </mat-form-field>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" class="w-100">
@@ -57,8 +57,9 @@
                 </button>
             </td>
         </ng-container>
-        <tr mat-header-row *matHeaderRowDef="c"></tr>
-        <tr mat-row *matRowDef="let row; columns: c;">
+        <tr mat-header-row *matHeaderRowDef="cols"></tr>
+        <tr mat-row *matRowDef="let row; columns: cols;">
         </tr>
     </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20, 50]" showFirstLastButtons></mat-paginator>
 </div>

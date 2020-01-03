@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product/product.service';
@@ -12,25 +12,26 @@ import * as moment from 'moment';
 })
 export class AdminProductsComponent implements OnInit {
 
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   products: Product[];
   dataSource = new MatTableDataSource<Product>([]);
   m = moment;
+  cols: string[] = ['select', 'SKU', 'productName', 'productPrice', 'productQuantity', 'productCategory', 'productAddedAt', 'edit'];
+  selection = new SelectionModel<Product>(true, []);
 
   constructor(private ps: ProductService, ) {
-
-  }
-  ngOnInit() {
     this.ps.productsObservalbe.subscribe((res) => {
       this.products = res;
       this.dataSource = new MatTableDataSource<Product>(this.products);
+      this.dataSource.paginator = this.paginator;
     });
+  }
+
+  ngOnInit() {
   }
   ngOnDestory() {
 
   }
-
-  c: string[] = ['select', 'SKU', 'productName', 'productPrice', 'productQuantity', 'productCategory', 'productAddedAt', 'edit'];
-  selection = new SelectionModel<Product>(true, []);
 
   isAllSelected() {
     const numSelected = this.selection.selected.length;
@@ -53,5 +54,14 @@ export class AdminProductsComponent implements OnInit {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.SKU}`;
+  }
+
+  deleteProducts() {
+    console.log(this.selection.selected);
+    this.selection.selected.forEach(element => {
+      this.ps.deleteProducts(element.SKU).then(res => {
+        console.log(res);
+      });
+    });
   }
 }

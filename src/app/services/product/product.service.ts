@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
-
 import {
   AngularFirestore,
   AngularFirestoreCollection,
-  AngularFirestoreDocument
 } from "angularfire2/firestore";
 import { Product } from 'src/app/models/product';
-import { Subscriber } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +12,8 @@ export class ProductService {
   Products: AngularFirestoreCollection<Product>;// db ref
   public allProducts: Product[];
   constructor(private db: AngularFirestore) {
-    this.Products = db.collection('Products');
+    this.Products = db.collection('Products', ref => ref.orderBy('productAddedAt').limit(100));
+    // TODO PAGINATION
     this.loadProducts();
   }
   private loadProducts() {
@@ -32,9 +30,7 @@ export class ProductService {
       this.Products.doc(product.SKU).ref.get().then((doc) => {
         this.Products.doc(product.SKU)
           .set(product)
-          .then((res) => {
-            console.log("add Product: " + res);
-          }).catch(error => {
+          .catch(error => {
             console.error(error);
             reject("Add product failed");
           });
@@ -42,6 +38,16 @@ export class ProductService {
       }).catch((error) => {
         console.error(error);
         reject(`fetch doc ${product.SKU} failed`);
+      })
+    })
+  }
+  public deleteProducts(sku: string) {
+    return new Promise((resolve, reject) => {
+      this.Products.doc(sku).delete().then((res) => {
+        resolve(`remove SKU ${sku} successed`);
+      }).catch((error) => {
+        console.error(error);
+        reject(`remove SKU ${sku} failed`);
       })
     })
   }
