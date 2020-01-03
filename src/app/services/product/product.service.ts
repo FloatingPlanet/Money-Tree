@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
-
 import {
   AngularFirestore,
   AngularFirestoreCollection,
-  AngularFirestoreDocument
 } from "angularfire2/firestore";
 import { Product } from 'src/app/models/product';
-import { Subscriber } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +12,8 @@ export class ProductService {
   Products: AngularFirestoreCollection<Product>;// db ref
   public allProducts: Product[];
   constructor(private db: AngularFirestore) {
-    this.Products = db.collection('Products');
+    this.Products = db.collection('Products', ref => ref.orderBy('productAddedAt').limit(5));
+    // TODO PAGINATION
     this.loadProducts();
   }
   private loadProducts() {
