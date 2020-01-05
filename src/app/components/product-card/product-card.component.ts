@@ -13,5 +13,16 @@ export class ProductCardComponent implements OnInit {
   @Input() product: Product;
   ngOnInit() {
   }
-
+  addToCart(sku: string) {
+    var tmp = localStorage.getItem("anonymousData");
+    if (tmp != null) {
+      var ss = JSON.parse(tmp)['skus'].push(sku);
+      console.log(JSON.parse(tmp))
+      localStorage.setItem('anonymousData', JSON.stringify(ss));
+      console.log(localStorage.getItem('anonymousData'))
+    } else {
+      var newProduct = { 'skus': [sku] };
+      localStorage.setItem('anonymousData', JSON.stringify(newProduct));
+    }
+  }
 }

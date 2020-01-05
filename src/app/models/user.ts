@@ -18,4 +18,5 @@ export class User {
   country?: string;
   state?: string;
   zip?: number;
+  cart?: string[]
 }
