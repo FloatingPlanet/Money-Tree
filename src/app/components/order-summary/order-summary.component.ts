@@ -24,7 +24,7 @@ export class OrderSummaryComponent implements OnInit {
 
 
   ngOnInit() {
-    this.subtotal = this.orders.reduceRight((p, { productPrice }) => p + price, 0);
+    this.subtotal = this.orders.reduceRight((p, { productPrice }) => p + productPrice, 0);
     this.estimatedTax = this.taxRate * (this.subtotal + this.shipping);
     this.recyclingFee = this.subtotal * this.recycleRate;
     this.total = Math.ceil((this.subtotal + this.shipping + this.estimatedTax + this.recyclingFee) * 10) / 10;
