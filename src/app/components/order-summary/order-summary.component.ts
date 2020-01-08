@@ -3,8 +3,8 @@ import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product/product.service';
 
 @Component({
-  selector: 'app-order-summary',
-  templateUrl: './order-summary.component.html',
+  selector: 'app-s-summary',
+  templateUrl: './s-summary.component.html',
   styleUrls: ['./order-summary.component.scss']
 })
 export class OrderSummaryComponent implements OnInit {
@@ -24,7 +24,7 @@ export class OrderSummaryComponent implements OnInit {
 
 
   ngOnInit() {
-    this.subtotal = this.order.reduceRight((p, { price }) => p + price, 0);
+    this.subtotal = this.orders.reduceRight((p, { productPrice }) => p + price, 0);
     this.estimatedTax = this.taxRate * (this.subtotal + this.shipping);
     this.recyclingFee = this.subtotal * this.recycleRate;
     this.total = Math.ceil((this.subtotal + this.shipping + this.estimatedTax + this.recyclingFee) * 10) / 10;
