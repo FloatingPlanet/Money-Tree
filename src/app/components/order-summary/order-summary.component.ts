@@ -3,8 +3,8 @@ import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product/product.service';
 
 @Component({
-  selector: 'app-s-summary',
-  templateUrl: './s-summary.component.html',
+  selector: 'app-order-summary',
+  templateUrl: './order-summary.component.html',
   styleUrls: ['./order-summary.component.scss']
 })
 export class OrderSummaryComponent implements OnInit {
@@ -19,12 +19,13 @@ export class OrderSummaryComponent implements OnInit {
   public total: number;
   public orders: Product[];
   constructor(private ps: ProductService) {
-
+    this.orders = JSON.parse(localStorage.getItem('anonymousCart'))['products'];
+    console.log(this.orders);
   }
 
 
   ngOnInit() {
-    this.subtotal = this.orders.reduceRight((p, { productPrice }) => p + productPrice, 0);
+    this.subtotal = this.orders.map(product => product.productPrice).reduceRight((prev, next) => prev + next, 0);
     this.estimatedTax = this.taxRate * (this.subtotal + this.shipping);
     this.recyclingFee = this.subtotal * this.recycleRate;
     this.total = Math.ceil((this.subtotal + this.shipping + this.estimatedTax + this.recyclingFee) * 10) / 10;
