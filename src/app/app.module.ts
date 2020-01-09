@@ -68,7 +68,6 @@ import { AdminProductsComponent } from './admin/admin-products/admin-products.co
 import { CategoryFormComponent } from './components/category-form/category-form.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ProductFormComponent } from './components/product-form/product-form.component';
-import { NewProductComponent } from './pages/new-product/new-product.component';
 import { ModifyProductComponent } from './components/modify-product/modify-product.component';
 import { CategoryService } from './services/category/category.service';
 
@@ -94,7 +93,6 @@ import { CategoryService } from './services/category/category.service';
     AdminProductsComponent,
     CategoryFormComponent,
     ProductFormComponent,
-    NewProductComponent,
     ModifyProductComponent,
   ],
   imports: [
