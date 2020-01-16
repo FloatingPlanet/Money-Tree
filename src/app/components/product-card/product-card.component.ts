@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Product } from 'src/app/models/product';
+import {Component, OnInit, Input} from '@angular/core';
+import {Product} from 'src/app/models/product';
 
 @Component({
   selector: 'app-product-card',
@@ -9,20 +9,26 @@ import { Product } from 'src/app/models/product';
 
 export class ProductCardComponent implements OnInit {
   like = false;
-  constructor() { }
+
+  constructor() {
+  }
+
   @Input() product: Product;
+
   ngOnInit() {
   }
 
   addToCart(product: Product[]) {
     console.log(product);
-    var localCart = JSON.parse(localStorage.getItem("anonymousCart"));;
+    const localCart = JSON.parse(localStorage.getItem('anonymousCart'));
     if (localCart != null) {
-      localCart['products'].push(product);
+      localCart.products.push(product);
       localStorage.setItem('anonymousCart', JSON.stringify(localCart));
     } else {
-      var newProduct = { 'products': [product] };
+      const newProduct = {products: [product]};
       localStorage.setItem('anonymousCart', JSON.stringify(newProduct));
     }
   }
+
+
 }

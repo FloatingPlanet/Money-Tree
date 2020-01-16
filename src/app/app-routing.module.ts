@@ -11,6 +11,7 @@ import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.componen
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { ProductFormComponent } from './components/product-form/product-form.component';
 import { ModifyProductComponent } from './components/modify-product/modify-product.component';
+import {ProductInfoComponent} from './components/product-info/product-info.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'signup', component: SignupPageComponent },
   { path: 'cart', component: ShoppingCartComponent },
   { path: 'no-access', component: NoAccessComponent },
+  { path: 'info/:SKU', component: ProductInfoComponent },
   {
     path: 'admin', component: AdminPageComponent,
     children: [
