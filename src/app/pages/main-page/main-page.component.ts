@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ProductService } from 'src/app/services/product/product.service';
-import { Validator, FormGroup, FormBuilder } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {ProductService} from 'src/app/services/product/product.service';
+
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
@@ -8,7 +8,8 @@ import { Validator, FormGroup, FormBuilder } from '@angular/forms';
 })
 export class MainPageComponent implements OnInit {
   constructor(private ps: ProductService
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     // this.product = {

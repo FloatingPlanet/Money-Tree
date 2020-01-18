@@ -1,32 +1,32 @@
 <mat-toolbar color="primary">
-    <mat-toolbar-row>
-        <button mat-button [routerLink]="['/']">
-          LOGO
-        </button>
-        <span class="spacer"></span>
+  <mat-toolbar-row>
+    <button [routerLink]="['/']" mat-button>
+      LOGO
+    </button>
+    <span class="spacer"></span>
 
-        <button [routerLink]="['/cart']" mat-icon-button aria-hidden="false" aria-label="Example log icon">
-          <mat-icon aria-hidden="false" aria-label="Example cart icon">shopping_cart
-          </mat-icon>
-        </button>
-       
-        <span *ngIf="!authState; else logoutBlock" >
-          <button [routerLink]="['/login']" mat-button aria-hidden="false" aria-label="Log in">
+    <button [routerLink]="['/cart']" aria-hidden="false" aria-label="Example log icon" mat-icon-button>
+      <mat-icon aria-hidden="false" aria-label="Example cart icon">shopping_cart
+      </mat-icon>
+    </button>
+
+    <span *ngIf="!authState; else logoutBlock">
+          <button [routerLink]="['/login']" aria-hidden="false" aria-label="Log in" mat-button>
             <mat-icon aria-hidden="false" aria-label="Example log icon">people</mat-icon>
             &nbsp;
             <span>Log in/Sign Up</span>
           </button>
         </span>
-        <ng-template #logoutBlock>
-              <!-- <a id="avatar-btn" class="nav-link"> -->
-          <img class="nav-avatar mr-1" width="20" height="20" [src]="avatarURL" />
-          &nbsp;
-          <span>
+    <ng-template #logoutBlock>
+      <!-- <a id="avatar-btn" class="nav-link"> -->
+      <img [src]="avatarURL" class="nav-avatar mr-1" height="20" width="20"/>
+      &nbsp;
+      <span>
             {{displayName}}
           </span>
-          &nbsp;
-          <!-- </a> -->
-          <button mat-button (click)="logout()">Log Out</button>
-        </ng-template>
-    </mat-toolbar-row>
+      &nbsp;
+      <!-- </a> -->
+      <button (click)="logout()" mat-button>Log Out</button>
+    </ng-template>
+  </mat-toolbar-row>
 </mat-toolbar>

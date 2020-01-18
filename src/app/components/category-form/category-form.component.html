@@ -1,18 +1,18 @@
-<mat-selection-list #categoriesSelection [(ngModel)]="selectedCatogries" (ngModelChange)="onSelectionChange($event)">
-	<mat-list-option *ngFor="let c of this.cs.allCategories" [value]="c.category">
-		{{c.category}}
-	</mat-list-option>
+<mat-selection-list #categoriesSelection (ngModelChange)="onSelectionChange($event)" [(ngModel)]="selectedCatogries">
+  <mat-list-option *ngFor="let c of this.cs.allCategories" [value]="c.category">
+    {{c.category}}
+  </mat-list-option>
 </mat-selection-list>
-<form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
-	<label>
-		<mat-form-field class="add-category">
-			<input matInput type="text" formControlName="category" placeholder="New Category" #newCategory>
-		</mat-form-field>
-	</label>
-	<button type="submit" mat-icon-button [disabled]="!categoryForm.valid">
-		<mat-icon>check</mat-icon>
-	</button>
+<form (ngSubmit)="onSubmit()" [formGroup]="categoryForm">
+  <label>
+    <mat-form-field class="add-category">
+      <input #newCategory formControlName="category" matInput placeholder="New Category" type="text">
+    </mat-form-field>
+  </label>
+  <button [disabled]="!categoryForm.valid" mat-icon-button type="submit">
+    <mat-icon>check</mat-icon>
+  </button>
 
-	<p>{{newCategory.value}}</p>
+  <p>{{newCategory.value}}</p>
 </form>
 <p *ngIf="selectedCatogries">{{selectedCatogries.category}}</p>

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ProductService } from 'src/app/services/product/product.service';
-import { Product } from 'src/app/models/product';
+import {Component, OnInit} from '@angular/core';
+import {ProductService} from 'src/app/services/product/product.service';
+import {Product} from 'src/app/models/product';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -9,8 +9,9 @@ import { Product } from 'src/app/models/product';
 })
 export class ShoppingCartComponent implements OnInit {
   public orders: Product[];
+
   constructor(private ps: ProductService) {
-    this.orders = JSON.parse(localStorage.getItem('anonymousCart'))['products'];
+    this.orders = JSON.parse(localStorage.getItem('anonymousCart')).products;
     console.log(this.orders);
   }
 

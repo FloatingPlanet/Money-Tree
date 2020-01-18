@@ -1,17 +1,17 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import * as firebase from 'firebase/app';
-import { Observable } from 'rxjs';
-import { User } from '../../models/user';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { Router } from '@angular/router';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { User as FirebaseUser, UserCredential } from '@firebase/auth-types';
-import { FlashMessageService } from '../flashMessage/flash-message.service';
+import {User} from '../../models/user';
+import {AngularFireAuth} from 'angularfire2/auth';
+import {Router} from '@angular/router';
+import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
+import {User as FirebaseUser, UserCredential} from '@firebase/auth-types';
+import {FlashMessageService} from '../flashMessage/flash-message.service';
 
 @Injectable()
 export class AuthService {
   authState: FirebaseUser = null;
   users: AngularFirestoreCollection<User>;
+
   constructor(
     private afAuth: AngularFireAuth,
     private db: AngularFirestore,
@@ -83,23 +83,6 @@ export class AuthService {
     return this.socialSignIn(provider);
   }
 
-  private socialSignIn(provider: firebase.auth.AuthProvider) {
-    return this.afAuth.auth.signInWithPopup(provider)
-      .then((credential) => {
-        this.authState = credential.user;
-        this.updateUserData();
-        this.fs.success('3rd party log in successful', 'You\'ve been logged in with ' + provider.providerId);
-        console.log(provider);
-      })
-      .catch(error => {
-        this.fs.error('3rd party login failed', error.message);
-        console.log(error);
-      });
-  }
-
-
-  //// Anonymous Auth ////
-
   anonymousLogin() {
     return this.afAuth.auth.signInAnonymously()
       .then((res: UserCredential) => {
@@ -111,14 +94,15 @@ export class AuthService {
       });
   }
 
-  //// Email/Password Auth ////
+
+  //// Anonymous Auth ////
 
   emailSignUp(login) {
     return this.afAuth.auth.createUserWithEmailAndPassword(login.email, login.password)
       .then((credential: UserCredential) => {
         this.authState = credential.user;
         this.updateUserData();
-        this.afAuth.auth.currentUser.updateProfile({ displayName: login.username });
+        this.afAuth.auth.currentUser.updateProfile({displayName: login.username});
         this.fs.success('Sign up success', 'You\'ve been logged in');
       })
       .catch(error => {
@@ -133,6 +117,8 @@ export class AuthService {
         console.log(error);
       });
   }
+
+  //// Email/Password Auth ////
 
   emailLogin(login) {
     return this.afAuth.auth.signInWithEmailAndPassword(login.email, login.password)
@@ -160,14 +146,28 @@ export class AuthService {
       .catch((error) => console.log(error));
   }
 
-
-  //// Sign Out ////
-
   signOut(): void {
     this.afAuth.auth.signOut().then(() => {
       this.fs.success('Log out', 'You\'ve been logged out');
     });
     this.router.navigate(['/']);
+  }
+
+
+  //// Sign Out ////
+
+  private socialSignIn(provider: firebase.auth.AuthProvider) {
+    return this.afAuth.auth.signInWithPopup(provider)
+      .then((credential) => {
+        this.authState = credential.user;
+        this.updateUserData();
+        this.fs.success('3rd party log in successful', 'You\'ve been logged in with ' + provider.providerId);
+        console.log(provider);
+      })
+      .catch(error => {
+        this.fs.error('3rd party login failed', error.message);
+        console.log(error);
+      });
   }
 
   //// Helpers ////

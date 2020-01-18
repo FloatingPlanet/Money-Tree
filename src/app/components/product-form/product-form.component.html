@@ -1,52 +1,52 @@
-<form [formGroup]="productForm" (ngSubmit)="onSubmit(productForm)">
-	<div class="form-container">
-		<label>
-			<mat-form-field>
-				<input matInput type="text" formControlName="SKU" required placeholder="SKU">
-			</mat-form-field>
-		</label>
-		<label>
-			<mat-form-field>
-				<input matInput type="number" formControlName="productId" required placeholder="Product Id">
-			</mat-form-field>
-		</label>
-		<label>
-			<mat-form-field>
-				<input matInput type="text" formControlName="productName" required placeholder="Product Name">
-			</mat-form-field>
-		</label>
-		<label>
-			<mat-form-field>
-				<input matInput type="text" formControlName="productSummary" required placeholder="Product Summary">
-			</mat-form-field>
-		</label>
-		<label>
-			<mat-form-field>
-				<input matInput type="number" formControlName="productPrice" required placeholder="Product Price">
-			</mat-form-field>
-		</label>
-		<label>
-			<mat-form-field>
-				<input matInput type="text" formControlName="productDescription" required
-					placeholder="Product Description">
-			</mat-form-field>
-		</label>
-		<label>
-			<mat-form-field>
-				<input matInput type="number" formControlName="productQuantity" required placeholder="Product Quantity">
-			</mat-form-field>
-		</label>
-		<label>
-			<mat-form-field>
+<form (ngSubmit)="onSubmit(productForm)" [formGroup]="productForm">
+  <div class="form-container">
+    <label>
+      <mat-form-field>
+        <input formControlName="SKU" matInput placeholder="SKU" required type="text">
+      </mat-form-field>
+    </label>
+    <label>
+      <mat-form-field>
+        <input formControlName="productId" matInput placeholder="Product Id" required type="number">
+      </mat-form-field>
+    </label>
+    <label>
+      <mat-form-field>
+        <input formControlName="productName" matInput placeholder="Product Name" required type="text">
+      </mat-form-field>
+    </label>
+    <label>
+      <mat-form-field>
+        <input formControlName="productSummary" matInput placeholder="Product Summary" required type="text">
+      </mat-form-field>
+    </label>
+    <label>
+      <mat-form-field>
+        <input formControlName="productPrice" matInput placeholder="Product Price" required type="number">
+      </mat-form-field>
+    </label>
+    <label>
+      <mat-form-field>
+        <input formControlName="productDescription" matInput placeholder="Product Description" required
+               type="text">
+      </mat-form-field>
+    </label>
+    <label>
+      <mat-form-field>
+        <input formControlName="productQuantity" matInput placeholder="Product Quantity" required type="number">
+      </mat-form-field>
+    </label>
+    <label>
+      <mat-form-field>
 
-				<input matInput type="number" formControlName="ratings" required placeholder="Ratings">
-			</mat-form-field>
-		</label>
-		<label>
-			<mat-form-field>
-				<input matInput type="text" formControlName="productSeller" placeholder="Product Seller" value="NA">
-			</mat-form-field>
-		</label>
-		<button type="submit" [disabled]="!productForm.valid">Submit</button>
-	</div>
+        <input formControlName="ratings" matInput placeholder="Ratings" required type="number">
+      </mat-form-field>
+    </label>
+    <label>
+      <mat-form-field>
+        <input formControlName="productSeller" matInput placeholder="Product Seller" type="text" value="NA">
+      </mat-form-field>
+    </label>
+    <button [disabled]="!productForm.valid" type="submit">Submit</button>
+  </div>
 </form>

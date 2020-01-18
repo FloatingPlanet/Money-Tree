@@ -1,9 +1,9 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { ProductService } from 'src/app/services/product/product.service';
-import { Subscription } from 'rxjs';
-import { Product } from 'src/app/models/product';
-import { ActivatedRoute } from '@angular/router';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ProductService} from 'src/app/services/product/product.service';
+import {Subscription} from 'rxjs';
+import {Product} from 'src/app/models/product';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-product-form',
@@ -13,6 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 export class ProductFormComponent implements OnInit {
 
   @Input() detail: Product;
+  // tslint:disable-next-line:no-output-on-prefix
   @Output() onFormModified: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
   SKU: string;
@@ -24,7 +25,7 @@ export class ProductFormComponent implements OnInit {
     this.SKU = this.route.snapshot.paramMap.get('SKU');
     if (this.SKU) {
       this.ps.fetchProduct(this.SKU).then(result => {
-        let product = <Product>result;
+        const product = result as Product;
         this.productForm.setValue({
           SKU: product.SKU,
           productId: product.productId,
@@ -39,19 +40,23 @@ export class ProductFormComponent implements OnInit {
           ratings: product.ratings,
           favourite: product.favourite,
           productSeller: product.productSeller,
-        })
+        });
       }).catch(error => console.error(error));
     } else {
     }
   }
+
   ngOnDestory() {
     this.subscription.unsubscribe();
   }
-  ngOnInit() { }
+
+  ngOnInit() {
+  }
 
   ngOnChanges() {
 
   }
+
   onSubmit(fg: FormGroup) {
     this.onFormModified.emit(fg);
     this.resetForm();

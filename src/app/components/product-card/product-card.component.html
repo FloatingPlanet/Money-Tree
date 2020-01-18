@@ -6,14 +6,14 @@
   </mat-card-content>
   <mat-card-actions class="d-flex justify-content-end">
     <button mat-icon-button>
-      <mat-icon aria-hidden="false" aria-label="add to cart" (click)="addToCart(product)">add_shopping_cart
+      <mat-icon (click)="addToCart(product)" aria-hidden="false" aria-label="add to cart">add_shopping_cart
       </mat-icon>
     </button>
-    <button mat-icon-button *ngIf="like" (click)="like=!like">
+    <button (click)="like=!like" *ngIf="like" mat-icon-button>
       <mat-icon aria-hidden="false" aria-label="add to favorite">favorite
       </mat-icon>
     </button>
-    <button mat-icon-button *ngIf="!like" (click)="like=!like">
+    <button (click)="like=!like" *ngIf="!like" mat-icon-button>
       <mat-icon aria-hidden="false" aria-label="remove from favorite">favorite_border
       </mat-icon>
     </button>

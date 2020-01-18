@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/login/auth.service';
-import { FlashMessageService } from 'src/app/services/flashMessage/flash-message.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { MustMatch } from 'src/helpers/helpers';
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from 'src/app/services/login/auth.service';
+import {FlashMessageService} from 'src/app/services/flashMessage/flash-message.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {MustMatch} from 'src/helpers/helpers';
 
 @Component({
   selector: 'app-signup-page',
@@ -15,6 +15,7 @@ export class SignupPageComponent implements OnInit {
   submitted = false;
 
   signupForm: FormGroup;
+
   constructor(
     private as: AuthService,
     private fs: FlashMessageService,
@@ -24,7 +25,9 @@ export class SignupPageComponent implements OnInit {
   ) {
   }
 
-  get form() {return this.signupForm.controls; }
+  get form() {
+    return this.signupForm.controls;
+  }
 
   ngOnInit() {
     this.signupForm = this.formBuilder.group({
@@ -36,11 +39,12 @@ export class SignupPageComponent implements OnInit {
       validator: MustMatch('password', 'confirmPassword')
     });
     this.as.currentUserObservable.subscribe((auth) => {
-    if (auth) {
-      this.router.navigate(['/']);
-    }
-  });
+      if (auth) {
+        this.router.navigate(['/']);
+      }
+    });
   }
+
   signup() {
     this.submitted = true;
     if (this.signupForm.invalid) {
@@ -48,9 +52,11 @@ export class SignupPageComponent implements OnInit {
     }
     this.as.emailSignUp(this.signupForm.value);
   }
+
   signupWithGoogle() {
     this.as.googleLogin();
   }
+
   reset() {
     this.submitted = false;
     this.signupForm.reset();

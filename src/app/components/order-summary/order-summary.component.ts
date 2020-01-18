@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/app/models/product';
-import { ProductService } from 'src/app/services/product/product.service';
+import {Component, OnInit} from '@angular/core';
+import {Product} from 'src/app/models/product';
+import {ProductService} from 'src/app/services/product/product.service';
 
 @Component({
   selector: 'app-order-summary',
@@ -9,17 +9,18 @@ import { ProductService } from 'src/app/services/product/product.service';
 })
 export class OrderSummaryComponent implements OnInit {
   // rate
-  public taxRate: number = 0.12;
-  public recycleRate: number = 0;
+  public taxRate = 0.12;
+  public recycleRate = 0;
   // amount
   public subtotal: number;
-  public shipping: number = 0;
-  public estimatedTax: number = 0;
-  public recyclingFee: number = 0;
+  public shipping = 0;
+  public estimatedTax = 0;
+  public recyclingFee = 0;
   public total: number;
   public orders: Product[];
+
   constructor(private ps: ProductService) {
-    this.orders = JSON.parse(localStorage.getItem('anonymousCart'))['products'];
+    this.orders = JSON.parse(localStorage.getItem('anonymousCart')).products;
     console.log(this.orders);
   }
 

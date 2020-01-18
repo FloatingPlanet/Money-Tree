@@ -1,9 +1,8 @@
-import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule, FormBuilder  } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { AuthService } from '../../services/login/auth.service';
-import { FlashMessageService } from '../../services/flashMessage/flash-message.service';
-import { User } from '../../models/user';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AuthService} from '../../services/login/auth.service';
+import {FlashMessageService} from '../../services/flashMessage/flash-message.service';
 
 
 @Component({
@@ -16,6 +15,7 @@ export class LoginPageComponent implements OnInit {
 
   loginForm: FormGroup;
   resetForm: FormGroup;
+
   constructor(
     private as: AuthService,
     private fs: FlashMessageService,
@@ -25,7 +25,9 @@ export class LoginPageComponent implements OnInit {
   ) {
   }
 
-  get form() {return this.loginForm.controls; }
+  get form() {
+    return this.loginForm.controls;
+  }
 
   ngOnInit() {
     this.as.currentUserObservable.subscribe((auth) => {
@@ -41,6 +43,7 @@ export class LoginPageComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]]
     });
   }
+
   emailLogin() {
     this.submitted = true;
     if (this.loginForm.invalid) {
@@ -48,6 +51,7 @@ export class LoginPageComponent implements OnInit {
     }
     this.as.emailLogin(this.loginForm.value);
   }
+
   loginWithGoogle() {
     this.as.googleLogin();
   }
@@ -58,6 +62,7 @@ export class LoginPageComponent implements OnInit {
     }
     this.as.resetPassword(this.resetForm.value.email);
   }
+
   reset() {
     this.submitted = false;
     this.loginForm.reset();
