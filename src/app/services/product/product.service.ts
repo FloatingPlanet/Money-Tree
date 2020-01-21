@@ -64,6 +64,5 @@ export class ProductService {
         reject(`fetch doc ${sku} failed`);
       });
     });
-
   }
 }

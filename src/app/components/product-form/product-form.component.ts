@@ -13,6 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 export class ProductFormComponent implements OnInit {
 
   @Input() detail: Product;
+  // tslint:disable-next-line:no-output-on-prefix
   @Output() onFormModified: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
   SKU: string;
@@ -24,7 +25,7 @@ export class ProductFormComponent implements OnInit {
     this.SKU = this.route.snapshot.paramMap.get('SKU');
     if (this.SKU) {
       this.ps.fetchProduct(this.SKU).then(result => {
-        let product = <Product>result;
+        let product = result as Product;
         this.productForm.setValue({
           SKU: product.SKU,
           productId: product.productId,
@@ -39,7 +40,7 @@ export class ProductFormComponent implements OnInit {
           ratings: product.ratings,
           favourite: product.favourite,
           productSeller: product.productSeller,
-        })
+        });
       }).catch(error => console.error(error));
     } else {
     }
@@ -49,6 +50,7 @@ export class ProductFormComponent implements OnInit {
   }
   ngOnInit() { }
 
+  // tslint:disable-next-line:use-lifecycle-interface
   ngOnChanges() {
 
   }
@@ -66,6 +68,7 @@ export class ProductFormComponent implements OnInit {
       productSummary: null,
       productPrice: [null, Validators.required],
       productDescription: [null, Validators.required],
+      // tslint:disable-next-line:max-line-length
       productImageUrls: this.formBuilder.array(['https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mbp16touch-space-select-201911?wid=400&hei=400&fmt=jpeg&qlt=95&op_usm=0.5,1.5&fit=constrain&.v=1572825197207']),
       productAddedAt: new Date(),
       productQuantity: [null, [Validators.required, Validators.pattern('\\d*')]],
