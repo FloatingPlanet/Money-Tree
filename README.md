@@ -1,5 +1,5 @@
 # MONEY TREE
-
+![money tree](https://github.com/shanerbo/project-money-tree/blob/master/money-tree.jpg)
 ### Implement a template for e-commerces, focus on basic functionalities by using angular, angular material design and firestore.
 
 #### TODO: 
