@@ -44,7 +44,7 @@ export class OrderSummaryComponent implements OnInit {
   }
 
   validateCoupon() {
-    this.cs.valiateCoupon(this.myInput).then((result) => {
+    this.cs.validateCoupon(this.myInput).then((result) => {
       this.coupon = result as Coupon;
       this.calculateSummary(this.coupon);
       console.log(result);

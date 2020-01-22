@@ -10,13 +10,17 @@ import {Coupon} from 'src/app/models/coupon';
 })
 export class CouponsService {
   private Coupons: AngularFirestoreCollection<Coupon>;
+  public allCoupons: Coupon[];
 
   constructor(private db: AngularFirestore) {
-    this.Coupons = db.collection('Coupons', ref => ref.orderBy('productAddedAt').limit(100));
-
+    this.Coupons = db.collection('Coupons', ref => ref.orderBy('addedAt').limit(100));
   }
 
-  public valiateCoupon(c: string) {
+  get couponsObservable() {
+    return this.Coupons.valueChanges();
+  }
+
+  public validateCoupon(c: string) {
     return new Promise((resolve, reject) => {
       this.Coupons.doc(c).ref.get().then((doc) => {
         if (doc.exists) {
