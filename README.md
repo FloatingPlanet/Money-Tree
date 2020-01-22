@@ -19,7 +19,7 @@
     - ~~Guest cart~~
     - Registered user has its own cart
         - If user update its cart without logging, its shopping cart shoule be updated once user login.
-
+6. Move to Amplify (not for now)
 ##### CTO: [Otto hu](https://github.com/aWildOtto)
 ##### CEO: [Jiaran Yu](https://github.com/jiaranyu)
 ##### Cleaner: [Erbo Shan](https://github.com/shanerbo)
