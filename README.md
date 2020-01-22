@@ -1,4 +1,4 @@
-## Yet another simplest e-commerce template
+# MONEY TREE
 
 ### Implement a template for e-commerces, focus on basic functionalities by using angular, angular material design and firestore.
 
