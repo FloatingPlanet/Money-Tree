@@ -73,6 +73,7 @@ import { CategoryService } from './services/category/category.service';
 import { ProductInfoComponent } from './components/product-info/product-info.component';
 import {CouponsService} from './services/coupons/coupons.service';
 import {FlexModule} from "@angular/flex-layout";
+import { AdminCouponsComponent } from './admin/admin-coupons/admin-coupons.component';
 
 
 
@@ -98,6 +99,7 @@ import {FlexModule} from "@angular/flex-layout";
     ProductFormComponent,
     ModifyProductComponent,
     ProductInfoComponent,
+    AdminCouponsComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
