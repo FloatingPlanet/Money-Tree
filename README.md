@@ -1,5 +1,4 @@
-## Yet another simplest e-commerce template
-
+# MONEY TREE
 ### Implement a template for e-commerces, focus on basic functionalities by using angular, angular material design and firestore.
 
 #### TODO: 
@@ -24,3 +23,4 @@
 ##### CTO: [Otto hu](https://github.com/aWildOtto)
 ##### CEO: [Jiaran Yu](https://github.com/jiaranyu)
 ##### Cleaner: [Erbo Shan](https://github.com/shanerbo)
+![money tree](https://github.com/shanerbo/project-money-tree/blob/master/money-tree.jpg)
