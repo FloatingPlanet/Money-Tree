@@ -17,7 +17,7 @@ export class AdminCouponsComponent implements OnInit {
   coupons: Coupon[];
   dataSource = new MatTableDataSource<Coupon>([]);
   m = moment;
-  cols: string[] = ['select', 'couponCode', 'discount', 'duration', 'freeShipping', 'validFrom', 'amount', 'addedAt', 'edit'];
+  cols: string[] = ['select', 'coupon', 'discount', 'from', 'to', 'freeShipping', 'minimumSpend', 'amount', 'addedAt', 'edit'];
   selection = new SelectionModel<Coupon>(true, []);
 
   constructor(private cs: CouponsService) {
@@ -55,4 +55,11 @@ export class AdminCouponsComponent implements OnInit {
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.coupon}`;
   }
 
+  deleteCoupons() {
+    this.selection.selected.forEach(element => {
+      this.cs.deleteCoupons(element.coupon).then(res => {
+        }
+      );
+    });
+  }
 }

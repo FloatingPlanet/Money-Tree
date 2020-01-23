@@ -36,4 +36,33 @@ export class CouponsService {
   }
 
 
+  public deleteCoupons(coupon: string) {
+    return new Promise((resolve, reject) => {
+      this.Coupons.doc(coupon).delete().then(() => {
+        resolve(`remove Coupon ${coupon} succeed`);
+
+      }).catch((error) => {
+        console.log(error);
+        reject(`fetch doc ${coupon} failed`);
+      });
+    });
+  }
+
+  public addCoupon(coupon: Coupon) {
+    return new Promise((resolve, reject) => {
+      this.Coupons.doc(coupon.coupon).ref.get().then((doc) => {
+        this.Coupons.doc(coupon.coupon)
+          .set(coupon)
+          .catch(error => {
+            console.error(error);
+            reject('Add coupon failed');
+          });
+        resolve(`doc ${coupon.coupon} added`);
+      }).catch((error) => {
+        console.error(error);
+        reject(`fetch doc ${coupon.coupon} failed`);
+      });
+    });
+
+  }
 }

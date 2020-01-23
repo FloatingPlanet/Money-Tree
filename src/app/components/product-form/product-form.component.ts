@@ -16,9 +16,9 @@ export class ProductFormComponent implements OnInit {
   // tslint:disable-next-line:no-output-on-prefix
   @Output() onFormModified: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
-  SKU: string;
-  subscription: Subscription;
-  productForm: FormGroup;
+  private SKU: string;
+  private subscription: Subscription;
+  public productForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private ps: ProductService, private route: ActivatedRoute) {
     this.resetForm();
@@ -43,6 +43,7 @@ export class ProductFormComponent implements OnInit {
         });
       }).catch(error => console.error(error));
     } else {
+
     }
   }
   ngOnDestory() {
@@ -52,7 +53,6 @@ export class ProductFormComponent implements OnInit {
 
   // tslint:disable-next-line:use-lifecycle-interface
   ngOnChanges() {
-
   }
   onSubmit(fg: FormGroup) {
     this.onFormModified.emit(fg);

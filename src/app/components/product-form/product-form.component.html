@@ -47,6 +47,11 @@
 				<input matInput type="text" formControlName="productSeller" placeholder="Product Seller" value="NA">
 			</mat-form-field>
 		</label>
+    <p >
+      {{ productForm.value | json }}
+  </p>
 		<button type="submit" [disabled]="!productForm.valid">Submit</button>
 	</div>
+
 </form>
+
