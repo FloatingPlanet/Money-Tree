@@ -1,6 +1,8 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {Product} from 'src/app/models/product';
 import {AuthService} from '../../services/login/auth.service';
+import {CategoryService} from '../../services/category/category.service';
+import {CartService} from '../../services/cart/cart.service';
 
 @Component({
   selector: 'app-product-card',
@@ -10,19 +12,21 @@ import {AuthService} from '../../services/login/auth.service';
 
 export class ProductCardComponent implements OnInit {
   like = false;
+  @Input() product: Product;
 
-  constructor(private as: AuthService) {
-    const user = this.as.currentUser();
-    console.log(user);
+  constructor(private as: AuthService, private cs: CartService) {
+
   }
 
-  @Input() product: Product;
 
   ngOnInit() {
   }
 
   addToCart(product: Product[]) {
-    console.log(product);
+    if (this.as.authenticated) {
+      this.cs.addProduct();
+    }
+
     const localCart = JSON.parse(localStorage.getItem('anonymousCart'));
     if (localCart != null) {
       localCart.products.push(product);
