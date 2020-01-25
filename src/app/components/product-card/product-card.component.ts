@@ -1,5 +1,6 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {Product} from 'src/app/models/product';
+import {AuthService} from '../../services/login/auth.service';
 
 @Component({
   selector: 'app-product-card',
@@ -10,7 +11,9 @@ import {Product} from 'src/app/models/product';
 export class ProductCardComponent implements OnInit {
   like = false;
 
-  constructor() {
+  constructor(private as: AuthService) {
+    const user = this.as.currentUser();
+    console.log(user);
   }
 
   @Input() product: Product;
