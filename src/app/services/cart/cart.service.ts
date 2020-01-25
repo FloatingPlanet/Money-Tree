@@ -9,6 +9,6 @@ export class CartService {
   }
 
   addProduct() {
-    return
+    return;
   }
 }
