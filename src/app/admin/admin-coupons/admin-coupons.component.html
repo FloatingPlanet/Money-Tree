@@ -1,1 +1,74 @@
-<p>admin-coupons works!</p>
+<div class="coupon-list">
+  <button mat-raised-button color="primary" class="mx-2" [routerLink]="['add']">Add</button>
+  <button mat-raised-button color="accent" class="" (click)="deleteCoupons()">Delete</button>
+  <mat-form-field class=" px-2">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" class="w-100">
+
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="coupon">
+      <th mat-header-cell *matHeaderCellDef>Coupon Code</th>
+      <td mat-cell *matCellDef="let c"> {{c.coupon}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="discount">
+      <th mat-header-cell *matHeaderCellDef>Discount</th>
+      <td mat-cell *matCellDef="let c"> {{c.discount}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="from">
+      <th mat-header-cell *matHeaderCellDef>From</th>
+      <td mat-cell *matCellDef="let c"> {{c.from}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="to">
+      <th mat-header-cell *matHeaderCellDef>To</th>
+      <td mat-cell *matCellDef="let c"> {{c.to}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="freeShipping">
+      <th mat-header-cell *matHeaderCellDef>Free Shipping</th>
+      <td mat-cell *matCellDef="let c"> {{c.freeShipping ? 'yes' : 'no'}} </td>
+    </ng-container>
+    <ng-container matColumnDef="minimumSpend">
+      <th mat-header-cell *matHeaderCellDef>Minimum Spend</th>
+      <td mat-cell *matCellDef="let c"> {{c.minimumSpend}} </td>
+    </ng-container>
+    <ng-container matColumnDef="amount">
+      <th mat-header-cell *matHeaderCellDef>Amount</th>
+      <td mat-cell *matCellDef="let c">{{c.amount}} </td>
+    </ng-container>
+    <ng-container matColumnDef="addedAt">
+      <th mat-header-cell *matHeaderCellDef>Added At</th>
+      <td mat-cell *matCellDef="let c">
+        {{m.unix(c.addedAt.seconds).format('MM/DD/YYYY, HH:mm')}}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef> Edit</th>
+      <td mat-cell *matCellDef="let c">
+        <button [routerLink]="['./modify',c.coupon]" mat-icon-button aria-label="edit product">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="cols"></tr>
+    <tr mat-row *matRowDef="let row; columns: cols;">
+    </tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20, 50]" showFirstLastButtons></mat-paginator>
+</div>
