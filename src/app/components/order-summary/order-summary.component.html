@@ -20,11 +20,14 @@
       <mat-card-content>
         <div class="input-group mb-3">
           <label for="coupon">
-            <input type="text" class="form-control" placeholder="Enter Coupon" [(ngModel)]="myInput" id="coupon" aria-describedby="basic-addon2">
+            <input type="text" class="form-control" placeholder="Enter Coupon" oninput="this.value = this.value.toUpperCase()" [(ngModel)]="myInput" id="coupon" aria-describedby="basic-addon2">
             <div class="input-group-append">
-              <button class="btn btn-outline-secondary" type="button" (click)="validateCoupon()">Apply</button>
+              <button class="btn btn-outline-secondary" type="button" [disabled]="!this.myInput" (click)="validateCoupon()">Apply</button>
             </div>
           </label>
+          <p>
+            {{this.getCoupon}}
+          </p>
         </div>
       </mat-card-content>
         <mat-card-actions fxFlexAlign="end" align="end">

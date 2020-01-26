@@ -10,6 +10,9 @@ import {CouponsService} from '../../services/coupons/coupons.service';
   styleUrls: ['./order-summary.component.scss']
 })
 export class OrderSummaryComponent implements OnInit {
+
+  private getCoupon: string;
+  private currentDate =  new Date();
   // rate
   public taxRate = 0.12;
   public recycleRate = 0;
@@ -46,9 +49,27 @@ export class OrderSummaryComponent implements OnInit {
   validateCoupon() {
     this.cs.validateCoupon(this.myInput).then((result) => {
       this.coupon = result as Coupon;
-      this.calculateSummary(this.coupon);
+      // @ts-ignore
+      if ((this.subtotal >= this.coupon.minimumSpend)
+        && (this.currentDate >= new Date(this.coupon.from))
+        && (this.currentDate <= new Date(this.coupon.to))
+        && (this.coupon.amount > 0)) {
+        this.calculateSummary(this.coupon);
+        this.getCoupon = `${this.coupon.coupon} is applied`;
+      } else {
+        if (this.subtotal < this.coupon.minimumSpend) {
+          this.getCoupon = `You need to spend more than ${this.coupon.minimumSpend} to use coupon`;
+        } else if (this.currentDate < new Date(this.coupon.from)) {
+          this.getCoupon = `The coupon is valid from ${this.coupon.from}`;
+        } else if (this.currentDate > new Date(this.coupon.to)) {
+          this.getCoupon = `Oops! The coupon has expired.`;
+        } else if (this.coupon.amount <= 0) {
+          this.getCoupon = `You are not eligible to use this coupon.`;
+        }
+      }
       console.log(result);
     }).catch((error) => {
+      this.getCoupon = 'Coupon is not valid';
       console.error(error);
     });
   }

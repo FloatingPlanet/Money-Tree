@@ -14,6 +14,9 @@ export class CouponsService {
 
   constructor(private db: AngularFirestore) {
     this.Coupons = db.collection('Coupons', ref => ref.orderBy('addedAt').limit(100));
+    this.Coupons.valueChanges().subscribe((coupons) => {
+      this.allCoupons = coupons;
+    });
   }
 
   get couponsObservable() {
@@ -68,16 +71,16 @@ export class CouponsService {
 
   public fetchCoupon(couponName: string) {
     return new Promise((resolve, reject) => {
-        this.Coupons.doc(couponName).ref.get().then((doc) => {
-          if (doc.exists) {
-            resolve(doc.data());
-          } else {
-            reject(`${couponName} does not exist`);
-          }
-        }).catch((error) => {
-          console.log(error);
-          reject(`fetch coupon ${couponName} failed`);
-        });
+      this.Coupons.doc(couponName).ref.get().then((doc) => {
+        if (doc.exists) {
+          resolve(doc.data());
+        } else {
+          reject(`${couponName} does not exist`);
+        }
+      }).catch((error) => {
+        console.log(error);
+        reject(`fetch coupon ${couponName} failed`);
       });
+    });
   }
 }
