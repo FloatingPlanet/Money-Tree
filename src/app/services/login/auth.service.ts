@@ -11,14 +11,14 @@ import { FlashMessageService } from '../flashMessage/flash-message.service';
 @Injectable()
 export class AuthService {
   authState: FirebaseUser = null;
-  users: AngularFirestoreCollection<User>;
+  Users: AngularFirestoreCollection<User>;
   constructor(
     private afAuth: AngularFireAuth,
     private db: AngularFirestore,
     private fs: FlashMessageService,
     private router: Router
   ) {
-    this.users = this.db.collection('users');
+    this.Users = this.db.collection('Users');
     this.afAuth.authState.subscribe((auth) => {
       this.authState = auth;
     });
@@ -177,7 +177,7 @@ export class AuthService {
     // useful if your app displays information about users or for admin features
     console.log(this.currentUser);
 
-    this.users.doc(this.currentUserId).set({
+    this.Users.doc(this.currentUserId).set({
       email: this.currentUser.email,
       username: this.currentUser.displayName
     });
