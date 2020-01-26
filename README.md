@@ -1,27 +1,27 @@
-# MoneyTree
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.21.
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+# MONEY TREE
+### Implement a template for e-commerces, focus on basic functionalities by using angular, angular material design and firestore.
+![header](https://github.com/shanerbo/project-money-tree/blob/master/forest%20peak.PNG)
+#### TODO: 
+1. Third party payment service.
+    - Paypal
+    - Master/Visa
+    - WeChat/Alipay
+2. Admin page
+    - Add coupons
+    - Add rules for tax, shippings
+    - Login page for admin
+    - Modify orders
+    - Chart/diagram allow user visualize its business
+4. Products
+    - Show products by different categories/constraints
+5. Cart
+    - Show numbers if user add same products multiple times
+    - ~~Guest cart~~
+    - Registered user has its own cart
+        - If user update its cart without logging, its shopping cart shoule be updated once user login.
+6. Move to Amplify (not for now)
+7. In modify product page, we accomplished progress bar badly, need to find a elegant way to implement it!
+##### CTO: [Otto hu](https://github.com/aWildOtto)
+##### CEO: [Jiaran Yu](https://github.com/jiaranyu)
+##### Cleaner: [Erbo Shan](https://github.com/shanerbo)
+![money tree](https://github.com/shanerbo/project-money-tree/blob/master/money-tree.jpg)

@@ -1,9 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ProductService} from 'src/app/services/product/product.service';
-import {Subscription} from 'rxjs';
-import {Product} from 'src/app/models/product';
-import {ActivatedRoute} from '@angular/router';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { ProductService } from 'src/app/services/product/product.service';
+import { Subscription } from 'rxjs';
+import { Product } from 'src/app/models/product';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product-form',
@@ -25,7 +25,7 @@ export class ProductFormComponent implements OnInit {
     this.SKU = this.route.snapshot.paramMap.get('SKU');
     if (this.SKU) {
       this.ps.fetchProduct(this.SKU).then(result => {
-        const product = result as Product;
+        let product = result as Product;
         this.productForm.setValue({
           SKU: product.SKU,
           productId: product.productId,
@@ -45,18 +45,15 @@ export class ProductFormComponent implements OnInit {
     } else {
     }
   }
-
   ngOnDestory() {
     this.subscription.unsubscribe();
   }
+  ngOnInit() { }
 
-  ngOnInit() {
-  }
-
+  // tslint:disable-next-line:use-lifecycle-interface
   ngOnChanges() {
 
   }
-
   onSubmit(fg: FormGroup) {
     this.onFormModified.emit(fg);
     this.resetForm();
@@ -71,6 +68,7 @@ export class ProductFormComponent implements OnInit {
       productSummary: null,
       productPrice: [null, Validators.required],
       productDescription: [null, Validators.required],
+      // tslint:disable-next-line:max-line-length
       productImageUrls: this.formBuilder.array(['https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mbp16touch-space-select-201911?wid=400&hei=400&fmt=jpeg&qlt=95&op_usm=0.5,1.5&fit=constrain&.v=1572825197207']),
       productAddedAt: new Date(),
       productQuantity: [null, [Validators.required, Validators.pattern('\\d*')]],

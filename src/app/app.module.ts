@@ -71,6 +71,9 @@ import { ProductFormComponent } from './components/product-form/product-form.com
 import { ModifyProductComponent } from './components/modify-product/modify-product.component';
 import { CategoryService } from './services/category/category.service';
 import { ProductInfoComponent } from './components/product-info/product-info.component';
+import {CouponsService} from './services/coupons/coupons.service';
+import {FlexModule} from "@angular/flex-layout";
+import { AdminCouponsComponent } from './admin/admin-coupons/admin-coupons.component';
 
 
 
@@ -96,6 +99,7 @@ import { ProductInfoComponent } from './components/product-info/product-info.com
     ProductFormComponent,
     ModifyProductComponent,
     ProductInfoComponent,
+    AdminCouponsComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -142,13 +146,15 @@ import { ProductInfoComponent } from './components/product-info/product-info.com
     MatPaginatorModule,
     FormsModule,
     ReactiveFormsModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    FlexModule
   ],
   providers: [
     AuthService,
     FlashMessageService,
     ProductService,
     CategoryService,
+    CouponsService
   ],
   bootstrap: [AppComponent]
 })
