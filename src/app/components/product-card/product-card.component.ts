@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Product} from 'src/app/models/product';
 import {AuthService} from '../../services/login/auth.service';
 import {CartService} from '../../services/cart/cart.service';
@@ -15,33 +15,18 @@ export class ProductCardComponent implements OnInit {
   like = false;
   private user: User;
   @Input() product: Product;
+  @Output() productToBeAdded = new EventEmitter<Product>();
 
-  constructor(private as: AuthService, private cs: CartService, private us: UserService) {
+  constructor(private as: AuthService) {
 
   }
-
 
   ngOnInit() {
-    this.us.getCurrentUser().then((user) => {
-      this.user = user as User;
-    }).catch((error) => {
-      console.error(error);
-    });
+
   }
 
-  addToCart(product: Product[]) {
-    if (this.as.authenticated) {
-      this.us.addProduct(product);
-    }
-
-    const localCart = JSON.parse(localStorage.getItem('anonymousCart'));
-    if (localCart != null) {
-      localCart.products.push(product);
-      localStorage.setItem('anonymousCart', JSON.stringify(localCart));
-    } else {
-      const newProduct = {products: [product]};
-      localStorage.setItem('anonymousCart', JSON.stringify(newProduct));
-    }
+  public addToCart(product: Product) {
+    this.productToBeAdded.emit(product);
   }
 
 

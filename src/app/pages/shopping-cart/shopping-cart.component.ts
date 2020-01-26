@@ -11,7 +11,7 @@ import {UserService} from '../../services/user/user.service';
   styleUrls: ['./shopping-cart.component.scss']
 })
 export class ShoppingCartComponent implements OnInit {
-  public orders: Product[];
+  public orders: { info: Product[]; quantity: number };
 
 
   constructor(private ps: ProductService, private as: AuthService, private us: UserService) {

@@ -20,6 +20,9 @@ export class User {
   country?: string;
   state?: string;
   zip?: number;
-  cart?: Product[];
+  cart?: {
+    info: Product[],
+    quantity: number
+  };
 
 }
