@@ -12,22 +12,26 @@ import {UserService} from '../../services/user/user.service';
 export class ShoppingCartComponent implements OnInit {
   public orders: Product[];
 
-  constructor(private ps: ProductService, private as: AuthService, private us: UserService) {
+
+  constructor(private ps: ProductService, private as: AuthService,private us: UserService) {
 
   }
+
   ngOnInit() {
-    if (this.as.authenticated) {
-      this.orders = [];
-    } else {
-      this.loadFromLocal();
-    }
+    this.as.currentUserObservable.subscribe((auth) => {
+      if (auth) {
+        console.log('loged');
+      } else {
+        this.loadFromLocal();
+      }
+    });
+
   }
 
   private loadFromLocal() {
     const localCart = JSON.parse(localStorage.getItem('anonymousCart'));
     this.orders = localCart ? localCart.products : [];
   }
-
 
 
 }

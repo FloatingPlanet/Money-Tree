@@ -20,7 +20,7 @@ export class AdminProductsComponent implements OnInit {
   selection = new SelectionModel<Product>(true, []);
 
   constructor(private ps: ProductService, ) {
-    this.ps.productsObservalbe.subscribe((res) => {
+    this.ps.productsObservable.subscribe((res) => {
       this.products = res;
       this.dataSource = new MatTableDataSource<Product>(this.products);
       this.dataSource.paginator = this.paginator;
