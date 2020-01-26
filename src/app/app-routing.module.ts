@@ -32,7 +32,8 @@ const routes: Routes = [
       {path: 'products/add', component: ModifyProductComponent},
       {path: 'products/modify/:SKU', component: ModifyProductComponent},
       {path: 'coupons', component: AdminCouponsComponent},
-      {path: 'coupons/add', component: CouponFormComponent}
+      {path: 'coupons/add', component: CouponFormComponent},
+      {path: 'coupons/modify/:coupon', component: CouponFormComponent}
     ]
   },
   {path: '**', component: PageNotFoundComponent},

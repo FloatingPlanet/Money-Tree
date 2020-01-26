@@ -65,4 +65,19 @@ export class CouponsService {
     });
 
   }
+
+  public fetchCoupon(couponName: string) {
+    return new Promise((resolve, reject) => {
+        this.Coupons.doc(couponName).ref.get().then((doc) => {
+          if (doc.exists) {
+            resolve(doc.data());
+          } else {
+            reject(`${couponName} does not exist`);
+          }
+        }).catch((error) => {
+          console.log(error);
+          reject(`fetch coupon ${couponName} failed`);
+        });
+      });
+  }
 }
