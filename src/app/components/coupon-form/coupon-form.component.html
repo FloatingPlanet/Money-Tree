@@ -1,0 +1,50 @@
+<div *ngIf="couponForm">
+
+  <form [formGroup]="couponForm" (ngSubmit)="onSubmit(couponForm)">
+    <div class=" form-container">
+      <label>
+        <mat-form-field>
+          <input matInput type="text" formControlName="coupon"
+                 required placeholder="coupon" [readonly]="this.notEditable"
+                 oninput="this.value = this.value.toUpperCase(); ">
+          <mat-error  *ngIf="this.couponForm['controls']
+  .coupon.hasError('existCoupon')">
+            *this coupon already exists
+          </mat-error>
+        </mat-form-field>
+
+      </label>
+      <label>
+        <mat-form-field>
+          <input matInput type="number" formControlName="discount" required placeholder="discount">
+        </mat-form-field>
+      </label>
+      <label>
+        <mat-form-field>
+          <input matInput type="date" formControlName="from" required placeholder="from">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="date" formControlName="to" required placeholder="to">
+        </mat-form-field>
+      </label>
+      <label>
+        <mat-form-field>
+          <input matInput type="number" formControlName="amount" required placeholder="amount">
+        </mat-form-field>
+      </label>
+      <label id="example-radio-group-label">Free Shipping</label>
+      <label>
+        <mat-radio-group formControlName="freeShipping">
+          <mat-radio-button value="1">Yes</mat-radio-button>
+          <mat-radio-button value="0">No</mat-radio-button>
+        </mat-radio-group>
+      </label>
+      <label>
+        <mat-form-field>
+          <input matInput type="number" formControlName="minimumSpend" required placeholder="Minimum Spend">
+        </mat-form-field>
+      </label>
+      <button type="submit" [disabled]="!couponForm.valid">Submit</button>
+    </div>
+  </form>
+</div>
