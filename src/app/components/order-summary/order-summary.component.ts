@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Product} from 'src/app/models/product';
 import {ProductService} from 'src/app/services/product/product.service';
 import {Coupon} from '../../models/coupon';
@@ -10,6 +10,8 @@ import {CouponsService} from '../../services/coupons/coupons.service';
   styleUrls: ['./order-summary.component.scss']
 })
 export class OrderSummaryComponent implements OnInit {
+  @Input() orders: Product[];
+
   // rate
   public taxRate = 0.12;
   public recycleRate = 0;
@@ -19,29 +21,29 @@ export class OrderSummaryComponent implements OnInit {
   public estimatedTax = 0;
   public recyclingFee = 0;
   public total: number;
-  public orders: Product[];
   public myInput: string;
   private coupon: Coupon;
   public totalItems: number;
 
-  private calculateSummary(coupon: Coupon) {
-    this.totalItems = this.orders.length;
-    this.subtotal = coupon ? Math.ceil(this.subtotal * (1 - this.coupon.discount) * 10) / 10 :
-      this.orders.map(product => product.productPrice).reduceRight((prev, next) => prev + next, 0);
-    this.estimatedTax = this.taxRate * (this.subtotal + this.shipping);
-    this.recyclingFee = this.subtotal * this.recycleRate;
-    this.total = Math.ceil((this.subtotal + this.shipping + this.estimatedTax + this.recyclingFee) * 10) / 10;
-  }
-
   constructor(private ps: ProductService, private cs: CouponsService) {
-    this.orders = JSON.parse(localStorage.getItem('anonymousCart')).products;
-    console.log(this.orders);
-  }
 
+  }
 
   ngOnInit() {
     this.calculateSummary(this.coupon);
   }
+
+  private calculateSummary(coupon: Coupon) {
+    if (this.orders) {
+      this.totalItems = this.orders.length;
+      this.subtotal = coupon ? Math.ceil(this.subtotal * (1 - this.coupon.discount) * 10) / 10 :
+        this.orders.map(product => product.productPrice).reduceRight((prev, next) => prev + next, 0);
+      this.estimatedTax = this.taxRate * (this.subtotal + this.shipping);
+      this.recyclingFee = this.subtotal * this.recycleRate;
+      this.total = Math.ceil((this.subtotal + this.shipping + this.estimatedTax + this.recyclingFee) * 10) / 10;
+    }
+  }
+
 
   validateCoupon() {
     this.cs.valiateCoupon(this.myInput).then((result) => {
@@ -52,4 +54,5 @@ export class OrderSummaryComponent implements OnInit {
       console.error(error);
     });
   }
+
 }

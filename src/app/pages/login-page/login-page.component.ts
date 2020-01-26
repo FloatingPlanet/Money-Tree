@@ -4,6 +4,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../services/login/auth.service';
 import { FlashMessageService } from '../../services/flashMessage/flash-message.service';
 import { User } from '../../models/user';
+import {LocalstorageService} from "../../services/localStorage/localstorage.service";
+import {Product} from "../../models/product";
 
 
 @Component({
@@ -12,16 +14,17 @@ import { User } from '../../models/user';
   styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent implements OnInit {
-  submitted = false;
-
-  loginForm: FormGroup;
-  resetForm: FormGroup;
+  private submitted = false;
+  private cartProduct: Product[];
+  private loginForm: FormGroup;
+  private resetForm: FormGroup;
   constructor(
     private as: AuthService,
     private fs: FlashMessageService,
     private router: Router,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private ls: LocalstorageService
   ) {
   }
 
