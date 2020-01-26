@@ -1,6 +1,7 @@
 import {Component, Input, OnInit, Output} from '@angular/core';
 import { AuthService } from 'src/app/services/login/auth.service';
 import { Router } from '@angular/router';
+import {User} from '../../models/user';
 
 @Component({
   selector: 'app-nav-bar',

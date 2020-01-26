@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection,} from 'angularfire2/firestore';
 import {User} from '../../models/user';
 import {AuthService} from '../login/auth.service';
+import {Product} from "../../models/product";
 
 @Injectable({
   providedIn: 'root'
@@ -33,4 +34,7 @@ export class UserService {
   }
 
 
+  addProduct(product: Product) {
+
+  }
 }
