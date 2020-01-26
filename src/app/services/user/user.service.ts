@@ -12,20 +12,25 @@ export class UserService {
 
   constructor(private db: AngularFirestore, private as: AuthService) {
     this.Users = this.db.collection('Users');
-    this.as.currentUserObservable.subscribe((auth) => {
-      if (auth) {
-        this.Users.doc(auth.uid).ref.get().then((doc) => {
-          this.user = doc.data() as User;
-        }).catch((error) => {
-          console.log(error);
-        });
-      }
-    });
-
   }
 
   get userOberservalbe() {
     return this.Users.valueChanges();
   }
+
+  public getCurrentUser() {
+    return new Promise((res, rej) => {
+      this.as.currentUserObservable.subscribe((auth) => {
+        if (auth) {
+          this.Users.doc(auth.uid).ref.get().then((doc) => {
+            res(doc.data());
+          }).catch((error) => {
+            rej(error);
+          });
+        }
+      });
+    });
+  }
+
 
 }

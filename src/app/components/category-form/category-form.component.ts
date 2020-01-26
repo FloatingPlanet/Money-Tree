@@ -20,7 +20,7 @@ export class CategoryFormComponent implements OnInit {
   existCategory(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
       const exist = this.cs.allCategories.some(x => x.category === control.value);
-      return exist ? { 'existCategory': { value: control.value } } : null;
+      return exist ? { existCategory: { value: control.value } } : null;
     };
   }
   categoryForm = this.formBuilder.group({

@@ -24,7 +24,7 @@ export class ProductCardComponent implements OnInit {
 
   addToCart(product: Product[]) {
     if (this.as.authenticated) {
-      this.cs.addProduct();
+      console.log('log');
     }
 
     const localCart = JSON.parse(localStorage.getItem('anonymousCart'));
