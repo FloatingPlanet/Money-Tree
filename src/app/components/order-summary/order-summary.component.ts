@@ -12,7 +12,7 @@ import {CouponsService} from '../../services/coupons/coupons.service';
 export class OrderSummaryComponent implements OnInit {
 
   private getCoupon: string;
-  private currentDate =  new Date();
+  private currentDate = new Date();
   // rate
   public taxRate = 0.12;
   public recycleRate = 0;

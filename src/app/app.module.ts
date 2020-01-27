@@ -72,7 +72,7 @@ import { ModifyProductComponent } from './components/modify-product/modify-produ
 import { CategoryService } from './services/category/category.service';
 import { ProductInfoComponent } from './components/product-info/product-info.component';
 import {CouponsService} from './services/coupons/coupons.service';
-import {FlexModule} from "@angular/flex-layout";
+import {FlexModule} from '@angular/flex-layout';
 import { AdminCouponsComponent } from './admin/admin-coupons/admin-coupons.component';
 import { CouponFormComponent } from './components/coupon-form/coupon-form.component';
 
@@ -104,7 +104,7 @@ import { CouponFormComponent } from './components/coupon-form/coupon-form.compon
     CouponFormComponent,
   ],
   imports: [
-    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     AngularFirestoreModule,
     BrowserModule,

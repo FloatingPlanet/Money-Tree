@@ -18,7 +18,7 @@ export class AuthService {
     private fs: FlashMessageService,
     private router: Router
   ) {
-    this.users = this.db.collection('users');
+    this.users = this.db.collection('Users');
     this.afAuth.authState.subscribe((auth) => {
       this.authState = auth;
     });
