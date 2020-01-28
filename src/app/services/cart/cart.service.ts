@@ -16,12 +16,10 @@ export class CartService {
   addProduct(product: Product) {
     if (this.as.authenticated) {
       this.us.addProduct(product).then((res) => {
-        console.log('added!!!');
       }).catch((e) => {
         console.error(e);
       });
     } else {
-      console.log('add to local');
       if (this.localCart != null) {
         this.localCart.products.push(product);
         localStorage.setItem('anonymousCart', JSON.stringify(this.localCart));
@@ -42,7 +40,6 @@ export class CartService {
     let newProducts = products.filter(x => {
       return x.SKU !== SKU;
     });
-    console.log(newProducts);
     newProducts = {
       products: newProducts
     };

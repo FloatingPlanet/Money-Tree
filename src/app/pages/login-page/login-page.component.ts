@@ -4,8 +4,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../services/login/auth.service';
 import { FlashMessageService } from '../../services/flashMessage/flash-message.service';
 import { User } from '../../models/user';
-import {LocalstorageService} from "../../services/localStorage/localstorage.service";
-import {Product} from "../../models/product";
+import {LocalstorageService} from '../../services/localStorage/localstorage.service';
+import {Product} from '../../models/product';
 
 
 @Component({

@@ -144,7 +144,6 @@ export class AuthService {
       .catch(error => {
         console.log(error);
         this.fs.error('Log in failed', error.message);
-
       });
   }
 
@@ -178,9 +177,6 @@ export class AuthService {
     this.users.doc(this.currentUserId).set({
       email: this.currentUser.email,
       username: this.currentUser.displayName
-    });
-
-
+    }, {merge: true});
   }
-
 }

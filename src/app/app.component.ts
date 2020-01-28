@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.as.currentUserObservable.subscribe((auth) => {
-      if (auth && this.cs.loadFromLocal()) {
+      if (auth && this.cs.loadFromLocal().length > 0) {
         this.cs.loadFromLocal().forEach(product => {
           this.us.addProduct(product).then(() => {
           }).catch((err) => {

@@ -57,10 +57,7 @@ export class ProductFormComponent implements OnInit {
   }
 
 
-  onSubmit(fg
-             :
-             FormGroup
-  ) {
+  onSubmit(fg: FormGroup) {
     this.onFormModified.emit(fg);
     this.resetForm();
   }

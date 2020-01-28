@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Product} from 'src/app/models/product';
 import {ProductService} from 'src/app/services/product/product.service';
 import {Coupon} from '../../models/coupon';
@@ -11,8 +11,6 @@ import {CouponsService} from '../../services/coupons/coupons.service';
 })
 export class OrderSummaryComponent implements OnInit {
   @Input() orders: Product[];
-
-
   private getCoupon: string;
   private currentDate = new Date();
   // rate
@@ -29,8 +27,6 @@ export class OrderSummaryComponent implements OnInit {
   public totalItems: number;
 
   constructor(private ps: ProductService, private cs: CouponsService) {
-    this.orders = JSON.parse(localStorage.getItem('anonymousCart')).products;
-    console.log(this.orders);
   }
 
   ngOnInit() {

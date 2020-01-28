@@ -66,6 +66,7 @@ import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { CategoryFormComponent } from './components/category-form/category-form.component';
+import { CouponFormComponent } from './components/coupon-form/coupon-form.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ProductFormComponent } from './components/product-form/product-form.component';
 import { ModifyProductComponent } from './components/modify-product/modify-product.component';
@@ -74,6 +75,7 @@ import { ProductInfoComponent } from './components/product-info/product-info.com
 import {CouponsService} from './services/coupons/coupons.service';
 import {FlexModule} from '@angular/flex-layout';
 import { AdminCouponsComponent } from './admin/admin-coupons/admin-coupons.component';
+import {CartService} from './services/cart/cart.service';
 
 
 
@@ -103,7 +105,7 @@ import { AdminCouponsComponent } from './admin/admin-coupons/admin-coupons.compo
     CouponFormComponent,
   ],
   imports: [
-    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     AngularFirestoreModule,
     BrowserModule,

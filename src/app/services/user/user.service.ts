@@ -35,7 +35,7 @@ export class UserService {
   }
 
 
-  addProduct(product: Product) {
+  public addProduct(product: Product) {
     return new Promise((res, rej) => {
       this.as.currentUserObservable.subscribe((auth) => {
         if (auth) {
