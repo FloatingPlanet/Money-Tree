@@ -35,7 +35,6 @@ export class ShoppingCartComponent implements OnInit {
         this.orders = this.cs.loadFromLocal();
       }
     });
-
   }
 
 
