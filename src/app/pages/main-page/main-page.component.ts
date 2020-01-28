@@ -5,6 +5,7 @@ import {UserService} from '../../services/user/user.service';
 import {Product} from '../../models/product';
 import {AuthService} from '../../services/login/auth.service';
 import {error} from 'util';
+import {CartService} from '../../services/cart/cart.service';
 
 @Component({
   selector: 'app-main-page',
@@ -12,11 +13,12 @@ import {error} from 'util';
   styleUrls: ['./main-page.component.scss']
 })
 export class MainPageComponent implements OnInit {
-  constructor(private ps: ProductService, private us: UserService, private as: AuthService) {
+  constructor(private ps: ProductService,
+              private us: UserService,
+              private cs: CartService) {
   }
 
   private user: User;
-  private productToBeAdded: Product;
 
   ngOnInit() {
     this.us.getCurrentUser().then((user) => {
@@ -27,22 +29,6 @@ export class MainPageComponent implements OnInit {
   }
 
   addToCart(product: Product) {
-    if (this.as.authenticated) {
-      this.us.addProduct(product).then((res) => {
-        console.log('added!!!');
-      }).catch((e) => {
-        console.error(e);
-      });
-    } else {
-      const localCart = JSON.parse(localStorage.getItem('anonymousCart'));
-      console.log('add to local')
-      if (localCart != null) {
-        localCart.products.push(product);
-        localStorage.setItem('anonymousCart', JSON.stringify(localCart));
-      } else {
-        const newProduct = {products: [product]};
-        localStorage.setItem('anonymousCart', JSON.stringify(newProduct));
-      }
-    }
+  this.cs.addProduct(product);
   }
 }

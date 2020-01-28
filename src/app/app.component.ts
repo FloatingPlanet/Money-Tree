@@ -19,12 +19,14 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.as.currentUserObservable.subscribe((auth) => {
+      if (auth) {
+
+      }
       this.logInfo = {
         avatarURL: auth ? auth.photoURL : this.DEFAULT_AVATAR,
         displayName: auth ? auth.displayName : this.DEFAULT_NAME,
         authState: !!auth
       };
-      console.log(this.logInfo)
     });
   }
 

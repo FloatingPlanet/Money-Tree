@@ -4,6 +4,7 @@ import {Product} from 'src/app/models/product';
 import {User} from 'src/app/models/user';
 import {AuthService} from '../../services/login/auth.service';
 import {UserService} from '../../services/user/user.service';
+import {CartService} from '../../services/cart/cart.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -11,10 +12,13 @@ import {UserService} from '../../services/user/user.service';
   styleUrls: ['./shopping-cart.component.scss']
 })
 export class ShoppingCartComponent implements OnInit {
-  public orders: { info: Product[]; quantity: number };
+  public orders: Product[];
 
 
-  constructor(private ps: ProductService, private as: AuthService, private us: UserService) {
+  constructor(private ps: ProductService,
+              private as: AuthService,
+              private us: UserService,
+              private cs: CartService) {
 
   }
 
@@ -28,15 +32,10 @@ export class ShoppingCartComponent implements OnInit {
           console.error(error);
         });
       } else {
-        this.loadFromLocal();
+        this.orders = this.cs.loadFromLocal();
       }
     });
 
-  }
-
-  private loadFromLocal() {
-    const localCart = JSON.parse(localStorage.getItem('anonymousCart'));
-    this.orders = localCart ? localCart.products : [];
   }
 
 
