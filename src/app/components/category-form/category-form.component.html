@@ -1,5 +1,5 @@
 <mat-selection-list #categoriesSelection [(ngModel)]="selectedCatogries" (ngModelChange)="onSelectionChange($event)">
-	<mat-list-option *ngFor="let c of this.cs.allCategories" [value]="c.category">
+	<mat-list-option *ngFor="let c of this.allCategories" [value]="c.category">
 		{{c.category}}
 	</mat-list-option>
 </mat-selection-list>

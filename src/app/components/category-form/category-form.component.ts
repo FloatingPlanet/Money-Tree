@@ -11,8 +11,19 @@ import { Category } from 'src/app/models/category';
 })
 export class CategoryFormComponent implements OnInit {
   @Output() public selectedCategories = new EventEmitter<string[]>();
+  @Output() public cLoaded = new EventEmitter<boolean>();
+  allCategories: Category[];
 
-  constructor(private formBuilder: FormBuilder, private cs: CategoryService) { }
+  constructor(private formBuilder: FormBuilder, private cs: CategoryService) {
+    this.cs.categoriesObservable.subscribe((res) => {
+      this.allCategories = res;
+      this.cLoaded.emit(true);
+    });
+  }
+
+  categoryForm = this.formBuilder.group({
+    category: [null, [Validators.required, this.existCategory()]],
+  });
 
   ngOnInit() {
   }
@@ -23,9 +34,6 @@ export class CategoryFormComponent implements OnInit {
       return exist ? { existCategory: { value: control.value } } : null;
     };
   }
-  categoryForm = this.formBuilder.group({
-    category: [null, [Validators.required, this.existCategory()]],
-  })
 
   onSelectionChange(cats: string[]) {
     this.selectedCategories.emit(cats);

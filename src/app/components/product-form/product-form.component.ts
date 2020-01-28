@@ -1,9 +1,9 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { ProductService } from 'src/app/services/product/product.service';
-import { Subscription } from 'rxjs';
-import { Product } from 'src/app/models/product';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
+import {FormBuilder, Validators, FormGroup} from '@angular/forms';
+import {ProductService} from 'src/app/services/product/product.service';
+import {Subscription} from 'rxjs';
+import {Product} from 'src/app/models/product';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-product-form',
@@ -14,47 +14,53 @@ export class ProductFormComponent implements OnInit {
 
   @Input() detail: Product;
   // tslint:disable-next-line:no-output-on-prefix
-  @Output() onFormModified: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+  @Output() public onFormModified: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+  @Output() public pLoaded = new EventEmitter<boolean>();
 
-  SKU: string;
-  subscription: Subscription;
-  productForm: FormGroup;
+  private SKU: string;
+  private subscription: Subscription;
+  public productForm: FormGroup;
+  public product: Product;
 
   constructor(private formBuilder: FormBuilder, private ps: ProductService, private route: ActivatedRoute) {
     this.resetForm();
     this.SKU = this.route.snapshot.paramMap.get('SKU');
     if (this.SKU) {
       this.ps.fetchProduct(this.SKU).then(result => {
-        let product = result as Product;
+        this.product = result as Product;
         this.productForm.setValue({
-          SKU: product.SKU,
-          productId: product.productId,
-          productName: product.productName,
-          productCategory: product.productCategory,
-          productSummary: product.productSummary,
-          productPrice: product.productPrice,
-          productDescription: product.productDescription,
-          productImageUrls: product.productImageUrls,
-          productAddedAt: product.productAddedAt,
-          productQuantity: product.productQuantity,
-          ratings: product.ratings,
-          favourite: product.favourite,
-          productSeller: product.productSeller,
+          SKU: this.product.SKU,
+          productId: this.product.productId,
+          productName: this.product.productName,
+          productCategory: this.product.productCategory,
+          productSummary: this.product.productSummary,
+          productPrice: this.product.productPrice,
+          productDescription: this.product.productDescription,
+          productImageUrls: this.product.productImageUrls,
+          productAddedAt: this.product.productAddedAt,
+          productQuantity: this.product.productQuantity,
+          ratings: this.product.ratings,
+          favourite: this.product.favourite,
+          productSeller: this.product.productSeller,
         });
+        this.productForm.controls.SKU.disable();
+        this.pLoaded.emit(true);
       }).catch(error => console.error(error));
-    } else {
     }
   }
+
   ngOnDestory() {
     this.subscription.unsubscribe();
   }
-  ngOnInit() { }
 
-  // tslint:disable-next-line:use-lifecycle-interface
-  ngOnChanges() {
-
+  ngOnInit() {
   }
-  onSubmit(fg: FormGroup) {
+
+
+  onSubmit(fg
+             :
+             FormGroup
+  ) {
     this.onFormModified.emit(fg);
     this.resetForm();
   }
