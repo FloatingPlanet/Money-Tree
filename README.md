@@ -17,10 +17,12 @@
 5. Cart
     - Show numbers if user add same products multiple times
     - ~~Guest cart~~
-    - Registered user has its own cart
-        - If user update its cart without logging, its shopping cart shoule be updated once user login.
+    - ~~Registered user has its own cart~~
+        ~~- If user update its cart without logging, its shopping cart shoule be updated once user login.~~
 6. Move to Amplify (not for now)
 7. In modify product page, we accomplished progress bar badly, need to find a elegant way to implement it!
+8. User info page
+9. Logged in user are allowed to browse their orders
 ##### CTO: [Otto hu](https://github.com/aWildOtto)
 ##### CEO: [Jiaran Yu](https://github.com/jiaranyu)
 ##### Cleaner: [Erbo Shan](https://github.com/shanerbo)
