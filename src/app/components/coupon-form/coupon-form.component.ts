@@ -16,6 +16,7 @@ export class CouponFormComponent implements OnInit {
   private coupon: Coupon;
   private notEditable = false;
   private allCoupons: Coupon[];
+  private editCoupon = false;
 
   constructor(private formBuilder: FormBuilder, private cs: CouponsService, private route: ActivatedRoute, private router: Router) {
 
@@ -30,6 +31,7 @@ export class CouponFormComponent implements OnInit {
     this.couponName = this.route.snapshot.paramMap.get('coupon');
     if (this.couponName) {
       this.fetchCoupon();
+      this.editCoupon = true;
 
     }
   }
@@ -54,10 +56,14 @@ export class CouponFormComponent implements OnInit {
   }
 
   private existCoupon(): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
+    // tslint:disable-next-line:triple-equals
 
-      const exist = this.allCoupons.some(x => x.coupon === control.value);
-      return exist ? {existCoupon: {value: control.value}} : null;
+      return (control: AbstractControl): { [key: string]: any } | null => {
+
+        const exist = this.allCoupons.some(x => x.coupon === control.value);
+        if (!this.editCoupon) {
+        return exist ? {existCoupon: {value: control.value}} : null;
+      }
     };
   }
 
