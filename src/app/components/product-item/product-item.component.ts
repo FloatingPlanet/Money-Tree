@@ -1,5 +1,6 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {Product} from 'src/app/models/product';
+import {CartService} from '../../services/cart/cart.service';
 
 @Component({
   selector: 'app-product-item',
@@ -8,7 +9,7 @@ import {Product} from 'src/app/models/product';
 })
 export class ProductItemComponent implements OnInit {
 
-  constructor() {
+  constructor(private cs: CartService) {
   }
 
   @Input() product: Product;
@@ -16,16 +17,8 @@ export class ProductItemComponent implements OnInit {
   ngOnInit() {
   }
 
-  deleteFromCart(SKU: string) {
-    const localCart = JSON.parse(localStorage.getItem('anonymousCart'));
-    const products = localCart.products;
-    let newProducts = products.filter(x => {
-      return x.SKU !== SKU;
-    });
-    newProducts = {
-      products: newProducts
-    };
-    localStorage.setItem('anonymousCart', JSON.stringify(newProducts));
-    window.location.reload();
+  public deleteFromCart(SKU: string) {
+    this.cs.deleteFromCart(SKU);
   }
+
 }

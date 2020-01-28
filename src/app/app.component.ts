@@ -27,6 +27,7 @@ export class AppComponent implements OnInit {
             console.error(err);
           });
         });
+        this.cs.clearAll();
       }
       this.logInfo = {
         avatarURL: auth ? auth.photoURL : this.DEFAULT_AVATAR,
