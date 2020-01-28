@@ -4,7 +4,7 @@
       <app-product-item *ngFor="let product of orders" [product]="product"></app-product-item>
     </div>
     <div class="col-sm-3">
-      <app-order-summary></app-order-summary>
+      <app-order-summary [orders] = "orders"></app-order-summary>
     </div>
   </div>
 </div>

@@ -1,16 +1,16 @@
 <mat-card class="mb-2 col-12 col-md-9 col-xl-12 py-md-3 pl-md-5 bd-content" role="main">
-    <mat-card-content class="">
-        <div class="media">
-            <img class="mr-3" class="img-thumbnail" class="thumbNail" src="{{product.productImageUrls[0]}}"
-                alt="Generic placeholder image" height="100">
-            <div class="media-body">
-                <h5 class="mt-0" class="text">{{product.productName}}</h5>
-                <h6 class=" mt-0">CAD {{product.productPrice}}</h6>
-                <h6 class=" mt-0">{{product.SKU}}</h6>
-                <button mat-button [routerLink]="['/info/',product.SKU]">View details</button>
-                <button mat-button (click)="deleteFromCart(product.SKU)">Delete</button>
-                <!--TODO MODEL POP WINDOW SHOWS DETAIL  -->
-            </div>
-        </div>
-    </mat-card-content>
+  <mat-card-content class="">
+    <div class="media">
+      <img class="mr-3" class="img-thumbnail" class="thumbNail" src="{{product.productImageUrls[0]}}"
+           alt="Generic placeholder image" height="100">
+      <div class="media-body">
+        <h5 class="mt-0" class="text">{{product.productName}}</h5>
+        <h6 class=" mt-0">CAD {{product.productPrice}}</h6>
+        <h6 class=" mt-0">{{product.SKU}}</h6>
+        <button mat-button [routerLink]="['/info/',product.SKU]">View details</button>
+        <button mat-button (click)="deleteFromCart(product.SKU)">Delete</button>
+        <!--TODO MODEL POP WINDOW SHOWS DETAIL  -->
+      </div>
+    </div>
+  </mat-card-content>
 </mat-card>

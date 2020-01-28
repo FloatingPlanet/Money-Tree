@@ -1,17 +1,18 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import * as firebase from 'firebase/app';
-import { Observable } from 'rxjs';
-import { User } from '../../models/user';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { Router } from '@angular/router';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { User as FirebaseUser, UserCredential } from '@firebase/auth-types';
-import { FlashMessageService } from '../flashMessage/flash-message.service';
+import {Observable} from 'rxjs';
+import {User} from '../../models/user';
+import {AngularFireAuth} from 'angularfire2/auth';
+import {Router} from '@angular/router';
+import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
+import {User as FirebaseUser, UserCredential} from '@firebase/auth-types';
+import {FlashMessageService} from '../flashMessage/flash-message.service';
 
 @Injectable()
 export class AuthService {
   authState: FirebaseUser = null;
   users: AngularFirestoreCollection<User>;
+
   constructor(
     private afAuth: AngularFireAuth,
     private db: AngularFirestore,
@@ -89,7 +90,6 @@ export class AuthService {
         this.authState = credential.user;
         this.updateUserData();
         this.fs.success('3rd party log in successful', 'You\'ve been logged in with ' + provider.providerId);
-        console.log(provider);
       })
       .catch(error => {
         this.fs.error('3rd party login failed', error.message);
@@ -118,7 +118,7 @@ export class AuthService {
       .then((credential: UserCredential) => {
         this.authState = credential.user;
         this.updateUserData();
-        this.afAuth.auth.currentUser.updateProfile({ displayName: login.username });
+        this.afAuth.auth.currentUser.updateProfile({displayName: login.username});
         this.fs.success('Sign up success', 'You\'ve been logged in');
       })
       .catch(error => {
@@ -144,7 +144,6 @@ export class AuthService {
       .catch(error => {
         console.log(error);
         this.fs.error('Log in failed', error.message);
-
       });
   }
 
@@ -167,7 +166,7 @@ export class AuthService {
     this.afAuth.auth.signOut().then(() => {
       this.fs.success('Log out', 'You\'ve been logged out');
     });
-    this.router.navigate(['/']);
+
   }
 
   //// Helpers ////
@@ -175,14 +174,9 @@ export class AuthService {
   private updateUserData(): void {
     // Writes user name and email to realtime db
     // useful if your app displays information about users or for admin features
-    console.log(this.currentUser);
-
     this.users.doc(this.currentUserId).set({
       email: this.currentUser.email,
       username: this.currentUser.displayName
-    });
-
-
+    }, {merge: true});
   }
-
 }

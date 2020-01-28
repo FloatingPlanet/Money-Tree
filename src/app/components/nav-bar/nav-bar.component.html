@@ -9,8 +9,8 @@
           <mat-icon aria-hidden="false" aria-label="Example cart icon">shopping_cart
           </mat-icon>
         </button>
-       
-        <span *ngIf="!authState; else logoutBlock" >
+
+        <span *ngIf="!info?.authState; else logoutBlock" >
           <button [routerLink]="['/login']" mat-button aria-hidden="false" aria-label="Log in">
             <mat-icon aria-hidden="false" aria-label="Example log icon">people</mat-icon>
             &nbsp;
@@ -19,10 +19,10 @@
         </span>
         <ng-template #logoutBlock>
               <!-- <a id="avatar-btn" class="nav-link"> -->
-          <img class="nav-avatar mr-1" width="20" height="20" [src]="avatarURL" />
+          <img class="nav-avatar mr-1" width="20" height="20" [src]="info?.avatarURL" />
           &nbsp;
           <span>
-            {{displayName}}
+            {{info?.displayName}}
           </span>
           &nbsp;
           <!-- </a> -->

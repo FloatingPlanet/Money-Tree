@@ -1,8 +1,8 @@
-import {Component, OnInit, ViewChild, Output, EventEmitter} from '@angular/core';
-import {FormBuilder, Validators, ValidatorFn, AbstractControl} from '@angular/forms';
-import {ProductService} from 'src/app/services/product/product.service';
-import {CategoryService} from 'src/app/services/category/category.service';
-import {Category} from 'src/app/models/category';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
+import { ProductService } from 'src/app/services/product/product.service';
+import { CategoryService } from 'src/app/services/category/category.service';
+import { Category } from 'src/app/models/category';
 
 @Component({
   selector: 'app-category-form',
@@ -31,7 +31,7 @@ export class CategoryFormComponent implements OnInit {
   existCategory(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
       const exist = this.cs.allCategories.some(x => x.category === control.value);
-      return exist ? {existCategory: {value: control.value}} : null;
+      return exist ? { existCategory: { value: control.value } } : null;
     };
   }
 

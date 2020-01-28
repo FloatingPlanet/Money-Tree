@@ -1,3 +1,5 @@
+import {Product} from './product';
+
 export class User {
   uid: string;
   username: string;
@@ -18,5 +20,7 @@ export class User {
   country?: string;
   state?: string;
   zip?: number;
-  cart?: string[]
+  cart?: Product[];
+
+
 }

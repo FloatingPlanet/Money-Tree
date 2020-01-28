@@ -1,8 +1,5 @@
 import {Injectable} from '@angular/core';
-import {
-  AngularFirestore,
-  AngularFirestoreCollection,
-} from 'angularfire2/firestore';
+import {AngularFirestore, AngularFirestoreCollection,} from 'angularfire2/firestore';
 import {Product} from 'src/app/models/product';
 
 @Injectable({
@@ -19,7 +16,7 @@ export class ProductService {
   }
 
   private loadProducts() {
-    this.Products.valueChanges().subscribe((data) => {
+    this.productsObservable.subscribe((data) => {
       this.allProducts = data;
     });
   }
