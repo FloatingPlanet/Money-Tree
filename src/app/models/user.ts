@@ -1,4 +1,5 @@
 import {Product} from './product';
+import {Order} from './order';
 
 export class User {
   uid: string;
@@ -21,6 +22,5 @@ export class User {
   state?: string;
   zip?: number;
   cart?: Product[];
-
-
+  orders?: Order[];
 }
