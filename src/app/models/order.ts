@@ -4,12 +4,16 @@ import {AddressInfo} from './addressInfo';
 export class Order {
   uid: string;
   orderNumber: number;
-  purchaseDate: Date;
   orderStatus: string;
-  // Tracking Related:
+  // from checkout-form
+    // Tracking Related:
   shippingInfo: AddressInfo;
   trackingNumber: string;
-  // Billing related:
+    // Billing related:
   billingInfo: AddressInfo;
+  // from oder-summary form
   products: Product[];
+  coupon?: string;
+  totalPrice: number;
+  purchaseDate: Date;
 }

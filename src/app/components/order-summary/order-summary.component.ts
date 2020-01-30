@@ -1,15 +1,16 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges} from '@angular/core';
 import {Product} from 'src/app/models/product';
 import {ProductService} from 'src/app/services/product/product.service';
 import {Coupon} from '../../models/coupon';
 import {CouponsService} from '../../services/coupons/coupons.service';
+import {Routes, Router} from 'node_modules/@angular/router';
 
 @Component({
   selector: 'app-order-summary',
   templateUrl: './order-summary.component.html',
   styleUrls: ['./order-summary.component.scss']
 })
-export class OrderSummaryComponent implements OnInit {
+export class OrderSummaryComponent implements OnChanges {
   @Input() orders: Product[];
   private getCoupon: string;
   private currentDate = new Date();
@@ -26,10 +27,11 @@ export class OrderSummaryComponent implements OnInit {
   private coupon: Coupon;
   public totalItems: number;
 
-  constructor(private ps: ProductService, private cs: CouponsService) {
+  constructor(private ps: ProductService, private cs: CouponsService, public router: Router
+  ) {
   }
 
-  ngOnInit() {
+  ngOnChanges() {
     this.calculateSummary(this.coupon);
   }
 

@@ -1,8 +1,10 @@
 export class AddressInfo {
-  receiver: string;
-  receiverContact: string;
-  shippingAddress: {
-    apt?: number;
+  customer: {
+    firstName: string;
+    lastName: string;
+    phoneNumber: string;
+  };
+  address: {
     street1: string;
     street2?: string;
     city: string;
