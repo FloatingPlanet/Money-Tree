@@ -24,6 +24,7 @@
 7. In modify product page, we accomplished progress bar badly, need to find a elegant way to implement it!
 8. User info page
 9. Logged in user are allowed to browse their orders
+10. Add image while user adding new product
 ##### CTO: [Otto hu](https://github.com/aWildOtto)
 ##### CEO: [Jiaran Yu](https://github.com/jiaranyu)
 ##### Cleaner: [Erbo Shan](https://github.com/shanerbo)
