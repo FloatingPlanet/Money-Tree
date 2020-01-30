@@ -66,9 +66,9 @@ import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { CategoryFormComponent } from './components/category-form/category-form.component';
-import { CouponFormComponent } from './admin/coupon-form/coupon-form.component';
+import { CouponFormComponent } from './components/coupon-form/coupon-form.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { ProductFormComponent } from './components/product-form/product-form.component';
 import { ModifyProductComponent } from './components/modify-product/modify-product.component';
 import { CategoryService } from './services/category/category.service';
 import { ProductInfoComponent } from './components/product-info/product-info.component';
@@ -106,9 +106,6 @@ import { UserProfileComponent } from './user/user-profile/user-profile.component
     ProductInfoComponent,
     AdminCouponsComponent,
     CouponFormComponent,
-    UserPageComponent,
-    UserOrdersComponent,
-    UserProfileComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
