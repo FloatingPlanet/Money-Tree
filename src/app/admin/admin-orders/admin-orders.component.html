@@ -1,1 +1,46 @@
-<p>admin-orders works!</p>
+<div class="order-list">
+  <mat-form-field class=" px-2">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" class="w-100">
+
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="orderNumber">
+      <th mat-header-cell *matHeaderCellDef> Order Number</th>
+      <td mat-cell *matCellDef="let a"> {{a.orderNumber}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="orderStatus">
+      <th mat-header-cell *matHeaderCellDef> Order Status</th>
+      <td mat-cell *matCellDef="let element"> {{element.orderStatus}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="uid">
+      <th mat-header-cell *matHeaderCellDef> User ID</th>
+      <td mat-cell *matCellDef="let element"> {{element.uid}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="coupon">
+      <th mat-header-cell *matHeaderCellDef>Coupon</th>
+      <td mat-cell *matCellDef="let element"> {{element.coupon.coupon}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="purchaseDate">
+      <th mat-header-cell *matHeaderCellDef> Purchase Date</th>
+      <td mat-cell
+          *matCellDef="let element"> {{m.unix(element.purchaseDate.seconds).format('MM/DD/YYYY, HH:mm:ss')}} </td>
+    </ng-container>
+    <ng-container matColumnDef="viewDetails">
+      <th mat-header-cell *matHeaderCellDef> Details </th>
+      <td mat-cell *matCellDef="let element">
+        <button aria-label="view detail">View Details
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="cols"></tr>
+    <tr mat-row *matRowDef="let row; columns: cols;">
+    </tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20, 50]" showFirstLastButtons></mat-paginator>
+</div>

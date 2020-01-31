@@ -1,9 +1,10 @@
 import {Product} from './product';
 import {AddressInfo} from './addressInfo';
+import {Coupon} from './coupon';
 
 export class Order {
   uid: string;
-  orderNumber: number;
+  orderNumber: string;
   orderStatus: string;
   // from checkout-form
     // Tracking Related:
@@ -12,8 +13,8 @@ export class Order {
     // Billing related:
   billingInfo: AddressInfo;
   // from oder-summary form
-  products: Product[];
-  coupon?: string;
+  products: string[];
+  coupon?: Coupon;
   totalPrice: number;
   purchaseDate: Date;
 }

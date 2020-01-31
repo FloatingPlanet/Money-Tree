@@ -7,6 +7,7 @@ import {User} from '../../models/user';
 import {AuthService} from '../../services/login/auth.service';
 import {CartService} from '../../services/cart/cart.service';
 import {FormGroup} from '@angular/forms';
+import {OrderService} from '../../services/order/order.service';
 
 @Component({
   selector: 'app-checkout-page',
@@ -21,7 +22,7 @@ export class CheckoutPageComponent implements AfterViewChecked {
   private baFormGroup: FormGroup;
   private ccFormGroup: FormGroup;
 
-  constructor(private us: UserService, private as: AuthService, private cs: CartService) {
+  constructor(private us: UserService, private as: AuthService, private cs: CartService, private os: OrderService) {
     this.as.currentUserObservable.subscribe((auth) => {
       if (auth) {
         this.us.getCurrentUser().then((res) => {
@@ -43,6 +44,23 @@ export class CheckoutPageComponent implements AfterViewChecked {
   }
 
   private submitOrder() {
-
+    const order = {
+      uid: 'a123',
+      orderNumber: 'O' + Date.now().toString(),
+      orderStatus: 'N/A',
+      shippingInfo: this.saFormGroup.value,
+      trackingNumber: 'N/A',
+      billingInfo: this.baFormGroup.value,
+      products: this.orders.map(product => product.SKU),
+      coupon: this.orderSummaryComponent.validatedCoupon ? this.orderSummaryComponent.validatedCoupon : null,
+      totalPrice: this.orderSummaryComponent.total,
+      purchaseDate: new Date(),
+    };
+    console.log(order);
+    this.os.addOrder(order).then((result) => {
+      console.log(result);
+    }).catch((error) => {
+      console.log(error);
+    });
   }
 }

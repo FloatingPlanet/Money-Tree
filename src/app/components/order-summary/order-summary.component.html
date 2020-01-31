@@ -21,10 +21,10 @@
       <div class="input-group mb-3">
         <label for="coupon">
           <input type="text" class="form-control" placeholder="Enter Coupon"
-                 oninput="this.value = this.value.toUpperCase()" [(ngModel)]="myInput" id="coupon"
+                 oninput="this.value = this.value.toUpperCase()" [(ngModel)]="couponInput" id="coupon"
                  aria-describedby="basic-addon2">
           <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button" [disabled]="!this.myInput"
+            <button class="btn btn-outline-secondary" type="button" [disabled]="!this.couponInput"
                     (click)="validateCoupon()">Apply
             </button>
           </div>
