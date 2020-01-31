@@ -1,7 +1,12 @@
 import {Injectable} from '@angular/core';
-import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+  AngularFirestoreDocument
+} from "angularfire2/firestore";
+import {Product} from 'src/app/models/product';
 import {Category} from 'src/app/models/category';
-import {Subject} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +24,11 @@ export class CategoryService {
   public loadCategories() {
     this.Categories.valueChanges().subscribe((data) => {
       this.allCategories = data;
-    })
+    });
+  }
+
+  get categoriesObservable() {
+    return this.Categories.valueChanges();
   }
 
   public addCategory(C: Category) {

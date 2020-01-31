@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import * as firebase from 'firebase/app';
+import {Observable} from 'rxjs';
 import {User} from '../../models/user';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {Router} from '@angular/router';
@@ -18,7 +19,7 @@ export class AuthService {
     private fs: FlashMessageService,
     private router: Router
   ) {
-    this.users = this.db.collection('users');
+    this.users = this.db.collection('Users');
     this.afAuth.authState.subscribe((auth) => {
       this.authState = auth;
     });
@@ -83,6 +84,22 @@ export class AuthService {
     return this.socialSignIn(provider);
   }
 
+  private socialSignIn(provider: firebase.auth.AuthProvider) {
+    return this.afAuth.auth.signInWithPopup(provider)
+      .then((credential) => {
+        this.authState = credential.user;
+        this.updateUserData();
+        this.fs.success('3rd party log in successful', 'You\'ve been logged in with ' + provider.providerId);
+      })
+      .catch(error => {
+        this.fs.error('3rd party login failed', error.message);
+        console.log(error);
+      });
+  }
+
+
+  //// Anonymous Auth ////
+
   anonymousLogin() {
     return this.afAuth.auth.signInAnonymously()
       .then((res: UserCredential) => {
@@ -94,8 +111,7 @@ export class AuthService {
       });
   }
 
-
-  //// Anonymous Auth ////
+  //// Email/Password Auth ////
 
   emailSignUp(login) {
     return this.afAuth.auth.createUserWithEmailAndPassword(login.email, login.password)
@@ -118,8 +134,6 @@ export class AuthService {
       });
   }
 
-  //// Email/Password Auth ////
-
   emailLogin(login) {
     return this.afAuth.auth.signInWithEmailAndPassword(login.email, login.password)
       .then((res: UserCredential) => {
@@ -130,7 +144,6 @@ export class AuthService {
       .catch(error => {
         console.log(error);
         this.fs.error('Log in failed', error.message);
-
       });
   }
 
@@ -146,28 +159,14 @@ export class AuthService {
       .catch((error) => console.log(error));
   }
 
+
+  //// Sign Out ////
+
   signOut(): void {
     this.afAuth.auth.signOut().then(() => {
       this.fs.success('Log out', 'You\'ve been logged out');
     });
-    this.router.navigate(['/']);
-  }
 
-
-  //// Sign Out ////
-
-  private socialSignIn(provider: firebase.auth.AuthProvider) {
-    return this.afAuth.auth.signInWithPopup(provider)
-      .then((credential) => {
-        this.authState = credential.user;
-        this.updateUserData();
-        this.fs.success('3rd party log in successful', 'You\'ve been logged in with ' + provider.providerId);
-        console.log(provider);
-      })
-      .catch(error => {
-        this.fs.error('3rd party login failed', error.message);
-        console.log(error);
-      });
   }
 
   //// Helpers ////
@@ -175,14 +174,9 @@ export class AuthService {
   private updateUserData(): void {
     // Writes user name and email to realtime db
     // useful if your app displays information about users or for admin features
-    console.log(this.currentUser);
-
     this.users.doc(this.currentUserId).set({
       email: this.currentUser.email,
       username: this.currentUser.displayName
-    });
-
-
+    }, {merge: true});
   }
-
 }

@@ -1,21 +1,24 @@
-<mat-drawer-container autosize class="admin-container">
-  <mat-drawer #drawer class="admin-sidenav" mode="side" opened="true">
-    <h1>
-      Admin
-    </h1>
-    <mat-list>
-      <button [routerLink]="['orders']" mat-button>
-        Orders
+<mat-drawer-container class="admin-container" autosize>
+	<mat-drawer #drawer class="admin-sidenav" opened="true" mode="side">
+		<h1>
+			Admin
+		</h1>
+		<mat-list>
+			<button [routerLink]="['orders']" mat-button>
+				Orders
+			</button>
+			<mat-divider></mat-divider>
+			<button [routerLink]=" ['products']" mat-button>
+				Products
+			</button>
+			<mat-divider></mat-divider>
+      <button [routerLink]="['coupons']" mat-button>
+        Coupons
       </button>
-      <mat-divider></mat-divider>
-      <button [routerLink]=" ['products']" mat-button>
-        Products
-      </button>
-      <mat-divider></mat-divider>
-    </mat-list>
+		</mat-list>
 
-  </mat-drawer>
-  <div class=" admin-sidenav-content">
-    <router-outlet></router-outlet>
-  </div>
+	</mat-drawer>
+	<div class=" admin-sidenav-content">
+		<router-outlet></router-outlet>
+	</div>
 </mat-drawer-container>

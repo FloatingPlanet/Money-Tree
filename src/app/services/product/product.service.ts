@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
+import {AngularFirestore, AngularFirestoreCollection,} from 'angularfire2/firestore';
 import {Product} from 'src/app/models/product';
 
 @Injectable({
@@ -15,7 +15,13 @@ export class ProductService {
     this.loadProducts();
   }
 
-  get productsObservalbe() {
+  private loadProducts() {
+    this.productsObservable.subscribe((data) => {
+      this.allProducts = data;
+    });
+  }
+
+  get productsObservable() {
     return this.Products.valueChanges();
   }
 
@@ -60,12 +66,6 @@ export class ProductService {
         console.error(error);
         reject(`fetch doc ${sku} failed`);
       });
-    });
-  }
-
-  private loadProducts() {
-    this.Products.valueChanges().subscribe((data) => {
-      this.allProducts = data;
     });
   }
 }

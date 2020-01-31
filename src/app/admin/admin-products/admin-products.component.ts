@@ -1,8 +1,8 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator, MatTableDataSource} from '@angular/material';
-import {SelectionModel} from '@angular/cdk/collections';
-import {Product} from 'src/app/models/product';
-import {ProductService} from 'src/app/services/product/product.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { SelectionModel } from '@angular/cdk/collections';
+import { Product } from 'src/app/models/product';
+import { ProductService } from 'src/app/services/product/product.service';
 import * as moment from 'moment';
 
 @Component({
@@ -12,15 +12,15 @@ import * as moment from 'moment';
 })
 export class AdminProductsComponent implements OnInit {
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   products: Product[];
   dataSource = new MatTableDataSource<Product>([]);
   m = moment;
   cols: string[] = ['select', 'SKU', 'productName', 'productPrice', 'productQuantity', 'productCategory', 'productAddedAt', 'edit'];
   selection = new SelectionModel<Product>(true, []);
 
-  constructor(private ps: ProductService) {
-    this.ps.productsObservalbe.subscribe((res) => {
+  constructor(private ps: ProductService, ) {
+    this.ps.productsObservable.subscribe((res) => {
       this.products = res;
       this.dataSource = new MatTableDataSource<Product>(this.products);
       this.dataSource.paginator = this.paginator;
@@ -29,7 +29,6 @@ export class AdminProductsComponent implements OnInit {
 
   ngOnInit() {
   }
-
   ngOnDestory() {
 
   }

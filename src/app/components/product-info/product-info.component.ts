@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Product} from '../../models/product';
 import {ProductService} from '../../services/product/product.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-product-info',
@@ -10,7 +10,7 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class ProductInfoComponent implements OnInit {
   public product: Product;
-  private readonly SKU: any;
+  private SKU: any;
 
   constructor(private ps: ProductService, private route: ActivatedRoute) {
     this.SKU = this.route.snapshot.paramMap.get('SKU');
