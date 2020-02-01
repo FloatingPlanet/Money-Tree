@@ -14,6 +14,7 @@ import { ModifyProductComponent } from './components/modify-product/modify-produ
 import {ProductInfoComponent} from './components/product-info/product-info.component';
 import {AdminCouponsComponent} from './admin/admin-coupons/admin-coupons.component';
 import {CouponFormComponent} from './components/coupon-form/coupon-form.component';
+import {CheckoutPageComponent} from './pages/checkout-page/checkout-page.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path: 'login', component: LoginPageComponent},
   {path: 'signup', component: SignupPageComponent},
   {path: 'cart', component: ShoppingCartComponent},
+  {path: 'checkout', component: CheckoutPageComponent},
   {path: 'no-access', component: NoAccessComponent},
   {path: 'info/:SKU', component: ProductInfoComponent},
   {

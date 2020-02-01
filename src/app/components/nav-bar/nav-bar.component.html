@@ -1,7 +1,6 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="#4C4C4C">
     <mat-toolbar-row>
         <button mat-button [routerLink]="['/']">
-          LOGO
         </button>
         <span class="spacer"></span>
 
@@ -11,6 +10,7 @@
         </button>
 
         <span *ngIf="!info?.authState; else logoutBlock" >
+
           <button [routerLink]="['/login']" mat-button aria-hidden="false" aria-label="Log in">
             <mat-icon aria-hidden="false" aria-label="Example log icon">people</mat-icon>
             &nbsp;

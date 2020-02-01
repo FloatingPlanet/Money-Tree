@@ -8,6 +8,9 @@ import {AngularFireStorageModule} from '@angular/fire/storage';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ToastrModule} from 'ngx-toastr';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MDBBootstrapModule} from 'angular-bootstrap-md';
+import {} from 'bootstrap-material-design';
+
 import {
   MatCheckboxModule,
   MatButtonModule,
@@ -113,6 +116,8 @@ import {CartService} from './services/cart/cart.service';
     AppRoutingModule,
     AngularFireAuthModule,
     // material design stuff
+    BrowserModule,
+    MDBBootstrapModule.forRoot(),
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
@@ -162,5 +167,6 @@ import {CartService} from './services/cart/cart.service';
   bootstrap: [AppComponent]
 })
 
-export class AppModule { }
+export class AppModule {
+}
 
