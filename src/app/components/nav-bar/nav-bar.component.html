@@ -27,8 +27,8 @@
           </span>
       </div>
       <mat-menu #infoList="matMenu">
-        <button [routerLink]="['user']" mat-menu-item>Personal Profile</button>
-        <button [routerLink]="['user']" mat-menu-item>Orders</button>
+        <button [routerLink]="['user/profile']" mat-menu-item>Personal Profile</button>
+        <button [routerLink]="['user/orders']" mat-menu-item>Orders</button>
       </mat-menu>
       <!-- </a> -->
       <button mat-button (click)="logout()">Log Out</button>
