@@ -42,6 +42,7 @@ import {
   MatTableModule,
   MatSortModule,
   MatPaginatorModule,
+  MatBadgeModule,
 } from '@angular/material';
 
 // Our stuff ---- ❤❤❤
@@ -154,7 +155,8 @@ import {CartService} from './services/cart/cart.service';
     FormsModule,
     ReactiveFormsModule,
     ModalModule.forRoot(),
-    FlexModule
+    FlexModule,
+    MatBadgeModule
   ],
   providers: [
     AuthService,

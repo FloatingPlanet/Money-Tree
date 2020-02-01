@@ -17,7 +17,9 @@ export class UserService {
   }
 
   get userOberservalbe() {
-    return this.Users.valueChanges();
+    if (this.as.currentUserId) {
+      return this.Users.doc(this.as.currentUserId).valueChanges();
+    }
   }
 
   public getCurrentUser() {
@@ -51,3 +53,4 @@ export class UserService {
     });
   }
 }
+

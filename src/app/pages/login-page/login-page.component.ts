@@ -1,9 +1,9 @@
-import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule, FormBuilder  } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { AuthService } from '../../services/login/auth.service';
-import { FlashMessageService } from '../../services/flashMessage/flash-message.service';
-import { User } from '../../models/user';
+import {FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule, FormBuilder} from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {Router, ActivatedRoute} from '@angular/router';
+import {AuthService} from '../../services/login/auth.service';
+import {FlashMessageService} from '../../services/flashMessage/flash-message.service';
+import {User} from '../../models/user';
 import {LocalstorageService} from '../../services/localStorage/localstorage.service';
 import {Product} from '../../models/product';
 
@@ -18,6 +18,7 @@ export class LoginPageComponent implements OnInit {
   private cartProduct: Product[];
   private loginForm: FormGroup;
   private resetForm: FormGroup;
+
   constructor(
     private as: AuthService,
     private fs: FlashMessageService,
@@ -28,12 +29,14 @@ export class LoginPageComponent implements OnInit {
   ) {
   }
 
-  get form() {return this.loginForm.controls; }
+  get form() {
+    return this.loginForm.controls;
+  }
 
   ngOnInit() {
     this.as.currentUserObservable.subscribe((auth) => {
       if (auth) {
-        this.router.navigate(['/']);
+        this.router.navigate(['']);
       }
     });
     this.loginForm = this.formBuilder.group({
@@ -44,6 +47,7 @@ export class LoginPageComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]]
     });
   }
+
   emailLogin() {
     this.submitted = true;
     if (this.loginForm.invalid) {
@@ -51,6 +55,7 @@ export class LoginPageComponent implements OnInit {
     }
     this.as.emailLogin(this.loginForm.value);
   }
+
   loginWithGoogle() {
     this.as.googleLogin();
   }
@@ -61,6 +66,7 @@ export class LoginPageComponent implements OnInit {
     }
     this.as.resetPassword(this.resetForm.value.email);
   }
+
   reset() {
     this.submitted = false;
     this.loginForm.reset();

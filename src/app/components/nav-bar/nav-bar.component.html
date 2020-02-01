@@ -1,13 +1,13 @@
 <mat-toolbar color="#4C4C4C">
     <mat-toolbar-row>
         <button mat-button [routerLink]="['/']">
-          <span class="badge badge-secondary">New</span>
+          <span class="badge badge-secondary">LOGO</span>
 
         </button>
         <span class="spacer"></span>
 
         <button [routerLink]="['/cart']" mat-icon-button aria-hidden="false" aria-label="Example log icon">
-          <mat-icon aria-hidden="false" aria-label="Example cart icon">shopping_cart
+          <mat-icon matBadge="{{this.itemInCart}}" matBadgePosition="after" matBadgeColor="warn" aria-hidden="false" aria-label="Example cart icon">shopping_cart
           </mat-icon>
         </button>
 
