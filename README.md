@@ -1,6 +1,10 @@
 # MONEY TREE
 ### Implement a template for e-commerces, focus on basic functionalities by using angular, angular material design and firestore.
 ![header](https://github.com/shanerbo/project-money-tree/blob/master/forest%20peak.PNG)
+
+### Material Design Framework:
+  1. MDB pro (pricy)
+  2. [Material Design for Bootstrap](https://github.com/FezVrasta/bootstrap-material-design)
 #### TODO: 
 ![diagram](https://github.com/shanerbo/project-money-tree/blob/master/G390i.png)
 1. Third party payment service.
