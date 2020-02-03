@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {Product} from '../../models/product';
 import {AuthService} from '../login/auth.service';
 import {UserService} from '../user/user.service';
+import {Observable, of} from 'rxjs';
+import {User} from '../../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +11,7 @@ import {UserService} from '../user/user.service';
 export class CartService {
 
   private localCart = JSON.parse(localStorage.getItem('anonymousCart'));
+  private cart: Product[];
 
   constructor(private as: AuthService, private us: UserService) {
   }
@@ -52,5 +55,16 @@ export class CartService {
       products: []
     };
     localStorage.setItem('anonymousCart', JSON.stringify(emptyProduct));
+  }
+
+  loadCart() {
+    if (this.as.authenticated) {
+      this.us.getCurrentUser().then((res) => {
+        this.cart = (res as User).cart;
+      });
+    } else {
+      this.cart = this.localCart;
+    }
+    return of(this.cart);
   }
 }

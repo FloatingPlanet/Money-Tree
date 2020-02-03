@@ -6,6 +6,7 @@ import {Product} from '../../models/product';
 import {AuthService} from '../../services/login/auth.service';
 import {error} from 'util';
 import {CartService} from '../../services/cart/cart.service';
+import {select, Store} from '@ngrx/store';
 
 @Component({
   selector: 'app-main-page',
@@ -13,11 +14,15 @@ import {CartService} from '../../services/cart/cart.service';
   styleUrls: ['./main-page.component.scss']
 })
 export class MainPageComponent implements OnInit {
+
   constructor(private ps: ProductService,
               private us: UserService,
-              private cs: CartService) {
+              private cs: CartService,
+  ) {
+
   }
 
+  public products: Product[] = [];
   private user: User;
 
   ngOnInit() {
@@ -29,6 +34,6 @@ export class MainPageComponent implements OnInit {
   }
 
   addToCart(product: Product) {
-  this.cs.addProduct(product);
+    this.cs.addProduct(product);
   }
 }

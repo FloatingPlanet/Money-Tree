@@ -52,5 +52,9 @@ export class UserService {
       });
     });
   }
+
+  public deleteProduct(SKU: number) {
+
+  }
 }
 

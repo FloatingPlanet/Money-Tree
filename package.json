@@ -24,6 +24,8 @@
     "@angular/router": "~8.2.14",
     "@firebase/auth-types": "^0.9.4",
     "@ng-bootstrap/ng-bootstrap": "^4.2.2",
+    "@ngrx/effects": "^8.6.0",
+    "@ngrx/store": "^8.6.0",
     "angular-bootstrap-md": "^8.8.2",
     "angularfire2": "^5.2.3",
     "bootstrap": "^4.4.1",

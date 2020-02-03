@@ -8,7 +8,6 @@ import {AngularFireStorageModule} from '@angular/fire/storage';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ToastrModule} from 'ngx-toastr';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MDBBootstrapModule} from 'angular-bootstrap-md';
 import {} from 'bootstrap-material-design';
 
 import {
@@ -80,6 +79,8 @@ import {FlexModule} from '@angular/flex-layout';
 import {AdminCouponsComponent} from './admin/admin-coupons/admin-coupons.component';
 import {CouponFormComponent} from './components/coupon-form/coupon-form.component';
 import {CartService} from './services/cart/cart.service';
+import {StoreModule} from '@ngrx/store';
+import {EffectsModule} from '@ngrx/effects';
 
 
 @NgModule({
@@ -118,7 +119,6 @@ import {CartService} from './services/cart/cart.service';
     AngularFireAuthModule,
     // material design stuff
     BrowserModule,
-    MDBBootstrapModule.forRoot(),
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
@@ -156,7 +156,7 @@ import {CartService} from './services/cart/cart.service';
     ReactiveFormsModule,
     ModalModule.forRoot(),
     FlexModule,
-    MatBadgeModule
+    MatBadgeModule,
   ],
   providers: [
     AuthService,
