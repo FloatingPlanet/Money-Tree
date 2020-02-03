@@ -81,6 +81,8 @@ import {CouponFormComponent} from './components/coupon-form/coupon-form.componen
 import {CartService} from './services/cart/cart.service';
 import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
+import {CartEffects} from './effects/products.effects';
+import {cartReducer} from './reducers/products.reducers';
 
 
 @NgModule({
@@ -157,6 +159,8 @@ import {EffectsModule} from '@ngrx/effects';
     ModalModule.forRoot(),
     FlexModule,
     MatBadgeModule,
+    StoreModule.forRoot({cart: cartReducer}),
+    EffectsModule.forRoot([CartEffects])
   ],
   providers: [
     AuthService,
