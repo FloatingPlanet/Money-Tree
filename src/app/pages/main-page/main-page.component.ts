@@ -14,6 +14,9 @@ import * as cartActions from '../../actions/products.actions';
   styleUrls: ['./main-page.component.scss']
 })
 export class MainPageComponent implements OnInit {
+  public products: Product[] = [];
+  private user: User;
+  cart$: Observable<Product[]>;
 
   constructor(private ps: ProductService,
               private us: UserService,
@@ -22,10 +25,6 @@ export class MainPageComponent implements OnInit {
   ) {
     this.cart$ = this.store.select('cart');
   }
-
-  public products: Product[] = [];
-  private user: User;
-  cart$: Observable<Product[]>;
 
   ngOnInit() {
     this.us.getCurrentUser().then((user) => {
@@ -38,6 +37,9 @@ export class MainPageComponent implements OnInit {
 
   getCart() {
     this.store.dispatch(new cartActions.GetCart());
+    // this.cart$.subscribe((res) => {
+    //   console.log(res);
+    // });
   }
 
   addToCart(product: Product) {
