@@ -3,10 +3,8 @@ import {ProductService} from 'src/app/services/product/product.service';
 import {User} from '../../models/user';
 import {UserService} from '../../services/user/user.service';
 import {Product} from '../../models/product';
-import {AuthService} from '../../services/login/auth.service';
-import {error} from 'util';
 import {CartService} from '../../services/cart/cart.service';
-import {select, Store} from '@ngrx/store';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-main-page',
@@ -14,16 +12,15 @@ import {select, Store} from '@ngrx/store';
   styleUrls: ['./main-page.component.scss']
 })
 export class MainPageComponent implements OnInit {
+  public products: Product[] = [];
+  private user: User;
+  cart$: Observable<Product[]>;
 
   constructor(private ps: ProductService,
               private us: UserService,
               private cs: CartService,
   ) {
-
   }
-
-  public products: Product[] = [];
-  private user: User;
 
   ngOnInit() {
     this.us.getCurrentUser().then((user) => {
@@ -32,6 +29,7 @@ export class MainPageComponent implements OnInit {
       console.error(e);
     });
   }
+
 
   addToCart(product: Product) {
     this.cs.addProduct(product);

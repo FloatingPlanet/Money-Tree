@@ -79,8 +79,6 @@ import {FlexModule} from '@angular/flex-layout';
 import {AdminCouponsComponent} from './admin/admin-coupons/admin-coupons.component';
 import {CouponFormComponent} from './components/coupon-form/coupon-form.component';
 import {CartService} from './services/cart/cart.service';
-import {StoreModule} from '@ngrx/store';
-import {EffectsModule} from '@ngrx/effects';
 
 
 @NgModule({
