@@ -5,7 +5,6 @@ import {UserService} from '../../services/user/user.service';
 import {Product} from '../../models/product';
 import {CartService} from '../../services/cart/cart.service';
 import {Observable} from 'rxjs';
-import {AuthService} from '../../services/login/auth.service';
 
 @Component({
   selector: 'app-main-page',
@@ -20,7 +19,6 @@ export class MainPageComponent implements OnInit {
   constructor(private ps: ProductService,
               private us: UserService,
               private cs: CartService,
-              private as: AuthService
   ) {
   }
 

@@ -59,7 +59,6 @@ import {CheckoutPageComponent} from './pages/checkout-page/checkout-page.compone
 import {NoAccessComponent} from './pages/no-access/no-access.component';
 import {PageNotFoundComponent} from './pages/page-not-found/page-not-found.component';
 import {environment} from 'src/environments/environment';
-import {AuthService} from './services/login/auth.service';
 import {FlashMessageService} from './services/flashMessage/flash-message.service';
 import {ProductService} from './services/product/product.service';
 import {SignupPageComponent} from './pages/signup-page/signup-page.component';

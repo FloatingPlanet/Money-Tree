@@ -1,5 +1,4 @@
 import {Component, Input, OnChanges, OnInit, Output} from '@angular/core';
-import {AuthService} from 'src/app/services/login/auth.service';
 import {Router} from '@angular/router';
 import {User} from '../../models/user';
 import {UserService} from '../../services/user/user.service';
@@ -15,7 +14,7 @@ export class NavBarComponent implements OnInit, OnChanges {
   @Input() info: any;
   private itemInCart: number;
 
-  constructor(private as: AuthService, private us: UserService) {
+  constructor(private us: UserService) {
   }
 
   ngOnInit() {
@@ -28,7 +27,7 @@ export class NavBarComponent implements OnInit, OnChanges {
   }
 
   logout() {
-    this.as.signOut();
+    this.us.signOut();
   }
 
   ngOnChanges(): void {

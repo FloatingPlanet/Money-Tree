@@ -1,5 +1,4 @@
 import {AfterContentInit, AfterViewChecked, AfterViewInit, Component, OnChanges, OnInit, ViewChild} from '@angular/core';
-import {AuthService} from './services/login/auth.service';
 import {UserService} from './services/user/user.service';
 import {CartService} from './services/cart/cart.service';
 import {NavBarComponent} from './components/nav-bar/nav-bar.component';
@@ -18,11 +17,11 @@ export class AppComponent implements OnInit {
   private itemInCart: number;
   @ViewChild(NavBarComponent, {static: false}) navBar: NavBarComponent;
 
-  constructor(private as: AuthService, private cs: CartService, private us: UserService) {
+  constructor( private cs: CartService, private us: UserService) {
   }
 
   ngOnInit(): void {
-    this.as.currentUserObservable.subscribe((auth) => {
+    this.us.currentUserObservable.subscribe((auth) => {
       if (auth && this.cs.loadFromLocal().length > 0) {
         this.cs.loadFromLocal().forEach(product => {
           this.us.addProduct(product).then((res) => {
@@ -32,7 +31,6 @@ export class AppComponent implements OnInit {
         });
         this.cs.clearAll();
       }
-      console.log(this.us.user);
 
       this.logInfo = {
         avatarURL: auth ? auth.photoURL : this.DEFAULT_AVATAR,

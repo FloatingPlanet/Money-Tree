@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from 'src/app/services/login/auth.service';
 import {FlashMessageService} from 'src/app/services/flashMessage/flash-message.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MustMatch} from 'src/helpers/helpers';
+import {UserService} from '../../services/user/user.service';
 
 @Component({
   selector: 'app-signup-page',
@@ -17,7 +17,7 @@ export class SignupPageComponent implements OnInit {
   signupForm: FormGroup;
 
   constructor(
-    private as: AuthService,
+    private us: UserService,
     private fs: FlashMessageService,
     private router: Router,
     private route: ActivatedRoute,
@@ -38,7 +38,7 @@ export class SignupPageComponent implements OnInit {
     }, {
       validator: MustMatch('password', 'confirmPassword')
     });
-    this.as.currentUserObservable.subscribe((auth) => {
+    this.us.currentUserObservable.subscribe((auth) => {
       if (auth) {
         this.router.navigate(['/']);
       }
@@ -50,11 +50,11 @@ export class SignupPageComponent implements OnInit {
     if (this.signupForm.invalid) {
       return;
     }
-    this.as.emailSignUp(this.signupForm.value);
+    this.us.emailSignUp(this.signupForm.value);
   }
 
   signupWithGoogle() {
-    this.as.googleLogin();
+    this.us.googleLogin();
   }
 
   reset() {

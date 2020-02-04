@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
 import {User} from '../../models/user';
-import {AuthService} from '../login/auth.service';
 import {Product} from '../../models/product';
 import * as firebase from 'firebase';
 import {User as FirebaseUser, UserCredential} from '@firebase/auth-types';

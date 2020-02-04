@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {Product} from '../../models/product';
-import {AuthService} from '../login/auth.service';
 import {UserService} from '../user/user.service';
 import {Observable, of} from 'rxjs';
 import {User} from '../../models/user';
@@ -13,14 +12,14 @@ export class CartService {
   private localCart = JSON.parse(localStorage.getItem('anonymousCart'));
   public cart: Product[];
 
-  constructor(private as: AuthService, private us: UserService) {
-    this.as.currentUserObservable.subscribe((user) => {
+  constructor(private us: UserService) {
+    this.us.currentUserObservable.subscribe((user) => {
       this.cart = (user as User).cart;
     });
   }
 
   addProduct(product: Product) {
-    if (this.as.authenticated) {
+    if (this.us.authenticated) {
       this.us.addProduct(product).then((res) => {
       }).catch((e) => {
         console.error(e);
