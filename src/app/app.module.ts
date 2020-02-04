@@ -79,10 +79,6 @@ import {FlexModule} from '@angular/flex-layout';
 import {AdminCouponsComponent} from './admin/admin-coupons/admin-coupons.component';
 import {CouponFormComponent} from './components/coupon-form/coupon-form.component';
 import {CartService} from './services/cart/cart.service';
-import {StoreModule} from '@ngrx/store';
-import {EffectsModule} from '@ngrx/effects';
-import {CartEffects} from './effects/products.effects';
-import {cartReducer} from './reducers/products.reducers';
 
 
 @NgModule({
@@ -159,8 +155,6 @@ import {cartReducer} from './reducers/products.reducers';
     ModalModule.forRoot(),
     FlexModule,
     MatBadgeModule,
-    StoreModule.forRoot({cart: cartReducer}),
-    EffectsModule.forRoot([CartEffects])
   ],
   providers: [
     AuthService,
