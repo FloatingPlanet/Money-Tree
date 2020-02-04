@@ -82,6 +82,7 @@ import { UserProfileComponent } from './user/user-profile/user-profile.component
 import {CouponFormComponent} from './admin/coupon-form/coupon-form.component';
 import {ProductFormComponent} from './admin/product-form/product-form.component';
 import { CheckoutFormComponent } from './components/checkout-form/checkout-form.component';
+import { UserAddressModalComponent } from './user/user-address-modal/user-address-modal.component';
 
 
 
@@ -113,6 +114,7 @@ import { CheckoutFormComponent } from './components/checkout-form/checkout-form.
     UserOrdersComponent,
     UserProfileComponent,
     CheckoutFormComponent,
+    UserAddressModalComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),

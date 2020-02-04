@@ -1,5 +1,6 @@
 import {Product} from './product';
 import {Order} from './order';
+import {AddressInfo} from './addressInfo';
 
 export class User {
   uid: string;
@@ -14,6 +15,7 @@ export class User {
   createdOn?: Date;
   isAdmin: boolean;
   avatar: string;
+  shippingInfo: AddressInfo[];
   firstName?: string;
   lastName?: string;
   address1?: string;
