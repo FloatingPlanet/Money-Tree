@@ -5,6 +5,9 @@
 ### Material Design Framework:
   1. [MDB pro (pricy)](https://mdbootstrap.com/products/angular-ui-kit/)
   2. [Material Design for Bootstrap](https://github.com/FezVrasta/bootstrap-material-design)
+
+### Important everything related to user date, you have to check if user still loged in by using this.us.logInObservable()
+
 #### TODO: 
 ![diagram](https://github.com/shanerbo/project-money-tree/blob/master/G390i.png)
 1. Third party payment service.
@@ -30,6 +33,7 @@
 9. ~~Logged in user are allowed to browse their orders~~
 10. Add image while user adding new product
 11. index page
+
 ##### CTO: [Otto hu](https://github.com/aWildOtto)
 ##### CEO: [Jiaran Yu](https://github.com/jiaranyu)
 ##### Cleaner: [Erbo Shan](https://github.com/shanerbo)
