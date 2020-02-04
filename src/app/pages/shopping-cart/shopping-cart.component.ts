@@ -12,7 +12,7 @@ import {CartService} from '../../services/cart/cart.service';
   styleUrls: ['./shopping-cart.component.scss']
 })
 export class ShoppingCartComponent implements OnInit {
-  public orders: Product[];
+  public cart: Product[];
 
 
   constructor(private ps: ProductService,
@@ -25,14 +25,9 @@ export class ShoppingCartComponent implements OnInit {
   ngOnInit() {
     this.as.currentUserObservable.subscribe((auth) => {
       if (auth) {
-        this.us.getCurrentUser().then((res) => {
-          const user = res as User;
-          this.orders = user.cart;
-        }).catch((error) => {
-          console.error(error);
-        });
+        this.cart = this.cs.cart;
       } else {
-        this.orders = this.cs.loadFromLocal();
+        this.cart = this.cs.loadFromLocal();
       }
     });
   }

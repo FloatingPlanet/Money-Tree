@@ -19,7 +19,6 @@ export class AppComponent implements OnInit {
   @ViewChild(NavBarComponent, {static: false}) navBar: NavBarComponent;
 
   constructor(private as: AuthService, private cs: CartService, private us: UserService) {
-
   }
 
   ngOnInit(): void {
@@ -33,7 +32,7 @@ export class AppComponent implements OnInit {
         });
         this.cs.clearAll();
       }
-
+      console.log(this.us.user);
 
       this.logInfo = {
         avatarURL: auth ? auth.photoURL : this.DEFAULT_AVATAR,

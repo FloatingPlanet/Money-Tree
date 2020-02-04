@@ -11,9 +11,12 @@ import {User} from '../../models/user';
 export class CartService {
 
   private localCart = JSON.parse(localStorage.getItem('anonymousCart'));
-  private cart: Product[];
+  public cart: Product[];
 
   constructor(private as: AuthService, private us: UserService) {
+    this.as.currentUserObservable.subscribe((user) => {
+      this.cart = (user as User).cart;
+    });
   }
 
   addProduct(product: Product) {
@@ -57,14 +60,4 @@ export class CartService {
     localStorage.setItem('anonymousCart', JSON.stringify(emptyProduct));
   }
 
-  loadCart() {
-    if (this.as.authenticated) {
-      this.us.getCurrentUser().then((res) => {
-        this.cart = (res as User).cart;
-      });
-    } else {
-      this.cart = this.localCart;
-    }
-    return of(this.cart);
-  }
 }

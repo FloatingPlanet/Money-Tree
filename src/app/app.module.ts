@@ -157,7 +157,7 @@ import {CartService} from './services/cart/cart.service';
     MatBadgeModule,
   ],
   providers: [
-    AuthService,
+    // AuthService,
     FlashMessageService,
     ProductService,
     CategoryService,
