@@ -22,13 +22,13 @@ export class ShoppingCartComponent implements OnInit {
 
   ngOnInit() {
     if (this.us.authenticated) {
-      this.cs.cartObservable.subscribe((cart) => {
+      this.cs.cartObservable.subscribe((cart: Product[]) => {
+        console.log('cart update summary');
         this.cart = cart;
       });
     } else {
       this.cart = this.cs.loadFromLocal();
       console.log(this.cart);
-
     }
   }
 }

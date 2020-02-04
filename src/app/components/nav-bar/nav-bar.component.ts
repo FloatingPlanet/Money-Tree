@@ -21,6 +21,7 @@ export class NavBarComponent implements OnInit, OnChanges {
     // TODO user logout and login data is not consistent, and shopping cart has same shit
     if (this.us.userOberservalbe) {
       this.us.userOberservalbe.subscribe(res => {
+        console.log('cart updated nav');
         this.itemInCart = (res as User) ? (res as User).cart ? (res as User).cart.length : null : null;
       });
     }

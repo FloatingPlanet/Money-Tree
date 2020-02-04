@@ -16,15 +16,16 @@ export class CartService {
     this.us.currentUserObservable.subscribe((auth) => {
       console.log('login status changed');
       this.us.userOberservalbe.subscribe((user) => {
+        console.log('cart updated cart service');
         this.cart = (user as User).cart;
-
       });
     });
   }
 
   get cartObservable() {
-    return of(this.cart);
-
+    return new Observable(observer => {
+      observer.next(this.cart);
+    });
   }
 
   addProduct(product: Product) {
