@@ -21,9 +21,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.us.currentUserObservable.subscribe((auth) => {
-      if (auth && this.cs.loadFromLocal().length > 0) {
-        this.cs.loadFromLocal().forEach(product => {
+    this.us.logInObservable.subscribe((auth) => {
+      if (auth && this.cs.getLocalCart().length > 0) {
+        this.cs.getLocalCart().forEach(product => {
           this.us.addProduct(product).then((res) => {
           }).catch((err) => {
             console.error(err);

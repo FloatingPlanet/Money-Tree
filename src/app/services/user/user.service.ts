@@ -34,7 +34,7 @@ export class UserService {
 
   public getCurrentUser() {
     return new Promise((res, rej) => {
-      this.currentUserObservable.subscribe((auth) => {
+      this.logInObservable.subscribe((auth) => {
         if (auth) {
           this.Users.doc(auth.uid).ref.get().then((doc) => {
             res(doc.data());
@@ -49,7 +49,7 @@ export class UserService {
 
   public addProduct(product: Product) {
     return new Promise((res, rej) => {
-      this.currentUserObservable.subscribe((auth) => {
+      this.logInObservable.subscribe((auth) => {
         if (auth) {
           this.Users.doc(auth.uid).update({
             cart: firebase.firestore.FieldValue.arrayUnion(product)
@@ -77,7 +77,7 @@ export class UserService {
   }
 
   // Returns
-  get currentUserObservable(): any {
+  get logInObservable(): any {
     return this.afAuth.authState;
   }
 

@@ -34,7 +34,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.us.currentUserObservable.subscribe((auth) => {
+    this.us.logInObservable.subscribe((auth) => {
       if (auth) {
         // TODO rewrite
         this.router.navigate(['']);

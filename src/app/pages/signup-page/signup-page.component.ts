@@ -38,7 +38,7 @@ export class SignupPageComponent implements OnInit {
     }, {
       validator: MustMatch('password', 'confirmPassword')
     });
-    this.us.currentUserObservable.subscribe((auth) => {
+    this.us.logInObservable.subscribe((auth) => {
       if (auth) {
         this.router.navigate(['/']);
       }

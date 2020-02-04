@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Product} from '../../models/product';
 import {UserService} from '../user/user.service';
 import {User} from '../../models/user';
+import {Observable, Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,19 +11,28 @@ export class CartService {
 
   private localCart = JSON.parse(localStorage.getItem('anonymousCart'));
   private cart: Product[];
+  public cartObservable: Observable<Product[]>;
+  private cartSubject: Subject<Product[]>;
+
 
   constructor(private us: UserService) {
-    this.us.currentUserObservable.subscribe((auth) => {
-      console.log('login status changed');
-      this.us.userOberservalbe.subscribe((user) => {
-        console.log('cart updated cart service');
-        this.cart = (user as User).cart;
-      });
-    });
+    this.cartSubject = new Subject<Product[]>();
+    this.cartObservable = this.cartSubject.asObservable();
+    this.loadCartFromDB();
   }
 
-  get cartObservable() {
-    return this.us.userOberservalbe;
+
+  loadCartFromDB() {
+    this.us.logInObservable.subscribe((auth) => {
+      console.log('login status changed');
+      if (auth) {
+        this.us.userOberservalbe.subscribe((user) => {
+          console.log('cart service cart updated ');
+          this.cart = (user as User).cart;
+          this.cartSubject.next(this.cart);
+        });
+      }
+    });
   }
 
   addProduct(product: Product) {
@@ -43,8 +53,12 @@ export class CartService {
     return;
   }
 
-  public loadFromLocal(): Product[] {
+  public getLocalCart(): Product[] {
     return this.localCart ? this.localCart.products : [];
+  }
+
+  public getUserCart(): Product[] {
+    return this.cart;
   }
 
   public deleteFromCart(SKU: string) {
@@ -65,5 +79,4 @@ export class CartService {
     };
     localStorage.setItem('anonymousCart', JSON.stringify(emptyProduct));
   }
-
 }

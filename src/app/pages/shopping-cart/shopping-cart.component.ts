@@ -12,7 +12,7 @@ import {User} from '../../models/user';
 })
 export class ShoppingCartComponent implements OnInit {
   public cart: Product[];
-
+  private dummy: Product[];
 
   constructor(private ps: ProductService,
               private us: UserService,
@@ -21,12 +21,16 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.us.authenticated) {
-      this.us.userOberservalbe.subscribe((res) => {
-        this.cart = (res as User).cart;
-      });
-    } else {
-      this.cart = this.cs.loadFromLocal();
-    }
+    this.us.logInObservable.subscribe((auth) => {
+      if (auth) {
+        this.us.userOberservalbe.subscribe((res: User) => {
+          console.log('shopping cart updated');
+          this.cart = res.cart ? res.cart : [];
+        });
+      } else {
+        this.cart = this.cs.getLocalCart();
+      }
+    });
   }
+
 }

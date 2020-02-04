@@ -1,6 +1,8 @@
 import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {User} from '../../models/user';
 import {UserService} from '../../services/user/user.service';
+import {CartService} from '../../services/cart/cart.service';
+import {Product} from '../../models/product';
 
 @Component({
   selector: 'app-nav-bar',
@@ -13,22 +15,21 @@ export class NavBarComponent implements OnInit, OnChanges {
   @Input() info: any;
   private itemInCart: number;
 
-  constructor(private us: UserService) {
+  constructor(private us: UserService, private cs: CartService) {
   }
 
   ngOnInit() {
     // TODO user logout and login data is not consistent, and shopping cart has same shit
-    this.us.currentUserObservable.subscribe((auth) => {
+    this.us.logInObservable.subscribe((auth) => {
       if (auth) {
-        this.us.userOberservalbe.subscribe(res => {
-          console.log('cart updated nav');
-          this.itemInCart = (res as User) ? (res as User).cart ? (res as User).cart.length : null : null;
+        this.us.userOberservalbe.subscribe((res: User) => {
+          console.log('nav cart updated');
+          this.itemInCart = res.cart ? res.cart.length : null;
         });
       } else {
         this.itemInCart = null;
       }
     });
-
   }
 
   logout() {
