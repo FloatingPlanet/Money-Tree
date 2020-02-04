@@ -4,9 +4,7 @@ import {User} from '../../models/user';
 import {UserService} from '../../services/user/user.service';
 import {Product} from '../../models/product';
 import {CartService} from '../../services/cart/cart.service';
-import {select, Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
-import * as cartActions from '../../actions/products.actions';
 
 @Component({
   selector: 'app-main-page',
@@ -21,9 +19,7 @@ export class MainPageComponent implements OnInit {
   constructor(private ps: ProductService,
               private us: UserService,
               private cs: CartService,
-              private store: Store<User>
   ) {
-    this.cart$ = this.store.select('cart');
   }
 
   ngOnInit() {
@@ -32,15 +28,8 @@ export class MainPageComponent implements OnInit {
     }).catch((e) => {
       console.error(e);
     });
-    this.getCart();
   }
 
-  getCart() {
-    this.store.dispatch(new cartActions.GetCart());
-    // this.cart$.subscribe((res) => {
-    //   console.log(res);
-    // });
-  }
 
   addToCart(product: Product) {
     this.cs.addProduct(product);
