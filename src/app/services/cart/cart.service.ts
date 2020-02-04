@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Product} from '../../models/product';
 import {UserService} from '../user/user.service';
-import {Observable, of} from 'rxjs';
 import {User} from '../../models/user';
 
 @Injectable({
@@ -23,9 +22,7 @@ export class CartService {
   }
 
   get cartObservable() {
-    return new Observable(observer => {
-      observer.next(this.cart);
-    });
+    return this.us.userOberservalbe;
   }
 
   addProduct(product: Product) {

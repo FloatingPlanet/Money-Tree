@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ProductService} from 'src/app/services/product/product.service';
 import {Product} from 'src/app/models/product';
-import {User} from 'src/app/models/user';
 import {UserService} from '../../services/user/user.service';
 import {CartService} from '../../services/cart/cart.service';
+import {User} from '../../models/user';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -22,13 +22,11 @@ export class ShoppingCartComponent implements OnInit {
 
   ngOnInit() {
     if (this.us.authenticated) {
-      this.cs.cartObservable.subscribe((cart: Product[]) => {
-        console.log('cart update summary');
-        this.cart = cart;
+      this.us.userOberservalbe.subscribe((res) => {
+        this.cart = (res as User).cart;
       });
     } else {
       this.cart = this.cs.loadFromLocal();
-      console.log(this.cart);
     }
   }
 }
