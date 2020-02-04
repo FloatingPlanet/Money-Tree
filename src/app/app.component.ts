@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   private itemInCart: number;
   @ViewChild(NavBarComponent, {static: false}) navBar: NavBarComponent;
 
-  constructor( private cs: CartService, private us: UserService) {
+  constructor(private cs: CartService, private us: UserService) {
   }
 
   ngOnInit(): void {

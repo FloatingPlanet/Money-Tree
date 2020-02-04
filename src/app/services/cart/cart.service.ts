@@ -10,12 +10,21 @@ import {User} from '../../models/user';
 export class CartService {
 
   private localCart = JSON.parse(localStorage.getItem('anonymousCart'));
-  public cart: Product[];
+  private cart: Product[];
 
   constructor(private us: UserService) {
-    this.us.currentUserObservable.subscribe((user) => {
-      this.cart = (user as User).cart;
+    this.us.currentUserObservable.subscribe((auth) => {
+      console.log('login status changed');
+      this.us.userOberservalbe.subscribe((user) => {
+        this.cart = (user as User).cart;
+
+      });
     });
+  }
+
+  get cartObservable() {
+    return of(this.cart);
+
   }
 
   addProduct(product: Product) {

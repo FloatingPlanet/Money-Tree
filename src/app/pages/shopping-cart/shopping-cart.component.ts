@@ -21,12 +21,14 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.us.currentUserObservable.subscribe((auth) => {
-      if (auth) {
-        this.cart = this.cs.cart;
-      } else {
-        this.cart = this.cs.loadFromLocal();
-      }
-    });
+    if (this.us.authenticated) {
+      this.cs.cartObservable.subscribe((cart) => {
+        this.cart = cart;
+      });
+    } else {
+      this.cart = this.cs.loadFromLocal();
+      console.log(this.cart);
+
+    }
   }
 }
