@@ -32,7 +32,7 @@ export class CheckoutPageComponent implements AfterViewChecked {
           console.error(error);
         });
       } else {
-        this.orders = this.cs.loadFromLocal();
+        this.orders = this.cs.getLocalCart();
       }
     });
   }

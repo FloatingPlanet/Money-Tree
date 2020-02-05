@@ -69,15 +69,20 @@ import {AdminOrdersComponent} from './admin/admin-orders/admin-orders.component'
 import {AdminProductsComponent} from './admin/admin-products/admin-products.component';
 import {CategoryFormComponent} from './components/category-form/category-form.component';
 import {ModalModule} from 'ngx-bootstrap/modal';
-import {ProductFormComponent} from './components/product-form/product-form.component';
+import {ProductFormComponent} from './admin/product-form/product-form.component';
 import {ModifyProductComponent} from './components/modify-product/modify-product.component';
 import {CategoryService} from './services/category/category.service';
 import {ProductInfoComponent} from './components/product-info/product-info.component';
 import {CouponsService} from './services/coupons/coupons.service';
 import {FlexModule} from '@angular/flex-layout';
 import {AdminCouponsComponent} from './admin/admin-coupons/admin-coupons.component';
-import {CouponFormComponent} from './components/coupon-form/coupon-form.component';
+import {CouponFormComponent} from './admin/coupon-form/coupon-form.component';
 import {CartService} from './services/cart/cart.service';
+import {UserPageComponent} from './user/user-page/user-page.component';
+import {UserOrdersComponent} from './user/user-orders/user-orders.component';
+import {UserProfileComponent} from './user/user-profile/user-profile.component';
+import {MatBadgeModule} from '@angular/material/badge';
+import {CheckoutFormComponent} from './components/checkout-form/checkout-form.component';
 
 
 @NgModule({
@@ -104,6 +109,11 @@ import {CartService} from './services/cart/cart.service';
     ProductInfoComponent,
     AdminCouponsComponent,
     CouponFormComponent,
+    UserPageComponent,
+    UserOrdersComponent,
+    UserProfileComponent,
+    CheckoutPageComponent,
+    CheckoutFormComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -151,7 +161,8 @@ import {CartService} from './services/cart/cart.service';
     FormsModule,
     ReactiveFormsModule,
     ModalModule.forRoot(),
-    FlexModule
+    FlexModule,
+    MatBadgeModule
   ],
   providers: [
     AuthService,
