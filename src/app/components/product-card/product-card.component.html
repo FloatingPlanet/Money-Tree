@@ -1,8 +1,10 @@
 <mat-card class="product" >
   <mat-card-content >
-    <div class="image"  >
-      <img  mat-card-image (mouseenter)="this.buttonShow =!this.buttonShow"  (mouseleave) ="this.buttonShow = !this.buttonShow" src="{{product.productImageUrls[0]}}" alt="productImg">
-      <a class="info" *ngIf="this.buttonShow" href="#">HERE!</a>
+    <div class="img-wrapper" (mouseenter)="this.buttonShow =!this.buttonShow"  (mouseleave) ="this.buttonShow = !this.buttonShow">
+      <img mat-card-image class="img-responsive"  src="{{product.productImageUrls[0]}}" alt="productImg">
+      <div class="img-overlay">
+        <button *ngIf="this.buttonShow" class="btn btn-md btn-success">Details</button>
+      </div>
     </div>
     <mat-card-title class="title">{{product.productName}}</mat-card-title>
     <mat-card-subtitle class="price">CAD ${{product.productPrice}}</mat-card-subtitle>
