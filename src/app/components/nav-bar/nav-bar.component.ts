@@ -2,7 +2,6 @@ import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {User} from '../../models/user';
 import {UserService} from '../../services/user/user.service';
 import {CartService} from '../../services/cart/cart.service';
-import {Product} from '../../models/product';
 
 @Component({
   selector: 'app-nav-bar',

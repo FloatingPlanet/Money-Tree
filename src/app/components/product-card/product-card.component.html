@@ -1,6 +1,9 @@
-<mat-card class="product">
-  <mat-card-content>
-    <img mat-card-image src="{{product.productImageUrls[0]}}">
+<mat-card class="product" >
+  <mat-card-content >
+    <div class="image" (mouseenter)="this.tmp='lol'"  (mouseleave) ="this.tmp='lol2'">
+      <img  mat-card-image src="{{product.productImageUrls[0]}}" alt="productImg">
+      <a class="info" href="#">{{this.tmp}}</a>
+    </div>
     <mat-card-title class="title">{{product.productName}}</mat-card-title>
     <mat-card-subtitle class="price">CAD ${{product.productPrice}}</mat-card-subtitle>
   </mat-card-content>
