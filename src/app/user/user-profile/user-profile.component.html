@@ -1,0 +1,76 @@
+<div class="col-sm-5">
+<h4>My Address</h4>
+  <button mat-stroked-button color="primary" (click)="addAddress()">Add</button>
+<mat-list>
+  <mat-list-item>Item 1</mat-list-item>
+  <button mat-stroked-button color="primary">Edit</button>
+  <button mat-stroked-button color="warn">Delete</button>
+  <mat-divider></mat-divider>
+  <mat-list-item>Item 2</mat-list-item>
+  <button mat-stroked-button color="primary">Edit</button>
+  <button mat-stroked-button color="warn">Delete</button>
+  <mat-divider></mat-divider>
+  <mat-list-item>Item 3</mat-list-item>
+  <button mat-stroked-button color="primary">Edit</button>
+  <button mat-stroked-button color="warn">Delete</button>
+</mat-list>
+</div>
+
+<!-- Button trigger modal -->
+<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="saFormGroup">
+      <ng-template matStepLabel>Shipping Address</ng-template>
+      <div formGroupName="customer">
+        <mat-form-field>
+          <input matInput placeholder="First name" formControlName="firstName" required>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Last name" formControlName="lastName" required>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input matInput placeholder="phone number" formControlName="phoneNumber" required>
+        </mat-form-field>
+        <br>
+      </div>
+      <div formGroupName="address">
+        <mat-form-field>
+          <input matInput placeholder="street 1" formControlName="street1" required>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input matInput placeholder="street 2" formControlName="street2">
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input matInput placeholder="city" formControlName="city" required>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input matInput placeholder="province" formControlName="province" required>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input matInput placeholder="postal code" formControlName="postalCode" required>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input matInput placeholder="country" formControlName="country" required>
+        </mat-form-field>
+      </div>
+
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+  </div>
+</ng-template>

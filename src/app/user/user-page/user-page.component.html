@@ -1,0 +1,25 @@
+
+<mat-drawer-container class="user-container" autosize>
+  <mat-drawer #drawer class="user-sidenav" opened="true" mode="side">
+    <h1>
+      User-info
+    </h1>
+    <mat-list>
+      <button [routerLink]="['orders']" mat-button>
+        Orders
+      </button>
+      <mat-divider></mat-divider>
+      <button [routerLink]=" ['profile']" mat-button>
+        Profile
+      </button>
+      <mat-divider></mat-divider>
+    </mat-list>
+
+  </mat-drawer>
+  <div class=" user-sidenav-content">
+    <router-outlet></router-outlet>
+  </div>
+
+</mat-drawer-container>
+
+
