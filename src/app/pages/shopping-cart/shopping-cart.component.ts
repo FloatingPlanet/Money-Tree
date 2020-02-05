@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ProductService} from 'src/app/services/product/product.service';
 import {Product} from 'src/app/models/product';
-import {User} from 'src/app/models/user';
-import {AuthService} from '../../services/login/auth.service';
 import {UserService} from '../../services/user/user.service';
 import {CartService} from '../../services/cart/cart.service';
+import {User} from '../../models/user';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -12,28 +11,26 @@ import {CartService} from '../../services/cart/cart.service';
   styleUrls: ['./shopping-cart.component.scss']
 })
 export class ShoppingCartComponent implements OnInit {
-  public orders: Product[];
-
+  public cart: Product[];
+  private dummy: Product[];
 
   constructor(private ps: ProductService,
-              private as: AuthService,
               private us: UserService,
               private cs: CartService) {
 
   }
 
   ngOnInit() {
-    this.as.currentUserObservable.subscribe((auth) => {
+    this.us.logInObservable.subscribe((auth) => {
       if (auth) {
-        this.us.getCurrentUser().then((res) => {
-          const user = res as User;
-          this.orders = user.cart;
-        }).catch((error) => {
-          console.error(error);
+        this.us.userOberservalbe.subscribe((res: User) => {
+          console.log('shopping cart updated');
+          this.cart = res.cart ? res.cart : [];
         });
       } else {
-        this.orders = this.cs.loadFromLocal();
+        this.cart = this.cs.getLocalCart();
       }
     });
   }
+
 }

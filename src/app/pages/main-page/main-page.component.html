@@ -1,6 +1,8 @@
+<p *ngIf="cart$ | async as cart">{{cart |json}} </p>
+
 <div class="container-fluid">
-  <div class="row">
-    <app-product-card class="col-sm-12 col-md-6 col-lg-4 col-xl-2" *ngFor="let product of ps.allProducts"
+  <div class="card-deck">
+    <app-product-card class="col-sm-6 col-md-6 col-lg-4 col-xl-3" *ngFor="let product of ps.allProducts"
                       [product]="product" (productToBeAdded)="addToCart($event)">
     </app-product-card>
   </div>

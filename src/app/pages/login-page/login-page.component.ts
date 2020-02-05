@@ -1,11 +1,11 @@
-import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule, FormBuilder  } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { AuthService } from '../../services/login/auth.service';
-import { FlashMessageService } from '../../services/flashMessage/flash-message.service';
-import { User } from '../../models/user';
+import {FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule, FormBuilder} from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {Router, ActivatedRoute} from '@angular/router';
+import {FlashMessageService} from '../../services/flashMessage/flash-message.service';
+import {User} from '../../models/user';
 import {LocalstorageService} from '../../services/localStorage/localstorage.service';
 import {Product} from '../../models/product';
+import {UserService} from '../../services/user/user.service';
 
 
 @Component({
@@ -18,8 +18,9 @@ export class LoginPageComponent implements OnInit {
   private cartProduct: Product[];
   private loginForm: FormGroup;
   private resetForm: FormGroup;
+
   constructor(
-    private as: AuthService,
+    private us: UserService,
     private fs: FlashMessageService,
     private router: Router,
     private route: ActivatedRoute,
@@ -28,12 +29,15 @@ export class LoginPageComponent implements OnInit {
   ) {
   }
 
-  get form() {return this.loginForm.controls; }
+  get form() {
+    return this.loginForm.controls;
+  }
 
   ngOnInit() {
-    this.as.currentUserObservable.subscribe((auth) => {
+    this.us.logInObservable.subscribe((auth) => {
       if (auth) {
-        this.router.navigate(['/']);
+        // TODO rewrite
+        this.router.navigate(['']);
       }
     });
     this.loginForm = this.formBuilder.group({
@@ -44,23 +48,26 @@ export class LoginPageComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]]
     });
   }
+
   emailLogin() {
     this.submitted = true;
     if (this.loginForm.invalid) {
       return;
     }
-    this.as.emailLogin(this.loginForm.value);
+    this.us.emailLogin(this.loginForm.value);
   }
+
   loginWithGoogle() {
-    this.as.googleLogin();
+    this.us.googleLogin();
   }
 
   resetPassword() {
     if (this.resetForm.invalid) {
       return;
     }
-    this.as.resetPassword(this.resetForm.value.email);
+    this.us.resetPassword(this.resetForm.value.email);
   }
+
   reset() {
     this.submitted = false;
     this.loginForm.reset();

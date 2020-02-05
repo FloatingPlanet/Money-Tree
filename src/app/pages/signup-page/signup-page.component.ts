@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/login/auth.service';
-import { FlashMessageService } from 'src/app/services/flashMessage/flash-message.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { MustMatch } from 'src/helpers/helpers';
+import {Component, OnInit} from '@angular/core';
+import {FlashMessageService} from 'src/app/services/flashMessage/flash-message.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {MustMatch} from 'src/helpers/helpers';
+import {UserService} from '../../services/user/user.service';
 
 @Component({
   selector: 'app-signup-page',
@@ -15,8 +15,9 @@ export class SignupPageComponent implements OnInit {
   submitted = false;
 
   signupForm: FormGroup;
+
   constructor(
-    private as: AuthService,
+    private us: UserService,
     private fs: FlashMessageService,
     private router: Router,
     private route: ActivatedRoute,
@@ -24,7 +25,9 @@ export class SignupPageComponent implements OnInit {
   ) {
   }
 
-  get form() {return this.signupForm.controls; }
+  get form() {
+    return this.signupForm.controls;
+  }
 
   ngOnInit() {
     this.signupForm = this.formBuilder.group({
@@ -35,22 +38,25 @@ export class SignupPageComponent implements OnInit {
     }, {
       validator: MustMatch('password', 'confirmPassword')
     });
-    this.as.currentUserObservable.subscribe((auth) => {
-    if (auth) {
-      this.router.navigate(['/']);
-    }
-  });
+    this.us.logInObservable.subscribe((auth) => {
+      if (auth) {
+        this.router.navigate(['/']);
+      }
+    });
   }
+
   signup() {
     this.submitted = true;
     if (this.signupForm.invalid) {
       return;
     }
-    this.as.emailSignUp(this.signupForm.value);
+    this.us.emailSignUp(this.signupForm.value);
   }
+
   signupWithGoogle() {
-    this.as.googleLogin();
+    this.us.googleLogin();
   }
+
   reset() {
     this.submitted = false;
     this.signupForm.reset();

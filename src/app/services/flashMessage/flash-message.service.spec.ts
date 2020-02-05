@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { FlashMessageService } from './flash-message.service';
+import {FlashMessageService} from './flash-message.service';
 
 describe('FlashMessageService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
