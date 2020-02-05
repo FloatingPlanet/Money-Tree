@@ -1,43 +1,47 @@
 <div class="card">
-    <header>
-        <div class="card-body">
-            <h5 class="card-title">Order Summary</h5>
-            <p class="card-text">Your Order Total</p>
-            <p class="card-text">{{totalItems}} item(s)</p>
-        </div>
-    </header>
-    <div>
-
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">Subtotal: {{subtotal}}</li>
-            <li class="list-group-item">Shipping: {{shipping}}</li>
-            <li class="list-group-item">Estimated Tax: {{estimatedTax}}</li>
-            <li class="list-group-item">Recycling fee: {{recyclingFee}}</li>
-            <li class="list-group-item">Your Total: {{total}}</li>
-        </ul>
+  <header>
+    <div class="card-body">
+      <h5 class="card-title">Order Summary</h5>
+      <p class="card-text">Your Order Total</p>
+      <p class="card-text">{{totalItems}} item(s)</p>
     </div>
-    <div class="card-body product">
-      <mat-card-content>
-        <div class="input-group mb-3">
-          <label for="coupon">
-            <input type="text" class="form-control" placeholder="Enter Coupon" oninput="this.value = this.value.toUpperCase()" [(ngModel)]="myInput" id="coupon" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary" type="button" [disabled]="!this.myInput" (click)="validateCoupon()">Apply</button>
-            </div>
-          </label>
-          <p>
-            {{this.getCoupon}}
-          </p>
-        </div>
-      </mat-card-content>
-        <mat-card-actions fxFlexAlign="end" align="end">
-            <span class="spacer"></span>
-            <button mat-button [routerLink]="['/checkout']">
-                <mat-icon aria-hidden="false" aria-label="proceed to checkout">payment
-                </mat-icon>
+  </header>
+  <div>
+
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Subtotal: {{this.subtotal}}</li>
+      <li class="list-group-item">Shipping: {{this.shipping}}</li>
+      <li class="list-group-item">Estimated Tax: {{this.estimatedTax}}</li>
+      <li class="list-group-item">Recycling fee: {{this.recyclingFee}}</li>
+      <li class="list-group-item">Your Total: {{this.total}}</li>
+    </ul>
+  </div>
+  <div class="card-body product">
+    <mat-card-content>
+      <div class="input-group mb-3">
+        <label for="coupon">
+          <input type="text" class="form-control" placeholder="Enter Coupon"
+                 oninput="this.value = this.value.toUpperCase()" [(ngModel)]="couponInput" id="coupon"
+                 aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" [disabled]="!this.couponInput"
+                    (click)="validateCoupon()">Apply
             </button>
-        </mat-card-actions>
-    </div>
-
-
+          </div>
+        </label>
+        <p>
+          {{this.getCoupon}}
+        </p>
+      </div>
+    </mat-card-content>
+    <mat-card-actions fxFlexAlign="end" align="end">
+      <span class="spacer"></span>
+      <ng-container *ngIf="router.url.includes('cart')">
+        <button mat-button>
+          <mat-icon aria-hidden="false" aria-label="proceed to checkout" [routerLink]="['/checkout']">payment
+          </mat-icon>
+        </button>
+      </ng-container>
+    </mat-card-actions>
+  </div>
 </div>

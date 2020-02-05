@@ -41,7 +41,6 @@ import {
   MatTableModule,
   MatSortModule,
   MatPaginatorModule,
-  MatBadgeModule,
 } from '@angular/material';
 
 // Our stuff ---- ❤❤❤
@@ -59,6 +58,7 @@ import {CheckoutPageComponent} from './pages/checkout-page/checkout-page.compone
 import {NoAccessComponent} from './pages/no-access/no-access.component';
 import {PageNotFoundComponent} from './pages/page-not-found/page-not-found.component';
 import {environment} from 'src/environments/environment';
+import {AuthService} from './services/login/auth.service';
 import {FlashMessageService} from './services/flashMessage/flash-message.service';
 import {ProductService} from './services/product/product.service';
 import {SignupPageComponent} from './pages/signup-page/signup-page.component';
@@ -69,15 +69,20 @@ import {AdminOrdersComponent} from './admin/admin-orders/admin-orders.component'
 import {AdminProductsComponent} from './admin/admin-products/admin-products.component';
 import {CategoryFormComponent} from './components/category-form/category-form.component';
 import {ModalModule} from 'ngx-bootstrap/modal';
-import {ProductFormComponent} from './components/product-form/product-form.component';
+import {ProductFormComponent} from './admin/product-form/product-form.component';
 import {ModifyProductComponent} from './components/modify-product/modify-product.component';
 import {CategoryService} from './services/category/category.service';
 import {ProductInfoComponent} from './components/product-info/product-info.component';
 import {CouponsService} from './services/coupons/coupons.service';
 import {FlexModule} from '@angular/flex-layout';
 import {AdminCouponsComponent} from './admin/admin-coupons/admin-coupons.component';
-import {CouponFormComponent} from './components/coupon-form/coupon-form.component';
+import {CouponFormComponent} from './admin/coupon-form/coupon-form.component';
 import {CartService} from './services/cart/cart.service';
+import {UserPageComponent} from './user/user-page/user-page.component';
+import {UserOrdersComponent} from './user/user-orders/user-orders.component';
+import {UserProfileComponent} from './user/user-profile/user-profile.component';
+import {MatBadgeModule} from '@angular/material/badge';
+import {CheckoutFormComponent} from './components/checkout-form/checkout-form.component';
 
 
 @NgModule({
@@ -104,6 +109,11 @@ import {CartService} from './services/cart/cart.service';
     ProductInfoComponent,
     AdminCouponsComponent,
     CouponFormComponent,
+    UserPageComponent,
+    UserOrdersComponent,
+    UserProfileComponent,
+    CheckoutPageComponent,
+    CheckoutFormComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -115,7 +125,6 @@ import {CartService} from './services/cart/cart.service';
     AppRoutingModule,
     AngularFireAuthModule,
     // material design stuff
-    BrowserModule,
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
@@ -153,10 +162,10 @@ import {CartService} from './services/cart/cart.service';
     ReactiveFormsModule,
     ModalModule.forRoot(),
     FlexModule,
-    MatBadgeModule,
+    MatBadgeModule
   ],
   providers: [
-    // AuthService,
+    AuthService,
     FlashMessageService,
     ProductService,
     CategoryService,
@@ -166,6 +175,5 @@ import {CartService} from './services/cart/cart.service';
   bootstrap: [AppComponent]
 })
 
-export class AppModule {
-}
+export class AppModule { }
 

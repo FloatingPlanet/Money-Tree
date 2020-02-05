@@ -19,16 +19,21 @@
             <span>Log in/Sign Up</span>
           </button>
         </span>
-        <ng-template #logoutBlock>
-              <!-- <a id="avatar-btn" class="nav-link"> -->
-          <img class="nav-avatar mr-1" width="20" height="20" [src]="info?.avatarURL" />
-          &nbsp;
-          <span>
+    <ng-template #logoutBlock>
+      <!-- <a id="avatar-btn" class="nav-link"> -->
+      <div [matMenuTriggerFor]="infoList">
+        <img class="nav-avatar mr-1" width="20" height="20" [src]="info?.avatarURL"/>
+        &nbsp;
+        <span>
             {{info?.displayName}}
           </span>
-          &nbsp;
-          <!-- </a> -->
-          <button mat-button (click)="logout()">Log Out</button>
-        </ng-template>
-    </mat-toolbar-row>
+      </div>
+      <mat-menu #infoList="matMenu">
+        <button [routerLink]="['user/profile']" mat-menu-item>Personal Profile</button>
+        <button [routerLink]="['user/orders']" mat-menu-item>Orders</button>
+      </mat-menu>
+      <!-- </a> -->
+      <button mat-button (click)="logout()">Log Out</button>
+    </ng-template>
+  </mat-toolbar-row>
 </mat-toolbar>

@@ -39,6 +39,7 @@ export class AuthService {
   // Returns
   get currentUserObservable(): any {
     return this.afAuth.authState;
+
   }
 
   // Returns current user UID

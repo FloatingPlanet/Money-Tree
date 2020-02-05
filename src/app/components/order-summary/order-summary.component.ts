@@ -1,15 +1,16 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges} from '@angular/core';
 import {Product} from 'src/app/models/product';
 import {ProductService} from 'src/app/services/product/product.service';
 import {Coupon} from '../../models/coupon';
 import {CouponsService} from '../../services/coupons/coupons.service';
+import {Routes, Router} from 'node_modules/@angular/router';
 
 @Component({
   selector: 'app-order-summary',
   templateUrl: './order-summary.component.html',
   styleUrls: ['./order-summary.component.scss']
 })
-export class OrderSummaryComponent implements OnInit {
+export class OrderSummaryComponent implements OnChanges {
   @Input() orders: Product[];
   private getCoupon: string;
   private currentDate = new Date();
@@ -22,14 +23,15 @@ export class OrderSummaryComponent implements OnInit {
   public estimatedTax = 0;
   public recyclingFee = 0;
   public total: number;
-  public myInput: string;
+  public couponInput: string;
   private coupon: Coupon;
   public totalItems: number;
-
-  constructor(private ps: ProductService, private cs: CouponsService) {
+  public validatedCoupon: Coupon;
+  constructor(private ps: ProductService, private cs: CouponsService, public router: Router
+  ) {
   }
 
-  ngOnInit() {
+  ngOnChanges() {
     this.calculateSummary(this.coupon);
   }
 
@@ -46,7 +48,7 @@ export class OrderSummaryComponent implements OnInit {
 
 
   validateCoupon() {
-    this.cs.validateCoupon(this.myInput).then((result) => {
+    this.cs.validateCoupon(this.couponInput).then((result) => {
       this.coupon = result as Coupon;
       // @ts-ignore
       if ((this.subtotal >= this.coupon.minimumSpend)
@@ -55,6 +57,7 @@ export class OrderSummaryComponent implements OnInit {
         && (this.coupon.amount > 0)) {
         this.calculateSummary(this.coupon);
         this.getCoupon = `${this.coupon.coupon} is applied`;
+        this.validatedCoupon = this.coupon;
       } else {
         if (this.subtotal < this.coupon.minimumSpend) {
           this.getCoupon = `You need to spend more than ${this.coupon.minimumSpend} to use coupon`;
