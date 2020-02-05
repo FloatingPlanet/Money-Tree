@@ -4,6 +4,11 @@
   <div class="col-10 col-sm-5 col-md-4 col-lg-4">
     <app-product-item *ngFor="let product of this.cart" [product]="product"></app-product-item>
   </div>
+  <div class="col-1 d-block d-sm-none">x
+
+  </div>
+  <div class="col-1 d-block  d-sm-none">x
+  </div>
   <div class="col-10 col-sm-5 col-md-4 col-lg-4">
     <app-order-summary [orders]="this.cart"></app-order-summary>
   </div>

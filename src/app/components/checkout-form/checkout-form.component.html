@@ -1,0 +1,122 @@
+<mat-vertical-stepper [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="saFormGroup">
+    <form [formGroup]="saFormGroup">
+      <ng-template matStepLabel>Shipping Address</ng-template>
+      <div formGroupName="customer">
+        <mat-form-field>
+          <input matInput placeholder="First name" formControlName="firstName" required>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Last name" formControlName="lastName" required>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input matInput placeholder="phone number" formControlName="phoneNumber" required>
+        </mat-form-field>
+        <br>
+      </div>
+      <div formGroupName="address">
+        <mat-form-field>
+          <input matInput placeholder="street 1" formControlName="street1" required>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input matInput placeholder="street 2" formControlName="street2">
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input matInput placeholder="city" formControlName="city" required>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input matInput placeholder="province" formControlName="province" required>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input matInput placeholder="postal code" formControlName="postalCode" required>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input matInput placeholder="country" formControlName="country" required>
+        </mat-form-field>
+      </div>
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="baFormGroup">
+    <ng-template matStepLabel>Billing Address</ng-template>
+    <mat-checkbox class="example-margin" [(ngModel)]="sameAddress" (click)="changeBAform()">My billing address is the
+      same as my shipping
+      address
+    </mat-checkbox>
+    <form *ngIf="!sameAddress" [formGroup]="baFormGroup">
+      <div formGroupName="customer">
+        <mat-form-field>
+          <input matInput placeholder="First name" formControlName="firstName" required>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Last name" formControlName="lastName" required>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input matInput placeholder="phone number" formControlName="phoneNumber" required>
+        </mat-form-field>
+        <br>
+      </div>
+      <div formGroupName="address">
+        <mat-form-field>
+          <input matInput placeholder="street 1" formControlName="street1" required>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input matInput placeholder="street 2" formControlName="street2">
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input matInput placeholder="city" formControlName="city" required>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input matInput placeholder="province" formControlName="province" required>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input matInput placeholder="postal code" formControlName="postalCode" required>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input matInput placeholder="country" formControlName="country" required>
+        </mat-form-field>
+      </div>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Payment</ng-template>
+    <form [formGroup]="ccFormGroup">
+      <mat-form-field>
+        <input matInput placeholder="First name" formControlName="firstName" required>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Last name" formControlName="lastName" required>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input matInput placeholder="Card Number" formControlName="cardNumber" required>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input matInput placeholder="Expire Date" formControlName="expireDate" required>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="CVV" formControlName="cvv" required>
+      </mat-form-field>
+    </form>
+  </mat-step>
+</mat-vertical-stepper>
