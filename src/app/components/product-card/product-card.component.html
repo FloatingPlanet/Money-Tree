@@ -3,7 +3,7 @@
     <div class="img-wrapper" (mouseenter)="this.buttonShow =!this.buttonShow"  (mouseleave) ="this.buttonShow = !this.buttonShow">
       <img mat-card-image class="img-responsive"  src="{{product.productImageUrls[0]}}" alt="productImg">
       <div class="img-overlay">
-        <button *ngIf="this.buttonShow" class="btn btn-md btn-success">Details</button>
+        <button *ngIf="this.buttonShow" class="btn btn-sm btn-secondary btn-block">Details</button>
       </div>
     </div>
     <mat-card-title class="title">{{product.productName}}</mat-card-title>
