@@ -13,6 +13,7 @@ import {User} from '../../models/user';
 export class ProductCardComponent implements OnInit {
   public like = false;
   private user: User;
+  public buttonShow : boolean = false;
   @Input() product: Product;
   @Output() productToBeAdded = new EventEmitter<Product>();
 
@@ -26,6 +27,4 @@ export class ProductCardComponent implements OnInit {
   public addToCart(product: Product) {
     this.productToBeAdded.emit(product);
   }
-
-
 }
