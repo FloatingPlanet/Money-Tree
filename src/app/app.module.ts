@@ -83,6 +83,7 @@ import {UserOrdersComponent} from './user/user-orders/user-orders.component';
 import {UserProfileComponent} from './user/user-profile/user-profile.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import {CheckoutFormComponent} from './forms/checkout-form/checkout-form.component';
+import { ProductQuickLookComponent } from './components/product-quick-look/product-quick-look.component';
 
 
 @NgModule({
@@ -114,6 +115,7 @@ import {CheckoutFormComponent} from './forms/checkout-form/checkout-form.compone
     UserProfileComponent,
     CheckoutPageComponent,
     CheckoutFormComponent,
+    ProductQuickLookComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
