@@ -15,7 +15,7 @@ export class MainPageComponent implements OnInit {
   public products: Product[] = [];
   private user: User;
 
-  constructor(private ps: ProductService,
+  constructor(public ps: ProductService,
               private us: UserService,
               private cs: CartService,
   ) {

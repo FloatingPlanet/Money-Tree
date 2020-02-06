@@ -21,7 +21,7 @@ export class UserProfileComponent implements OnInit {
     this.saFormGroup = this.addressFormBuilder();
   }
 
-  private addAddress() {
+  public addAddress() {
 
   }
 

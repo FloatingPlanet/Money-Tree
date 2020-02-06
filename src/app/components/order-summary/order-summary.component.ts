@@ -12,8 +12,8 @@ import {Routes, Router} from 'node_modules/@angular/router';
 })
 export class OrderSummaryComponent implements OnChanges {
   @Input() orders: Product[];
-  private getCoupon: string;
-  private currentDate = new Date();
+  public getCoupon: string;
+  public currentDate = new Date();
   // rate
   public taxRate = 0.12;
   public recycleRate = 0;
