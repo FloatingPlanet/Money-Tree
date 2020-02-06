@@ -1,9 +1,13 @@
-<mat-card class="product" >
-  <mat-card-content >
-    <div class="img-wrapper" (mouseenter)="this.buttonShow =!this.buttonShow"  (mouseleave) ="this.buttonShow = !this.buttonShow">
-      <img mat-card-image class="img-responsive"  src="{{product.productImageUrls[0]}}" alt="productImg">
+<mat-card class="product">
+  <mat-card-content>
+    <div class="img-wrapper" (mouseenter)="this.buttonShow =!this.buttonShow"
+         (mouseleave)="this.buttonShow = !this.buttonShow">
+      <img mat-card-image class="img-responsive" src="{{product.productImageUrls[0]}}" alt="productImg">
       <div class="img-overlay">
-        <button *ngIf="this.buttonShow" class="btn btn-sm btn-secondary btn-block">Details</button>
+        <button *ngIf="this.buttonShow" type="button" class="btn btn-sm btn-secondary btn-block"
+                data-toggle="modal" data-target="#quickLook">
+          Quick Look
+        </button>
       </div>
     </div>
     <mat-card-title class="title">{{product.productName}}</mat-card-title>
@@ -25,60 +29,14 @@
     </button>
   </mat-card-actions>
 </mat-card>
-<!--<div class="row">-->
-<!--  <div class="col-md-4">-->
-<!--    &lt;!&ndash;Card&ndash;&gt;-->
-<!--    <mdb-card cascade="true" wider="true">-->
 
-<!--      &lt;!&ndash;Card image&ndash;&gt;-->
-<!--      <div class="view view-cascade overlay waves-light" mdbWavesEffect>-->
-<!--        <mdb-card-img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/shoes%20(3).jpg" alt=""></mdb-card-img>-->
-<!--        <a>-->
-<!--          <div class="mask rgba-white-slight"></div>-->
-<!--        </a>-->
-<!--      </div>-->
-<!--      &lt;!&ndash;/.Card image&ndash;&gt;-->
 
-<!--      &lt;!&ndash;Card content&ndash;&gt;-->
-<!--      <mdb-card-body cascade="true" class="text-center">-->
-<!--        &lt;!&ndash;Category & Title&ndash;&gt;-->
-<!--        <h5>Shoes</h5>-->
-<!--        <mdb-card-title>-->
-<!--          <h4 class="card-title"><strong><a href="">Product name</a></strong></h4>-->
-<!--        </mdb-card-title>-->
-
-<!--        &lt;!&ndash;Rating&ndash;&gt;-->
-<!--        <ul class="rating">-->
-<!--          <li><mdb-icon fas icon="star"></mdb-icon></li>-->
-<!--          <li><mdb-icon fas icon="star"></mdb-icon></li>-->
-<!--          <li><mdb-icon fas icon="star"></mdb-icon></li>-->
-<!--          <li><mdb-icon fas icon="star"></mdb-icon></li>-->
-<!--          <li><mdb-icon fas icon="star"></mdb-icon></li>-->
-<!--        </ul>-->
-
-<!--        &lt;!&ndash;Description&ndash;&gt;-->
-<!--        <mdb-card-text class="card-text">Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus-->
-<!--          saepe eveniet-->
-<!--          ut et voluptates.-->
-<!--        </mdb-card-text>-->
-
-<!--        <hr>-->
-
-<!--        &lt;!&ndash;Card footer&ndash;&gt;-->
-<!--        <mdb-card-footer class="p-0">-->
-<!--          <div class="clearfix"><span class="float-left">49$</span>-->
-<!--            <span class="float-right">-->
-<!--              <a data-toggle="tooltip" data-placement="top" title="Add to Cart"><mdb-icon fas icon="shopping-cart" class="mr-3"></mdb-icon></a>-->
-<!--              <a data-toggle="tooltip" data-placement="top" title="Share"><mdb-icon fas icon="share-alt" class="mr-3"></mdb-icon></a>-->
-<!--              <a class="active" data-toggle="tooltip" data-placement="top" title="Added to Wishlist"><mdb-icon fas icon="heart"></mdb-icon></a>-->
-<!--            </span>-->
-<!--          </div>-->
-<!--        </mdb-card-footer>-->
-
-<!--      </mdb-card-body>-->
-<!--      &lt;!&ndash;/.Card content&ndash;&gt;-->
-
-<!--    </mdb-card>-->
-<!--    &lt;!&ndash;/.Card&ndash;&gt;-->
-<!--  </div>-->
-<!--</div>-->
+<div id="quickLook" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+     aria-labelledby="myLargeModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <app-product-item [product]="product"></app-product-item>
+    </div>
+  </div>
+</div>
