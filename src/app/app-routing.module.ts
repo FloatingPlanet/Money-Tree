@@ -12,7 +12,7 @@ import { AdminProductsComponent } from './admin/admin-products/admin-products.co
 import { ModifyProductComponent } from './components/modify-product/modify-product.component';
 import {ProductInfoComponent} from './components/product-info/product-info.component';
 import {AdminCouponsComponent} from './admin/admin-coupons/admin-coupons.component';
-import {CouponFormComponent} from './admin/coupon-form/coupon-form.component';
+import {CouponFormComponent} from './forms/coupon-form/coupon-form.component';
 import {UserPageComponent} from './user/user-page/user-page.component';
 import {UserOrdersComponent} from './user/user-orders/user-orders.component';
 import {UserProfileComponent} from './user/user-profile/user-profile.component';
