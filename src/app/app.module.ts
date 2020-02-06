@@ -84,7 +84,6 @@ import {UserProfileComponent} from './user/user-profile/user-profile.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import {CheckoutFormComponent} from './forms/checkout-form/checkout-form.component';
 import {ProductQuickLookComponent} from './components/product-quick-look/product-quick-look.component';
-import {GooglePlaceModule} from 'ngx-google-places-autocomplete';
 
 @NgModule({
   declarations: [
@@ -165,7 +164,6 @@ import {GooglePlaceModule} from 'ngx-google-places-autocomplete';
     ModalModule.forRoot(),
     FlexModule,
     MatBadgeModule,
-    GooglePlaceModule,
   ],
   providers: [
     AuthService,
