@@ -32,7 +32,7 @@ export class CategoryService {
     this.Categories.doc(C.category.toUpperCase().replace(/\s/g, ''))
       .set(C)
       .then((res) => {
-        console.log('add Category: ' + res);
+        console.log('add Category: ' + C.category);
       }).catch(error => {
       console.error(error);
     });
