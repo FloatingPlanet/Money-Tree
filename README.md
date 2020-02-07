@@ -33,6 +33,7 @@
 9. ~~Logged in user are allowed to browse their orders~~
 10. Add image while user adding new product
 11. index page
+12. product can only be assigned to one primary/secondary category (admin)
 
 ##### CTO: [Otto hu](https://github.com/aWildOtto)
 ##### CEO: [Jiaran Yu](https://github.com/jiaranyu)
