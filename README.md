@@ -34,6 +34,7 @@
 10. Add image while user adding new product
 11. index page
 12. product can only be assigned to one primary/secondary category (admin)
+13. Fix bug in category form caused by primary SKU 
 
 ##### CTO: [Otto hu](https://github.com/aWildOtto)
 ##### CEO: [Jiaran Yu](https://github.com/jiaranyu)
