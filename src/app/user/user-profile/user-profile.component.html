@@ -1,37 +1,11 @@
 <div class="col-sm-5">
-<h4>My Address</h4>
-  <button mat-stroked-button color="primary" (click)="addAddress()">Add</button>
-<mat-list>
-  <mat-list-item>Item 1</mat-list-item>
-  <button mat-stroked-button color="primary">Edit</button>
-  <button mat-stroked-button color="warn">Delete</button>
-  <mat-divider></mat-divider>
-  <mat-list-item>Item 2</mat-list-item>
-  <button mat-stroked-button color="primary">Edit</button>
-  <button mat-stroked-button color="warn">Delete</button>
-  <mat-divider></mat-divider>
-  <mat-list-item>Item 3</mat-list-item>
-  <button mat-stroked-button color="primary">Edit</button>
-  <button mat-stroked-button color="warn">Delete</button>
-</mat-list>
-</div>
-
-<!-- Button trigger modal -->
-<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button>
-
-<ng-template #content let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form [formGroup]="saFormGroup">
-      <ng-template matStepLabel>Shipping Address</ng-template>
+  <h4>My Address</h4>
+  <button mat-stroked-button id="add" data-toggle="collapse" href="#panel" color="primary">Add</button>
+  <div id="panel" class="collapse">
+    <form [formGroup]="saFormGroup" (ngSubmit)="onSubmit(saFormGroup); " >
       <div formGroupName="customer">
         <mat-form-field>
-          <input matInput placeholder="First name" formControlName="firstName" required>
+          <input id="firstName" matInput placeholder="First name" formControlName="firstName" required>
         </mat-form-field>
         <mat-form-field>
           <input matInput placeholder="Last name" formControlName="lastName" required>
@@ -44,33 +18,46 @@
       </div>
       <div formGroupName="address">
         <mat-form-field>
-          <input matInput placeholder="street 1" formControlName="street1" required>
+          <input id="street1" matInput placeholder="street 1" formControlName="street1" required>
         </mat-form-field>
         <br>
         <mat-form-field>
-          <input matInput placeholder="street 2" formControlName="street2">
+          <input id="street2" matInput placeholder="street 2" formControlName="street2">
         </mat-form-field>
         <br>
         <mat-form-field>
-          <input matInput placeholder="city" formControlName="city" required>
+          <input id="city" matInput placeholder="city" formControlName="city" required>
         </mat-form-field>
         <br>
         <mat-form-field>
-          <input matInput placeholder="province" formControlName="province" required>
+          <input id="province" matInput placeholder="province" formControlName="province" required>
         </mat-form-field>
         <br>
         <mat-form-field>
-          <input matInput placeholder="postal code" formControlName="postalCode" required>
+          <input id="postalCode" matInput placeholder="postal code" formControlName="postalCode" required>
         </mat-form-field>
         <br>
         <mat-form-field>
-          <input matInput placeholder="country" formControlName="country" required>
+          <input id="country" matInput placeholder="country" formControlName="country" required>
         </mat-form-field>
       </div>
-
+      <button mat-stroked-button data-toggle="collapse" href="#panel" color="primary" type="submit">Submit</button>
     </form>
   </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
-  </div>
-</ng-template>
+
+  <mat-list>
+    <div *ngFor="let address of addressList">
+        <p>{{address.customer.firstName + ' ' + address.customer.lastName}}</p>
+        <p>{{address.customer.phoneNumber}}</p>
+        <p>{{address.address.street1}}</p>
+        <p>{{address.address.street2}}</p>
+        <p>{{address.address.city + ', '+ address.address.province+', '+address.address.country}}</p>
+        <p>{{address.address.postalCode}}</p>
+      <button mat-stroked-button color="primary">Edit</button>
+      <button mat-stroked-button color="warn">Delete</button>
+      <mat-divider></mat-divider>
+    </div>
+  </mat-list>
+</div>
+
+

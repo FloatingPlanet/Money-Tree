@@ -1,4 +1,5 @@
 export class AddressInfo {
+  addressId: string;
   customer: {
     firstName: string;
     lastName: string;

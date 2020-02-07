@@ -4,7 +4,6 @@ import {OrderSummaryComponent} from '../../components/order-summary/order-summar
 import {Product} from '../../models/product';
 import {UserService} from '../../services/user/user.service';
 import {User} from '../../models/user';
-import {AuthService} from '../../services/login/auth.service';
 import {CartService} from '../../services/cart/cart.service';
 import {FormGroup} from '@angular/forms';
 import {OrderService} from '../../services/order/order.service';
@@ -22,8 +21,8 @@ export class CheckoutPageComponent implements AfterViewChecked {
   public baFormGroup: FormGroup;
   public ccFormGroup: FormGroup;
 
-  constructor(private us: UserService, private as: AuthService, private cs: CartService, private os: OrderService) {
-    this.as.currentUserObservable.subscribe((auth) => {
+  constructor(private us: UserService,  private cs: CartService, private os: OrderService) {
+    this.us.logInObservable.subscribe((auth) => {
       if (auth) {
         this.us.getCurrentUser().then((res) => {
           const user = res as User;
