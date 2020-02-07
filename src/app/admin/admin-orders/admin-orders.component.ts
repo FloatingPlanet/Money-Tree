@@ -35,6 +35,8 @@ export class AdminOrdersComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.orderObservable$.unsubscribe();
+    if (this.orderObservable$) {
+      this.orderObservable$.unsubscribe();
+    }
   }
 }

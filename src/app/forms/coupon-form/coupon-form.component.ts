@@ -85,6 +85,8 @@ export class CouponFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.couponsObservable$.unsubscribe();
+    if (this.couponsObservable$) {
+      this.couponsObservable$.unsubscribe();
+    }
   }
 }

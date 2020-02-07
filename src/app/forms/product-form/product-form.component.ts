@@ -17,7 +17,6 @@ export class ProductFormComponent implements OnInit {
   @Output() public pLoaded = new EventEmitter<boolean>();
 
   public SKU: string;
-  public subscription: Subscription;
   public productForm: FormGroup;
   public product: Product;
 
@@ -48,9 +47,6 @@ export class ProductFormComponent implements OnInit {
     }
   }
 
-  ngOnDestory() {
-    this.subscription.unsubscribe();
-  }
 
   ngOnInit() {
   }
@@ -78,4 +74,6 @@ export class ProductFormComponent implements OnInit {
       productSeller: null,
     });
   }
+
+
 }

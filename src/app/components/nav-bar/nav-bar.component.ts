@@ -23,7 +23,7 @@ export class NavBarComponent implements OnInit, OnChanges, OnDestroy {
     // TODO user logout and login data is not consistent, and shopping cart has same shit
     this.logInObservable$ = this.us.logInObservable.subscribe((auth) => {
       if (auth) {
-        this.us.userOberservalbe.subscribe((res: User) => {
+        this.us.userObservable.subscribe((res: User) => {
           console.log('nav cart updated');
           this.itemInCart = res.cart ? res.cart.length : null;
         });
@@ -42,7 +42,9 @@ export class NavBarComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.logInObservable$.unsubscribe();
+    if (this.logInObservable$) {
+      this.logInObservable$.unsubscribe();
+    }
   }
 
 }

@@ -30,7 +30,7 @@ export class UserProfileComponent implements OnInit {
 
     this.us.logInObservable.subscribe((auth) => {
       if (auth) {
-        this.us.userOberservalbe.subscribe((res: User) => {
+        this.us.userObservable.subscribe((res: User) => {
           const user = res as User;
           this.addressList = user.shippingInfo;
         });

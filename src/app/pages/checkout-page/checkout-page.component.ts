@@ -27,7 +27,7 @@ export class CheckoutPageComponent implements AfterViewChecked, OnDestroy {
   constructor(private us: UserService, private cs: CartService, private os: OrderService) {
     this.logInObservable$ = this.us.logInObservable.subscribe((auth) => {
       if (auth) {
-        this.userObservable$ = this.us.userOberservalbe.subscribe((res) => {
+        this.userObservable$ = this.us.userObservable.subscribe((res) => {
           const user = res as User;
           this.orders = user.cart;
         });
@@ -65,7 +65,11 @@ export class CheckoutPageComponent implements AfterViewChecked, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.logInObservable$.unsubscribe();
-    this.userObservable$.unsubscribe();
+    if (this.logInObservable$) {
+      this.logInObservable$.unsubscribe();
+    }
+    if (this.userObservable$) {
+      this.userObservable$.unsubscribe();
+    }
   }
 }

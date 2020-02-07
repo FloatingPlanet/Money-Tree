@@ -8,6 +8,8 @@ import {User as FirebaseUser, UserCredential} from '@firebase/auth-types';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {FlashMessageService} from '../flashMessage/flash-message.service';
 import {Router} from '@angular/router';
+import {from, merge} from 'rxjs';
+import {map, mergeMap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -27,10 +29,17 @@ export class UserService {
     });
   }
 
-  get userOberservalbe() {
+  get userObservable() {
     if (this.currentUserId) {
       return this.Users.doc(this.currentUserId).valueChanges();
     }
+  }
+
+  // TODO merge two observable
+  get userDataObservable() {
+    return this.logInObservable.pipe(
+      mergeMap(auth => this.userObservable.pipe(map(user => (user)))
+      ));
   }
 
   public getCurrentUser() {

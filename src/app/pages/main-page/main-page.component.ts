@@ -14,6 +14,7 @@ import {Subscription} from 'rxjs';
 export class MainPageComponent implements OnInit, OnDestroy {
   public products: Product[] = [];
   public user: User;
+  private logInObservable$: Subscription;
   private userObservable$: Subscription;
 
   constructor(public ps: ProductService,
@@ -23,8 +24,14 @@ export class MainPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.userObservable$ = this.us.userOberservalbe.subscribe((user: User) => {
-      this.user = user as User;
+    this.logInObservable$ = this.us.logInObservable.subscribe((auth) => {
+      if (auth) {
+        this.userObservable$ = this.us.userObservable.subscribe((res: User) => {
+          this.user = res ? res : null;
+        });
+      } else {
+        this.user = null;
+      }
     });
   }
 
@@ -34,6 +41,11 @@ export class MainPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.userObservable$.unsubscribe();
+    if (this.logInObservable$) {
+      this.logInObservable$.unsubscribe();
+    }
+    if (this.userObservable$) {
+      this.userObservable$.unsubscribe();
+    }
   }
 }

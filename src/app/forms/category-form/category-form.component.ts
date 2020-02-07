@@ -47,6 +47,9 @@ export class CategoryFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.categoriesObservable$.unsubscribe();
+    if (this.categoriesObservable$) {
+      this.categoriesObservable$.unsubscribe();
+
+    }
   }
 }
