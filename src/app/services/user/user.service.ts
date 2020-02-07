@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
 import {User} from '../../models/user';
+import {AddressInfo} from '../../models/addressInfo';
 import {Product} from '../../models/product';
 import * as firebase from 'firebase';
 import {User as FirebaseUser, UserCredential} from '@firebase/auth-types';
@@ -220,5 +221,23 @@ export class UserService {
     }, {merge: true});
   }
 
+
+  public addAddress(address: AddressInfo) {
+    return new Promise((res, rej) => {
+      this.logInObservable.subscribe((auth) => {
+        if (auth) {
+          this.Users.doc(auth.uid).update({
+            shippingInfo: firebase.firestore.FieldValue.arrayUnion(address)
+          }).catch(r => {
+            console.error(r);
+            rej(`cannot add address`);
+          });
+          res('added address succeeded');
+        } else {
+          rej('user is logged out');
+        }
+      });
+    });
+  }
 }
 
