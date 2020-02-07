@@ -1,1 +1,7 @@
 <p>no-access works!</p>
+<label>
+  address:<input  (input)="findAddress($event)" >
+</label>
+<div>
+  <p *ngFor="let addr of this.addresses">address:{{addr.Text}} </p>
+</div>

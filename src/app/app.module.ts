@@ -81,6 +81,7 @@ import {UserProfileComponent} from './user/user-profile/user-profile.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import {CheckoutFormComponent} from './forms/checkout-form/checkout-form.component';
 import {ProductQuickLookComponent} from './components/product-quick-look/product-quick-look.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -160,6 +161,7 @@ import {ProductQuickLookComponent} from './components/product-quick-look/product
     ModalModule.forRoot(),
     FlexModule,
     MatBadgeModule,
+    HttpClientModule,
   ],
   providers: [
     FlashMessageService,

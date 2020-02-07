@@ -49,6 +49,7 @@ const routes: Routes = [
     ]
   },
   {path: 'checkout', component: CheckoutPageComponent},
+  {path: 'address', component: NoAccessComponent},
   {path: '**', component: PageNotFoundComponent},
 ];
 
