@@ -7,11 +7,11 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./checkout-form.component.scss']
 })
 export class CheckoutFormComponent implements OnInit {
-  isLinear = true;
-  saFormGroup: FormGroup;
-  baFormGroup: FormGroup;
-  ccFormGroup: FormGroup;
-  sameAddress = true;
+  public isLinear = true;
+  public saFormGroup: FormGroup;
+  public baFormGroup: FormGroup;
+  public ccFormGroup: FormGroup;
+  public sameAddress = true;
   proceedToPlaceOrder: boolean;
 
   constructor(private formBuilder: FormBuilder) {

@@ -1,8 +1,7 @@
-import {AfterContentInit, AfterViewChecked, AfterViewInit, Component, OnChanges, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {UserService} from './services/user/user.service';
 import {CartService} from './services/cart/cart.service';
 import {NavBarComponent} from './components/nav-bar/nav-bar.component';
-import {User} from './models/user';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +23,7 @@ export class AppComponent implements OnInit {
     this.us.logInObservable.subscribe((auth) => {
       if (auth && this.cs.getLocalCart().length > 0) {
         this.cs.getLocalCart().forEach(product => {
-          this.us.addProduct(product).then((res) => {
+          this.us.addProduct(product).then(() => {
           }).catch((err) => {
             console.error(err);
           });

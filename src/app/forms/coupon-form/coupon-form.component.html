@@ -7,7 +7,7 @@
           <input matInput type="text" formControlName="coupon"
                  required placeholder="coupon" [readonly]="this.notEditable"
                  oninput="this.value = this.value.toUpperCase(); ">
-          <mat-error  *ngIf="this.couponForm['controls']
+          <mat-error *ngIf="this.couponForm['controls']
   .coupon.hasError('existCoupon')">
             *this coupon already exists
           </mat-error>

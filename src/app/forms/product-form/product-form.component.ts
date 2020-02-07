@@ -17,8 +17,8 @@ export class ProductFormComponent implements OnInit {
   @Output() public onFormModified: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
   @Output() public pLoaded = new EventEmitter<boolean>();
 
-  private SKU: string;
-  private subscription: Subscription;
+  public  SKU: string;
+  public  subscription: Subscription;
   public productForm: FormGroup;
   public product: Product;
 

@@ -1,7 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Product} from 'src/app/models/product';
-import {CartService} from '../../services/cart/cart.service';
-import {UserService} from '../../services/user/user.service';
 import {User} from '../../models/user';
 
 @Component({
@@ -12,12 +10,12 @@ import {User} from '../../models/user';
 
 export class ProductCardComponent implements OnInit {
   public like = false;
-  private user: User;
-  public buttonShow : boolean = false;
+  public  user: User;
+  public buttonShow = false;
   @Input() product: Product;
   @Output() productToBeAdded = new EventEmitter<Product>();
 
-  constructor(private us: UserService) {
+  constructor() {
 
   }
 

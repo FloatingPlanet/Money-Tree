@@ -1,10 +1,8 @@
-import {FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule, FormBuilder} from '@angular/forms';
+import {FormGroup, Validators, FormBuilder} from '@angular/forms';
 import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {FlashMessageService} from '../../services/flashMessage/flash-message.service';
-import {User} from '../../models/user';
 import {LocalstorageService} from '../../services/localStorage/localstorage.service';
-import {Product} from '../../models/product';
 import {UserService} from '../../services/user/user.service';
 
 
@@ -15,7 +13,6 @@ import {UserService} from '../../services/user/user.service';
 })
 export class LoginPageComponent implements OnInit {
   public submitted = false;
-  private cartProduct: Product[];
   public loginForm: FormGroup;
   public resetForm: FormGroup;
 
@@ -25,7 +22,6 @@ export class LoginPageComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private ls: LocalstorageService
   ) {
   }
 

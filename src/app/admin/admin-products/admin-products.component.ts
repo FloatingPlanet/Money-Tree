@@ -13,11 +13,11 @@ import * as moment from 'moment';
 export class AdminProductsComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  products: Product[];
-  dataSource = new MatTableDataSource<Product>([]);
-  m = moment;
-  cols: string[] = ['select', 'SKU', 'productName', 'productPrice', 'productQuantity', 'productCategory', 'productAddedAt', 'edit'];
-  selection = new SelectionModel<Product>(true, []);
+  public products: Product[];
+  public dataSource = new MatTableDataSource<Product>([]);
+  public m = moment;
+  public cols: string[] = ['select', 'SKU', 'productName', 'productPrice', 'productQuantity', 'productCategory', 'productAddedAt', 'edit'];
+  public selection = new SelectionModel<Product>(true, []);
 
   constructor(private ps: ProductService, ) {
     this.ps.productsObservable.subscribe((res) => {

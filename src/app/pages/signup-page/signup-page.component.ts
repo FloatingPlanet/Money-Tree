@@ -12,9 +12,9 @@ import {UserService} from '../../services/user/user.service';
 })
 export class SignupPageComponent implements OnInit {
 
-  submitted = false;
+  public submitted = false;
 
-  signupForm: FormGroup;
+  public signupForm: FormGroup;
 
   constructor(
     private us: UserService,

@@ -4,7 +4,9 @@
     <h1 class="text-center">LOG IN</h1>
     <form (ngSubmit)="emailLogin()" [formGroup]="loginForm">
       <mat-form-field class="w-100">
-        <input formControlName="email" matInput placeholder="Email" required type="email"/>
+        <label>
+          <input formControlName="email" matInput placeholder="Email" required type="email"/>
+        </label>
       </mat-form-field>
       <div *ngIf="submitted && form.email.errors" class="invalid-feedback">
         <div *ngIf="form.email.errors.required">Login email is required</div>
@@ -12,7 +14,9 @@
       </div>
 
       <mat-form-field class="w-100">
-        <input formControlName="password" matInput placeholder="Password" required type="password"/>
+        <label>
+          <input formControlName="password" matInput placeholder="Password" required type="password"/>
+        </label>
       </mat-form-field>
       <div *ngIf="submitted && form.password.errors" class="invalid-feedback">
         <div *ngIf="form.password.errors.required">Password is required</div>
@@ -25,7 +29,9 @@
     <form (ngSubmit)="resetPassword()" [formGroup]="resetForm" class="mt-5">
       <label class="w-100" for="resetEmail">Forgot password?</label>
       <mat-form-field>
-        <input formControlName="email" matInput name="resetEmail" placeholder="Email" required type="email"/>
+        <label>
+          <input formControlName="email" matInput name="resetEmail" placeholder="Email" required type="email"/>
+        </label>
       </mat-form-field>
       <button mat-button type="submit">Reset password</button>
     </form>

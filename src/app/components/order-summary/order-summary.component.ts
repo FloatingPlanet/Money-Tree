@@ -3,7 +3,7 @@ import {Product} from 'src/app/models/product';
 import {ProductService} from 'src/app/services/product/product.service';
 import {Coupon} from '../../models/coupon';
 import {CouponsService} from '../../services/coupons/coupons.service';
-import {Routes, Router} from 'node_modules/@angular/router';
+import {Router} from 'node_modules/@angular/router';
 
 @Component({
   selector: 'app-order-summary',
@@ -24,7 +24,7 @@ export class OrderSummaryComponent implements OnChanges {
   public recyclingFee = 0;
   public total: number;
   public couponInput: string;
-  private coupon: Coupon;
+  public  coupon: Coupon;
   public totalItems: number;
   public validatedCoupon: Coupon;
   constructor(private ps: ProductService, private cs: CouponsService, public router: Router

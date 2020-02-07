@@ -12,12 +12,12 @@ import * as moment from 'moment';
 export class AdminOrdersComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-  orders: Order[];
-  dataSource = new MatTableDataSource<Order>([]);
-  cols: string[] = ['orderNumber', 'orderStatus', 'uid', 'coupon', 'purchaseDate', 'viewDetails'];
-  m = moment;
+  public orders: Order[];
+  public dataSource = new MatTableDataSource<Order>([]);
+  public cols: string[] = ['orderNumber', 'orderStatus', 'uid', 'coupon', 'purchaseDate', 'viewDetails'];
+  public m = moment;
 
-  constructor(private os: OrderService,) {
+  constructor(private os: OrderService) {
     this.os.ordersObservable.subscribe((res) => {
       this.orders = res;
       this.dataSource = new MatTableDataSource<Order>(this.orders);

@@ -14,11 +14,11 @@ import {CouponsService} from '../../services/coupons/coupons.service';
 export class AdminCouponsComponent implements OnInit {
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  coupons: Coupon[];
-  dataSource = new MatTableDataSource<Coupon>([]);
-  m = moment;
-  cols: string[] = ['select', 'coupon', 'discount', 'from', 'to', 'freeShipping', 'minimumSpend', 'amount', 'addedAt', 'edit'];
-  selection = new SelectionModel<Coupon>(true, []);
+  public coupons: Coupon[];
+  public dataSource = new MatTableDataSource<Coupon>([]);
+  public m = moment;
+  public cols: string[] = ['select', 'coupon', 'discount', 'from', 'to', 'freeShipping', 'minimumSpend', 'amount', 'addedAt', 'edit'];
+  public selection = new SelectionModel<Coupon>(true, []);
 
   constructor(private cs: CouponsService) {
     this.cs.couponsObservable.subscribe((res: Coupon[]) => {
@@ -57,7 +57,7 @@ export class AdminCouponsComponent implements OnInit {
 
   deleteCoupons() {
     this.selection.selected.forEach(element => {
-      this.cs.deleteCoupons(element.coupon).then(res => {
+      this.cs.deleteCoupons(element.coupon).then(() => {
         }
       );
     });

@@ -8,7 +8,6 @@ import {AngularFireStorageModule} from '@angular/fire/storage';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ToastrModule} from 'ngx-toastr';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {} from 'bootstrap-material-design';
 
 import {
   MatCheckboxModule,
@@ -48,7 +47,6 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MainPageComponent} from './pages/main-page/main-page.component';
-import {ProfileComponent} from './pages/profile/profile.component';
 
 import {ProductCardComponent} from './components/product-card/product-card.component';
 import {NavBarComponent} from './components/nav-bar/nav-bar.component';
@@ -88,7 +86,6 @@ import {ProductQuickLookComponent} from './components/product-quick-look/product
   declarations: [
     AppComponent,
     MainPageComponent,
-    ProfileComponent,
     ProductCardComponent,
     NavBarComponent,
     LoginPageComponent,

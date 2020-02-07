@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators, FormGroup, ValidatorFn, AbstractControl} from '@angular/forms';
 import {CouponsService} from 'src/app/services/coupons/coupons.service';
 import {Coupon} from '../../models/coupon';
@@ -10,13 +10,12 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./coupon-form.component.scss']
 })
 export class CouponFormComponent implements OnInit {
-  // tslint:disable-next-line:no-output-on-prefix
   public couponForm: FormGroup;
-  private couponName: string;
-  private coupon: Coupon;
+  public couponName: string;
+  public coupon: Coupon;
   public notEditable = false;
-  private allCoupons: Coupon[];
-  private editCoupon = false;
+  public allCoupons: Coupon[];
+  public editCoupon = false;
 
   constructor(private formBuilder: FormBuilder, private cs: CouponsService, private route: ActivatedRoute, private router: Router) {
 
@@ -58,10 +57,10 @@ export class CouponFormComponent implements OnInit {
   private existCoupon(): ValidatorFn {
     // tslint:disable-next-line:triple-equals
 
-      return (control: AbstractControl): { [key: string]: any } | null => {
+    return (control: AbstractControl): { [key: string]: any } | null => {
 
-        const exist = this.allCoupons.some(x => x.coupon === control.value);
-        if (!this.editCoupon) {
+      const exist = this.allCoupons.some(x => x.coupon === control.value);
+      if (!this.editCoupon) {
         return exist ? {existCoupon: {value: control.value}} : null;
       }
     };

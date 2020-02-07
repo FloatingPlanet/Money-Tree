@@ -12,7 +12,6 @@ import {User} from '../../models/user';
 })
 export class ShoppingCartComponent implements OnInit {
   public cart: Product[];
-  private dummy: Product[];
 
   constructor(private ps: ProductService,
               private us: UserService,

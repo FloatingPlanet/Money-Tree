@@ -1,10 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ProductService} from 'src/app/services/product/product.service';
 import {User} from '../../models/user';
 import {UserService} from '../../services/user/user.service';
 import {Product} from '../../models/product';
 import {CartService} from '../../services/cart/cart.service';
-import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-main-page',
@@ -13,7 +12,7 @@ import {Observable} from 'rxjs';
 })
 export class MainPageComponent implements OnInit {
   public products: Product[] = [];
-  private user: User;
+  public  user: User;
 
   constructor(public ps: ProductService,
               private us: UserService,

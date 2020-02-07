@@ -2,11 +2,9 @@ import {Injectable} from '@angular/core';
 import {
   AngularFirestore,
   AngularFirestoreCollection,
-  AngularFirestoreDocument
-} from "angularfire2/firestore";
-import {Product} from 'src/app/models/product';
+} from 'angularfire2/firestore';
 import {Category} from 'src/app/models/category';
-import {Observable, Subject} from 'rxjs';
+import {Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +30,7 @@ export class CategoryService {
   }
 
   public addCategory(C: Category) {
-    this.Categories.doc(C.category.toUpperCase().replace(/\s/g, ""))
+    this.Categories.doc(C.category.toUpperCase().replace(/\s/g, ''))
       .set(C)
       .then((res) => {
         console.log('add Category: ' + res);

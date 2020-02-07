@@ -4,40 +4,58 @@
       <ng-template matStepLabel>Shipping Address</ng-template>
       <div formGroupName="customer">
         <mat-form-field>
-          <input matInput placeholder="First name" formControlName="firstName" required>
+          <label>
+            <input matInput placeholder="First name" formControlName="firstName" required>
+          </label>
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Last name" formControlName="lastName" required>
+          <label>
+            <input matInput placeholder="Last name" formControlName="lastName" required>
+          </label>
         </mat-form-field>
         <br>
         <mat-form-field>
-          <input matInput placeholder="phone number" formControlName="phoneNumber" required>
+          <label>
+            <input matInput placeholder="phone number" formControlName="phoneNumber" required>
+          </label>
         </mat-form-field>
         <br>
       </div>
       <div formGroupName="address">
         <mat-form-field>
-          <input matInput placeholder="street 1" formControlName="street1" required>
+          <label>
+            <input matInput placeholder="street 1" formControlName="street1" required>
+          </label>
         </mat-form-field>
         <br>
         <mat-form-field>
-          <input matInput placeholder="street 2" formControlName="street2">
+          <label>
+            <input matInput placeholder="street 2" formControlName="street2">
+          </label>
         </mat-form-field>
         <br>
         <mat-form-field>
-          <input matInput placeholder="city" formControlName="city" required>
+          <label>
+            <input matInput placeholder="city" formControlName="city" required>
+          </label>
         </mat-form-field>
         <br>
         <mat-form-field>
-          <input matInput placeholder="province" formControlName="province" required>
+          <label>
+            <input matInput placeholder="province" formControlName="province" required>
+          </label>
         </mat-form-field>
         <br>
         <mat-form-field>
-          <input matInput placeholder="postal code" formControlName="postalCode" required>
+          <label>
+            <input matInput placeholder="postal code" formControlName="postalCode" required>
+          </label>
         </mat-form-field>
         <br>
         <mat-form-field>
-          <input matInput placeholder="country" formControlName="country" required>
+          <label>
+            <input matInput placeholder="country" formControlName="country" required>
+          </label>
         </mat-form-field>
       </div>
       <div>
@@ -54,40 +72,58 @@
     <form *ngIf="!sameAddress" [formGroup]="baFormGroup">
       <div formGroupName="customer">
         <mat-form-field>
-          <input matInput placeholder="First name" formControlName="firstName" required>
+          <label>
+            <input matInput placeholder="First name" formControlName="firstName" required>
+          </label>
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Last name" formControlName="lastName" required>
+          <label>
+            <input matInput placeholder="Last name" formControlName="lastName" required>
+          </label>
         </mat-form-field>
         <br>
         <mat-form-field>
-          <input matInput placeholder="phone number" formControlName="phoneNumber" required>
+          <label>
+            <input matInput placeholder="phone number" formControlName="phoneNumber" required>
+          </label>
         </mat-form-field>
         <br>
       </div>
       <div formGroupName="address">
         <mat-form-field>
-          <input matInput placeholder="street 1" formControlName="street1" required>
+          <label>
+            <input matInput placeholder="street 1" formControlName="street1" required>
+          </label>
         </mat-form-field>
         <br>
         <mat-form-field>
-          <input matInput placeholder="street 2" formControlName="street2">
+          <label>
+            <input matInput placeholder="street 2" formControlName="street2">
+          </label>
         </mat-form-field>
         <br>
         <mat-form-field>
-          <input matInput placeholder="city" formControlName="city" required>
+          <label>
+            <input matInput placeholder="city" formControlName="city" required>
+          </label>
         </mat-form-field>
         <br>
         <mat-form-field>
-          <input matInput placeholder="province" formControlName="province" required>
+          <label>
+            <input matInput placeholder="province" formControlName="province" required>
+          </label>
         </mat-form-field>
         <br>
         <mat-form-field>
-          <input matInput placeholder="postal code" formControlName="postalCode" required>
+          <label>
+            <input matInput placeholder="postal code" formControlName="postalCode" required>
+          </label>
         </mat-form-field>
         <br>
         <mat-form-field>
-          <input matInput placeholder="country" formControlName="country" required>
+          <label>
+            <input matInput placeholder="country" formControlName="country" required>
+          </label>
         </mat-form-field>
       </div>
       <div>
@@ -101,21 +137,31 @@
     <ng-template matStepLabel>Payment</ng-template>
     <form [formGroup]="ccFormGroup">
       <mat-form-field>
-        <input matInput placeholder="First name" formControlName="firstName" required>
+        <label>
+          <input matInput placeholder="First name" formControlName="firstName" required>
+        </label>
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Last name" formControlName="lastName" required>
+        <label>
+          <input matInput placeholder="Last name" formControlName="lastName" required>
+        </label>
       </mat-form-field>
       <br>
       <mat-form-field>
-        <input matInput placeholder="Card Number" formControlName="cardNumber" required>
+        <label>
+          <input matInput placeholder="Card Number" formControlName="cardNumber" required>
+        </label>
       </mat-form-field>
       <br>
       <mat-form-field>
-        <input matInput placeholder="Expire Date" formControlName="expireDate" required>
+        <label>
+          <input matInput placeholder="Expire Date" formControlName="expireDate" required>
+        </label>
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="CVV" formControlName="cvv" required>
+        <label>
+          <input matInput placeholder="CVV" formControlName="cvv" required>
+        </label>
       </mat-form-field>
     </form>
   </mat-step>

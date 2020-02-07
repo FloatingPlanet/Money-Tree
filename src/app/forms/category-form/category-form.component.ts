@@ -1,6 +1,5 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
-import { ProductService } from 'src/app/services/product/product.service';
 import { CategoryService } from 'src/app/services/category/category.service';
 import { Category } from 'src/app/models/category';
 
@@ -12,7 +11,7 @@ import { Category } from 'src/app/models/category';
 export class CategoryFormComponent implements OnInit {
   @Output() public selectedCategories = new EventEmitter<string[]>();
   @Output() public cLoaded = new EventEmitter<boolean>();
-  allCategories: Category[];
+  public allCategories: Category[];
 
   constructor(private formBuilder: FormBuilder, private cs: CategoryService) {
     this.cs.categoriesObservable.subscribe((res) => {
