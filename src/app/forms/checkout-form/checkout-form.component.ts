@@ -63,6 +63,7 @@ export class CheckoutFormComponent implements OnInit {
     });
   }
 
+  // TODO auto fill out all fields
   search = (text$: Observable<string>) =>
     text$.pipe(
       debounceTime(300),
