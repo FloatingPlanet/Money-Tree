@@ -33,7 +33,7 @@ export class AddressService {
               if (response.Items.length === 0) {
                 rej('Sorry, there were no results');
               } else {
-                res({address: response.Items.map(r => r.Text), location: response.Items.map(r => r.Description)});
+                res(response.Items.map(r => r.Text));
                 console.log({address: response.Items.map(r => r.Text), location: response.Items.map(r => r.Description)});
               }
             }
