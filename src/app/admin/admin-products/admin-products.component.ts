@@ -66,6 +66,7 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.productsObservable$.unsubscribe();
-  }
+    if (this.productsObservable$) {
+      this.productsObservable$.unsubscribe();
+    }  }
 }

@@ -14,6 +14,7 @@ import {Subscription} from 'rxjs';
 export class ShoppingCartComponent implements OnInit, OnDestroy {
   public cart: Product[];
   private logInObservable$: Subscription;
+  private userObservable$: Subscription;
 
   constructor(private ps: ProductService,
               private us: UserService,
@@ -24,7 +25,7 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.logInObservable$ = this.us.logInObservable.subscribe((auth) => {
       if (auth) {
-        this.us.userOberservalbe.subscribe((res: User) => {
+        this.userObservable$ = this.us.userObservable.subscribe((res: User) => {
           console.log('shopping cart updated');
           this.cart = res.cart ? res.cart : [];
         });
@@ -35,6 +36,11 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.logInObservable$.unsubscribe();
+    if (this.logInObservable$) {
+      this.logInObservable$.unsubscribe();
+    }
+    if (this.userObservable$) {
+      this.userObservable$.unsubscribe();
+    }
   }
 }

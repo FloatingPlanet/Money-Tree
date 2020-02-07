@@ -26,7 +26,7 @@ export class CartService {
     this.us.logInObservable.subscribe((auth) => {
       console.log('login status changed');
       if (auth) {
-        this.us.userOberservalbe.subscribe((user) => {
+        this.us.userObservable.subscribe((user) => {
           console.log('cart service cart updated ');
           this.cart = (user as User).cart;
           this.cartSubject.next(this.cart);

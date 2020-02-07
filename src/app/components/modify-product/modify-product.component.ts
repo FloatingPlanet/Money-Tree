@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {ProductService} from 'src/app/services/product/product.service';
-import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-modify-product',
@@ -10,14 +9,9 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class ModifyProductComponent implements OnInit {
   public selectedCategories: string[];
-  public cLoaded = false;
-  public pLoaded = false;
-  public isHidden = true;
 
-  constructor(private ps: ProductService, private route: ActivatedRoute) {
-    if (!this.route.snapshot.paramMap.get('SKU')) {
-      this.pLoaded = true;
-    }
+  constructor(private ps: ProductService) {
+
   }
 
   ngOnInit() {
@@ -34,22 +28,6 @@ export class ModifyProductComponent implements OnInit {
     this.ps.addProduct(fg.value).then(result => console.log(result)).catch(error => console.error(error));
   }
 
-  public categoriesLoaded(loaded: boolean) {
-    if (loaded) {
-      this.cLoaded = true;
-      if (this.cLoaded && this.pLoaded) {
-        this.isHidden = false;
-      }
-    }
-  }
 
-  public productLoaded(loaded: boolean) {
-    if (loaded) {
-      this.pLoaded = true;
-      if (this.cLoaded && this.pLoaded) {
-        this.isHidden = false;
-      }
-    }
-  }
 }
 

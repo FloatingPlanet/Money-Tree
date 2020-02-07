@@ -24,7 +24,10 @@
       <div formGroupName="address">
         <mat-form-field>
           <label>
-            <input matInput placeholder="street 1" formControlName="street1" required>
+            <input matInput placeholder="street 1" formControlName="street1"
+                   [ngbTypeahead]="search"
+                   required>
+            <small *ngIf="searching" class="form-text text-muted">searching...</small>
           </label>
         </mat-form-field>
         <br>

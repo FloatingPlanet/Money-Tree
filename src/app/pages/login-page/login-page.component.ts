@@ -72,6 +72,8 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.logInObservable$.unsubscribe();
+    if (this.logInObservable$) {
+      this.logInObservable$.unsubscribe();
+    }
   }
 }

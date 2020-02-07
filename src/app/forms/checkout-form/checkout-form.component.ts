@@ -1,5 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {catchError, debounceTime, distinctUntilChanged, map, switchMap, tap} from 'rxjs/operators';
+import {Observable, of} from 'rxjs';
+import {AddressService} from '../../services/address/address.service';
+
 
 @Component({
   selector: 'app-checkout-form',
@@ -12,8 +16,13 @@ export class CheckoutFormComponent implements OnInit {
   public baFormGroup: FormGroup;
   public ccFormGroup: FormGroup;
   public sameAddress = true;
+  public addresses: any;
 
-  constructor(private formBuilder: FormBuilder) {
+  model: any;
+  searching = false;
+  searchFailed = false;
+
+  constructor(private formBuilder: FormBuilder, private as: AddressService) {
   }
 
   ngOnInit() {
@@ -53,6 +62,24 @@ export class CheckoutFormComponent implements OnInit {
       }),
     });
   }
+
+  // TODO auto fill out all fields
+  search = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      tap(() => this.searching = true),
+      switchMap(term =>
+        this.as.getAddress(term).pipe(
+          tap(() => this.searchFailed = false),
+          catchError(() => {
+            this.searchFailed = true;
+            console.log('search failed');
+            return of([]);
+          }))
+      ),
+      tap(() => this.searching = false)
+    );
 
   // TODO validate credit card
   submitOrder() {
