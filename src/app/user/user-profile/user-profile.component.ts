@@ -27,6 +27,7 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit() {
     this.saFormGroup = this.addressFormBuilder();
+
     this.us.logInObservable.subscribe((auth) => {
       if (auth) {
         this.us.userOberservalbe.subscribe((res: User) => {

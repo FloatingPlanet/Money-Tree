@@ -9,10 +9,10 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./modify-product.component.scss']
 })
 export class ModifyProductComponent implements OnInit {
-  private selectedCategories: string[];
-  private cLoaded = false;
-  private pLoaded = false;
-  private isHidden = true;
+  public selectedCategories: string[];
+  public cLoaded = false;
+  public pLoaded = false;
+  public isHidden = true;
 
   constructor(private ps: ProductService, private route: ActivatedRoute) {
     if (!this.route.snapshot.paramMap.get('SKU')) {
@@ -34,7 +34,7 @@ export class ModifyProductComponent implements OnInit {
     this.ps.addProduct(fg.value).then(result => console.log(result)).catch(error => console.error(error));
   }
 
-  private categoriesLoaded(loaded: boolean) {
+  public categoriesLoaded(loaded: boolean) {
     if (loaded) {
       this.cLoaded = true;
       if (this.cLoaded && this.pLoaded) {
@@ -43,7 +43,7 @@ export class ModifyProductComponent implements OnInit {
     }
   }
 
-  private productLoaded(loaded: boolean) {
+  public productLoaded(loaded: boolean) {
     if (loaded) {
       this.pLoaded = true;
       if (this.cLoaded && this.pLoaded) {

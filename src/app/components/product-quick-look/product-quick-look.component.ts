@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-product-quick-look',
@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductQuickLookComponent implements OnInit {
 
-  constructor() { }
+
+  constructor() {
+  }
+
 
   ngOnInit() {
+
   }
+
 
 }

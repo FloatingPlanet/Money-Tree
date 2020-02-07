@@ -17,9 +17,9 @@ export class CheckoutPageComponent implements AfterViewChecked {
   @ViewChild(CheckoutFormComponent, {static: false}) checkoutComponent: CheckoutFormComponent;
   @ViewChild(OrderSummaryComponent, {static: false}) orderSummaryComponent: OrderSummaryComponent;
   public orders: Product[];
-  private saFormGroup: FormGroup;
-  private baFormGroup: FormGroup;
-  private ccFormGroup: FormGroup;
+  public saFormGroup: FormGroup;
+  public baFormGroup: FormGroup;
+  public ccFormGroup: FormGroup;
 
   constructor(private us: UserService,  private cs: CartService, private os: OrderService) {
     this.us.logInObservable.subscribe((auth) => {
@@ -42,7 +42,7 @@ export class CheckoutPageComponent implements AfterViewChecked {
     this.ccFormGroup = this.checkoutComponent.ccFormGroup;
   }
 
-  private submitOrder() {
+  public submitOrder() {
     const order = {
       uid: 'a123',
       orderNumber: 'O' + Date.now().toString(),

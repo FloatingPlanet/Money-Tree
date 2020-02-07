@@ -14,9 +14,8 @@ import {Observable} from 'rxjs';
 export class MainPageComponent implements OnInit {
   public products: Product[] = [];
   private user: User;
-  cart$: Observable<Product[]>;
 
-  constructor(private ps: ProductService,
+  constructor(public ps: ProductService,
               private us: UserService,
               private cs: CartService,
   ) {
@@ -34,4 +33,6 @@ export class MainPageComponent implements OnInit {
   addToCart(product: Product) {
     this.cs.addProduct(product);
   }
+
+
 }

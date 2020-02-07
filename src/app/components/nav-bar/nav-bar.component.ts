@@ -12,7 +12,7 @@ export class NavBarComponent implements OnInit, OnChanges {
   DEFAULT_AVATAR = '../../../assets/default-avatar.png';
   DEFAULT_NAME = 'Shady Individual';
   @Input() info: any;
-  private itemInCart: number;
+  public itemInCart: number;
 
   constructor(private us: UserService, private cs: CartService) {
   }

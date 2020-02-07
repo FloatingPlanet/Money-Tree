@@ -14,10 +14,10 @@ import {UserService} from '../../services/user/user.service';
   styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent implements OnInit {
-  private submitted = false;
+  public submitted = false;
   private cartProduct: Product[];
-  private loginForm: FormGroup;
-  private resetForm: FormGroup;
+  public loginForm: FormGroup;
+  public resetForm: FormGroup;
 
   constructor(
     private us: UserService,

@@ -11,10 +11,10 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class CouponFormComponent implements OnInit {
   // tslint:disable-next-line:no-output-on-prefix
-  private couponForm: FormGroup;
+  public couponForm: FormGroup;
   private couponName: string;
   private coupon: Coupon;
-  private notEditable = false;
+  public notEditable = false;
   private allCoupons: Coupon[];
   private editCoupon = false;
 

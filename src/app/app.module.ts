@@ -82,8 +82,7 @@ import {UserOrdersComponent} from './user/user-orders/user-orders.component';
 import {UserProfileComponent} from './user/user-profile/user-profile.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import {CheckoutFormComponent} from './forms/checkout-form/checkout-form.component';
-import { ProductQuickLookComponent } from './components/product-quick-look/product-quick-look.component';
-
+import {ProductQuickLookComponent} from './components/product-quick-look/product-quick-look.component';
 
 @NgModule({
   declarations: [
@@ -163,7 +162,7 @@ import { ProductQuickLookComponent } from './components/product-quick-look/produ
     ReactiveFormsModule,
     ModalModule.forRoot(),
     FlexModule,
-    MatBadgeModule
+    MatBadgeModule,
   ],
   providers: [
     FlashMessageService,
@@ -175,5 +174,6 @@ import { ProductQuickLookComponent } from './components/product-quick-look/produ
   bootstrap: [AppComponent]
 })
 
-export class AppModule { }
+export class AppModule {
+}
 

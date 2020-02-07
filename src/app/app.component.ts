@@ -13,8 +13,8 @@ export class AppComponent implements OnInit {
   title = 'money-tree';
   DEFAULT_AVATAR = '../../../assets/default-avatar.png';
   DEFAULT_NAME = 'Shady Individual';
-  private logInfo: any;
-  private itemInCart: number;
+  public logInfo: any;
+  public itemInCart: number;
   @ViewChild(NavBarComponent, {static: false}) navBar: NavBarComponent;
 
   constructor(private cs: CartService, private us: UserService) {

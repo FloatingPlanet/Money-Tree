@@ -29,7 +29,7 @@ export class CheckoutFormComponent implements OnInit {
     });
   }
 
-  private changeBAform() {
+  public changeBAform() {
     if (!this.sameAddress) {
       this.baFormGroup = this.saFormGroup;
     } else {
@@ -55,7 +55,7 @@ export class CheckoutFormComponent implements OnInit {
     });
   }
 
-  //TODO validate credit card
+  // TODO validate credit card
   submitOrder() {
 
   }
