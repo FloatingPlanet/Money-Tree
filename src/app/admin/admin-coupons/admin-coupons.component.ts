@@ -1,17 +1,18 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Coupon} from '../../models/coupon';
 import * as moment from 'moment';
 import {SelectionModel} from '@angular/cdk/collections';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {CouponsService} from '../../services/coupons/coupons.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-admin-coupons',
   templateUrl: './admin-coupons.component.html',
   styleUrls: ['./admin-coupons.component.scss']
 })
-export class AdminCouponsComponent implements OnInit {
+export class AdminCouponsComponent implements OnInit, OnDestroy {
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   public coupons: Coupon[];
@@ -19,9 +20,10 @@ export class AdminCouponsComponent implements OnInit {
   public m = moment;
   public cols: string[] = ['select', 'coupon', 'discount', 'from', 'to', 'freeShipping', 'minimumSpend', 'amount', 'addedAt', 'edit'];
   public selection = new SelectionModel<Coupon>(true, []);
+  private couponsObservable$: Subscription;
 
   constructor(private cs: CouponsService) {
-    this.cs.couponsObservable.subscribe((res: Coupon[]) => {
+    this.couponsObservable$ = this.cs.couponsObservable.subscribe((res: Coupon[]) => {
       console.log(res);
       this.coupons = res;
       this.dataSource = new MatTableDataSource<Coupon>(this.coupons);
@@ -61,5 +63,9 @@ export class AdminCouponsComponent implements OnInit {
         }
       );
     });
+  }
+
+  ngOnDestroy(): void {
+    this.couponsObservable$.unsubscribe();
   }
 }

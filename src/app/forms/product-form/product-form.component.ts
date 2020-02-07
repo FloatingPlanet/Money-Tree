@@ -13,12 +13,11 @@ import {ActivatedRoute} from '@angular/router';
 export class ProductFormComponent implements OnInit {
 
   @Input() detail: Product;
-  // tslint:disable-next-line:no-output-on-prefix
-  @Output() public onFormModified: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+  @Output() public onFormModified = new EventEmitter<FormGroup>();
   @Output() public pLoaded = new EventEmitter<boolean>();
 
-  public  SKU: string;
-  public  subscription: Subscription;
+  public SKU: string;
+  public subscription: Subscription;
   public productForm: FormGroup;
   public product: Product;
 
@@ -71,7 +70,6 @@ export class ProductFormComponent implements OnInit {
       productSummary: null,
       productPrice: [null, Validators.required],
       productDescription: [null, Validators.required],
-      // tslint:disable-next-line:max-line-length
       productImageUrls: this.formBuilder.array(['https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mbp16touch-space-select-201911?wid=400&hei=400&fmt=jpeg&qlt=95&op_usm=0.5,1.5&fit=constrain&.v=1572825197207']),
       productAddedAt: new Date(),
       productQuantity: [null, [Validators.required, Validators.pattern('\\d*')]],

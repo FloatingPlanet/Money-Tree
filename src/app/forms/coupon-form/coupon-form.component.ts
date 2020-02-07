@@ -1,21 +1,23 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, Validators, FormGroup, ValidatorFn, AbstractControl} from '@angular/forms';
 import {CouponsService} from 'src/app/services/coupons/coupons.service';
 import {Coupon} from '../../models/coupon';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-coupon-form',
   templateUrl: './coupon-form.component.html',
   styleUrls: ['./coupon-form.component.scss']
 })
-export class CouponFormComponent implements OnInit {
+export class CouponFormComponent implements OnInit, OnDestroy {
   public couponForm: FormGroup;
   public couponName: string;
   public coupon: Coupon;
   public notEditable = false;
   public allCoupons: Coupon[];
   public editCoupon = false;
+  private couponsObservable$: Subscription;
 
   constructor(private formBuilder: FormBuilder, private cs: CouponsService, private route: ActivatedRoute, private router: Router) {
 
@@ -23,7 +25,7 @@ export class CouponFormComponent implements OnInit {
 
 
   ngOnInit() {
-    this.cs.couponsObservable.subscribe((res) => {
+    this.couponsObservable$ = this.cs.couponsObservable.subscribe((res) => {
       this.allCoupons = res;
       this.resetForm();
     });
@@ -37,7 +39,7 @@ export class CouponFormComponent implements OnInit {
 
   public onSubmit(cf: FormGroup) {
     this.cs.addCoupon(cf.value).then(result => console.log(result)).catch(error => console.error(error));
-    this.router.navigate(['/admin/coupons']);
+    this.router.navigate(['/admin/coupons']).then(r => console.log('why i am here'));
     this.resetForm();
   }
 
@@ -55,8 +57,6 @@ export class CouponFormComponent implements OnInit {
   }
 
   private existCoupon(): ValidatorFn {
-    // tslint:disable-next-line:triple-equals
-
     return (control: AbstractControl): { [key: string]: any } | null => {
 
       const exist = this.allCoupons.some(x => x.coupon === control.value);
@@ -82,5 +82,9 @@ export class CouponFormComponent implements OnInit {
       });
       console.log(this.couponForm.value);
     }).catch((error) => console.log(error));
+  }
+
+  ngOnDestroy(): void {
+    this.couponsObservable$.unsubscribe();
   }
 }

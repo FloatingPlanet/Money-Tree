@@ -1,20 +1,22 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
-import { CategoryService } from 'src/app/services/category/category.service';
-import { Category } from 'src/app/models/category';
+import {Component, OnInit, Output, EventEmitter, OnDestroy} from '@angular/core';
+import {FormBuilder, Validators, ValidatorFn, AbstractControl} from '@angular/forms';
+import {CategoryService} from 'src/app/services/category/category.service';
+import {Category} from 'src/app/models/category';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-category-form',
   templateUrl: './category-form.component.html',
   styleUrls: ['./category-form.component.scss']
 })
-export class CategoryFormComponent implements OnInit {
+export class CategoryFormComponent implements OnInit, OnDestroy {
   @Output() public selectedCategories = new EventEmitter<string[]>();
   @Output() public cLoaded = new EventEmitter<boolean>();
   public allCategories: Category[];
+  private categoriesObservable$: Subscription;
 
   constructor(private formBuilder: FormBuilder, private cs: CategoryService) {
-    this.cs.categoriesObservable.subscribe((res) => {
+    this.categoriesObservable$ = this.cs.categoriesObservable.subscribe((res) => {
       this.allCategories = res;
       this.cLoaded.emit(true);
     });
@@ -30,7 +32,7 @@ export class CategoryFormComponent implements OnInit {
   existCategory(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
       const exist = this.cs.allCategories.some(x => x.category === control.value);
-      return exist ? { existCategory: { value: control.value } } : null;
+      return exist ? {existCategory: {value: control.value}} : null;
     };
   }
 
@@ -42,5 +44,9 @@ export class CategoryFormComponent implements OnInit {
   onSubmit() {
     this.cs.addCategory(this.categoryForm.value);
     this.categoryForm.reset();
+  }
+
+  ngOnDestroy(): void {
+    this.categoriesObservable$.unsubscribe();
   }
 }

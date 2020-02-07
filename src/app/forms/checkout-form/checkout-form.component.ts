@@ -12,7 +12,6 @@ export class CheckoutFormComponent implements OnInit {
   public baFormGroup: FormGroup;
   public ccFormGroup: FormGroup;
   public sameAddress = true;
-  proceedToPlaceOrder: boolean;
 
   constructor(private formBuilder: FormBuilder) {
   }

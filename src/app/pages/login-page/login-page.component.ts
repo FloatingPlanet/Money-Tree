@@ -1,9 +1,10 @@
 import {FormGroup, Validators, FormBuilder} from '@angular/forms';
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {FlashMessageService} from '../../services/flashMessage/flash-message.service';
 import {LocalstorageService} from '../../services/localStorage/localstorage.service';
 import {UserService} from '../../services/user/user.service';
+import {Subscription} from 'rxjs';
 
 
 @Component({
@@ -11,10 +12,11 @@ import {UserService} from '../../services/user/user.service';
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss']
 })
-export class LoginPageComponent implements OnInit {
+export class LoginPageComponent implements OnInit, OnDestroy {
   public submitted = false;
   public loginForm: FormGroup;
   public resetForm: FormGroup;
+  private logInObservable$: Subscription;
 
   constructor(
     private us: UserService,
@@ -30,7 +32,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.us.logInObservable.subscribe((auth) => {
+    this.logInObservable$ = this.us.logInObservable.subscribe((auth) => {
       if (auth) {
         // TODO rewrite
         this.router.navigate(['']);
@@ -69,4 +71,7 @@ export class LoginPageComponent implements OnInit {
     this.loginForm.reset();
   }
 
+  ngOnDestroy(): void {
+    this.logInObservable$.unsubscribe();
+  }
 }

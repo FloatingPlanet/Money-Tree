@@ -1,26 +1,28 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatPaginator } from '@angular/material';
-import { SelectionModel } from '@angular/cdk/collections';
-import { Product } from 'src/app/models/product';
-import { ProductService } from 'src/app/services/product/product.service';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {MatTableDataSource, MatPaginator} from '@angular/material';
+import {SelectionModel} from '@angular/cdk/collections';
+import {Product} from 'src/app/models/product';
+import {ProductService} from 'src/app/services/product/product.service';
 import * as moment from 'moment';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-admin-products',
   templateUrl: './admin-products.component.html',
   styleUrls: ['./admin-products.component.scss']
 })
-export class AdminProductsComponent implements OnInit {
+export class AdminProductsComponent implements OnInit, OnDestroy {
 
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   public products: Product[];
   public dataSource = new MatTableDataSource<Product>([]);
   public m = moment;
   public cols: string[] = ['select', 'SKU', 'productName', 'productPrice', 'productQuantity', 'productCategory', 'productAddedAt', 'edit'];
   public selection = new SelectionModel<Product>(true, []);
+  private productsObservable$: Subscription;
 
-  constructor(private ps: ProductService, ) {
-    this.ps.productsObservable.subscribe((res) => {
+  constructor(private ps: ProductService) {
+    this.productsObservable$ = this.ps.productsObservable.subscribe((res) => {
       this.products = res;
       this.dataSource = new MatTableDataSource<Product>(this.products);
       this.dataSource.paginator = this.paginator;
@@ -29,9 +31,7 @@ export class AdminProductsComponent implements OnInit {
 
   ngOnInit() {
   }
-  ngOnDestory() {
 
-  }
 
   isAllSelected() {
     const numSelected = this.selection.selected.length;
@@ -63,5 +63,9 @@ export class AdminProductsComponent implements OnInit {
         console.log(res);
       });
     });
+  }
+
+  ngOnDestroy(): void {
+    this.productsObservable$.unsubscribe();
   }
 }

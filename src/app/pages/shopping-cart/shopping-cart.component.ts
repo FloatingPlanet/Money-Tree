@@ -1,17 +1,19 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ProductService} from 'src/app/services/product/product.service';
 import {Product} from 'src/app/models/product';
 import {UserService} from '../../services/user/user.service';
 import {CartService} from '../../services/cart/cart.service';
 import {User} from '../../models/user';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
   styleUrls: ['./shopping-cart.component.scss']
 })
-export class ShoppingCartComponent implements OnInit {
+export class ShoppingCartComponent implements OnInit, OnDestroy {
   public cart: Product[];
+  private logInObservable$: Subscription;
 
   constructor(private ps: ProductService,
               private us: UserService,
@@ -20,7 +22,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.us.logInObservable.subscribe((auth) => {
+    this.logInObservable$ = this.us.logInObservable.subscribe((auth) => {
       if (auth) {
         this.us.userOberservalbe.subscribe((res: User) => {
           console.log('shopping cart updated');
@@ -30,5 +32,9 @@ export class ShoppingCartComponent implements OnInit {
         this.cart = this.cs.getLocalCart();
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.logInObservable$.unsubscribe();
   }
 }
