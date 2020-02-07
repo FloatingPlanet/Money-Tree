@@ -13,7 +13,7 @@ import {ActivatedRoute} from '@angular/router';
 export class ProductFormComponent implements OnInit {
 
   @Input() detail: Product;
-  @Output() public onFormModified = new EventEmitter<FormGroup>();
+  @Output() public formModified = new EventEmitter<FormGroup>();
   @Output() public pLoaded = new EventEmitter<boolean>();
 
   public SKU: string;
@@ -57,7 +57,7 @@ export class ProductFormComponent implements OnInit {
 
 
   onSubmit(fg: FormGroup) {
-    this.onFormModified.emit(fg);
+    this.formModified.emit(fg);
     this.resetForm();
   }
 
