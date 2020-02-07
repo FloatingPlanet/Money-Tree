@@ -4,7 +4,7 @@ import {
   AngularFirestoreCollection,
 } from 'angularfire2/firestore';
 import {Category} from 'src/app/models/category';
-import {Subject} from 'rxjs';
+import {Product} from '../../models/product';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,6 @@ import {Subject} from 'rxjs';
 export class CategoryService {
   Categories: AngularFirestoreCollection<Category>; // db ref
   public allCategories = [];
-  public selectedCategories = new Subject<string[]>();
 
   constructor(private db: AngularFirestore) {
     this.Categories = db.collection('Categories');
@@ -20,7 +19,7 @@ export class CategoryService {
   }
 
   public loadCategories() {
-    this.Categories.valueChanges().subscribe((data) => {
+    this.categoriesObservable.subscribe((data) => {
       this.allCategories = data;
     });
   }
@@ -35,6 +34,15 @@ export class CategoryService {
       .then((res) => {
         console.log('add Category: ' + res);
       }).catch(error => {
+      console.error(error);
+    });
+  }
+
+  public addProductToCategory(C: string, P: Product) {
+    const subCategories = this.Categories.doc(C.toUpperCase().replace(/\s/g, '')).collection('products');
+    subCategories.doc(P.SKU).set(P).then((res) => {
+      console.log(`add ${P.SKU} to Collection ${C} succeeded!`);
+    }).catch((error) => {
       console.error(error);
     });
   }

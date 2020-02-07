@@ -1,17 +1,17 @@
-<div *ngIf=" !cLoaded && !pLoaded">
+<div *ngIf=" false">
   <mat-progress-bar color="green" mode="indeterminate"></mat-progress-bar>
 </div>
-<div class="container" [hidden]="isHidden">
+<div class="container">
   <div class="row">
     <div class="col-sm-9">
       <h1>Product</h1>
       <app-product-form (formModified)="iNeedaUpdateProduct($event)"
-                        (pLoaded)="productLoaded($event)"></app-product-form>
+      ></app-product-form>
     </div>
     <div class="col-sm-3">
       <h1>Category</h1>
       <app-category-form (selectedCategories)="gimmeDatCategories($event)"
-                         (cLoaded)="categoriesLoaded($event)"></app-category-form>
+      ></app-category-form>
     </div>
   </div>
 </div>

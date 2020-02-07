@@ -11,15 +11,11 @@ import {Subscription} from 'rxjs';
 })
 export class CategoryFormComponent implements OnInit, OnDestroy {
   @Output() public selectedCategories = new EventEmitter<string[]>();
-  @Output() public cLoaded = new EventEmitter<boolean>();
   public allCategories: Category[];
   private categoriesObservable$: Subscription;
 
   constructor(private formBuilder: FormBuilder, private cs: CategoryService) {
-    this.categoriesObservable$ = this.cs.categoriesObservable.subscribe((res) => {
-      this.allCategories = res;
-      this.cLoaded.emit(true);
-    });
+
   }
 
   categoryForm = this.formBuilder.group({
@@ -27,6 +23,9 @@ export class CategoryFormComponent implements OnInit, OnDestroy {
   });
 
   ngOnInit() {
+    this.categoriesObservable$ = this.cs.categoriesObservable.subscribe((res) => {
+      this.allCategories = res;
+    });
   }
 
   existCategory(): ValidatorFn {
@@ -40,7 +39,6 @@ export class CategoryFormComponent implements OnInit, OnDestroy {
     this.selectedCategories.emit(cats);
   }
 
-
   onSubmit() {
     this.cs.addCategory(this.categoryForm.value);
     this.categoryForm.reset();
@@ -49,7 +47,6 @@ export class CategoryFormComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.categoriesObservable$) {
       this.categoriesObservable$.unsubscribe();
-
     }
   }
 }

@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
 import {Product} from 'src/app/models/product';
+import {CategoryService} from '../category/category.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class ProductService {
   Products: AngularFirestoreCollection<Product>; // db ref
   public allProducts: Product[];
 
-  constructor(private db: AngularFirestore) {
+  constructor(private db: AngularFirestore, private cs: CategoryService) {
     this.Products = db.collection('Products', ref => ref.orderBy('productAddedAt').limit(100));
     // TODO PAGINATION
     this.loadProducts();
@@ -36,6 +37,7 @@ export class ProductService {
             reject('Add product failed');
           });
         resolve(`doc ${product.SKU} added`);
+        product.productCategory.forEach(c => this.cs.addProductToCategory(c, product));
       }).catch((error) => {
         console.error(error);
         reject(`fetch doc ${product.SKU} failed`);
