@@ -16,13 +16,6 @@ export class User {
   isAdmin: boolean;
   avatar: string;
   shippingInfo: AddressInfo[];
-  firstName?: string;
-  lastName?: string;
-  address1?: string;
-  address2?: string;
-  country?: string;
-  state?: string;
-  zip?: number;
   cart?: Product[];
   orders?: Order[];
 }

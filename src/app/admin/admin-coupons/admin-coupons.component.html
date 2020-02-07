@@ -1,10 +1,12 @@
-<div class="coupon-list">
+< class="coupon-list">
   <button mat-raised-button color="primary" class="mx-2" [routerLink]="['add']">Add</button>
   <button mat-raised-button color="accent" class="" (click)="deleteCoupons()">Delete</button>
   <mat-form-field class=" px-2">
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    <label>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </label>
   </mat-form-field>
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" class="w-100">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" >
 
     <!-- Checkbox Column -->
     <ng-container matColumnDef="select">
@@ -71,4 +73,3 @@
     </tr>
   </table>
   <mat-paginator [pageSizeOptions]="[5, 10, 20, 50]" showFirstLastButtons></mat-paginator>
-</div>
