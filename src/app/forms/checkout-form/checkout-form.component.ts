@@ -31,7 +31,9 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
   public searching = false;
   public searchFailed = false;
   public currentStatus: Status;
+  // user pick address from list
   public addressSelected: AddressInfo;
+  // flag for showing list of saved address
   public showAddressList = true;
 
   constructor(private formBuilder: FormBuilder, private as: AddressService, private us: UserService) {
@@ -157,6 +159,7 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
     }
   }
 
+  // parse formGroup to object
   public generateAddress(af: FormGroup) {
     return {
       address: {
@@ -176,6 +179,7 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
     };
   }
 
+  // parse address object to form
   private castAddressToForm(a: AddressInfo) {
     this.saFormGroup.setValue({
       customer: {
@@ -195,8 +199,10 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
 
   }
 
-  public showAddressForm() {
+  //
+  public triggerAddressForm() {
     this.showAddressList = !this.showAddressList;
+    // reset addressSelected user may pick address then decide to add new address
     this.addressSelected = null;
   }
 }
