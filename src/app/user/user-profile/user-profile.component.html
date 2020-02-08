@@ -1,3 +1,4 @@
+<script src="../../services/product/product.service.spec.ts"></script>
 <div class="col-sm-5">
   <h4>My Address</h4>
   <button mat-stroked-button id="add" data-toggle="collapse" href="#panel" color="primary">Add</button>
@@ -54,7 +55,7 @@
         <p>{{address.address.city + ', '+ address.address.province+', '+address.address.country}}</p>
         <p>{{address.address.postalCode}}</p>
       <button mat-stroked-button color="primary">Edit</button>
-      <button mat-stroked-button color="warn">Delete</button>
+      <button mat-stroked-button color="warn" (click)="deleteAddress(address.addressId)">Delete</button>
       <mat-divider></mat-divider>
     </div>
   </mat-list>

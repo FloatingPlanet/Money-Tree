@@ -1,7 +1,6 @@
 import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
 import {FormBuilder, Validators, FormGroup} from '@angular/forms';
 import {ProductService} from 'src/app/services/product/product.service';
-import {Subscription} from 'rxjs';
 import {Product} from 'src/app/models/product';
 import {ActivatedRoute} from '@angular/router';
 
@@ -74,6 +73,4 @@ export class ProductFormComponent implements OnInit {
       productSeller: null,
     });
   }
-
-
 }

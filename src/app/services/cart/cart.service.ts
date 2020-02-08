@@ -37,7 +37,7 @@ export class CartService {
 
   addProduct(product: Product) {
     if (this.us.authenticated) {
-      this.us.addProduct(product).then((res) => {
+      this.us.addProductToCart(product).then((res) => {
       }).catch((e) => {
         console.error(e);
       });

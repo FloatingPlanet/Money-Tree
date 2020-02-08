@@ -15,9 +15,10 @@ import {map, mergeMap} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class UserService {
-  public authState: FirebaseUser = null;
+  public authMetaData: FirebaseUser = null;
   public Users: AngularFirestoreCollection<User>;
   public user: User;
+  public isLogged: boolean;
 
   constructor(private afAuth: AngularFireAuth,
               private db: AngularFirestore,
@@ -25,7 +26,8 @@ export class UserService {
               private router: Router) {
     this.Users = this.db.collection('Users');
     this.afAuth.authState.subscribe((auth) => {
-      this.authState = auth;
+      this.authMetaData = auth;
+      this.isLogged = true;
     });
   }
 
@@ -34,6 +36,13 @@ export class UserService {
       return this.Users.doc(this.currentUserId).valueChanges();
     }
   }
+
+  get userAddressObservable() {
+    if (this.isLogged) {
+      return this.Users.doc(this.authMetaData.uid).collection('addresses').valueChanges();
+    }
+  }
+
 
   // TODO merge two observable
   get userDataObservable() {
@@ -57,7 +66,7 @@ export class UserService {
   }
 
 
-  public addProduct(product: Product) {
+  public addProductToCart(product: Product) {
     return new Promise((res, rej) => {
       this.logInObservable.subscribe((auth) => {
         if (auth) {
@@ -78,12 +87,12 @@ export class UserService {
   }
 
   get authenticated(): boolean {
-    return this.authState !== null;
+    return this.authMetaData !== null;
   }
 
   // Returns current user data
   get currentUser(): any {
-    return this.authenticated ? this.authState : null;
+    return this.authenticated ? this.authMetaData : null;
   }
 
   // Returns
@@ -93,22 +102,22 @@ export class UserService {
 
   // Returns current user UID
   get currentUserId(): string {
-    return this.authenticated ? this.authState.uid : '';
+    return this.authenticated ? this.authMetaData.uid : '';
   }
 
   // Anonymous User
   get currentUserAnonymous(): boolean {
-    return this.authenticated ? this.authState.isAnonymous : false;
+    return this.authenticated ? this.authMetaData.isAnonymous : false;
   }
 
   // Returns current user display name or Guest
-  get currentUserDisplayName(): string {
-    if (!this.authState) {
+  get currentUserName(): string {
+    if (!this.authMetaData) {
       return 'Guest';
     } else if (this.currentUserAnonymous) {
       return 'Anonymous';
     } else {
-      return this.authState.displayName || 'User without a Name';
+      return this.authMetaData.displayName || 'User without a Name';
     }
   }
 
@@ -137,7 +146,7 @@ export class UserService {
   private socialSignIn(provider: firebase.auth.AuthProvider) {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((credential) => {
-        this.authState = credential.user;
+        this.authMetaData = credential.user;
         this.updateUserData();
         this.fs.success('3rd party log in successful', 'You\'ve been logged in with ' + provider.providerId);
       })
@@ -153,7 +162,7 @@ export class UserService {
   anonymousLogin() {
     return this.afAuth.auth.signInAnonymously()
       .then((res: UserCredential) => {
-        this.authState = res.user;
+        this.authMetaData = res.user;
         this.updateUserData();
       })
       .catch(error => {
@@ -166,7 +175,7 @@ export class UserService {
   emailSignUp(login) {
     return this.afAuth.auth.createUserWithEmailAndPassword(login.email, login.password)
       .then((credential: UserCredential) => {
-        this.authState = credential.user;
+        this.authMetaData = credential.user;
         this.updateUserData();
         this.afAuth.auth.currentUser.updateProfile({displayName: login.username});
         this.fs.success('Sign up success', 'You\'ve been logged in');
@@ -187,7 +196,7 @@ export class UserService {
   emailLogin(login) {
     return this.afAuth.auth.signInWithEmailAndPassword(login.email, login.password)
       .then((res: UserCredential) => {
-        this.authState = res.user;
+        this.authMetaData = res.user;
         this.updateUserData();
         this.fs.success('Log in', 'You\'ve been logged in');
       })
@@ -214,6 +223,7 @@ export class UserService {
 
   signOut(): void {
     this.afAuth.auth.signOut().then(() => {
+      this.isLogged = false;
       this.fs.success('Log out', 'You\'ve been logged out');
     });
 
@@ -235,15 +245,35 @@ export class UserService {
     return new Promise((res, rej) => {
       this.logInObservable.subscribe((auth) => {
         if (auth) {
-          this.Users.doc(auth.uid).update({
-            shippingInfo: firebase.firestore.FieldValue.arrayUnion(address)
+          const addresses = this.Users.doc(auth.uid).collection('addresses');
+          addresses.doc(address.addressId).set(address).then(() => {
+            console.log(`Added ${address.addressId} to addresses.`);
+            res(address.addressId);
           }).catch(r => {
             console.error(r);
             rej(`cannot add address`);
           });
-          res('added address succeeded');
         } else {
           rej('user is logged out');
+        }
+      });
+    });
+  }
+
+  public deleteAddress(id: string) {
+    return new Promise((res, rej) => {
+      this.logInObservable.subscribe((auth) => {
+        if (auth) {
+          const addresses = this.Users.doc(auth.uid).collection('addresses');
+          addresses.doc(id).delete().then(() => {
+            console.log(`${id} is deleted`);
+            res(`${id} is deleted`);
+          }).catch((error) => {
+            console.error(error);
+            rej(`failed to delete address ${id}`);
+          });
+        } else {
+          rej(`user is logged out`);
         }
       });
     });

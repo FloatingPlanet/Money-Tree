@@ -1,28 +1,40 @@
-import {Component, Injectable, OnInit} from '@angular/core';
+import {Component, Injectable, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {catchError, debounceTime, distinctUntilChanged, map, switchMap, tap} from 'rxjs/operators';
-import {Observable, of} from 'rxjs';
+import {Observable, of, Subscription} from 'rxjs';
 import {AddressService} from '../../services/address/address.service';
+import {AddressInfo} from '../../models/addressInfo';
+import {UserService} from '../../services/user/user.service';
 
+export enum Status {
+  notLogged = 1,
+  loggedWithoutAddress,
+  loggedWithAddress,
+}
 
 @Component({
   selector: 'app-checkout-form',
   templateUrl: './checkout-form.component.html',
   styleUrls: ['./checkout-form.component.scss']
 })
-export class CheckoutFormComponent implements OnInit {
+
+
+export class CheckoutFormComponent implements OnInit, OnDestroy {
   public isLinear = true;
+  public sameAddress = true;
   public saFormGroup: FormGroup;
   public baFormGroup: FormGroup;
   public ccFormGroup: FormGroup;
-  public sameAddress = true;
-  public addresses: any;
+  public addressList: AddressInfo[];
+  private logInObservable$: Subscription;
+  private addressObservable$: Subscription;
+  public searching = false;
+  public searchFailed = false;
+  public currentStatus: Status;
+  public addressSelected: AddressInfo;
+  public showAddressList = true;
 
-  model: any;
-  searching = false;
-  searchFailed = false;
-
-  constructor(private formBuilder: FormBuilder, private as: AddressService) {
+  constructor(private formBuilder: FormBuilder, private as: AddressService, private us: UserService) {
   }
 
   ngOnInit() {
@@ -35,6 +47,27 @@ export class CheckoutFormComponent implements OnInit {
       expireDate: ['', Validators.required],
       cvv: ['', Validators.required],
     });
+
+    this.logInObservable$ = this.us.logInObservable.subscribe((auth) => {
+      if (auth) {
+        this.addressObservable$ = this.us.userAddressObservable.subscribe((addresses: AddressInfo[]) => {
+          this.addressList = addresses;
+          if (addresses) {
+            this.currentStatus = Status.loggedWithAddress;
+          } else {
+            this.currentStatus = Status.loggedWithoutAddress;
+          }
+        });
+      } else {
+        this.currentStatus = Status.notLogged;
+        // TODO: implement log in modal;
+        console.log('Need to log in');
+      }
+    });
+  }
+
+  get Status() {
+    return Status;
   }
 
   public changeBAform() {
@@ -79,10 +112,91 @@ export class CheckoutFormComponent implements OnInit {
           }))
       ),
       tap(() => this.searching = false)
-    );
+    )
 
   // TODO validate credit card
+
   submitOrder() {
 
+  }
+
+  ngOnDestroy(): void {
+    if (this.logInObservable$) {
+      this.logInObservable$.unsubscribe();
+    }
+    if (this.addressObservable$) {
+      this.addressObservable$.unsubscribe();
+    }
+  }
+
+  onSubmitSaFormGroup(sa: FormGroup) {
+    let address: AddressInfo;
+    switch (this.currentStatus) {
+      case(Status.notLogged):
+        console.log(`nothing happens here`);
+        break;
+      case(Status.loggedWithoutAddress):
+        address = this.generateAddress(sa);
+        this.us.addAddress(address).then(r => {
+        });
+        console.log(`address ${address.addressId} added`);
+        break;
+      case(Status.loggedWithAddress):
+        if (this.addressSelected) {
+          // saFormGroup is equal to the selected address
+          this.castAddressToForm(this.addressSelected);
+        } else if (this.saFormGroup.valid) {
+          address = this.generateAddress(sa);
+          this.us.addAddress(address).then((res: string) => {
+            this.showAddressList = true;
+          });
+        }
+        break;
+      default:
+        break;
+    }
+  }
+
+  public generateAddress(af: FormGroup) {
+    return {
+      address: {
+        city: af.get('address').value.city,
+        country: af.get('address').value.country,
+        postalCode: af.get('address').value.postalCode,
+        province: af.get('address').value.province,
+        street1: af.get('address').value.street1,
+        street2: af.get('address').value.street2,
+      },
+      addressId: 'A' + Date.now().toString(),
+      customer: {
+        firstName: af.get('customer').value.firstName,
+        lastName: af.get('customer').value.lastName,
+        phoneNumber: af.get('customer').value.phoneNumber,
+      },
+    };
+  }
+
+  private castAddressToForm(a: AddressInfo) {
+    this.saFormGroup.setValue({
+      customer: {
+        firstName: a.customer.firstName,
+        lastName: a.customer.lastName,
+        phoneNumber: a.customer.phoneNumber
+      },
+      address: {
+        street1: a.address.street1,
+        street2: a.address.street2,
+        city: a.address.city,
+        province: a.address.province,
+        postalCode: a.address.postalCode,
+        country: a.address.country,
+      }
+    });
+
+  }
+
+  public showAddressForm() {
+    this.showAddressList = !this.showAddressList;
+    this.addressSelected = null;
   }
 }

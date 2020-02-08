@@ -1,10 +1,12 @@
-import {Component, OnInit,  ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {AddressInfo} from '../../models/addressInfo';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormBuilder, FormGroup, Validators, FormGroupDirective} from '@angular/forms';
 import {UserService} from '../../services/user/user.service';
 import {User} from '../../models/user';
+import {add} from 'ngx-bootstrap/chronos';
+import {Subscription}from  'rxjs';
 
 
 @Component({
@@ -12,12 +14,14 @@ import {User} from '../../models/user';
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss']
 })
-export class UserProfileComponent implements OnInit {
+export class UserProfileComponent implements OnInit, OnDestroy {
 
   public addressList: AddressInfo[];
-  closeResult: string;
-  saFormGroup: FormGroup;
+  public saFormGroup: FormGroup;
   @ViewChild(FormGroupDirective, {static: false}) formGroupDirective: FormGroupDirective;
+  private logInObservable$: Subscription;
+  private addressObservable$: Subscription;
+
 
   constructor(private router: Router,
               private modalService: NgbModal, private formBuilder: FormBuilder,
@@ -27,15 +31,13 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit() {
     this.saFormGroup = this.addressFormBuilder();
-
-    this.us.logInObservable.subscribe((auth) => {
+    this.logInObservable$ = this.us.logInObservable.subscribe((auth) => {
       if (auth) {
-        this.us.userObservable.subscribe((res: User) => {
-          const user = res as User;
-          this.addressList = user.shippingInfo;
+        this.addressObservable$ = this.us.userAddressObservable.subscribe((addresses: AddressInfo[]) => {
+          this.addressList = addresses;
         });
       } else {
-         // TODO: implemement log in modal;
+        // TODO: implemement log in modal;
         console.log('Need to log in');
       }
     });
@@ -79,22 +81,7 @@ export class UserProfileComponent implements OnInit {
 
   private onSubmit(af: FormGroup) {
     console.log(af.value);
-    const address = {
-      addressId: 'A' + Date.now().toString(),
-      customer: {
-        firstName: af.get('customer').value.firstName,
-        lastName: af.get('customer').value.lastName,
-        phoneNumber: af.get('customer').value.phoneNumber,
-      },
-      address: {
-        street1: af.get('address').value.street1,
-        street2: af.get('address').value.street2,
-        city: af.get('address').value.city,
-        province: af.get('address').value.province,
-        postalCode: af.get('address').value.postalCode,
-        country: af.get('address').value.country,
-      },
-    };
+    const address = this.generateAddress(af);
     console.log(address);
 
     this.us.addAddress(address).then((result) => {
@@ -104,5 +91,41 @@ export class UserProfileComponent implements OnInit {
       console.log(error);
     });
 
+  }
+
+  public deleteAddress(addressId: string) {
+    this.us.deleteAddress(addressId).then((result) => {
+      console.log(result);
+    }).catch((error) => {
+      console.error(error);
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.logInObservable$) {
+      this.logInObservable$.unsubscribe();
+    }
+    if (this.addressObservable$) {
+      this.addressObservable$.unsubscribe();
+    }
+  }
+
+  public generateAddress(af: FormGroup) {
+    return {
+      addressId: 'A' + Date.now().toString(),
+        customer: {
+      firstName: af.get('customer').value.firstName,
+        lastName: af.get('customer').value.lastName,
+        phoneNumber: af.get('customer').value.phoneNumber,
+    },
+      address: {
+        street1: af.get('address').value.street1,
+          street2: af.get('address').value.street2,
+          city: af.get('address').value.city,
+          province: af.get('address').value.province,
+          postalCode: af.get('address').value.postalCode,
+          country: af.get('address').value.country,
+      },
+    };
   }
 }

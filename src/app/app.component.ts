@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
     this.us.logInObservable.subscribe((auth) => {
       if (auth && this.cs.getLocalCart().length > 0) {
         this.cs.getLocalCart().forEach(product => {
-          this.us.addProduct(product).then(() => {
+          this.us.addProductToCart(product).then(() => {
           }).catch((err) => {
             console.error(err);
           });
