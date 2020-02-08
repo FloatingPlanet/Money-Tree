@@ -140,10 +140,11 @@
 
     <div *ngSwitchCase="Status.loggedWithAddress">
       <ng-template matStepLabel>Shipping Address</ng-template>
-      <button mat-stroked-button id="add" data-toggle="collapse" href="#panel" color="primary"
-              (click)="triggerAddressForm()"  >Add a new address
+      <button mat-stroked-button id="add" data-toggle="collapse" data-target="#newAddressForm" aria-expanded="false"
+              aria-controls="collapseExample" color="primary"
+              (click)="triggerAddressForm()">Add a new address
       </button>
-      <div id="panel" class="collapse" *ngIf="!this.showAddressList">
+      <div id="newAddressForm" class="collapse">
         <form [formGroup]="saFormGroup">
 
           <div formGroupName="customer">
