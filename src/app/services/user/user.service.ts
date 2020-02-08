@@ -31,12 +31,25 @@ export class UserService {
     });
   }
 
+  /*
+  return login observable
+   */
+  get logInObservable(): any {
+    return this.afAuth.authState;
+  }
+
+  /*
+  return user info observable
+   */
   get userObservable() {
     if (this.currentUserId) {
       return this.Users.doc(this.currentUserId).valueChanges();
     }
   }
 
+  /*
+  return user address observable
+   */
   get userAddressObservable() {
     if (this.isLogged) {
       return this.Users.doc(this.authMetaData.uid).collection('addresses').valueChanges();
@@ -51,21 +64,9 @@ export class UserService {
       ));
   }
 
-  public getCurrentUser() {
-    return new Promise((res, rej) => {
-      this.logInObservable.subscribe((auth) => {
-        if (auth) {
-          this.Users.doc(auth.uid).ref.get().then((doc) => {
-            res(doc.data());
-          }).catch((error) => {
-            rej(error);
-          });
-        }
-      });
-    });
-  }
-
-
+  /*
+  add @product to user' cart collection
+   */
   public addProductToCart(product: Product) {
     return new Promise((res, rej) => {
       this.logInObservable.subscribe((auth) => {
@@ -86,31 +87,53 @@ export class UserService {
 
   }
 
-  get authenticated(): boolean {
-    return this.authMetaData !== null;
+
+  public addAddress(address: AddressInfo) {
+    return new Promise((res, rej) => {
+      this.logInObservable.subscribe((auth) => {
+        if (auth) {
+          const addresses = this.Users.doc(auth.uid).collection('addresses');
+          addresses.doc(address.addressId).set(address).then(() => {
+            console.log(`Added ${address.addressId} to addresses.`);
+            res(address.addressId);
+          }).catch(r => {
+            console.error(r);
+            rej(`cannot add address`);
+          });
+        } else {
+          rej('user is logged out');
+        }
+      });
+    });
   }
 
-  // Returns current user data
-  get currentUser(): any {
-    return this.authenticated ? this.authMetaData : null;
+  public deleteAddress(id: string) {
+    return new Promise((res, rej) => {
+      this.logInObservable.subscribe((auth) => {
+        if (auth) {
+          const addresses = this.Users.doc(auth.uid).collection('addresses');
+          addresses.doc(id).delete().then(() => {
+            console.log(`${id} is deleted`);
+            res(`${id} is deleted`);
+          }).catch((error) => {
+            console.error(error);
+            rej(`failed to delete address ${id}`);
+          });
+        } else {
+          rej(`user is logged out`);
+        }
+      });
+    });
   }
 
-  // Returns
-  get logInObservable(): any {
-    return this.afAuth.authState;
-  }
 
-  // Returns current user UID
-  get currentUserId(): string {
-    return this.authenticated ? this.authMetaData.uid : '';
-  }
-
-  // Anonymous User
-  get currentUserAnonymous(): boolean {
-    return this.authenticated ? this.authMetaData.isAnonymous : false;
-  }
-
-  // Returns current user display name or Guest
+  /* #########################################################################
+  ############################################################################
+       Following functions are the examples how to write spaghetti code.
+       Do not delete them, 以儆效尤！
+  ############################################################################
+  ############################################################################
+   */
   get currentUserName(): string {
     if (!this.authMetaData) {
       return 'Guest';
@@ -121,7 +144,25 @@ export class UserService {
     }
   }
 
-  //// Social Auth ////
+  get authenticated(): boolean {
+    return this.authMetaData !== null;
+  }
+
+  // Returns current user data
+  get currentUser(): any {
+    return this.authenticated ? this.authMetaData : null;
+  }
+
+
+  // Returns current user UID
+  get currentUserId(): string {
+    return this.authenticated ? this.authMetaData.uid : '';
+  }
+
+  // Anonymous User
+  get currentUserAnonymous(): boolean {
+    return this.authenticated ? this.authMetaData.isAnonymous : false;
+  }
 
   githubLogin() {
     const provider = new firebase.auth.GithubAuthProvider();
@@ -238,45 +279,6 @@ export class UserService {
       email: this.currentUser.email,
       username: this.currentUser.displayName
     }, {merge: true});
-  }
-
-
-  public addAddress(address: AddressInfo) {
-    return new Promise((res, rej) => {
-      this.logInObservable.subscribe((auth) => {
-        if (auth) {
-          const addresses = this.Users.doc(auth.uid).collection('addresses');
-          addresses.doc(address.addressId).set(address).then(() => {
-            console.log(`Added ${address.addressId} to addresses.`);
-            res(address.addressId);
-          }).catch(r => {
-            console.error(r);
-            rej(`cannot add address`);
-          });
-        } else {
-          rej('user is logged out');
-        }
-      });
-    });
-  }
-
-  public deleteAddress(id: string) {
-    return new Promise((res, rej) => {
-      this.logInObservable.subscribe((auth) => {
-        if (auth) {
-          const addresses = this.Users.doc(auth.uid).collection('addresses');
-          addresses.doc(id).delete().then(() => {
-            console.log(`${id} is deleted`);
-            res(`${id} is deleted`);
-          }).catch((error) => {
-            console.error(error);
-            rej(`failed to delete address ${id}`);
-          });
-        } else {
-          rej(`user is logged out`);
-        }
-      });
-    });
   }
 }
 
