@@ -22,8 +22,7 @@ export class UserService {
 
   constructor(private afAuth: AngularFireAuth,
               private db: AngularFirestore,
-              private fs: FlashMessageService,
-              private router: Router) {
+              private fs: FlashMessageService) {
     this.Users = this.db.collection('Users');
     this.afAuth.authState.subscribe((auth) => {
       this.authMetaData = auth;
@@ -87,7 +86,9 @@ export class UserService {
 
   }
 
-
+  /*
+  add @address to firebase
+   */
   public addAddress(address: AddressInfo) {
     return new Promise((res, rej) => {
       this.logInObservable.subscribe((auth) => {
@@ -107,6 +108,9 @@ export class UserService {
     });
   }
 
+  /*
+  delete @id address from firebase
+   */
   public deleteAddress(id: string) {
     return new Promise((res, rej) => {
       this.logInObservable.subscribe((auth) => {
