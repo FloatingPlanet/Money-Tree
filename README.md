@@ -1,5 +1,5 @@
 # MONEY TREE
-### Implement a template for e-commerces, focus on basic functionalities by using angular, angular material design and firestore.
+### Implement a template for e-commerces, focus on basic functionalities by using angular, angular material, bootstrap design and firestore.
 ![header](https://github.com/shanerbo/project-money-tree/blob/master/forest%20peak.PNG)
 
 ### Material Design Framework:
@@ -36,8 +36,10 @@
 12. product can only be assigned to one primary/secondary category (admin)
 13. Fix bug in category form caused by primary SKU 
 14. Diasble form submit button!!!!!!!! in everywhere(check out page)
-
+15. In checkout page, set radio button to preset value
+x. Remove all warnings and errors
 ##### CTO: [Otto hu](https://github.com/aWildOtto)
 ##### CEO: [Jiaran Yu](https://github.com/jiaranyu)
 ##### Cleaner: [Erbo Shan](https://github.com/shanerbo)
+##### I don't know what she doing: [Ming Chen](https://github.com/Cecilia999)
 ![money tree](https://github.com/shanerbo/project-money-tree/blob/master/money-tree.jpg)
