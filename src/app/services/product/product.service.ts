@@ -7,7 +7,7 @@ import {CategoryService} from '../category/category.service';
   providedIn: 'root'
 })
 export class ProductService {
-  Products: AngularFirestoreCollection<Product>; // db ref
+  public Products: AngularFirestoreCollection<Product>; // db ref
   public allProducts: Product[];
 
   constructor(private db: AngularFirestore, private cs: CategoryService) {
@@ -16,12 +16,18 @@ export class ProductService {
     this.loadProducts();
   }
 
+  /*
+  retrieve all product from firebase
+   */
   private loadProducts() {
     this.productsObservable.subscribe((data) => {
       this.allProducts = data;
     });
   }
 
+  /*
+  return products observable
+   */
   get productsObservable() {
     return this.Products.valueChanges();
   }
@@ -45,6 +51,9 @@ export class ProductService {
     });
   }
 
+  /*
+  delete @sku from firebase
+   */
   public deleteProducts(sku: string) {
     return new Promise((resolve, reject) => {
       this.Products.doc(sku).delete().then((res) => {
@@ -56,6 +65,9 @@ export class ProductService {
     });
   }
 
+  /*
+  retrieve @sku product from firebase
+   */
   public fetchProduct(sku: string) {
     return new Promise((resolve, reject) => {
       this.Products.doc(sku).ref.get().then((doc) => {

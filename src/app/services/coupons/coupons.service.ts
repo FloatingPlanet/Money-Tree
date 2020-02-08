@@ -19,10 +19,16 @@ export class CouponsService {
     });
   }
 
+  /*
+  return coupons observable
+   */
   get couponsObservable() {
     return this.Coupons.valueChanges();
   }
 
+  /*
+  validate coupon @c with coupons in firebase
+   */
   public validateCoupon(c: string) {
     return new Promise((resolve, reject) => {
       this.Coupons.doc(c).ref.get().then((doc) => {
@@ -38,7 +44,9 @@ export class CouponsService {
     });
   }
 
-
+  /*
+  delete @coupon from firebase
+   */
   public deleteCoupons(coupon: string) {
     return new Promise((resolve, reject) => {
       this.Coupons.doc(coupon).delete().then(() => {
@@ -51,6 +59,9 @@ export class CouponsService {
     });
   }
 
+  /*
+  add new @coupon in firebase
+   */
   public addCoupon(coupon: Coupon) {
     return new Promise((resolve, reject) => {
       this.Coupons.doc(coupon.coupon).ref.get().then((doc) => {
@@ -69,6 +80,9 @@ export class CouponsService {
 
   }
 
+  /*
+  retrieve a coupon using @couponName
+   */
   public fetchCoupon(couponName: string) {
     return new Promise((resolve, reject) => {
       this.Coupons.doc(couponName).ref.get().then((doc) => {

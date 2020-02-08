@@ -10,7 +10,7 @@ import {Product} from '../../models/product';
   providedIn: 'root'
 })
 export class CategoryService {
-  Categories: AngularFirestoreCollection<Category>; // db ref
+  public Categories: AngularFirestoreCollection<Category>; // db ref
   public allCategories = [];
 
   constructor(private db: AngularFirestore) {
@@ -18,16 +18,25 @@ export class CategoryService {
     this.loadCategories();
   }
 
+  /*
+  retrieve all categories from firebase
+   */
   public loadCategories() {
     this.categoriesObservable.subscribe((data) => {
       this.allCategories = data;
     });
   }
 
+  /*
+  return categories observable
+   */
   get categoriesObservable() {
     return this.Categories.valueChanges();
   }
 
+  /*
+  add category to firebase
+   */
   public addCategory(C: Category) {
     this.Categories.doc(C.category.toUpperCase().replace(/\s/g, ''))
       .set(C)
@@ -38,6 +47,9 @@ export class CategoryService {
     });
   }
 
+  /*
+  add product to its category collections
+   */
   public addProductToCategory(C: string, P: Product) {
     const subCategories = this.Categories.doc(C.toUpperCase().replace(/\s/g, '')).collection('products');
     subCategories.doc(P.SKU).set(P).then((res) => {

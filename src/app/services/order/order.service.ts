@@ -21,10 +21,16 @@ export class OrderService {
     });
   }
 
+  /*
+  return oder observable
+   */
   get ordersObservable() {
     return this.Orders.valueChanges();
   }
 
+  /*
+  add @oder to firebase
+   */
   public addOrder(order: Order) {
     return new Promise((resolve, reject) => {
       this.Orders.doc(order.orderNumber).ref.get().then((doc) => {

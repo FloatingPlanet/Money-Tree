@@ -10,6 +10,9 @@ export class AddressService {
   constructor() {
   }
 
+  /*
+  * Canada post API takes @userIpunt to retrieve address.
+  */
   getAddress(userInput: string) {
     console.log('doing searching');
     return from(new Promise((res, rej) => {

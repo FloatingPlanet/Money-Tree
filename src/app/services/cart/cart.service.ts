@@ -9,6 +9,9 @@ import {Observable, Subject} from 'rxjs';
 })
 export class CartService {
 
+  /*
+  localCart_ is cart retrieve from localstorage
+   */
   private localCart = JSON.parse(localStorage.getItem('anonymousCart'));
   private cart: Product[];
   public cartObservable: Observable<Product[]>;
@@ -22,6 +25,9 @@ export class CartService {
   }
 
 
+  /*
+  load user's cart from firebase
+   */
   loadCartFromDB() {
     this.us.logInObservable.subscribe((auth) => {
       console.log('login status changed');
@@ -35,6 +41,9 @@ export class CartService {
     });
   }
 
+  /*
+  add product to in user/guest cart
+   */
   addProduct(product: Product) {
     if (this.us.authenticated) {
       this.us.addProductToCart(product).then((res) => {
@@ -53,6 +62,9 @@ export class CartService {
     return;
   }
 
+  /*
+  return guest's cart
+   */
   public getLocalCart(): Product[] {
     return this.localCart ? this.localCart.products : [];
   }
@@ -61,6 +73,9 @@ export class CartService {
     return this.cart;
   }
 
+  /*
+  delete product from cart
+   */
   public deleteFromCart(SKU: string) {
     const products = this.localCart.products;
     let newProducts = products.filter(x => {
@@ -73,6 +88,9 @@ export class CartService {
     window.location.reload();
   }
 
+  /*
+  clear localstorage cart
+   */
   clearAll() {
     const emptyProduct = {
       products: []
