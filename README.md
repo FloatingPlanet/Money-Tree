@@ -37,6 +37,7 @@
 13. Fix bug in category form caused by primary SKU 
 14. Diasble form submit button!!!!!!!! in everywhere(check out page)
 15. In checkout page, set radio button to preset value
+16. Checkout page need to be fix, checkout flow is in urgent!!!
 x. Remove all warnings and errors
 ##### CTO: [Otto hu](https://github.com/aWildOtto)
 ##### CEO: [Jiaran Yu](https://github.com/jiaranyu)
