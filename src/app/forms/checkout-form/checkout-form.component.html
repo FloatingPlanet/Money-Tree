@@ -310,8 +310,9 @@
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Payment</ng-template>
-    <form [formGroup]="ccFormGroup">
+    <form [formGroup]="ccFormGroup" id="payment-form">
       <mat-form-field>
+
         <label>
           <input matInput placeholder="First name" formControlName="firstName" required>
         </label>
@@ -341,11 +342,3 @@
     </form>
   </mat-step>
 </mat-vertical-stepper>
-<form action="/charge" method="post" id="payment-form">
-  <div class="form-row">
-    <label for="card-element">Credit or debit card</label>
-    <div id="card-element"></div>
-    <div id="card-errors" role="alert"></div>
-  </div>
-  <button>Add payment source</button>
-</form>
