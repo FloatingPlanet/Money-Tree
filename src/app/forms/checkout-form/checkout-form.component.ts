@@ -6,6 +6,8 @@ import {AddressService} from '../../services/address/address.service';
 import {AddressInfo} from '../../models/addressInfo';
 import {UserService} from '../../services/user/user.service';
 
+declare var Stripe;
+
 export enum Status {
   notLogged = 1,
   loggedWithoutAddress,
@@ -35,6 +37,8 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
   public addressSelected: AddressInfo;
   // flag for showing list of saved address
   public showAddressList = true;
+  // Set your publishable key: remember to change this to your live publishable key in production
+  // See your keys here: https://dashboard.stripe.com/account/apikeys
 
   constructor(private formBuilder: FormBuilder, private as: AddressService, private us: UserService) {
   }

@@ -26,6 +26,8 @@
     "@ng-bootstrap/ng-bootstrap": "^4.2.2",
     "@ngrx/effects": "^8.6.0",
     "@ngrx/store": "^8.6.0",
+    "@types/stripe": "^7.13.21",
+    "@types/stripe-v3": "^3.1.15",
     "angular-bootstrap-md": "^8.8.2",
     "angularfire2": "^5.4.2",
     "bootstrap": "^4.4.1",
