@@ -1,6 +1,6 @@
-import {Component, Injectable, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {catchError, debounceTime, distinctUntilChanged, map, switchMap, tap} from 'rxjs/operators';
+import {catchError, debounceTime, distinctUntilChanged, switchMap, tap} from 'rxjs/operators';
 import {Observable, of, Subscription} from 'rxjs';
 import {AddressService} from '../../services/address/address.service';
 import {AddressInfo} from '../../models/addressInfo';
@@ -39,11 +39,13 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
   public showAddressList = true;
   // Set your publishable key: remember to change this to your live publishable key in production
   // See your keys here: https://dashboard.stripe.com/account/apikeys
+  private stripe: any;
 
   constructor(private formBuilder: FormBuilder, private as: AddressService, private us: UserService) {
   }
 
   ngOnInit() {
+    this.stripe = Stripe('pk_test_MqVKH6H9BZ4TJyBeSFWoiOBy0002rDVKa9');
     this.saFormGroup = this.addressFormBuilder();
     this.baFormGroup = this.saFormGroup;
     this.ccFormGroup = this.formBuilder.group({
