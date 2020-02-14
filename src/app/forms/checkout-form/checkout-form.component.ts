@@ -35,9 +35,11 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
   public currentStatus: Status;
   // user pick address from list
   public addressSelected: AddressInfo;
-  public isAddingAddress=false;
+  public isAddingAddress = false;
 
-  constructor(private formBuilder: FormBuilder, private as: AddressService, private us: UserService) {
+  constructor(private formBuilder: FormBuilder,
+              private as: AddressService,
+              private us: UserService) {
   }
 
   ngOnInit() {
@@ -132,14 +134,14 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  onSubmitSaFormGroup(sa: FormGroup) {
+  onSubmitSaFormGroup() {
     let address: AddressInfo;
     switch (this.currentStatus) {
       case(Status.notLogged):
         console.log(`nothing happens here`);
         break;
       case(Status.loggedWithoutAddress):
-        address = this.generateAddress(sa);
+        address = this.generateAddress(this.saFormGroup);
         this.us.addAddress(address).then(r => {
         });
         console.log(`address ${address.addressId} added`);
@@ -148,10 +150,6 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
         if (this.addressSelected) {
           // saFormGroup is equal to the selected address
           this.castAddressToForm(this.addressSelected);
-        } else if (this.saFormGroup.valid) {
-          address = this.generateAddress(sa);
-          this.us.addAddress(address).then((res: string) => {
-          });
         }
         break;
       default:
@@ -199,6 +197,13 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
 
   }
 
+  public addAddressToDB() {
+    const address = this.generateAddress(this.saFormGroup);
+    this.us.addAddress(address).then((res: string) => {
+    });
+
+  }
+
   //
   public triggerAddressForm() {
     this.isAddingAddress = !this.isAddingAddress;
@@ -207,8 +212,15 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
     this.saFormGroup.reset();
   }
 
-  public updateShippingAddress(address: AddressInfo) {
-    this.addressSelected = address;
-    this.castAddressToForm(this.addressSelected);
+  public clickOnExistShippingAddress(address: AddressInfo) {
+    // if and only if use is not adding new address, then
+    // addressSelected will be updated
+    if (!this.isAddingAddress) {
+      this.addressSelected = address;
+      this.castAddressToForm(this.addressSelected);
+    } else {
+      this.addressSelected = null;
+      this.saFormGroup.reset();
+    }
   }
 }
