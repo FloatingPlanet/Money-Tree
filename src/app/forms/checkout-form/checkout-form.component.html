@@ -230,13 +230,16 @@
           </div>
           <button type="reset" mat-stroked-button color="warn" data-toggle="collapse" data-target="#newAddressForm"
                   aria-expanded="false"
-                  aria-controls="collapseExample" (click)="triggerAddressForm()">Cancel
+                  aria-controls="collapseExample" (click)="this.saFormGroup.reset(); this.triggerAddressForm()">Cancel
           </button>
           <button mat-stroked-button color="primary">Save</button>
         </form>
       </div>
       <div>
-        <button class="proceed" mat-button matStepperNext (click)="onSubmitSaFormGroup(saFormGroup)">Proceed to
+        <button type="button" class="proceed" mat-button matStepperNext
+                (click)="onSubmitSaFormGroup(saFormGroup)"
+                [disabled]="this.addressSelected===null || !this.saFormGroup.valid">
+          Proceed to
           Billing
         </button>
       </div>

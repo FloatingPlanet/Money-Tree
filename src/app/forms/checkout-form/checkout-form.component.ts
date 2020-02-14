@@ -210,6 +210,5 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
   public updateShippingAddress(address: AddressInfo) {
     this.addressSelected = address;
     this.castAddressToForm(this.addressSelected);
-
   }
 }
