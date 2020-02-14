@@ -206,7 +206,8 @@
               </label>
             </mat-form-field>
           </div>
-
+          <button mat-stroked-button color="warn">Cancel</button>
+          <button mat-stroked-button color="primary">Save</button>
         </form>
       </div>
       <div *ngIf="this.showAddressList">
@@ -214,7 +215,7 @@
           aria-labelledby="example-radio-group-label"
           class="example-radio-group" [(ngModel)]="this.addressSelected">
           <mat-radio-button class="example-radio-button" [value]="address"
-                            *ngFor="let address of addressList">
+                            *ngFor="let address of addressList" (click)="updateShippingAddress(address)">
             <p>{{address.customer.firstName + ' ' + address.customer.lastName}}</p>
             <p>{{address.customer.phoneNumber}}</p>
             <p>{{address.address.street1}}</p>
@@ -223,12 +224,12 @@
             <p>{{address.address.postalCode}}</p>
           </mat-radio-button>
         </mat-radio-group>
+        <div>
+          <button mat-button matStepperNext (click)="onSubmitSaFormGroup(saFormGroup)">Proceed to Billing</button>
+        </div>
       </div>
 
 
-      <div>
-        <button mat-button matStepperNext (click)="onSubmitSaFormGroup(saFormGroup)">Save and Proceed</button>
-      </div>
     </div>
     <div *ngSwitchDefault>
       <div class="spinner-grow text-dark" role="status">

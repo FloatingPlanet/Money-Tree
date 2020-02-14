@@ -7,6 +7,7 @@ import {AddressInfo} from '../../models/addressInfo';
 import {UserService} from '../../services/user/user.service';
 
 declare var Stripe;
+
 export enum Status {
   notLogged = 1,
   loggedWithoutAddress,
@@ -115,7 +116,7 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
           }))
       ),
       tap(() => this.searching = false)
-    )
+    );
 
   // TODO validate credit card
 
@@ -158,6 +159,7 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
       default:
         break;
     }
+    this.showAddressList = true;
   }
 
   // parse formGroup to object
@@ -205,5 +207,12 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
     this.showAddressList = !this.showAddressList;
     // reset addressSelected user may pick address then decide to add new address
     this.addressSelected = null;
+    this.saFormGroup.reset();
+  }
+
+  public updateShippingAddress(address: AddressInfo) {
+    this.addressSelected = address;
+    this.castAddressToForm(this.addressSelected);
+
   }
 }
