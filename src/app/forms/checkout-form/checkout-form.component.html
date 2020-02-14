@@ -310,8 +310,9 @@
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Payment</ng-template>
-    <form [formGroup]="ccFormGroup">
+    <form [formGroup]="ccFormGroup" id="payment-form">
       <mat-form-field>
+
         <label>
           <input matInput placeholder="First name" formControlName="firstName" required>
         </label>
