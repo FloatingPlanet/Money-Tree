@@ -37,9 +37,11 @@
 13. Fix bug in category form caused by primary SKU 
 14. Diasble form submit button!!!!!!!! in everywhere(check out page)
 15. In checkout page, set radio button to preset value
+16. Checkout page need to be fix, checkout flow is in urgent!!!
+17. can we fucking finishi this project by the end of feb???????????????????
 x. Remove all warnings and errors
 ##### CTO: [Otto hu](https://github.com/aWildOtto)
 ##### CEO: [Jiaran Yu](https://github.com/jiaranyu)
 ##### Cleaner: [Erbo Shan](https://github.com/shanerbo)
 ##### I don't know what she doing: [Ming Chen](https://github.com/Cecilia999)
-![money tree](https://github.com/shanerbo/project-money-tree/blob/master/money-tree.jpg)
+![money tree](https://github.com/shanerbo/project-money-tree/blob/master/rsz_money-tree.png)
