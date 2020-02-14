@@ -1,11 +1,12 @@
-import {Component, Injectable, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {catchError, debounceTime, distinctUntilChanged, map, switchMap, tap} from 'rxjs/operators';
+import {catchError, debounceTime, distinctUntilChanged, switchMap, tap} from 'rxjs/operators';
 import {Observable, of, Subscription} from 'rxjs';
 import {AddressService} from '../../services/address/address.service';
 import {AddressInfo} from '../../models/addressInfo';
 import {UserService} from '../../services/user/user.service';
 
+declare var Stripe;
 export enum Status {
   notLogged = 1,
   loggedWithoutAddress,
