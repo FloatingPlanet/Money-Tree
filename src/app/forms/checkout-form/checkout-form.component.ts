@@ -35,8 +35,7 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
   public currentStatus: Status;
   // user pick address from list
   public addressSelected: AddressInfo;
-  // flag for showing list of saved address
-  public showAddressList = true;
+  public isAddingAddress=false;
 
   constructor(private formBuilder: FormBuilder, private as: AddressService, private us: UserService) {
   }
@@ -152,14 +151,12 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
         } else if (this.saFormGroup.valid) {
           address = this.generateAddress(sa);
           this.us.addAddress(address).then((res: string) => {
-            this.showAddressList = true;
           });
         }
         break;
       default:
         break;
     }
-    this.showAddressList = true;
   }
 
   // parse formGroup to object
@@ -204,7 +201,7 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
 
   //
   public triggerAddressForm() {
-    // this.showAddressList = !this.showAddressList;
+    this.isAddingAddress = !this.isAddingAddress;
     // reset addressSelected user may pick address then decide to add new address
     this.addressSelected = null;
     this.saFormGroup.reset();
