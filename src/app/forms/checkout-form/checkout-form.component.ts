@@ -204,7 +204,7 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
 
   //
   public triggerAddressForm() {
-    this.showAddressList = !this.showAddressList;
+    // this.showAddressList = !this.showAddressList;
     // reset addressSelected user may pick address then decide to add new address
     this.addressSelected = null;
     this.saFormGroup.reset();

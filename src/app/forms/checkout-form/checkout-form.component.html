@@ -140,6 +140,25 @@
 
     <div *ngSwitchCase="Status.loggedWithAddress">
       <ng-template matStepLabel>Shipping Address</ng-template>
+
+      <div>
+        <mat-radio-group
+          aria-labelledby="example-radio-group-label"
+          class="example-radio-group" [(ngModel)]="this.addressSelected">
+          <mat-radio-button class="example-radio-button" [value]="address"
+                            *ngFor="let address of addressList" (click)="updateShippingAddress(address)">
+            <p>{{address.customer.firstName + ' ' + address.customer.lastName}}</p>
+            <p>{{address.customer.phoneNumber}}</p>
+            <p>{{address.address.street1}}</p>
+            <p>{{address.address.street2}}</p>
+            <p>{{address.address.city + ', ' + address.address.province + ', ' + address.address.country}}</p>
+            <p>{{address.address.postalCode}}</p>
+          </mat-radio-button>
+        </mat-radio-group>
+        <div>
+          <button mat-button matStepperNext (click)="onSubmitSaFormGroup(saFormGroup)">Proceed to Billing</button>
+        </div>
+      </div>
       <button mat-stroked-button id="add" data-toggle="collapse" data-target="#newAddressForm" aria-expanded="false"
               aria-controls="collapseExample" color="primary"
               (click)="triggerAddressForm()">Add a new address
@@ -210,25 +229,6 @@
           <button mat-stroked-button color="primary">Save</button>
         </form>
       </div>
-      <div *ngIf="this.showAddressList">
-        <mat-radio-group
-          aria-labelledby="example-radio-group-label"
-          class="example-radio-group" [(ngModel)]="this.addressSelected">
-          <mat-radio-button class="example-radio-button" [value]="address"
-                            *ngFor="let address of addressList" (click)="updateShippingAddress(address)">
-            <p>{{address.customer.firstName + ' ' + address.customer.lastName}}</p>
-            <p>{{address.customer.phoneNumber}}</p>
-            <p>{{address.address.street1}}</p>
-            <p>{{address.address.street2}}</p>
-            <p>{{address.address.city + ', ' + address.address.province + ', ' + address.address.country}}</p>
-            <p>{{address.address.postalCode}}</p>
-          </mat-radio-button>
-        </mat-radio-group>
-        <div>
-          <button mat-button matStepperNext (click)="onSubmitSaFormGroup(saFormGroup)">Proceed to Billing</button>
-        </div>
-      </div>
-
 
     </div>
     <div *ngSwitchDefault>
