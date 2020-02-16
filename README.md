@@ -39,6 +39,7 @@
 15. In checkout page, set radio button to preset value
 16. Checkout page need to be fix, checkout flow is in urgent!!!
 17. can we fucking finishi this project by the end of feb???????????????????
+18. finish checkout next week
 x. Remove all warnings and errors
 ##### CTO: [Otto hu](https://github.com/aWildOtto)
 ##### CEO: [Jiaran Yu](https://github.com/jiaranyu)
