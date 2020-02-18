@@ -7,7 +7,17 @@
   2. [Material Design for Bootstrap](https://github.com/FezVrasta/bootstrap-material-design)
 
 ## Important!!!!!!!!!!!! everything related to user'data, you have to check if user still loged in by using this.us.logInObservable()
-
+## new UI Framework: https://semantic-ui.com/elements/step.html#step
+    61%: Extra costs (shipping, taxes, fees) were too high
+    35%: Didn’t want to create an account
+    27%: The checkout process was too long or complicated
+    24%: Couldn’t see or calculate total order cost up-front
+    22%: Reported the website had errors or crashed.
+    18% Didn’t trust the online store with their credit card information
+    16%: Delivery timeline was much too slow
+    10%: Didn’t believe the returns policy to be fair or satisfactory
+    8%: Didn’t see their preferred method of payment
+    .5%: Their credit card was declined
 #### TODO: 
 ![diagram](https://github.com/shanerbo/project-money-tree/blob/master/G390i.png)
 1. Third party payment service.
