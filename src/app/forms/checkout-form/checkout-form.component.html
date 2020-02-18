@@ -239,7 +239,7 @@
     <div>
       <button type="button" class="proceed" mat-button matStepperNext
               (click)="onSubmitSaFormGroup()"
-              [disabled]="this.addressSelected===null || !this.saFormGroup.valid">
+              [disabled]="this.addressSelected===null || !this.saFormGroup.valid || this.isAddingAddress">
         Proceed to
         Billing
       </button>

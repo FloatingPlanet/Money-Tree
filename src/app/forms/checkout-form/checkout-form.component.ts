@@ -150,6 +150,8 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
         if (this.addressSelected) {
           // saFormGroup is equal to the selected address
           this.castAddressToForm(this.addressSelected);
+        } else {
+          console.log(this.saFormGroup);
         }
         break;
       default:
