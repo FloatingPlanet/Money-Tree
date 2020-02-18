@@ -1,7 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {catchError, debounceTime, distinctUntilChanged, switchMap, tap} from 'rxjs/operators';
-import {Observable, of, Subscription} from 'rxjs';
+import {Subscription} from 'rxjs';
 import {AddressService} from '../../services/address/address.service';
 import {AddressInfo} from '../../models/addressInfo';
 import {UserService} from '../../services/user/user.service';
@@ -22,6 +21,16 @@ export enum Status {
 
 
 export class CheckoutFormComponent implements OnInit, OnDestroy {
+
+  constructor(private formBuilder: FormBuilder,
+              private as: AddressService,
+              private us: UserService) {
+  }
+
+  get Status() {
+    return Status;
+  }
+
   public isLinear = true;
   public sameAddress = true;
   public saFormGroup: FormGroup;
@@ -36,11 +45,6 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
   // user pick address from list
   public addressSelected: AddressInfo;
   public isAddingAddress = false;
-
-  constructor(private formBuilder: FormBuilder,
-              private as: AddressService,
-              private us: UserService) {
-  }
 
   ngOnInit() {
     this.saFormGroup = this.addressFormBuilder();
@@ -71,10 +75,6 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
     });
   }
 
-  get Status() {
-    return Status;
-  }
-
   public changeBAform() {
     if (!this.sameAddress) {
       this.baFormGroup = this.saFormGroup;
@@ -102,23 +102,6 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
   }
 
   // TODO auto fill out all fields
-  search = (text$: Observable<string>) =>
-    text$.pipe(
-      debounceTime(300),
-      distinctUntilChanged(),
-      tap(() => this.searching = true),
-      switchMap(term =>
-        this.as.getAddress(term).pipe(
-          tap(() => this.searchFailed = false),
-          catchError(() => {
-            this.searchFailed = true;
-            console.log('search failed');
-            return of([]);
-          }))
-      ),
-      tap(() => this.searching = false)
-    );
-
   // TODO validate credit card
 
   submitOrder() {
@@ -206,7 +189,6 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
 
   }
 
-  //
   public triggerAddressForm() {
     this.isAddingAddress = !this.isAddingAddress;
     // reset addressSelected user may pick address then decide to add new address
