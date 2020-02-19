@@ -83,6 +83,7 @@ import {CheckoutFormComponent} from './forms/checkout-form/checkout-form.compone
 import {ProductQuickLookComponent} from './components/product-quick-look/product-quick-look.component';
 import {HttpClientModule} from '@angular/common/http';
 import {AddressService} from './services/address/address.service';
+import { MidBannerComponent } from './mid-banner/mid-banner.component';
 
 @NgModule({
   declarations: [
@@ -113,6 +114,7 @@ import {AddressService} from './services/address/address.service';
     CheckoutPageComponent,
     CheckoutFormComponent,
     ProductQuickLookComponent,
+    MidBannerComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
