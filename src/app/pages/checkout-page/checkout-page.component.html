@@ -1,17 +1,16 @@
-<div class="container mt-5">
-  <div class="row">
-    <div class="col-sm-8">
-      <app-checkout-form></app-checkout-form>
-    </div>
-
-    <div class="col-sm-4">
-      <app-order-summary [orders]="orders"></app-order-summary>
-      <button mat-flat-button color="primary" (click)="submitOrder()"
-              [disabled]="!this.baFormGroup?.valid || !this.saFormGroup?.valid || !this.ccFormGroup?.valid"> Place
-        Order
-      </button>
-      <app-product-item *ngFor="let product of orders" [product]="product"></app-product-item>
-    </div>
-
+<div class="row">
+  <div class="col-sm-8">
+    <app-checkout-form></app-checkout-form>
   </div>
+
+  <div class="col-sm-4">
+    <app-order-summary [orders]="orders"></app-order-summary>
+    <button mat-flat-button color="primary" (click)="submitOrder()"
+            [disabled]="!this.baFormGroup?.valid || !this.saFormGroup?.valid || !this.ccFormGroup?.valid"> Place
+      Order
+    </button>
+    <app-product-item *ngFor="let product of orders" [product]="product"></app-product-item>
+  </div>
+
 </div>
+
