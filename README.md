@@ -7,7 +7,8 @@
   2. [Material Design for Bootstrap](https://github.com/FezVrasta/bootstrap-material-design)
 
 ## Important!!!!!!!!!!!! everything related to user'data, you have to check if user still loged in by using this.us.logInObservable()
-## new UI Framework: https://semantic-ui.com/elements/step.html#step
+~~## new UI Framework: https://semantic-ui.com/elements/step.html#step~~
+    why user gives up checkout
     61%: Extra costs (shipping, taxes, fees) were too high
     35%: Didn’t want to create an account
     27%: The checkout process was too long or complicated
@@ -54,5 +55,4 @@ x. Remove all warnings and errors
 ##### CTO: [Otto hu](https://github.com/aWildOtto)
 ##### CEO: [Jiaran Yu](https://github.com/jiaranyu)
 ##### Cleaner: [Erbo Shan](https://github.com/shanerbo)
-##### I don't know what she doing: [Ming Chen](https://github.com/Cecilia999)
 ![money tree](https://github.com/shanerbo/project-money-tree/blob/master/rsz_money-tree.png)
