@@ -5,9 +5,10 @@
 ### Material Design Framework:
   1. [MDB pro (pricy)](https://mdbootstrap.com/products/angular-ui-kit/)
   2. [Material Design for Bootstrap](https://github.com/FezVrasta/bootstrap-material-design)
+  3. [Bootstrap](https://getbootstrap.com/docs/4.4/layout/overview/)
 
 ## Important!!!!!!!!!!!! everything related to user'data, you have to check if user still loged in by using this.us.logInObservable()
-~~## new UI Framework: https://semantic-ui.com/elements/step.html#step~~
+~~### new UI Framework: https://semantic-ui.com/elements/step.html#step~~
     why user gives up checkout
     61%: Extra costs (shipping, taxes, fees) were too high
     35%: Didn’t want to create an account
@@ -40,17 +41,15 @@
         ~~- If user update its cart without logging, its shopping cart shoule be updated once user login.~~
 6. Move to Amplify (not for now)
 7. In modify product page, we accomplished progress bar badly, need to find a elegant way to implement it!
-8. User info page
+8. User info page (WIP)
 9. ~~Logged in user are allowed to browse their orders~~
 10. Add image while user adding new product
-11. index page
-12. product can only be assigned to one primary/secondary category (admin)
+11. index page (WIP)
+12. product can only be assigned to one primary/secondary category (admin) (WIP)
 13. Fix bug in category form caused by primary SKU 
 14. Diasble form submit button!!!!!!!! in everywhere(check out page)
 15. In checkout page, set radio button to preset value
 16. Checkout page need to be fix, checkout flow is in urgent!!!
-17. can we fucking finishi this project by the end of feb???????????????????
-18. finish checkout next week
 x. Remove all warnings and errors
 ##### CTO: [Otto hu](https://github.com/aWildOtto)
 ##### CEO: [Jiaran Yu](https://github.com/jiaranyu)
