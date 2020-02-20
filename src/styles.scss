@@ -39,10 +39,18 @@ body {
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) {
   .card-view-custom-width {
-    width: 75%;
+    width: 60%;
   }
   .mid-banner-view-custom-width {
-    width: 90%;
+    width: 70%;
+  }
+}
+@media (min-width: 1400px) {
+  .card-view-custom-width {
+    width: 55%;
+  }
+  .mid-banner-view-custom-width {
+    width: 65%;
   }
 }
 
@@ -52,6 +60,12 @@ body {
     width: 55%;
   }
   .mid-banner-view-custom-width {
-    width: 70%;
+    width: 65%;
   }
+}
+.logo{
+  width: 100%;
+  max-width: 120px;
+  height: auto;
+  padding-right: 1vh;
 }
