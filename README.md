@@ -51,7 +51,7 @@
 15. In checkout page, set radio button to preset value
 16. Checkout page need to be fix, checkout flow is in urgent!!!
 17. ElasticSearch[Kibana](https://demo.elastic.co/app/kibana#/home?_g=())
-x. Remove all warnings and errors
+99. Remove all warnings and errors
 ##### CTO: [Otto hu](https://github.com/aWildOtto)
 ##### CEO: [Jiaran Yu](https://github.com/jiaranyu)
 ##### Cleaner: [Erbo Shan](https://github.com/shanerbo)
