@@ -1,11 +1,10 @@
 <mat-toolbar color="#4C4C4C">
   <mat-toolbar-row>
-    <button mat-button [routerLink]="['/']">
-      <span class="badge badge-secondary">LOGO</span>
+    <a [routerLink]="['/']"><img
+      src="https://raw.githubusercontent.com/shanerbo/project-money-tree/index-page/src/assets/logo_planet.png?token=AFLS5N67ZRBQ3PGI3UFASKS6K5PMA"
+      class="logo"></a>
 
-    </button>
-
-    <form class="form-inline my-2 my-lg-0">
+    <form class="form-inline my-2 my-lg-0 d-none d-sm-block">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
