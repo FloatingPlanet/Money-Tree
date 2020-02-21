@@ -3,6 +3,33 @@ p {
 }
 
 .proceed {
-  position: absolute;
-  right: 0;
+  margin:12px;
+  float:right;
+  background: darksalmon;
+  color: white
+}
+.breadcrumb{
+  background: linen;
+  margin:0px;
+
+  .breadcrumb-item{
+    font-size: larger;
+    color: darksalmon;
+  }
+}
+#saField{
+  border-radius: 10px;
+  overflow:auto;
+  background: linen;
+  outline-color: linen ;
+  #saForm{
+    background: white;
+    outline-color: linen ;
+    padding:10px;
+
+  }
+}
+
+#baField{
+  margin-top:20px;
 }

@@ -31,7 +31,7 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
     return Status;
   }
 
-  public isLinear = true;
+  // public isLinear = true;
   public sameAddress = true;
   public saFormGroup: FormGroup;
   public baFormGroup: FormGroup;
