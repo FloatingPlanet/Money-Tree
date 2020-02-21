@@ -1,3 +1,7 @@
-<app-nav-bar *ngIf="logInfo" [info]="logInfo"></app-nav-bar>
+<!-- this is for keep nav bar consistent with mid banner-->
+<div class="container-fluid mid-banner-view-custom-width">
+  <app-nav-bar *ngIf="logInfo" [info]="logInfo"></app-nav-bar>
+</div>
+
 <router-outlet *ngIf="logInfo"></router-outlet>
 
