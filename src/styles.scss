@@ -38,7 +38,7 @@ body {
 
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) {
-  .card-view-custom-width {
+  .main-section-view-custom-width {
     width: 60%;
   }
   .mid-banner-view-custom-width {
@@ -46,7 +46,7 @@ body {
   }
 }
 @media (min-width: 1400px) {
-  .card-view-custom-width {
+  .main-section-view-custom-width {
     width: 55%;
   }
   .mid-banner-view-custom-width {
@@ -56,7 +56,7 @@ body {
 
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1500px) {
-  .card-view-custom-width {
+  .main-section-view-custom-width {
     width: 55%;
   }
   .mid-banner-view-custom-width {
@@ -65,7 +65,7 @@ body {
 }
 .logo{
   width: 100%;
-  max-width: 120px;
+  max-width: 160px;
   height: auto;
   padding-right: 1vh;
 }
