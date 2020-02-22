@@ -1,0 +1,7 @@
+<ul class="nav justify-content-center">
+  <li class="nav-item" *ngFor="let cat of this.allCategories">
+    <a class="nav-link active" href="#">{{cat?.category}}</a>
+  <li class="nav-item">
+    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+  </li>
+</ul>

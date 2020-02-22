@@ -31,41 +31,60 @@ body {
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
-  .container-fluid {
-    width: 100%;
+  .nav-bar-view-custom-width {
+    width: 90%;
   }
+  .mid-banner-view-custom-width {
+    width: 85%;
+  }
+  .main-section-view-custom-width {
+    width: 75%;
+  }
+
+
 }
 
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) {
-  .card-view-custom-width {
-    width: 60%;
+  .nav-bar-view-custom-width {
+    width: 85%;
+  }
+  .mid-banner-view-custom-width {
+    width: 80%;
+  }
+  .main-section-view-custom-width {
+    width: 65%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .nav-bar-view-custom-width {
+    width: 75%;
   }
   .mid-banner-view-custom-width {
     width: 70%;
   }
-}
-@media (min-width: 1400px) {
-  .card-view-custom-width {
-    width: 55%;
-  }
-  .mid-banner-view-custom-width {
-    width: 65%;
+  .main-section-view-custom-width {
+    width: 60%;
   }
 }
 
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1500px) {
-  .card-view-custom-width {
-    width: 55%;
+  .nav-bar-view-custom-width {
+    width: 70%;
   }
   .mid-banner-view-custom-width {
     width: 65%;
   }
+  .main-section-view-custom-width {
+    width: 55%;
+  }
 }
-.logo{
+
+.logo {
   width: 100%;
-  max-width: 120px;
+  max-width: 160px;
   height: auto;
   padding-right: 1vh;
 }
