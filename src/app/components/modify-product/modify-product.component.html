@@ -1,12 +1,19 @@
 <div *ngIf=" false">
   <mat-progress-bar color="green" mode="indeterminate"></mat-progress-bar>
 </div>
+
 <div class="container">
+
   <div class="row">
     <div class="col-sm-9">
       <h1>Product</h1>
       <app-product-form [succeeded]="this.succeeded" (formModified)="iNeedaUpdateProduct($event)"
       ></app-product-form>
+    </div>
+    <div class="overlay">
+      <div class="spinner-wrapper">
+        <app-loading-spinner *ngIf="!succeeded"></app-loading-spinner>
+      </div>
     </div>
     <div class="col-sm-3">
       <h1>Category</h1>
