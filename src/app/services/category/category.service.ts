@@ -38,12 +38,12 @@ export class CategoryService {
   add category to firebase
    */
   public addCategory(C: Category) {
-    return new Promise((result, reject) => {
+    return new Promise((resolve, reject) => {
       this.Categories.doc(C.category.toUpperCase().replace(/\s/g, ''))
         .set(C)
         .then((res) => {
           console.log('add Category: ' + C.category);
-          result(C.category);
+          resolve(C.category);
         }).catch(error => {
         reject(error);
         console.error(error);
@@ -63,4 +63,18 @@ export class CategoryService {
     });
   }
 
+  /*
+  load specific products based on given category
+   */
+  public fetchCategoryProducts(C: string) {
+    return new Promise((resove, reject) => {
+      db.collection('Categories')
+        .doc(C)
+        .collection('products')
+        .get()
+        .then((res) => {
+
+      });
+    });
+  }
 }
