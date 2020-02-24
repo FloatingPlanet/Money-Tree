@@ -4,15 +4,15 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-sm-9">
+    <div class="col-sm-8">
       <h1>Product</h1>
       <app-product-form (formModified)="iNeedaUpdateProduct($event)"
       ></app-product-form>
     </div>
-    <div class="loading-spinner-overlay" *ngIf="!this.succeeded && this.submitted">
+    <div class="loading-spinner-overlay" *ngIf="this.loading">
       <app-loading-spinner></app-loading-spinner>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-4">
       <h1>Category</h1>
       <app-category-form (selectedCategories)="gimmeDatCategories($event)"
       ></app-category-form>

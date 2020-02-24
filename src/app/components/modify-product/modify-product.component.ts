@@ -10,8 +10,7 @@ import {ProductService} from 'src/app/services/product/product.service';
 })
 export class ModifyProductComponent implements OnInit {
   public selectedCategories: string[];
-  public succeeded = false;
-  public submitted = false;
+  public loading = false;
 
   constructor(private ps: ProductService, private location: Location) {
 
@@ -27,13 +26,12 @@ export class ModifyProductComponent implements OnInit {
 
   public iNeedaUpdateProduct(fg: FormGroup) {
     console.log(fg.value + ' : I am parent, I got detail');
-    this.submitted = true;
+    this.loading = true;
     // show loading spinner
     fg.patchValue({productCategory: this.selectedCategories ? this.selectedCategories : []});
     this.ps.addProduct(fg.value).then(result => {
         console.log(result);
-        this.succeeded = true;
-        this.submitted = false;
+        this.loading = false;
         setTimeout(() => {
           // jump back to previous page
           this.location.back();
