@@ -14,7 +14,6 @@ export class CategoriesBarComponent implements OnInit {
   constructor(private cs: CategoryService) {
     this.cs.categoriesObservable.subscribe((cats) => {
       this.allCategories = cats;
-      console.log(this.allCategories);
     });
   }
 

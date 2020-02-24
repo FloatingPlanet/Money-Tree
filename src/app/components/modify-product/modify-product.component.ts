@@ -9,6 +9,7 @@ import {ProductService} from 'src/app/services/product/product.service';
 })
 export class ModifyProductComponent implements OnInit {
   public selectedCategories: string[];
+  public succeeded = false;
 
   constructor(private ps: ProductService) {
 
@@ -25,7 +26,11 @@ export class ModifyProductComponent implements OnInit {
   public iNeedaUpdateProduct(fg: FormGroup) {
     console.log(fg.value + ' : I am parent, I got detail');
     fg.patchValue({productCategory: this.selectedCategories ? this.selectedCategories : []});
-    this.ps.addProduct(fg.value).then(result => console.log(result)).catch(error => console.error(error));
+    this.ps.addProduct(fg.value).then(result => {
+        console.log(result);
+        this.succeeded = !this.succeeded;
+      }
+    ).catch(error => console.error(error));
   }
 
 
