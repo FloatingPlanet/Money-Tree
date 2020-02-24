@@ -19,5 +19,4 @@ export class CategoriesBarComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
+import { Location } from '@angular/common';
 import {ProductService} from 'src/app/services/product/product.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class ModifyProductComponent implements OnInit {
   public succeeded = false;
   public submitted = false;
 
-  constructor(private ps: ProductService) {
+  constructor(private ps: ProductService, private location: Location) {
 
   }
 
@@ -32,6 +33,11 @@ export class ModifyProductComponent implements OnInit {
         console.log(result);
         this.succeeded = true;
         this.submitted = false;
+        setTimeout(() => {
+          // jump back to previous page
+          this.location.back();
+        },
+        500);
       }
     ).catch(error => console.error(error));
   }
