@@ -7,12 +7,12 @@
   <div class="row">
     <div class="col-sm-9">
       <h1>Product</h1>
-      <app-product-form [succeeded]="this.succeeded" (formModified)="iNeedaUpdateProduct($event)"
+      <app-product-form (formModified)="iNeedaUpdateProduct($event)"
       ></app-product-form>
     </div>
-    <div class="overlay">
+    <div class="overlay" *ngIf="!this.succeeded && this.submitted">
       <div class="spinner-wrapper">
-        <app-loading-spinner *ngIf="!succeeded"></app-loading-spinner>
+        <app-loading-spinner ></app-loading-spinner>
       </div>
     </div>
     <div class="col-sm-3">
