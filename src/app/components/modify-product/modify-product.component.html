@@ -10,10 +10,8 @@
       <app-product-form (formModified)="iNeedaUpdateProduct($event)"
       ></app-product-form>
     </div>
-    <div class="overlay" *ngIf="!this.succeeded && this.submitted">
-      <div class="spinner-wrapper">
-        <app-loading-spinner ></app-loading-spinner>
-      </div>
+    <div class="loading-spinner-overlay" *ngIf="!this.succeeded && this.submitted">
+      <app-loading-spinner></app-loading-spinner>
     </div>
     <div class="col-sm-3">
       <h1>Category</h1>
