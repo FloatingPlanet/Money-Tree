@@ -38,12 +38,16 @@ export class CategoryService {
   add category to firebase
    */
   public addCategory(C: Category) {
-    this.Categories.doc(C.category.toUpperCase().replace(/\s/g, ''))
-      .set(C)
-      .then((res) => {
-        console.log('add Category: ' + C.category);
-      }).catch(error => {
-      console.error(error);
+    return new Promise((result, reject) => {
+      this.Categories.doc(C.category.toUpperCase().replace(/\s/g, ''))
+        .set(C)
+        .then((res) => {
+          console.log('add Category: ' + C.category);
+          result(C.category);
+        }).catch(error => {
+        reject(error);
+        console.error(error);
+      });
     });
   }
 

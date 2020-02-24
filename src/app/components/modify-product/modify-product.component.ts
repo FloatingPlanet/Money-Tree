@@ -28,6 +28,7 @@ export class ModifyProductComponent implements OnInit {
   public iNeedaUpdateProduct(fg: FormGroup) {
     console.log(fg.value + ' : I am parent, I got detail');
     this.submitted = true;
+    // show loading spinner
     fg.patchValue({productCategory: this.selectedCategories ? this.selectedCategories : []});
     this.ps.addProduct(fg.value).then(result => {
         console.log(result);
