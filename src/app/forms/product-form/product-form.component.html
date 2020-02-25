@@ -2,7 +2,7 @@
   <div class="form-container">
     <label>
       <mat-form-field>
-        <input matInput type="text" formControlName="SKU" required placeholder="SKU">
+        <input matInput type="text" formControlName="SKU" required placeholder="SKU" [readonly]="this.notEditable">
       </mat-form-field>
     </label>
     <label>
@@ -17,7 +17,7 @@
     </label>
     <label>
       <mat-form-field>
-        <input matInput type="text" formControlName="productSummary" required placeholder="Product Summary">
+        <input matInput type="text" formControlName="productSummary" placeholder="Product Summary">
       </mat-form-field>
     </label>
     <label>
@@ -46,10 +46,14 @@
       <mat-form-field>
         <input matInput type="text" formControlName="productSeller" placeholder="Product Seller" value="NA">
       </mat-form-field>
-    </label>
-<!--    <p>-->
-<!--      {{ productForm.value | json }}-->
-<!--    </p>-->
+    </label> <label>
+    <mat-form-field>
+      <input matInput type="text" formControlName="productImageUrls" placeholder="Product Image Url" value="NA">
+    </mat-form-field>
+  </label>
+    <!--    <p>-->
+    <!--      {{ productForm.value | json }}-->
+    <!--    </p>-->
     <button type="submit" [disabled]="!productForm.valid">Submit</button>
   </div>
 </form>

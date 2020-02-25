@@ -14,6 +14,7 @@ export class CategoryFormComponent implements OnInit, OnDestroy {
   public allCategories: Category[];
   private categoriesObservable$: Subscription;
   private dummyHolder: any;
+  public succeeded = false;
 
   constructor(private formBuilder: FormBuilder, private cs: CategoryService) {
 
@@ -41,7 +42,13 @@ export class CategoryFormComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.cs.addCategory(this.categoryForm.value);
+    this.succeeded = true;
+    // show loading spinner
+    this.cs.addCategory(this.categoryForm.value).then((res) => {
+      setTimeout(() => {
+        this.succeeded = false;
+      }, 300);
+    });
     this.categoryForm.reset();
   }
 

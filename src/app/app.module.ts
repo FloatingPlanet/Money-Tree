@@ -85,6 +85,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {AddressService} from './services/address/address.service';
 import { MidBannerComponent } from './components/mid-banner/mid-banner.component';
 import { CategoriesBarComponent } from './components/categories-bar/categories-bar.component';
+import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -117,6 +118,7 @@ import { CategoriesBarComponent } from './components/categories-bar/categories-b
     ProductQuickLookComponent,
     MidBannerComponent,
     CategoriesBarComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
