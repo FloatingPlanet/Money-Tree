@@ -66,15 +66,9 @@ export class CategoryService {
   /*
   load specific products based on given category
    */
-  public fetchCategoryProducts(C: string) {
-    return new Promise((resove, reject) => {
-      db.collection('Categories')
+  public specificCategoryProductsObservable(C: string) {
+      return this.db.collection('Categories')
         .doc(C)
-        .collection('products')
-        .get()
-        .then((res) => {
-
-      });
-    });
+        .collection('products').valueChanges();
   }
 }

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CategoryService} from '../../services/category/category.service';
 import {Category} from '../../models/category';
+import {Product} from '../../models/product';
 
 @Component({
   selector: 'app-categories-bar',
@@ -18,5 +19,12 @@ export class CategoriesBarComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  public getProducts(category: string) {
+    console.log(category.toUpperCase());
+    this.cs.specificCategoryProductsObservable(category.toUpperCase()).subscribe((res: Product[])=>{
+      console.log(res);
+    });
   }
 }
