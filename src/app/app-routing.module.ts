@@ -31,7 +31,8 @@ const routes: Routes = [
   {
     path: 'category', component: CategoryProductsPageComponent,
     children: [
-      {path: '/:category', component: MainPageComponent},
+      {path: ':category', component: MainPageComponent},
+      {path: '**', component: PageNotFoundComponent},
     ]
   },
   {
