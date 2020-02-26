@@ -95,3 +95,15 @@ body {
   width: 100%;
   height: 100%;
 }
+@import '~@angular/material/theming';
+
+// Define a custom typography config that overrides the font-family as well as the
+// `headlines` and `body-1` levels.
+$custom-typography: mat-typography-config(
+  $font-family: 'Roboto, monospace',
+  $headline: mat-typography-level(16px, 18px, 700),
+  $body-1: mat-typography-level(12px, 14px, 500),
+  $title: mat-typography-level(8px, 10px, 500)
+);
+
+@include mat-core($custom-typography);

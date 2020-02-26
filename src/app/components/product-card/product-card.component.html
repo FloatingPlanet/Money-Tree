@@ -2,7 +2,10 @@
   <mat-card-content>
     <div class="img-wrapper" (mouseenter)="this.buttonShow =!this.buttonShow"
          (mouseleave)="this.buttonShow = !this.buttonShow">
-      <img mat-card-image class="img-responsive" src="{{product.productImageUrls[0]}}" alt="productImg">
+      <div>
+        <span class="badge badge-pill badge-danger">HOTs</span>
+        <img mat-card-image class="img-responsive" src="{{product.productImageUrls[0]}}" alt="productImg">
+      </div>
       <div class="img-overlay">
         <button *ngIf="this.buttonShow" type="button" class="btn btn-sm btn-secondary btn-block"
                 data-toggle="modal" data-target="#quickLook">
@@ -13,19 +16,18 @@
     <mat-card-title class="title">{{product.productName}}</mat-card-title>
     <mat-card-subtitle class="price">CAD ${{product.productPrice}}</mat-card-subtitle>
   </mat-card-content>
-  <span class="badge badge-secondary">HOT</span>
   <mat-card-actions class="d-flex justify-content-end">
-    <button mat-icon-button>
-      <mat-icon (click)="addToCart(product)" aria-hidden="false" aria-label="add to cart">add_shopping_cart
+    <button mat-icon-button aria-label="add to cart" (click)="addToCart(product)" >
+      <mat-icon>add_shopping_cart
       </mat-icon>
     </button>
-    <button (click)="like=!like" *ngIf="like" mat-icon-button>
-      <mat-icon aria-hidden="false" aria-label="add to favorite">favorite
-      </mat-icon>
+    <button mat-icon-button color="warn" (click)="like=!like" *ngIf="like"
+            aria-label="add to favorite">
+      <mat-icon>favorite</mat-icon>
     </button>
-    <button (click)="like=!like" *ngIf="!like" mat-icon-button>
-      <mat-icon aria-hidden="false" aria-label="remove from favorite">favorite_border
-      </mat-icon>
+    <button mat-icon-button (click)="like=!like" *ngIf="!like"
+            aria-label="remove from favorite">
+      <mat-icon>favorite_border</mat-icon>
     </button>
   </mat-card-actions>
 </mat-card>
