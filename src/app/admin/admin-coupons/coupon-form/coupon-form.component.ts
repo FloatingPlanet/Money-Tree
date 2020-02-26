@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, Validators, FormGroup, ValidatorFn, AbstractControl} from '@angular/forms';
 import {CouponsService} from 'src/app/services/coupons/coupons.service';
-import {Coupon} from '../../models/coupon';
+import {Coupon} from '../../../models/coupon';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 
