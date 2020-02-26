@@ -17,6 +17,7 @@ import {UserPageComponent} from './user/user-page/user-page.component';
 import {UserOrdersComponent} from './user/user-orders/user-orders.component';
 import {UserProfileComponent} from './user/user-profile/user-profile.component';
 import {CheckoutPageComponent} from './pages/checkout-page/checkout-page.component';
+import {CategoryProductsPageComponent} from './pages/category-products-page/category-products-page.component';
 
 
 const routes: Routes = [
@@ -27,6 +28,12 @@ const routes: Routes = [
   {path: 'checkout', component: CheckoutPageComponent},
   {path: 'no-access', component: NoAccessComponent},
   {path: 'info/:SKU', component: ProductInfoComponent},
+  {
+    path: 'category', component: CategoryProductsPageComponent,
+    children: [
+      {path: '/:category', component: MainPageComponent},
+    ]
+  },
   {
     path: 'admin', component: AdminPageComponent,
     children: [
