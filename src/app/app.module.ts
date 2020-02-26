@@ -86,6 +86,7 @@ import {AddressService} from './services/address/address.service';
 import { MidBannerComponent } from './components/mid-banner/mid-banner.component';
 import { CategoriesBarComponent } from './components/categories-bar/categories-bar.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import { CategoryProductsPageComponent } from './pages/category-products-page/category-products-page.component';
 
 @NgModule({
   declarations: [
@@ -119,6 +120,7 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
     MidBannerComponent,
     CategoriesBarComponent,
     LoadingSpinnerComponent,
+    CategoryProductsPageComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),

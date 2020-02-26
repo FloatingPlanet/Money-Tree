@@ -22,7 +22,6 @@ export class CategoriesBarComponent implements OnInit {
   }
 
   public getProducts(category: string) {
-    console.log(category.toUpperCase());
     this.cs.specificCategoryProductsObservable(category.toUpperCase()).subscribe((res: Product[])=>{
       console.log(res);
     });
