@@ -64,16 +64,16 @@ import {OrderSummaryComponent} from './components/order-summary/order-summary.co
 import {AdminPageComponent} from './pages/admin-page/admin-page.component';
 import {AdminOrdersComponent} from './admin/admin-orders/admin-orders.component';
 import {AdminProductsComponent} from './admin/admin-products/admin-products.component';
-import {CategoryFormComponent} from './forms/category-form/category-form.component';
+import {CategoryFormComponent} from './admin/admin-products/category-form/category-form.component';
 import {ModalModule} from 'ngx-bootstrap/modal';
-import {ProductFormComponent} from './forms/product-form/product-form.component';
+import {ProductFormComponent} from './admin/admin-products/product-form/product-form.component';
 import {ModifyProductComponent} from './components/modify-product/modify-product.component';
 import {CategoryService} from './services/category/category.service';
 import {ProductInfoComponent} from './components/product-info/product-info.component';
 import {CouponsService} from './services/coupons/coupons.service';
 import {FlexModule} from '@angular/flex-layout';
 import {AdminCouponsComponent} from './admin/admin-coupons/admin-coupons.component';
-import {CouponFormComponent} from './forms/coupon-form/coupon-form.component';
+import {CouponFormComponent} from './admin/admin-coupons/coupon-form/coupon-form.component';
 import {CartService} from './services/cart/cart.service';
 import {UserPageComponent} from './user/user-page/user-page.component';
 import {UserOrdersComponent} from './user/user-orders/user-orders.component';
@@ -86,6 +86,7 @@ import {AddressService} from './services/address/address.service';
 import { MidBannerComponent } from './components/mid-banner/mid-banner.component';
 import { CategoriesBarComponent } from './components/categories-bar/categories-bar.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import { CategoryProductsPageComponent } from './pages/category-products-page/category-products-page.component';
 
 @NgModule({
   declarations: [
@@ -119,6 +120,7 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
     MidBannerComponent,
     CategoriesBarComponent,
     LoadingSpinnerComponent,
+    CategoryProductsPageComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
