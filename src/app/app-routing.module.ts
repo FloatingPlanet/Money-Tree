@@ -18,6 +18,7 @@ import {UserOrdersComponent} from './user/user-orders/user-orders.component';
 import {UserProfileComponent} from './user/user-profile/user-profile.component';
 import {CheckoutPageComponent} from './pages/checkout-page/checkout-page.component';
 import {CategoryProductsPageComponent} from './pages/category-products-page/category-products-page.component';
+import {CategoryProductsGridComponent} from './pages/category-products-page/category-products-grid/category-products-grid.component';
 
 
 const routes: Routes = [
@@ -31,7 +32,7 @@ const routes: Routes = [
   {
     path: 'category', component: CategoryProductsPageComponent,
     children: [
-      {path: ':category', component: MainPageComponent},
+      {path: ':category', component: CategoryProductsGridComponent},
       {path: '**', component: PageNotFoundComponent},
     ]
   },

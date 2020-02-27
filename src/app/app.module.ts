@@ -87,6 +87,7 @@ import { MidBannerComponent } from './components/mid-banner/mid-banner.component
 import { CategoriesBarComponent } from './components/categories-bar/categories-bar.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { CategoryProductsPageComponent } from './pages/category-products-page/category-products-page.component';
+import { CategoryProductsGridComponent } from './pages/category-products-page/category-products-grid/category-products-grid.component';
 
 @NgModule({
   declarations: [
@@ -121,6 +122,7 @@ import { CategoryProductsPageComponent } from './pages/category-products-page/ca
     CategoriesBarComponent,
     LoadingSpinnerComponent,
     CategoryProductsPageComponent,
+    CategoryProductsGridComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
