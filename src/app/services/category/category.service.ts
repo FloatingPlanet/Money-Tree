@@ -67,6 +67,8 @@ export class CategoryService {
   load specific products based on given category
    */
   public specificCategoryProductsObservable(C: string) {
-    return this.db.collection('Categories/' + C + '/products').valueChanges();
+      return this.Categories
+        .doc(C.toUpperCase())
+        .collection('products').valueChanges();
   }
 }

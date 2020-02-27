@@ -32,7 +32,7 @@ const routes: Routes = [
   {
     path: 'category', component: CategoryProductsPageComponent,
     children: [
-      {path: ':category', component: CategoryProductsGridComponent},
+      {path: ':section', component: CategoryProductsGridComponent},
       {path: '**', component: PageNotFoundComponent},
     ]
   },
