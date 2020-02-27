@@ -16,10 +16,12 @@ export class CategoryProductsGridComponent implements OnInit, OnDestroy {
 
   constructor(private cs: CategoryService, private route: ActivatedRoute) {
     this.route.params.subscribe((params) => {
+      // keep eye on route changes, if so re-render products
       const cat = params.section;
       console.log(cat);
       this.specificCategoryProductsObservable$ = this.cs.specificCategoryProductsObservable(cat)
         .subscribe((res: Product[]) => {
+          // re-load products
           this.allProducts = res;
         });
     });
