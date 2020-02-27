@@ -1,15 +1,20 @@
-import {Component, Input, OnChanges} from '@angular/core';
+import {Component, Input, OnChanges,  OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-mid-banner',
   templateUrl: './mid-banner.component.html',
   styleUrls: ['./mid-banner.component.scss']
 })
-export class MidBannerComponent implements OnChanges {
+export class MidBannerComponent implements OnChanges, OnInit {
   @Input() path: string;
   public img: string;
 
   constructor() {
+
+  }
+
+  ngOnInit(): void {
+
   }
 
   ngOnChanges() {
@@ -23,5 +28,6 @@ export class MidBannerComponent implements OnChanges {
         break;
     }
   }
+
 
 }
