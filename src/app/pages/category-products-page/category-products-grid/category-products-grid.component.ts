@@ -18,9 +18,10 @@ export class CategoryProductsGridComponent implements OnInit, OnDestroy {
     this.route.params.subscribe((params) => {
       const cat = params.section;
       console.log(cat);
-      this.cs.specificCategoryProductsObservable(cat).subscribe((res: Product[]) => {
-        this.allProducts = res;
-      });
+      this.specificCategoryProductsObservable$ = this.cs.specificCategoryProductsObservable(cat)
+        .subscribe((res: Product[]) => {
+          this.allProducts = res;
+        });
     });
   }
 
