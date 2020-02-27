@@ -51,6 +51,7 @@
 15. In checkout page, set radio button to preset value
 16. Checkout page need to be fix, checkout flow is in urgent!!!
 17. ElasticSearch[Kibana](https://demo.elastic.co/app/kibana#/home?_g=())
+18. Search and Category bar shoube be removed in small screen size
 99. Remove all warnings and errors
 ~~##### CTO: [Otto hu](https://github.com/aWildOtto)~~
 ##### CEO: [Jiaran Yu](https://github.com/jiaranyu)
