@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-category-products-page',
@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./category-products-page.component.scss']
 })
 export class CategoryProductsPageComponent implements OnInit {
+  public path: string;
 
   constructor() { }
 
   ngOnInit() {
+    this.path = 'category';
   }
 
 }
