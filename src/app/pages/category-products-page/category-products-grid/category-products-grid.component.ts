@@ -13,15 +13,20 @@ export class CategoryProductsGridComponent implements OnInit, OnDestroy {
   public allProducts: Product[];
 
   public specificCategoryProductsObservable$: Subscription;
+
   constructor(private cs: CategoryService, private route: ActivatedRoute) {
-    const cat = this.route.snapshot.paramMap.get('section');
-    console.log(cat);
-    this.cs.specificCategoryProductsObservable(cat).subscribe((res: Product[]) => {
-      this.allProducts = res;
+    this.route.params.subscribe((params) => {
+      const cat = params.section;
+      console.log(cat);
+      this.cs.specificCategoryProductsObservable(cat).subscribe((res: Product[]) => {
+        this.allProducts = res;
+      });
     });
   }
+
   ngOnInit() {
   }
+
   ngOnDestroy(): void {
     this.specificCategoryProductsObservable$.unsubscribe();
   }
