@@ -47,4 +47,7 @@ export class NavBarComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
+  alert() {
+    console.log('enter!')
+  }
 }
