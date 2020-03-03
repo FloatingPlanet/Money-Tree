@@ -53,7 +53,7 @@
 17. ElasticSearch[Kibana](https://demo.elastic.co/app/kibana#/home?_g=())
 18. Search and Category bar shoube be removed in small screen size
 99. Remove all warnings and errors
-~~##### CTO: [Otto hu](https://github.com/aWildOtto)~~
+##### CTO: [Otto hu](https://github.com/aWildOtto)
 ##### CEO: [Jiaran Yu](https://github.com/jiaranyu)
 ##### Cleaner: [Erbo Shan](https://github.com/shanerbo)
 ![money tree](https://github.com/shanerbo/project-money-tree/blob/master/rsz_money-tree.png)
