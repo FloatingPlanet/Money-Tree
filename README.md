@@ -1,4 +1,9 @@
 [![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)
+[![Version](https://badge.fury.io/gh/tterb%2FHyde.svg)](https://badge.fury.io/gh/tterb%2FHyde)
+![Angular](https://img.shields.io/badge/Angular-9.x-red)
+![NPM](https://img.shields.io/badge/NPM-12.16.1-blue)
+![Build](https://img.shields.io/badge/Build-Fail-red)
+
 # MONEY TREE
 ### Implement a template for e-commerces, focus on basic functionalities by using angular, angular material, bootstrap design and firestore.
 ![header](https://github.com/shanerbo/project-money-tree/blob/master/forest%20peak.PNG)
