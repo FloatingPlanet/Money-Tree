@@ -13,7 +13,7 @@ export class CategoryFormComponent implements OnInit, OnDestroy {
   @Output() public selectedCategories = new EventEmitter<string[]>();
   public allCategories: Category[];
   private categoriesObservable$: Subscription;
-  private dummyHolder: any;
+  public dummyHolder: any;
   public succeeded = false;
 
   constructor(private formBuilder: FormBuilder, private cs: CategoryService) {

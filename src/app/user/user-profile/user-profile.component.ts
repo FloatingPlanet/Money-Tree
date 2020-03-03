@@ -5,8 +5,8 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormBuilder, FormGroup, Validators, FormGroupDirective} from '@angular/forms';
 import {UserService} from '../../services/user/user.service';
 import {User} from '../../models/user';
-import {add} from 'ngx-bootstrap/chronos';
-import {Subscription}from  'rxjs';
+
+import {Subscription} from 'rxjs';
 
 
 @Component({
@@ -79,7 +79,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     });
   }
 
-  private onSubmit(af: FormGroup) {
+  public onSubmit(af: FormGroup) {
     console.log(af.value);
     const address = this.generateAddress(af);
     console.log(address);
@@ -113,18 +113,18 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   public generateAddress(af: FormGroup) {
     return {
       addressId: 'A' + Date.now().toString(),
-        customer: {
-      firstName: af.get('customer').value.firstName,
+      customer: {
+        firstName: af.get('customer').value.firstName,
         lastName: af.get('customer').value.lastName,
         phoneNumber: af.get('customer').value.phoneNumber,
-    },
+      },
       address: {
         street1: af.get('address').value.street1,
-          street2: af.get('address').value.street2,
-          city: af.get('address').value.city,
-          province: af.get('address').value.province,
-          postalCode: af.get('address').value.postalCode,
-          country: af.get('address').value.country,
+        street2: af.get('address').value.street2,
+        city: af.get('address').value.city,
+        province: af.get('address').value.province,
+        postalCode: af.get('address').value.postalCode,
+        country: af.get('address').value.country,
       },
     };
   }

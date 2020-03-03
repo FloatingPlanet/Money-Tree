@@ -171,6 +171,7 @@ import { CategoryProductsGridComponent } from './pages/category-products-page/ca
     FlexModule,
     MatBadgeModule,
     HttpClientModule,
+    NgbModule.forRoot(),
   ],
   providers: [
     FlashMessageService,
