@@ -1,4 +1,4 @@
-[![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)
+ [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Version](https://badge.fury.io/gh/tterb%2FHyde.svg)](https://badge.fury.io/gh/tterb%2FHyde)
 ![Angular](https://img.shields.io/badge/Angular-9.x-red)
 ![NPM](https://img.shields.io/badge/NPM-12.16.1-blue)
