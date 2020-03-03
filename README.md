@@ -1,3 +1,4 @@
+[![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)
 # MONEY TREE
 ### Implement a template for e-commerces, focus on basic functionalities by using angular, angular material, bootstrap design and firestore.
 ![header](https://github.com/shanerbo/project-money-tree/blob/master/forest%20peak.PNG)
