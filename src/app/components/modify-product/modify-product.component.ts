@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
+import { Location } from '@angular/common';
 import {ProductService} from 'src/app/services/product/product.service';
 
 @Component({
@@ -9,8 +10,9 @@ import {ProductService} from 'src/app/services/product/product.service';
 })
 export class ModifyProductComponent implements OnInit {
   public selectedCategories: string[];
+  public loading = false;
 
-  constructor(private ps: ProductService) {
+  constructor(private ps: ProductService, private location: Location) {
 
   }
 
@@ -24,8 +26,19 @@ export class ModifyProductComponent implements OnInit {
 
   public iNeedaUpdateProduct(fg: FormGroup) {
     console.log(fg.value + ' : I am parent, I got detail');
+    this.loading = true;
+    // show loading spinner
     fg.patchValue({productCategory: this.selectedCategories ? this.selectedCategories : []});
-    this.ps.addProduct(fg.value).then(result => console.log(result)).catch(error => console.error(error));
+    this.ps.addProduct(fg.value).then(result => {
+        console.log(result);
+        this.loading = false;
+        setTimeout(() => {
+          // jump back to previous page
+          this.location.back();
+        },
+        500);
+      }
+    ).catch(error => console.error(error));
   }
 
 

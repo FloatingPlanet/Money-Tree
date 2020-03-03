@@ -4,10 +4,11 @@ html, body {
   height: 100%;
 }
 
+
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-color: #f6f8f4;
+  background-color: #f5f5f5;
 }
 
 .spacer {
@@ -18,7 +19,9 @@ body {
   color: red;
 }
 
-
+.mat-toolbar{
+  background-color: #f5f5f5;
+}
 // Extra small devices (portrait phones, less than 576px)
 // No media query for `xs` since this is the default in Bootstrap
 
@@ -88,3 +91,22 @@ body {
   height: auto;
   padding-right: 1vh;
 }
+.loading-spinner-overlay{
+  position: absolute;
+  z-index: 1002;
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 100%;
+  height: 100%;
+}
+@import '~@angular/material/theming';
+
+// Define a custom typography config that overrides the font-family as well as the
+// `headlines` and `body-1` levels.
+$custom-typography: mat-typography-config(
+  $font-family: 'Roboto, monospace',
+  $headline: mat-typography-level(16px, 18px, 700),
+  $body-1: mat-typography-level(12px, 14px, 500),
+  $title: mat-typography-level(8px, 10px, 500)
+);
+
+@include mat-core($custom-typography);

@@ -11,19 +11,20 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class ProductFormComponent implements OnInit {
 
-  @Input() detail: Product;
+  @Input() succeeded: boolean;
   @Output() public formModified = new EventEmitter<FormGroup>();
-  @Output() public pLoaded = new EventEmitter<boolean>();
 
   public SKU: string;
   public productForm: FormGroup;
   public product: Product;
+  public notEditable = false;
 
   constructor(private formBuilder: FormBuilder, private ps: ProductService, private route: ActivatedRoute) {
     this.resetForm();
     this.SKU = this.route.snapshot.paramMap.get('SKU');
     if (this.SKU) {
       this.ps.fetchProduct(this.SKU).then(result => {
+        this.notEditable = !this.notEditable;
         this.product = result as Product;
         this.productForm.setValue({
           SKU: this.product.SKU,
@@ -40,8 +41,7 @@ export class ProductFormComponent implements OnInit {
           favourite: this.product.favourite,
           productSeller: this.product.productSeller,
         });
-        this.productForm.controls.SKU.disable();
-        this.pLoaded.emit(true);
+        console.log(this.productForm.controls.SKU.value);
       }).catch(error => console.error(error));
     }
   }
@@ -53,7 +53,6 @@ export class ProductFormComponent implements OnInit {
 
   onSubmit(fg: FormGroup) {
     this.formModified.emit(fg);
-    this.resetForm();
   }
 
   resetForm() {
@@ -65,8 +64,7 @@ export class ProductFormComponent implements OnInit {
       productSummary: null,
       productPrice: [null, Validators.required],
       productDescription: [null, Validators.required],
-      // tslint:disable-next-line:max-line-length
-      productImageUrls: this.formBuilder.array(['https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mbp16touch-space-select-201911?wid=400&hei=400&fmt=jpeg&qlt=95&op_usm=0.5,1.5&fit=constrain&.v=1572825197207']),
+      productImageUrls: [null, Validators.required],
       productAddedAt: new Date(),
       productQuantity: [null, [Validators.required, Validators.pattern('\\d*')]],
       ratings: [null, Validators.required],
