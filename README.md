@@ -27,7 +27,7 @@
     8%: Didn’t see their preferred method of payment
     .5%: Their credit card was declined
     
-#### For multi-vendor website, each seller has its own admin page
+## For multi-vendor website, each seller has its own admin page
 #### TODO: 
 ![diagram](https://github.com/shanerbo/project-money-tree/blob/master/G390i.png)
 1. Third party payment service.
