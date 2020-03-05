@@ -15,7 +15,7 @@
 
 ## Important!!!!!!!!!!!! everything related to user'data, you have to check if user still loged in by using this.us.logInObservable()
 ~~### new UI Framework: https://semantic-ui.com/elements/step.html#step~~
-    why user gives up checkout
+    #### why user gives up checkout
     61%: Extra costs (shipping, taxes, fees) were too high
     35%: Didn’t want to create an account
     27%: The checkout process was too long or complicated
@@ -58,6 +58,7 @@
 16. Checkout page need to be fix, checkout flow is in urgent!!!
 17. ElasticSearch[Kibana](https://demo.elastic.co/app/kibana#/home?_g=())
 18. Search and Category bar shoube be removed in small screen size
+19. Move domain to floatingplanet.app, use floatingplanet.app to register gcp.
 99. Remove all warnings and errors
 ##### CTO: [Otto hu](https://github.com/aWildOtto)
 ##### CEO: [Jiaran Yu](https://github.com/jiaranyu)
