@@ -15,7 +15,7 @@
 
 ## Important!!!!!!!!!!!! everything related to user'data, you have to check if user still loged in by using this.us.logInObservable()
 ~~### new UI Framework: https://semantic-ui.com/elements/step.html#step~~
-    #### why user gives up checkout
+   #### why user gives up checkout
     61%: Extra costs (shipping, taxes, fees) were too high
     35%: Didn’t want to create an account
     27%: The checkout process was too long or complicated
@@ -26,6 +26,8 @@
     10%: Didn’t believe the returns policy to be fair or satisfactory
     8%: Didn’t see their preferred method of payment
     .5%: Their credit card was declined
+    
+#### For multi-vendor website, each seller has its own admin page
 #### TODO: 
 ![diagram](https://github.com/shanerbo/project-money-tree/blob/master/G390i.png)
 1. Third party payment service.
