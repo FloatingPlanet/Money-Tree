@@ -8,7 +8,6 @@ import {AngularFireStorageModule} from '@angular/fire/storage';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ToastrModule} from 'ngx-toastr';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
@@ -86,6 +85,8 @@ import { CategoriesBarComponent } from './components/categories-bar/categories-b
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { CategoryProductsPageComponent } from './pages/category-products-page/category-products-page.component';
 import { CategoryProductsGridComponent } from './pages/category-products-page/category-products-grid/category-products-grid.component';
+import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {faSearch} from '@fortawesome/free-solid-svg-icons';
 
 @NgModule({
   declarations: [
@@ -171,7 +172,8 @@ import { CategoryProductsGridComponent } from './pages/category-products-page/ca
     FlexModule,
     MatBadgeModule,
     HttpClientModule,
-    NgbModule.forRoot(),
+    NgbModule,
+    FontAwesomeModule,
   ],
   providers: [
     FlashMessageService,
@@ -185,5 +187,8 @@ import { CategoryProductsGridComponent } from './pages/category-products-page/ca
 })
 
 export class AppModule {
+  constructor(private library: FaIconLibrary) {
+    library.addIcons(faSearch);
+  }
 }
 
