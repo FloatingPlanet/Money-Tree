@@ -119,6 +119,7 @@ body {
   height: auto;
   padding-right: 1vh;
 }
+
 .loading-spinner-overlay{
   position: absolute;
   z-index: 1002;
@@ -138,6 +139,3 @@ $custom-typography: mat-typography-config(
 );
 
 @include mat-core($custom-typography);
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
