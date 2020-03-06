@@ -2,7 +2,7 @@
 [![Version](https://badge.fury.io/gh/tterb%2FHyde.svg)](https://badge.fury.io/gh/tterb%2FHyde)
 ![Angular](https://img.shields.io/badge/Angular-9.x-red)
 ![NPM](https://img.shields.io/badge/NPM-12.16.1-blue)
-![Build](https://img.shields.io/badge/Build-Fail-red)
+![Build](https://img.shields.io/badge/Build-Pass-green)
 
 # MONEY TREE
 ### Implement a template for e-commerces, focus on basic functionalities by using angular, angular material, bootstrap design and firestore.
