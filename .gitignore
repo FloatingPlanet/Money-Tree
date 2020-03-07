@@ -40,7 +40,9 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
+# credentials
 /src/environments/*
+/fireStoreKey.json
 # System Files
 .DS_Store
 Thumbs.db
