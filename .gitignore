@@ -41,8 +41,7 @@ yarn-error.log
 testem.log
 /typings
 # credentials
-/src/environments/*
-/src/environments/fireStoreKey.json
+/src/environments/
 # System Files
 .DS_Store
 Thumbs.db
