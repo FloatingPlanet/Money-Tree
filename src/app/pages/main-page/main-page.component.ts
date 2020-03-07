@@ -16,10 +16,12 @@ export class MainPageComponent implements OnInit, OnDestroy {
   public user: User;
   private logInObservable$: Subscription;
   private userObservable$: Subscription;
+  public path: string;
 
   constructor(public ps: ProductService,
               private us: UserService,
               private cs: CartService,
+
   ) {
   }
 

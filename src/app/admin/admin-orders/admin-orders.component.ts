@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Order} from '../../models/order';
-import {MatTableDataSource, MatPaginator} from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import {OrderService} from '../../services/order/order.service';
 import * as moment from 'moment';
 import {Subscription} from 'rxjs';

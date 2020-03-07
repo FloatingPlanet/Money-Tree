@@ -8,41 +8,38 @@ import {AngularFireStorageModule} from '@angular/fire/storage';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ToastrModule} from 'ngx-toastr';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSortModule } from '@angular/material/sort';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
-import {
-  MatCheckboxModule,
-  MatButtonModule,
-  MatInputModule,
-  MatAutocompleteModule,
-  MatDatepickerModule,
-  MatFormFieldModule,
-  MatRadioModule,
-  MatSelectModule,
-  MatSliderModule,
-  MatSlideToggleModule,
-  MatMenuModule,
-  MatSidenavModule,
-  MatToolbarModule,
-  MatListModule,
-  MatGridListModule,
-  MatCardModule,
-  MatStepperModule,
-  MatTabsModule,
-  MatExpansionModule,
-  MatButtonToggleModule,
-  MatChipsModule,
-  MatIconModule,
-  MatProgressSpinnerModule,
-  MatProgressBarModule,
-  MatDialogModule,
-  MatTooltipModule,
-  MatSnackBarModule,
-  MatTableModule,
-  MatSortModule,
-  MatPaginatorModule,
-} from '@angular/material';
-
-// Our stuff ---- ❤❤❤
+// Our stuff
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -64,16 +61,16 @@ import {OrderSummaryComponent} from './components/order-summary/order-summary.co
 import {AdminPageComponent} from './pages/admin-page/admin-page.component';
 import {AdminOrdersComponent} from './admin/admin-orders/admin-orders.component';
 import {AdminProductsComponent} from './admin/admin-products/admin-products.component';
-import {CategoryFormComponent} from './forms/category-form/category-form.component';
+import {CategoryFormComponent} from './admin/admin-products/category-form/category-form.component';
 import {ModalModule} from 'ngx-bootstrap/modal';
-import {ProductFormComponent} from './forms/product-form/product-form.component';
+import {ProductFormComponent} from './admin/admin-products/product-form/product-form.component';
 import {ModifyProductComponent} from './components/modify-product/modify-product.component';
 import {CategoryService} from './services/category/category.service';
 import {ProductInfoComponent} from './components/product-info/product-info.component';
 import {CouponsService} from './services/coupons/coupons.service';
 import {FlexModule} from '@angular/flex-layout';
 import {AdminCouponsComponent} from './admin/admin-coupons/admin-coupons.component';
-import {CouponFormComponent} from './forms/coupon-form/coupon-form.component';
+import {CouponFormComponent} from './admin/admin-coupons/coupon-form/coupon-form.component';
 import {CartService} from './services/cart/cart.service';
 import {UserPageComponent} from './user/user-page/user-page.component';
 import {UserOrdersComponent} from './user/user-orders/user-orders.component';
@@ -83,7 +80,13 @@ import {CheckoutFormComponent} from './forms/checkout-form/checkout-form.compone
 import {ProductQuickLookComponent} from './components/product-quick-look/product-quick-look.component';
 import {HttpClientModule} from '@angular/common/http';
 import {AddressService} from './services/address/address.service';
-import { MidBannerComponent } from './mid-banner/mid-banner.component';
+import { MidBannerComponent } from './components/mid-banner/mid-banner.component';
+import { CategoriesBarComponent } from './components/categories-bar/categories-bar.component';
+import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import { CategoryProductsPageComponent } from './pages/category-products-page/category-products-page.component';
+import { CategoryProductsGridComponent } from './pages/category-products-page/category-products-grid/category-products-grid.component';
+import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {faSearch} from '@fortawesome/free-solid-svg-icons';
 
 @NgModule({
   declarations: [
@@ -115,6 +118,10 @@ import { MidBannerComponent } from './mid-banner/mid-banner.component';
     CheckoutFormComponent,
     ProductQuickLookComponent,
     MidBannerComponent,
+    CategoriesBarComponent,
+    LoadingSpinnerComponent,
+    CategoryProductsPageComponent,
+    CategoryProductsGridComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -165,6 +172,8 @@ import { MidBannerComponent } from './mid-banner/mid-banner.component';
     FlexModule,
     MatBadgeModule,
     HttpClientModule,
+    NgbModule,
+    FontAwesomeModule,
   ],
   providers: [
     FlashMessageService,
@@ -178,5 +187,8 @@ import { MidBannerComponent } from './mid-banner/mid-banner.component';
 })
 
 export class AppModule {
+  constructor(private library: FaIconLibrary) {
+    library.addIcons(faSearch);
+  }
 }
 

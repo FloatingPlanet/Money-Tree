@@ -3,6 +3,7 @@ import {User} from '../../models/user';
 import {UserService} from '../../services/user/user.service';
 import {CartService} from '../../services/cart/cart.service';
 import {Subscription} from 'rxjs';
+import {events} from 'stripe';
 
 @Component({
   selector: 'app-nav-bar',
@@ -15,7 +16,7 @@ export class NavBarComponent implements OnInit, OnChanges, OnDestroy {
   @Input() info: any;
   public itemInCart: number;
   private logInObservable$: Subscription;
-
+  @Input() keyword: string;
   constructor(private us: UserService) {
   }
 
@@ -47,4 +48,7 @@ export class NavBarComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
+  public searchProduct() {
+    alert(this.keyword);
+  }
 }

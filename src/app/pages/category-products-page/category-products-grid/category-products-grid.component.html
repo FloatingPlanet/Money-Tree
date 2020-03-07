@@ -1,0 +1,10 @@
+<div class="container-fluid main-section-view-custom-width pt-3 pb-3">
+  <span class="text-monospace ">FEATURED PRODUCTS</span>
+  <div class="container-fluid">
+    <div class="card-deck">
+      <app-product-card class="col-6 col-sm-4 col-md-4 col-lg-4 col-xl-3" *ngFor="let product of this.allProducts"
+                        [product]="product">
+      </app-product-card>
+    </div>
+  </div>
+</div>

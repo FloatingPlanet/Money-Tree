@@ -1,3 +1,9 @@
+ [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Version](https://badge.fury.io/gh/tterb%2FHyde.svg)](https://badge.fury.io/gh/tterb%2FHyde)
+![Angular](https://img.shields.io/badge/Angular-9.x-red)
+![NPM](https://img.shields.io/badge/NPM-12.16.1-blue)
+![Build](https://img.shields.io/badge/Build-Pass-green)
+
 # MONEY TREE
 ### Implement a template for e-commerces, focus on basic functionalities by using angular, angular material, bootstrap design and firestore.
 ![header](https://github.com/shanerbo/project-money-tree/blob/master/forest%20peak.PNG)
@@ -9,7 +15,7 @@
 
 ## Important!!!!!!!!!!!! everything related to user'data, you have to check if user still loged in by using this.us.logInObservable()
 ~~### new UI Framework: https://semantic-ui.com/elements/step.html#step~~
-    why user gives up checkout
+   #### why user gives up checkout
     61%: Extra costs (shipping, taxes, fees) were too high
     35%: Didn’t want to create an account
     27%: The checkout process was too long or complicated
@@ -20,6 +26,8 @@
     10%: Didn’t believe the returns policy to be fair or satisfactory
     8%: Didn’t see their preferred method of payment
     .5%: Their credit card was declined
+    
+## For multi-vendor website, each seller has its own admin page
 #### TODO: 
 ![diagram](https://github.com/shanerbo/project-money-tree/blob/master/G390i.png)
 1. Third party payment service.
@@ -51,8 +59,10 @@
 15. In checkout page, set radio button to preset value
 16. Checkout page need to be fix, checkout flow is in urgent!!!
 17. ElasticSearch[Kibana](https://demo.elastic.co/app/kibana#/home?_g=())
+18. Search and Category bar shoube be removed in small screen size
+19. Move domain to floatingplanet.app, use floatingplanet.app to register gcp.
 99. Remove all warnings and errors
-##### CTO: [Otto hu](https://github.com/aWildOtto)
+##### ~~CTO: [Otto hu](https://github.com/aWildOtto)~~
 ##### CEO: [Jiaran Yu](https://github.com/jiaranyu)
 ##### Cleaner: [Erbo Shan](https://github.com/shanerbo)
 ![money tree](https://github.com/shanerbo/project-money-tree/blob/master/rsz_money-tree.png)

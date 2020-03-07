@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "dist/money-tree",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

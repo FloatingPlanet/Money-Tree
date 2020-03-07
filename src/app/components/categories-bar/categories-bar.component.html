@@ -1,0 +1,6 @@
+<ul class="nav justify-content-center">
+  <li class="nav-item" *ngFor="let cat of this.allCategories">
+    <a class="nav-link active" href="#" [routerLink]="['/category', cat.category]"
+       (click)="getProducts(cat.category)">{{cat?.category}}</a>
+  </li>
+</ul>

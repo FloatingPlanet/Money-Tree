@@ -1,8 +1,16 @@
-<div class="container-fluid">
-  <div class="card-deck">
-    <app-product-card class="col-sm-6 col-md-6 col-lg-4 col-xl-3" *ngFor="let product of ps.allProducts"
-                      [product]="product" (productToBeAdded)="addToCart($event)">
-    </app-product-card>
-  </div>
+<div class="container-fluid mid-banner-view-custom-width">
+<!--   TODO: categories bar should be removed in small screen size-->
+  <app-categories-bar></app-categories-bar>
+  <app-mid-banner [path]="path"></app-mid-banner>
 </div>
 
+<div class="container-fluid main-section-view-custom-width pt-3 pb-3">
+  <span class="text-monospace ">FEATURED PRODUCTS</span>
+  <div class="container-fluid">
+    <div class="card-deck">
+      <app-product-card class="col-6 col-sm-4 col-md-4 col-lg-4 col-xl-3" *ngFor="let product of ps.allProducts"
+                        [product]="product" (productToBeAdded)="addToCart($event)">
+      </app-product-card>
+    </div>
+  </div>
+</div>
