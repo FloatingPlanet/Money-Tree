@@ -62,7 +62,7 @@
 18. Search and Category bar shoube be removed in small screen size
 19. Move domain to floatingplanet.app, use floatingplanet.app to register gcp.
 99. Remove all warnings and errors
-##### CTO: [Otto hu](https://github.com/aWildOtto)
+##### ~~CTO: [Otto hu](https://github.com/aWildOtto)~~
 ##### CEO: [Jiaran Yu](https://github.com/jiaranyu)
 ##### Cleaner: [Erbo Shan](https://github.com/shanerbo)
 ![money tree](https://github.com/shanerbo/project-money-tree/blob/master/rsz_money-tree.png)

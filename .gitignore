@@ -42,7 +42,7 @@ testem.log
 /typings
 # credentials
 /src/environments/*
-/fireStoreKey.json
+/src/environments/fireStoreKey.json
 # System Files
 .DS_Store
 Thumbs.db
