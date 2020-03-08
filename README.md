@@ -42,27 +42,13 @@
     - Chart/diagram allow user visualize its business
 4. Products
     - Show products by different categories/constraints
+    - Redesign user scheme, if admin change products details, products in user cart will not updated!!!!!!!!!
+
 5. Cart
     - Show numbers if user add same products multiple times
     - ~~Guest cart~~
     - ~~Registered user has its own cart~~
         ~~- If user update its cart without logging, its shopping cart shoule be updated once user login.~~
-
-6. Move to Amplify (not for now)
-7. In modify product page, we accomplished progress bar badly, need to find a elegant way to implement it!
-8. User info page (WIP)
-9. ~~Logged in user are allowed to browse their orders~~
-10. Add image while user adding new product
-11. index page (WIP)
-12. product can only be assigned to one primary/secondary category (admin) (WIP)
-13. ~~Fix bug in category form caused by primary SKU ~~
-14. ~~Diasble form submit button!!!!!!!! in everywhere(check out page)~~
-15. ~~In checkout page, set radio button to preset value~~
-16. ~~Checkout page need to be fix, checkout flow is in urgent!!!~~
-17. ElasticSearch[Kibana](https://demo.elastic.co/app/kibana#/home?_g=())
-18. Search and Category bar shoube be removed in small screen size
-19. Move domain to floatingplanet.app, use floatingplanet.app to register gcp.
-20. Redesign user scheme, if admin change products details, products in user cart will not updated!!!!!!!!!
 21. Checkout
     - ~~14. Diasble form submit button!!!!!!!! in everywhere(check out page)~~
     - ~~15. In checkout page, set radio button to preset value~~
@@ -76,9 +62,18 @@
       - implement edit/delete in saFormGroup
       - debug
       - address Auto Complete (pending)
-    - Payment
-      - validate payment
-      
+6. Move to Amplify (not for now)
+7. In modify product page, we accomplished progress bar badly, need to find a elegant way to implement it!
+8. User info page (WIP)
+9. ~~Logged in user are allowed to browse their orders~~
+10. Add image while user adding new product
+11. index page (WIP)
+12. product can only be assigned to one primary/secondary category (admin) (WIP)
+13. ~~Fix bug in category form caused by primary SKU ~~
+17. ElasticSearch[Kibana](https://demo.elastic.co/app/kibana#/home?_g=())
+18. Search and Category bar shoube be removed in small screen size
+19. Move domain to floatingplanet.app, use floatingplanet.app to register gcp.
+
 99. Remove all warnings and errors
 ##### CTO: [Otto hu](https://github.com/aWildOtto)
 ##### CEO: [Jiaran Yu](https://github.com/jiaranyu)
