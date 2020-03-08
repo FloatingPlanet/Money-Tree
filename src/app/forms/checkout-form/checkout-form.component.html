@@ -1,171 +1,16 @@
-<div class="column" id="checkoutFormGroup">
-  <div class="column" id = "saField">
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page">
-          <span> Shipping Address</span></li>
-      </ol>
-    </nav>
-    <div class="column" [ngSwitch]="this.currentStatus" id="saForm">
-      <div *ngSwitchCase="Status.loggedWithoutAddress">
-        <form [formGroup]="saFormGroup">
-          <div formGroupName="customer">
-            <mat-form-field>
-              <label>
-                <input matInput placeholder="First name" formControlName="firstName" required>
-              </label>
-            </mat-form-field>
-            <mat-form-field>
-              <label>
-                <input matInput placeholder="Last name" formControlName="lastName" required>
-              </label>
-            </mat-form-field>
-            <br>
-            <mat-form-field>
-              <label>
-                <input matInput placeholder="phone number" formControlName="phoneNumber" required>
-              </label>
-            </mat-form-field>
-            <br>
-          </div>
-          <div formGroupName="address">
-            <mat-form-field>
-              <label>
-                <input matInput placeholder="street 1" formControlName="street1"
-                       required>
-                <small *ngIf="searching" class="form-text text-muted">searching...</small>
-              </label>
-            </mat-form-field>
-            <br>
-            <mat-form-field>
-              <label>
-                <input matInput placeholder="street 2" formControlName="street2">
-              </label>
-            </mat-form-field>
-            <br>
-            <mat-form-field>
-              <label>
-                <input matInput placeholder="city" formControlName="city" required>
-              </label>
-            </mat-form-field>
-            <br>
-            <mat-form-field>
-              <label>
-                <input matInput placeholder="province" formControlName="province" required>
-              </label>
-            </mat-form-field>
-            <br>
-            <mat-form-field>
-              <label>
-                <input matInput placeholder="postal code" formControlName="postalCode" required>
-              </label>
-            </mat-form-field>
-            <br>
-            <mat-form-field>
-              <label>
-                <input matInput placeholder="country" formControlName="country" required>
-              </label>
-            </mat-form-field>
-          </div>
-        </form>
-        <div class="proceed">
-          <button  mat-button (click)="onSubmitSaFormGroup()">Proceed to
-            Billing
-          </button>
-        </div>
-      </div>
-      <div *ngSwitchCase="Status.notLogged">
-        <form [formGroup]="saFormGroup">
-          <div formGroupName="customer">
-            <mat-form-field>
-              <label>
-                <input matInput placeholder="First name" formControlName="firstName" required>
-              </label>
-            </mat-form-field>
-            <mat-form-field>
-              <label>
-                <input matInput placeholder="Last name" formControlName="lastName" required>
-              </label>
-            </mat-form-field>
-            <br>
-            <mat-form-field>
-              <label>
-                <input matInput placeholder="phone number" formControlName="phoneNumber" required>
-              </label>
-            </mat-form-field>
-            <br>
-          </div>
-          <div formGroupName="address">
-            <mat-form-field>
-              <label>
-                <input matInput placeholder="street 1" formControlName="street1"
-                       required>
-                <small *ngIf="searching" class="form-text text-muted">searching...</small>
-              </label>
-            </mat-form-field>
-            <br>
-            <mat-form-field>
-              <label>
-                <input matInput placeholder="street 2" formControlName="street2">
-              </label>
-            </mat-form-field>
-            <br>
-            <mat-form-field>
-              <label>
-                <input matInput placeholder="city" formControlName="city" required>
-              </label>
-            </mat-form-field>
-            <br>
-            <mat-form-field>
-              <label>
-                <input matInput placeholder="province" formControlName="province" required>
-              </label>
-            </mat-form-field>
-            <br>
-            <mat-form-field>
-              <label>
-                <input matInput placeholder="postal code" formControlName="postalCode" required>
-              </label>
-            </mat-form-field>
-            <br>
-            <mat-form-field>
-              <label>
-                <input matInput placeholder="country" formControlName="country" required>
-              </label>
-            </mat-form-field>
-          </div>
-          <div>
-            <button class="proceed" mat-button (click)="onSubmitSaFormGroup()">Proceed to
-              Billing
-            </button>
-          </div>
-        </form>
-      </div>
-      <div *ngSwitchCase="Status.loggedWithAddress">
-        <div>
-          <mat-radio-group
-            class="example-radio-group" [(ngModel)]="this.addressSelected">
-            <mat-radio-button class="example-radio-button" [value]="address"
-                              *ngFor="let address of addressList" (click)="clickOnExistShippingAddress(address)"
-            >
-              <p>{{address.customer.firstName + ' ' + address.customer.lastName}}</p>
-              <p>{{address.customer.phoneNumber}}</p>
-              <p>{{address.address.street1}}</p>
-              <p>{{address.address.street2}}</p>
-              <p>{{address.address.city + ', ' + address.address.province + ', ' + address.address.country}}</p>
-              <p>{{address.address.postalCode}}</p>
-            </mat-radio-button>
-          </mat-radio-group>
-
-        </div>
-        <button type="button" *ngIf="!this.isAddingAddress" mat-stroked-button id="add" data-toggle="collapse"
-                data-target="#newAddressForm" aria-expanded="true"
-                aria-controls="collapseExample" color="primary"
-                (click)="triggerAddressForm()">Add a new address
-        </button>
-        <div id="newAddressForm" class="collapse">
+<div *ngIf = "!(this.Status.notLogged==currentStatus)"class="column" id="checkoutFormGroup">
+  <div [className]="this.Step.shippingAddress == currentStep?'column Field': 'column Field-inactive'" id="saField">
+    <mat-toolbar-row class="title">
+      <span>Shipping Address</span>
+      <span class="example-spacer"></span>
+      <mat-icon class="example-icon" *ngIf="!(this.Step.shippingAddress == currentStep) && this.modifiedSAForm"
+                (click)="editShippingForm()" aria-hidden="false" aria-label="Example user verified icon">edit
+      </mat-icon>
+    </mat-toolbar-row>
+    <div *ngIf="this.Step.shippingAddress == currentStep">
+      <div class="column Form" [ngSwitch]="this.currentStatus" id="saForm">
+        <div *ngSwitchCase="Status.loggedWithoutAddress">
           <form [formGroup]="saFormGroup">
-
             <div formGroupName="customer">
               <mat-form-field>
                 <label>
@@ -224,43 +69,306 @@
                 </label>
               </mat-form-field>
             </div>
-            <button type="reset" mat-stroked-button color="warn" data-toggle="collapse" data-target="#newAddressForm"
-                    (click)="this.saFormGroup.reset(); this.triggerAddressForm()">Cancel
+          </form>
+          <div class="proceed">
+            <button (click)="onSubmitSaFormGroup()" mat-button>Proceed to
+              Billing
             </button>
-            <button mat-stroked-button color="primary" data-toggle="collapse" data-target="#newAddressForm"
-                    (click)="this.addAddressToDB()" [disabled]="!this.saFormGroup.valid">Save
-            </button>
+          </div>
+        </div>
+        <div *ngSwitchCase="Status.notLogged">
+          <form [formGroup]="saFormGroup">
+            <div formGroupName="customer">
+              <mat-form-field>
+                <label>
+                  <input matInput placeholder="First name" formControlName="firstName" required>
+                </label>
+              </mat-form-field>
+              <mat-form-field>
+                <label>
+                  <input matInput placeholder="Last name" formControlName="lastName" required>
+                </label>
+              </mat-form-field>
+              <br>
+              <mat-form-field>
+                <label>
+                  <input matInput placeholder="phone number" formControlName="phoneNumber" required>
+                </label>
+              </mat-form-field>
+              <br>
+            </div>
+            <div formGroupName="address">
+              <mat-form-field>
+                <label>
+                  <input matInput placeholder="street 1" formControlName="street1"
+                         required>
+                  <small *ngIf="searching" class="form-text text-muted">searching...</small>
+                </label>
+              </mat-form-field>
+              <br>
+              <mat-form-field>
+                <label>
+                  <input matInput placeholder="street 2" formControlName="street2">
+                </label>
+              </mat-form-field>
+              <br>
+              <mat-form-field>
+                <label>
+                  <input matInput placeholder="city" formControlName="city" required>
+                </label>
+              </mat-form-field>
+              <br>
+              <mat-form-field>
+                <label>
+                  <input matInput placeholder="province" formControlName="province" required>
+                </label>
+              </mat-form-field>
+              <br>
+              <mat-form-field>
+                <label>
+                  <input matInput placeholder="postal code" formControlName="postalCode" required>
+                </label>
+              </mat-form-field>
+              <br>
+              <mat-form-field>
+                <label>
+                  <input matInput placeholder="country" formControlName="country" required>
+                </label>
+              </mat-form-field>
+            </div>
+            <div>
+              <button class="proceed" mat-button (click)="onSubmitSaFormGroup()">Proceed to
+                Billing
+              </button>
+            </div>
           </form>
         </div>
-      </div>
-      <div *ngSwitchDefault>
-        <div class="spinner-grow text-dark" role="status">
-          <span class="sr-only">Loading...</span>
+        <div *ngSwitchCase="Status.loggedWithAddress">
+          <div>
+            <mat-radio-group
+              class="example-radio-group" [(ngModel)]="this.saAddressSelected">
+              <div *ngFor="let address of addressList">
+                <mat-radio-button class="example-radio-button" [value]="address"
+                                  (click)="clickOnExistShippingAddress(address)">
+                  <div>{{address.customer.firstName + ' ' + address.customer.lastName + ' ' + address.customer.phoneNumber}}</div>
+                  <div>{{address.address.street1}}</div>
+                  <div>{{address.address.street2}}</div>
+                  <div>{{address.address.city + ', ' + address.address.province + ', ' + address.address.country}}</div>
+                  <div>{{address.address.postalCode}}</div>
+                </mat-radio-button>
+                <mat-divider class="mat-divider"></mat-divider>
+              </div>
+
+            </mat-radio-group>
+
+          </div>
+          <button type="button" *ngIf="!this.isAddingAddress" mat-stroked-button id="add" aria-expanded="true"
+                  aria-controls="collapseExample" color="primary"
+                  (click)="triggerAddressForm()">Add a new address
+          </button>
+          <div id="newAddressForm" *ngIf="this.isAddingAddress">
+            <form [formGroup]="saFormGroup">
+
+              <div formGroupName="customer">
+                <mat-form-field>
+                  <label>
+                    <input matInput placeholder="First name" formControlName="firstName" required>
+                  </label>
+                </mat-form-field>
+                <mat-form-field>
+                  <label>
+                    <input matInput placeholder="Last name" formControlName="lastName" required>
+                  </label>
+                </mat-form-field>
+                <br>
+                <mat-form-field>
+                  <label>
+                    <input matInput placeholder="phone number" formControlName="phoneNumber" required>
+                  </label>
+                </mat-form-field>
+                <br>
+              </div>
+              <div formGroupName="address">
+                <mat-form-field>
+                  <label>
+                    <input matInput placeholder="street 1" formControlName="street1"
+                           required>
+                    <small *ngIf="searching" class="form-text text-muted">searching...</small>
+                  </label>
+                </mat-form-field>
+                <br>
+                <mat-form-field>
+                  <label>
+                    <input matInput placeholder="street 2" formControlName="street2">
+                  </label>
+                </mat-form-field>
+                <br>
+                <mat-form-field>
+                  <label>
+                    <input matInput placeholder="city" formControlName="city" required>
+                  </label>
+                </mat-form-field>
+                <br>
+                <mat-form-field>
+                  <label>
+                    <input matInput placeholder="province" formControlName="province" required>
+                  </label>
+                </mat-form-field>
+                <br>
+                <mat-form-field>
+                  <label>
+                    <input matInput placeholder="postal code" formControlName="postalCode" required>
+                  </label>
+                </mat-form-field>
+                <br>
+                <mat-form-field>
+                  <label>
+                    <input matInput placeholder="country" formControlName="country" required>
+                  </label>
+                </mat-form-field>
+              </div>
+              <button type="reset" mat-stroked-button color="warn"
+                      (click)="this.saFormGroup.reset(); this.triggerAddressForm()">Cancel
+              </button>
+              <button mat-stroked-button color="primary"
+                      (click)="this.addAddressToDB()" [disabled]="!this.saFormGroup.valid">Save
+              </button>
+            </form>
+          </div>
         </div>
+        <div *ngSwitchDefault>
+          <div class="spinner-grow text-dark" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+
+      </div>
+      <div>
+        <button class="proceed" type="button" mat-button
+                (click)="onSubmitSaFormGroup()"
+                [disabled]="this.saAddressSelected===null || !this.saFormGroup.valid || this.isAddingAddress">
+          PROCEED TO BILLING
+        </button>
+      </div>
+    </div>
+    <div *ngIf="!(this.Step.shippingAddress == currentStep)">
+      <div class="column Form" [ngSwitch]="this.currentStatus" id="saGroup">
+        <div>{{this.saAddressSelected.customer.firstName + ' ' + saAddressSelected.customer.lastName + ' ' + saAddressSelected.customer.phoneNumber}}</div>
+        <div>{{saAddressSelected.address.street1}}</div>
+        <div>{{saAddressSelected.address.street2}}</div>
+        <div>{{saAddressSelected.address.city + ', ' + saAddressSelected.address.province + ', ' + saAddressSelected.address.country}}</div>
+        <div>{{saAddressSelected.address.postalCode}}</div>
       </div>
 
     </div>
-    <div >
-      <button class="proceed" type="button"  mat-button
-              (click)="onSubmitSaFormGroup()"
-              [disabled]="this.addressSelected===null || !this.saFormGroup.valid || this.isAddingAddress">
-        PROCEED TO BILLING
-      </button>
-    </div>
+
   </div>
 
-  <div class="column" id = "baField">
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page">Billing Address</li>
-      </ol>
-    </nav>
-    <mat-checkbox class="example-margin" [(ngModel)]="sameAddress" (click)="changeBAform()">My billing address is the
-      same as my shipping
-      address
-    </mat-checkbox>
-    <form *ngIf="!sameAddress" [formGroup]="baFormGroup">
-      <div formGroupName="customer">
+
+  <div [className]="this.Step.billingAddress == currentStep?'column Field': 'column Field-inactive'" id="baField">
+    <mat-toolbar-row class="title">
+      <span>Billing Address</span>
+      <span class="example-spacer"></span>
+      <mat-icon class="example-icon" *ngIf="!(this.Step.billingAddress == currentStep) && this.modifiedBAForm"
+                (click)="editBillingForm()" aria-hidden="false" aria-label="Example user verified icon">edit
+      </mat-icon>
+    </mat-toolbar-row>
+    <div *ngIf="this.Step.billingAddress == currentStep">
+      <div class="column Form" id="baForm">
+        <mat-checkbox class="example-margin" [(ngModel)]="sameAddress" (click)="changeBAform()">My billing address is
+          the
+          same as my shipping
+          address
+        </mat-checkbox>
+        <form *ngIf="!sameAddress" [formGroup]="baFormGroup">
+          <div formGroupName="customer">
+            <mat-form-field>
+              <label>
+                <input matInput placeholder="First name" formControlName="firstName" required>
+              </label>
+            </mat-form-field>
+            <mat-form-field>
+              <label>
+                <input matInput placeholder="Last name" formControlName="lastName" required>
+              </label>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+              <label>
+                <input matInput placeholder="phone number" formControlName="phoneNumber" required>
+              </label>
+            </mat-form-field>
+            <br>
+          </div>
+          <div formGroupName="address">
+            <mat-form-field>
+              <label>
+                <input matInput placeholder="street 1" formControlName="street1" required>
+              </label>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+              <label>
+                <input matInput placeholder="street 2" formControlName="street2">
+              </label>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+              <label>
+                <input matInput placeholder="city" formControlName="city" required>
+              </label>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+              <label>
+                <input matInput placeholder="province" formControlName="province" required>
+              </label>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+              <label>
+                <input matInput placeholder="postal code" formControlName="postalCode" required>
+              </label>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+              <label>
+                <input matInput placeholder="country" formControlName="country" required>
+              </label>
+            </mat-form-field>
+          </div>
+          <div>
+            <button mat-button>Back</button>
+            <button mat-button>Next</button>
+          </div>
+        </form>
+      </div>
+      <div>
+        <button class="proceed" (click)="onSubmitBaFormGroup()" mat-button>Proceed to Payment</button>
+      </div>
+    </div>
+    <div *ngIf="!(this.Step.billingAddress == currentStep) && this.modifiedBAForm">
+      <div class="column Form" id="baGroup">
+        <div>{{this.baAddressSelected.customer.firstName + ' ' + baAddressSelected.customer.lastName + ' ' + baAddressSelected.customer.phoneNumber}}</div>
+        <div>{{baAddressSelected.address.street1}}</div>
+        <div>{{baAddressSelected.address.street2}}</div>
+        <div>{{baAddressSelected.address.city + ', ' + baAddressSelected.address.province + ', ' + baAddressSelected.address.country}}</div>
+        <div>{{baAddressSelected.address.postalCode}}</div>
+      </div>
+
+    </div>
+
+  </div>
+  <div [className]="this.Step.payment == currentStep?'column Field': 'column Field-inactive'" id="coField">
+    <mat-toolbar-row class="title">
+      <span>Payment</span>
+      <span class="example-spacer"></span>
+      <mat-icon class="example-icon" *ngIf="!(this.Step.payment == currentStep) && this.modifiedPayment"
+                (click)="editPayment()" aria-hidden="false" aria-label="Example user verified icon">edit
+      </mat-icon>
+    </mat-toolbar-row>
+    <div class="column Form" *ngIf="this.Step.payment == currentStep " id="paymentForm">
+      <form [formGroup]="ccFormGroup" id="payment-form">
         <mat-form-field>
           <label>
             <input matInput placeholder="First name" formControlName="firstName" required>
@@ -274,90 +382,35 @@
         <br>
         <mat-form-field>
           <label>
-            <input matInput placeholder="phone number" formControlName="phoneNumber" required>
-          </label>
-        </mat-form-field>
-        <br>
-      </div>
-      <div formGroupName="address">
-        <mat-form-field>
-          <label>
-            <input matInput placeholder="street 1" formControlName="street1" required>
+            <input matInput placeholder="Card Number" formControlName="cardNumber" required>
           </label>
         </mat-form-field>
         <br>
         <mat-form-field>
           <label>
-            <input matInput placeholder="street 2" formControlName="street2">
+            <input matInput placeholder="Expire Date" formControlName="expireDate" required>
           </label>
         </mat-form-field>
-        <br>
         <mat-form-field>
           <label>
-            <input matInput placeholder="city" formControlName="city" required>
+            <input matInput placeholder="CVV" formControlName="cvv" required>
           </label>
         </mat-form-field>
-        <br>
-        <mat-form-field>
-          <label>
-            <input matInput placeholder="province" formControlName="province" required>
-          </label>
-        </mat-form-field>
-        <br>
-        <mat-form-field>
-          <label>
-            <input matInput placeholder="postal code" formControlName="postalCode" required>
-          </label>
-        </mat-form-field>
-        <br>
-        <mat-form-field>
-          <label>
-            <input matInput placeholder="country" formControlName="country" required>
-          </label>
-        </mat-form-field>
-      </div>
-      <div>
-        <button mat-button>Back</button>
-        <button mat-button>Next</button>
-      </div>
-    </form>
-    <button class="proceed" mat-button>Proceed to Payment</button>
+      </form>
+    </div>
   </div>
-  <div class="column" id = "coField">
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page">Payment</li>
-      </ol>
-    </nav>
-    <form [formGroup]="ccFormGroup" id="payment-form">
-      <mat-form-field>
+</div>
 
-        <label>
-          <input matInput placeholder="First name" formControlName="firstName" required>
-        </label>
-      </mat-form-field>
-      <mat-form-field>
-        <label>
-          <input matInput placeholder="Last name" formControlName="lastName" required>
-        </label>
-      </mat-form-field>
-      <br>
-      <mat-form-field>
-        <label>
-          <input matInput placeholder="Card Number" formControlName="cardNumber" required>
-        </label>
-      </mat-form-field>
-      <br>
-      <mat-form-field>
-        <label>
-          <input matInput placeholder="Expire Date" formControlName="expireDate" required>
-        </label>
-      </mat-form-field>
-      <mat-form-field>
-        <label>
-          <input matInput placeholder="CVV" formControlName="cvv" required>
-        </label>
-      </mat-form-field>
-    </form>
+<div class = "d-flex justify-content-center loggin-panel" *ngIf = "this.Status.notLogged==currentStatus">
+  <div >
+    <div class = "text">You are currently not logged. Please login to continue</div>
+    <div class = "d-flex justify-content-center">
+      <button class="loggin" mat-button>Sign In
+      </button>
+      <button class="loggin" mat-button >Sign Up
+      </button>
+    </div>
+
   </div>
+
 </div>

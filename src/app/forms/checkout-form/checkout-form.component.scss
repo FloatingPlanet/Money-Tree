@@ -1,35 +1,57 @@
+@import "../../../styles.scss";
 p {
   margin: 0;
+}
+.title{
+  color: white;
+  font-size: larger;
+
+}
+
+.example-spacer {
+  flex: 1 1 auto;
 }
 
 .proceed {
   margin:12px;
   float:right;
-  background: darksalmon;
-  color: white
+  background: white;
+  color: purple;
 }
-.breadcrumb{
-  background: linen;
-  margin:0px;
 
-  .breadcrumb-item{
-    font-size: larger;
-    color: darksalmon;
-  }
+.example-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+
 }
-#saField{
-  border-radius: 10px;
+.Form{
+  margin:3px;
+  background: white;
+  padding:10px;
+
+}
+.Field{
   overflow:auto;
-  background: linen;
-  outline-color: linen ;
-  #saForm{
-    background: white;
-    outline-color: linen ;
-    padding:10px;
-
-  }
+  background: $money-tree-gradient;
+  margin-bottom: 20px;
+}
+.Field-inactive{
+  overflow:auto;
+  opacity:0.7;
+  background:$money-tree-gradient;
+  margin-bottom: 20px;
 }
 
-#baField{
-  margin-top:20px;
+.loggin-panel {
+margin-top: 40%;
+  .text{
+    font-size:larger;
+  }
+  .loggin{
+    background: $money-tree-gradient;
+    margin:1vh;
+    
+    color: white
+  }
 }
