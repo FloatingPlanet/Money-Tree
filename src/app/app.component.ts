@@ -32,8 +32,8 @@ export class AppComponent implements OnInit {
       }
 
       this.logInfo = {
-        avatarURL: auth ? auth.photoURL : this.DEFAULT_AVATAR,
-        displayName: auth ? auth.displayName : this.DEFAULT_NAME,
+        avatarURL: auth ? this.us.authMetaData.photoURL : this.DEFAULT_AVATAR,
+        displayName: auth ? this.us.authMetaData.displayName : this.DEFAULT_NAME,
         authState: !!auth
       };
     });

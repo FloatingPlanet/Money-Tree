@@ -7,9 +7,8 @@ import * as firebase from 'firebase';
 import {User as FirebaseUser, UserCredential} from '@firebase/auth-types';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {FlashMessageService} from '../flashMessage/flash-message.service';
-import {Router} from '@angular/router';
-import {from, merge} from 'rxjs';
 import {map, mergeMap} from 'rxjs/operators';
+import {BehaviorSubject, Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +19,8 @@ export class UserService {
   public user: User;
   public isLogged: boolean;
 
+  public logStatus$ = new BehaviorSubject(false);
+
   constructor(private afAuth: AngularFireAuth,
               private db: AngularFirestore,
               private fs: FlashMessageService) {
@@ -27,6 +28,7 @@ export class UserService {
     this.afAuth.authState.subscribe((auth) => {
       this.authMetaData = auth;
       this.isLogged = true;
+      this.logStatus$.next(true);
     });
   }
 
@@ -34,7 +36,7 @@ export class UserService {
   return login observable
    */
   get logInObservable(): any {
-    return this.afAuth.authState;
+    return this.logStatus$.asObservable();
   }
 
   /*
@@ -69,7 +71,7 @@ export class UserService {
   public addProductToCart(product: Product) {
     return new Promise((res, rej) => {
       this.logInObservable.subscribe((auth) => {
-        if (auth) {
+        if (auth.status) {
           this.Users.doc(auth.uid).update({
             cart: firebase.firestore.FieldValue.arrayUnion(product)
           }).catch(r => {
@@ -269,6 +271,7 @@ export class UserService {
   signOut(): void {
     this.afAuth.auth.signOut().then(() => {
       this.isLogged = false;
+      this.logStatus$.next(false);
       this.fs.success('Log out', 'You\'ve been logged out');
     });
 

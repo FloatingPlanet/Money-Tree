@@ -14,14 +14,24 @@ export class NavBarComponent implements OnInit, OnChanges, OnDestroy {
   @Input() info: any;
   public itemInCart: number;
   private logInObservable$: Subscription;
-  private userObservable: Subscription;
+  private userObservable$: Subscription;
   @Input() keyword: string;
 
   constructor(private us: UserService) {
   }
 
   ngOnInit() {
-
+    // TODO user logout and login data is not consistent, and shopping cart has same shit
+    this.logInObservable$ = this.us.logInObservable.subscribe((auth) => {
+      if (auth) {
+        this.userObservable$ = this.us.userObservable.subscribe((res: User) => {
+          console.log('nav cart updated');
+          this.itemInCart = res.cart ? res.cart.length : null;
+        });
+      } else {
+        this.itemInCart = null;
+      }
+    });
   }
 
   // });
@@ -32,24 +42,15 @@ export class NavBarComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(): void {
-    // TODO user logout and login data is not consistent, and shopping cart has same shit
-    // this.logInObservable$ = this.us.logInObservable.subscribe((auth) => {
-    if (this.us.authenticated) {
-      this.userObservable = this.us.userObservable.subscribe((res: User) => {
-        console.log('nav cart updated');
-        this.itemInCart = res.cart ? res.cart.length : null;
-      });
-    } else {
-      this.itemInCart = null;
-    }
+
   }
 
   ngOnDestroy(): void {
     if (this.logInObservable$) {
       this.logInObservable$.unsubscribe();
     }
-    if (this.userObservable) {
-      this.userObservable.unsubscribe();
+    if (this.userObservable$) {
+      this.userObservable$.unsubscribe();
     }
   }
 
