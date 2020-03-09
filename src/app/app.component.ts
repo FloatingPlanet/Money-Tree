@@ -12,32 +12,10 @@ export class AppComponent implements OnInit {
   title = 'money-tree';
   DEFAULT_AVATAR = '../../../assets/default-avatar.png';
   DEFAULT_NAME = 'Shady Individual';
-  public logInfo: any;
-  public itemInCart: number;
-  @ViewChild(NavBarComponent, {static: false}) navBar: NavBarComponent;
 
-  constructor(private cs: CartService, private us: UserService) {
+  constructor() {
   }
 
   ngOnInit(): void {
-    this.us.logInObservable.subscribe((auth) => {
-      if (auth && this.cs.getLocalCart().length > 0) {
-        this.cs.getLocalCart().forEach(product => {
-          this.us.addProductToCart(product).then(() => {
-          }).catch((err) => {
-            console.error(err);
-          });
-        });
-        this.cs.clearAll();
-      }
-
-      this.logInfo = {
-        avatarURL: auth ? this.us.authMetaData.photoURL : this.DEFAULT_AVATAR,
-        displayName: auth ? this.us.authMetaData.displayName : this.DEFAULT_NAME,
-        authState: !!auth
-      };
-    });
   }
-
-
 }

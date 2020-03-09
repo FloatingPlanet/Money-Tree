@@ -33,7 +33,7 @@ export class CartService {
       console.log('login status changed');
       if (auth) {
         this.us.userObservable.subscribe((user) => {
-          console.log('cart service cart updated ');
+          console.log('user cart loaded ');
           this.cart = (user as User).cart;
           this.cartSubject.next(this.cart);
         });

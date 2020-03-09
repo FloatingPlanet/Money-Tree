@@ -25,7 +25,6 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.logInObservable$ = this.us.logInObservable.subscribe((auth) => {
       if (auth) {
-        console.log('yeah')
         this.userObservable$ = this.us.userObservable.subscribe((res: User) => {
           console.log('shopping cart updated');
           this.cart = res.cart ? res.cart : [];

@@ -2,6 +2,7 @@ import {Component, Input, OnChanges, OnDestroy, OnInit} from '@angular/core';
 import {User} from '../../models/user';
 import {UserService} from '../../services/user/user.service';
 import {Subscription} from 'rxjs';
+import {CartService} from '../../services/cart/cart.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -11,13 +12,13 @@ import {Subscription} from 'rxjs';
 export class NavBarComponent implements OnInit, OnChanges, OnDestroy {
   DEFAULT_AVATAR = '../../../assets/default-avatar.png';
   DEFAULT_NAME = 'Shady Individual';
-  @Input() info: any;
+  public logInfo: any;
   public itemInCart: number;
   private logInObservable$: Subscription;
   private userObservable$: Subscription;
   @Input() keyword: string;
 
-  constructor(private us: UserService) {
+  constructor(private us: UserService, private cs: CartService) {
   }
 
   ngOnInit() {
@@ -28,14 +29,25 @@ export class NavBarComponent implements OnInit, OnChanges, OnDestroy {
           console.log('nav cart updated');
           this.itemInCart = res.cart ? res.cart.length : null;
         });
+        if (this.cs.getLocalCart().length > 0) {
+          this.cs.getLocalCart().forEach(product => {
+            this.us.addProductToCart(product).then(() => {
+            }).catch((err) => {
+              console.error(err);
+            });
+          });
+          this.cs.clearAll();
+        }
+        this.logInfo = {
+          avatarURL: auth ? this.us.authMetaData.photoURL : this.DEFAULT_AVATAR,
+          displayName: auth ? this.us.authMetaData.displayName : this.DEFAULT_NAME,
+          authState: !!auth
+        };
       } else {
         this.itemInCart = null;
       }
     });
   }
-
-  // });
-  // }
 
   logout() {
     this.us.signOut();

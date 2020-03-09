@@ -8,7 +8,7 @@ import {User as FirebaseUser, UserCredential} from '@firebase/auth-types';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {FlashMessageService} from '../flashMessage/flash-message.service';
 import {map, mergeMap} from 'rxjs/operators';
-import {BehaviorSubject, Subject} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +18,15 @@ export class UserService {
   public Users: AngularFirestoreCollection<User>;
   public user: User;
   public isLogged: boolean;
-
+  private dummyUser: User = {
+    avatar: '',
+    isAdmin: false,
+    shippingInfo: [],
+    verifiedEmail: false,
+    uid: 'na', username: 'na', email: 'na', phoneNumber: 'na'
+  };
   public logStatus$ = new BehaviorSubject(false);
+  public userInfo$ = new BehaviorSubject<User>(this.dummyUser);
 
   constructor(private afAuth: AngularFireAuth,
               private db: AngularFirestore,
@@ -29,6 +36,12 @@ export class UserService {
       this.authMetaData = auth;
       this.isLogged = true;
       this.logStatus$.next(true);
+      if (this.currentUserId) {
+        this.Users.doc(this.currentUserId).valueChanges().subscribe((user: User) => {
+          this.userInfo$.next(user);
+          console.log('user in');
+        });
+      }
     });
   }
 
@@ -43,9 +56,7 @@ export class UserService {
   return user info observable
    */
   get userObservable() {
-    if (this.currentUserId) {
-      return this.Users.doc(this.currentUserId).valueChanges();
-    }
+    return this.userInfo$.asObservable();
   }
 
   /*
