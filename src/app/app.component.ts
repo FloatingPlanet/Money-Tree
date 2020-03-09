@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
   DEFAULT_AVATAR = '../../../assets/default-avatar.png';
   DEFAULT_NAME = 'Shady Individual';
 
-  constructor() {
+  constructor(private us: UserService) {
   }
 
   ngOnInit(): void {

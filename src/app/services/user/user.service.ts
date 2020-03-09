@@ -33,15 +33,24 @@ export class UserService {
               private fs: FlashMessageService) {
     this.Users = this.db.collection('Users');
     this.afAuth.authState.subscribe((auth) => {
-      this.authMetaData = auth;
-      this.isLogged = true;
-      this.logStatus$.next(true);
-      if (this.currentUserId) {
-        this.Users.doc(this.currentUserId).valueChanges().subscribe((user: User) => {
-          this.userInfo$.next(user);
-          console.log('user in');
-        });
+      if (auth) {
+        this.authMetaData = auth;
+        this.isLogged = true;
+        this.logStatus$.next(true);
+        if (this.currentUserId) {
+          this.Users.doc(this.currentUserId).valueChanges().subscribe((user: User) => {
+            this.userInfo$.next(user);
+            console.log('user in');
+          });
+        }
+      } else {
+        this.authMetaData = null;
+        this.isLogged = false;
+        this.logStatus$.next(false);
+        this.userInfo$.next(this.dummyUser);
+        console.log('user out');
       }
+
     });
   }
 

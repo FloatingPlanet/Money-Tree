@@ -26,7 +26,7 @@ export class NavBarComponent implements OnInit, OnChanges, OnDestroy {
     this.logInObservable$ = this.us.logInObservable.subscribe((auth) => {
       if (auth) {
         this.userObservable$ = this.us.userObservable.subscribe((res: User) => {
-          console.log('nav cart updated');
+          console.log('shopping cart banner updated');
           this.itemInCart = res.cart ? res.cart.length : null;
         });
         if (this.cs.getLocalCart().length > 0) {
