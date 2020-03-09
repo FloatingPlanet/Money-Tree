@@ -1,9 +1,7 @@
 import {Component, Input, OnChanges, OnDestroy, OnInit} from '@angular/core';
 import {User} from '../../models/user';
 import {UserService} from '../../services/user/user.service';
-import {CartService} from '../../services/cart/cart.service';
 import {Subscription} from 'rxjs';
-import {events} from 'stripe';
 
 @Component({
   selector: 'app-nav-bar',
@@ -16,14 +14,17 @@ export class NavBarComponent implements OnInit, OnChanges, OnDestroy {
   @Input() info: any;
   public itemInCart: number;
   private logInObservable$: Subscription;
+  private userObservable: Subscription;
   @Input() keyword: string;
+
   constructor(private us: UserService) {
   }
 
   ngOnInit() {
 
   }
-    // });
+
+  // });
   // }
 
   logout() {
@@ -34,7 +35,7 @@ export class NavBarComponent implements OnInit, OnChanges, OnDestroy {
     // TODO user logout and login data is not consistent, and shopping cart has same shit
     // this.logInObservable$ = this.us.logInObservable.subscribe((auth) => {
     if (this.us.authenticated) {
-      this.us.userObservable.subscribe((res: User) => {
+      this.userObservable = this.us.userObservable.subscribe((res: User) => {
         console.log('nav cart updated');
         this.itemInCart = res.cart ? res.cart.length : null;
       });
@@ -46,6 +47,9 @@ export class NavBarComponent implements OnInit, OnChanges, OnDestroy {
   ngOnDestroy(): void {
     if (this.logInObservable$) {
       this.logInObservable$.unsubscribe();
+    }
+    if (this.userObservable) {
+      this.userObservable.unsubscribe();
     }
   }
 
