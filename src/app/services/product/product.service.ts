@@ -1,34 +1,49 @@
 import {Injectable} from '@angular/core';
-import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
+import {AngularFirestore, AngularFirestoreCollection, Query} from 'angularfire2/firestore';
 import {Product} from 'src/app/models/product';
 import {CategoryService} from '../category/category.service';
-import {BehaviorSubject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  public Products: AngularFirestoreCollection<Product>; // db ref
+  public Products: AngularFirestoreCollection<Product[]>; // db ref
   public allProducts: Product[] = [];
+  private lastDoc: any;
+  private productFetchQuery: Query;
 
   constructor(private db: AngularFirestore, private cs: CategoryService) {
-    this.Products = db.collection('Products', ref => ref.orderBy('productAddedAt').limit(100));
+    this.Products = db.collection('Products', ref => ref.orderBy('productAddedAt'));
     // TODO PAGINATION
     this.loadProducts();
   }
 
   /*
-  retrieve all product from firebase
+  retrieve @limit products from firebase
    */
   private loadProducts() {
-    this.Products.ref.get().then((products) => {
+    this.productFetchQuery = this.Products.ref.limit(1);
+    this.productFetchQuery.get().then((products) => {
       products.forEach((doc) => {
         this.allProducts.push(doc.data() as Product);
-
+        this.lastDoc = doc;
       });
     });
   }
 
+  /*
+  retrieve @limit more products from firebase
+   */
+  public loadAnotherDocs() {
+    this.productFetchQuery = this.Products.ref.limit(1).startAfter(this.lastDoc);
+    this.productFetchQuery.get().then((products) => {
+      products.forEach((doc) => {
+        this.allProducts.push(doc.data() as Product);
+        this.lastDoc = doc;
+      });
+    });
+
+  }
 
   /*
   return products observable

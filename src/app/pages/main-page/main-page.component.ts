@@ -31,6 +31,10 @@ export class MainPageComponent implements OnInit, OnDestroy {
     this.cs.addProduct(product);
   }
 
+  load() {
+    this.ps.loadAnotherDocs();
+  }
+
   ngOnDestroy(): void {
 
   }
