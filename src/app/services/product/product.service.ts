@@ -22,7 +22,7 @@ export class ProductService {
   retrieve @limit products from firebase
    */
   private loadProducts() {
-    this.productFetchQuery = this.Products.ref.limit(1);
+    this.productFetchQuery = this.Products.ref.limit(4);
     this.productFetchQuery.get().then((products) => {
       products.forEach((doc) => {
         this.allProducts.push(doc.data() as Product);
@@ -35,7 +35,7 @@ export class ProductService {
   retrieve @limit more products from firebase
    */
   public loadAnotherDocs() {
-    this.productFetchQuery = this.Products.ref.limit(1).startAfter(this.lastDoc);
+    this.productFetchQuery = this.Products.ref.limit(4).startAfter(this.lastDoc);
     this.productFetchQuery.get().then((products) => {
       products.forEach((doc) => {
         this.allProducts.push(doc.data() as Product);
