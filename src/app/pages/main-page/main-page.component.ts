@@ -20,9 +20,10 @@ export class MainPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.ps.productObservable.subscribe((prods: Product[]) => {
-      this.products = prods;
-    });
+    this.products = this.ps.allProducts;
+    // this.ps.productObservable.subscribe((prods: Product[]) => {
+    //   this.products = prods;
+    // });
   }
 
 

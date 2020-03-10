@@ -10,7 +10,6 @@ import {BehaviorSubject} from 'rxjs';
 export class ProductService {
   public Products: AngularFirestoreCollection<Product>; // db ref
   public allProducts: Product[] = [];
-  public allProducts$: BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>([]);
 
   constructor(private db: AngularFirestore, private cs: CategoryService) {
     this.Products = db.collection('Products', ref => ref.orderBy('productAddedAt').limit(100));
@@ -23,25 +22,13 @@ export class ProductService {
    */
   private loadProducts() {
     this.Products.ref.get().then((products) => {
-      const p = new Promise((res, rej) => {
-        products.forEach((doc) => {
-          this.allProducts.push(doc.data() as Product);
-          if (this.allProducts.length === products.size - 1) {
-            res();
-          }
-        });
-      });
+      products.forEach((doc) => {
+        this.allProducts.push(doc.data() as Product);
 
-      p.then(() => this.allProducts$.next(this.allProducts));
+      });
     });
   }
 
-  /*
-  return products for customer observable
-   */
-  get productObservable() {
-    return this.allProducts$.asObservable();
-  }
 
   /*
   return products observable
