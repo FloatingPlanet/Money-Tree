@@ -23,7 +23,7 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
   private productsObservable$: Subscription;
 
   constructor(private ps: ProductService) {
-    this.productsObservable$ = this.ps.productsObservable.subscribe((res) => {
+    this.productsObservable$ = this.ps.productsObservableAdmin.subscribe((res) => {
       this.products = res;
       this.dataSource = new MatTableDataSource<Product>(this.products);
       this.dataSource.paginator = this.paginator;

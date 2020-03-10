@@ -2,13 +2,15 @@ import {Injectable} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
 import {Product} from 'src/app/models/product';
 import {CategoryService} from '../category/category.service';
+import {BehaviorSubject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
   public Products: AngularFirestoreCollection<Product>; // db ref
-  public allProducts: Product[];
+  public allProducts: Product[] = [];
+  public allProducts$: BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>([]);
 
   constructor(private db: AngularFirestore, private cs: CategoryService) {
     this.Products = db.collection('Products', ref => ref.orderBy('productAddedAt').limit(100));
@@ -20,15 +22,31 @@ export class ProductService {
   retrieve all product from firebase
    */
   private loadProducts() {
-    this.productsObservable.subscribe((data) => {
-      this.allProducts = data;
+    this.Products.ref.get().then((products) => {
+      const p = new Promise((res, rej) => {
+        products.forEach((doc) => {
+          this.allProducts.push(doc.data() as Product);
+          if (this.allProducts.length === products.size - 1) {
+            res();
+          }
+        });
+      });
+
+      p.then(() => this.allProducts$.next(this.allProducts));
     });
+  }
+
+  /*
+  return products for customer observable
+   */
+  get productObservable() {
+    return this.allProducts$.asObservable();
   }
 
   /*
   return products observable
    */
-  get productsObservable() {
+  get productsObservableAdmin() {
     return this.Products.valueChanges();
   }
 

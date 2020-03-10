@@ -8,7 +8,7 @@
   <span class="text-monospace ">FEATURED PRODUCTS</span>
   <div class="container-fluid">
     <div class="card-deck">
-      <app-product-card class="col-6 col-sm-4 col-md-4 col-lg-4 col-xl-3" *ngFor="let product of ps.allProducts"
+      <app-product-card class="col-6 col-sm-4 col-md-4 col-lg-4 col-xl-3" *ngFor="let product of this.products"
                         [product]="product" (productToBeAdded)="addToCart($event)">
       </app-product-card>
     </div>
