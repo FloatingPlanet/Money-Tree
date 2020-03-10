@@ -7,7 +7,7 @@ import {CategoryService} from '../category/category.service';
   providedIn: 'root'
 })
 export class ProductService {
-  public Products: AngularFirestoreCollection<Product[]>; // db ref
+  public Products: AngularFirestoreCollection<Product>; // db ref
   public allProducts: Product[] = [];
   private lastDoc: any;
   private productFetchQuery: Query;
