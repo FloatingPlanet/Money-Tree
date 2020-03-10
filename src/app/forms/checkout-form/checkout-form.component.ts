@@ -7,10 +7,16 @@ import {UserService} from '../../services/user/user.service';
 
 declare var Stripe;
 
-export enum Status {
+export enum logginStatus {
   notLogged = 1,
   loggedWithoutAddress,
   loggedWithAddress,
+}
+
+export enum checkoutStep {
+  shippingAddress = 1,
+  billingAddress,
+  payment,
 }
 
 @Component({
@@ -28,10 +34,14 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
   }
 
   get Status() {
-    return Status;
+    return logginStatus;
+  }
+  // get which form we are currently editting.
+  get Step() {
+    return checkoutStep;
   }
 
-  public isLinear = true;
+  // public isLinear = true;
   public sameAddress = true;
   public saFormGroup: FormGroup;
   public baFormGroup: FormGroup;
@@ -41,12 +51,19 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
   private addressObservable$: Subscription;
   public searching = false;
   public searchFailed = false;
-  public currentStatus: Status;
+  public currentStatus: logginStatus;
+  public currentStep: checkoutStep;
   // user pick address from list
-  public addressSelected: AddressInfo;
+  public saAddressSelected: AddressInfo;
+  public baAddressSelected: AddressInfo;
   public isAddingAddress = false;
+  // Track if has already modified form group
+  public modifiedSAForm = false;
+  public modifiedBAForm = false;
+  public modifiedPayment = false;
 
   ngOnInit() {
+    // init form group
     this.saFormGroup = this.addressFormBuilder();
     this.baFormGroup = this.saFormGroup;
     this.ccFormGroup = this.formBuilder.group({
@@ -56,23 +73,26 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
       expireDate: ['', Validators.required],
       cvv: ['', Validators.required],
     });
-
+    // init loggin status, and what to show in SA, BA field.
     this.logInObservable$ = this.us.logInObservable.subscribe((auth) => {
       if (auth) {
         this.addressObservable$ = this.us.userAddressObservable.subscribe((addresses: AddressInfo[]) => {
           this.addressList = addresses;
           if (addresses) {
-            this.currentStatus = Status.loggedWithAddress;
+            this.currentStatus = logginStatus.loggedWithAddress;
           } else {
-            this.currentStatus = Status.loggedWithoutAddress;
+            this.currentStatus = logginStatus.loggedWithoutAddress;
           }
         });
       } else {
-        this.currentStatus = Status.notLogged;
+        this.currentStatus = logginStatus.notLogged;
         // TODO: implement log in modal;
         console.log('Need to log in');
       }
     });
+
+    // init which step we are in.
+    this.currentStep = checkoutStep.shippingAddress;
   }
 
   public changeBAform() {
@@ -118,21 +138,24 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
   }
 
   onSubmitSaFormGroup() {
+    this.currentStep = checkoutStep.billingAddress;
+    this.modifiedSAForm = true;
     let address: AddressInfo;
     switch (this.currentStatus) {
-      case(Status.notLogged):
+      case(logginStatus.notLogged):
         console.log(`nothing happens here`);
         break;
-      case(Status.loggedWithoutAddress):
+      case(logginStatus.loggedWithoutAddress):
         address = this.generateAddress(this.saFormGroup);
+        this.saAddressSelected = address;
         this.us.addAddress(address).then(r => {
         });
         console.log(`address ${address.addressId} added`);
         break;
-      case(Status.loggedWithAddress):
-        if (this.addressSelected) {
+      case(logginStatus.loggedWithAddress):
+        if (this.saAddressSelected) {
           // saFormGroup is equal to the selected address
-          this.castAddressToForm(this.addressSelected);
+          this.castAddressToForm(this.saAddressSelected);
         } else {
           console.log(this.saFormGroup);
         }
@@ -141,7 +164,16 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
         break;
     }
   }
-
+  onSubmitBaFormGroup() {
+  this.modifiedBAForm = true;
+  this.currentStep = checkoutStep.payment;
+  this.modifiedPayment = true;
+  if (!this.sameAddress) {
+    this.baAddressSelected = this.generateAddress(this.baFormGroup);
+  } else {
+    this.baAddressSelected = this.saAddressSelected;
+  }
+  }
   // parse formGroup to object
   public generateAddress(af: FormGroup) {
     return {
@@ -185,6 +217,8 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
   public addAddressToDB() {
     const address = this.generateAddress(this.saFormGroup);
     this.us.addAddress(address).then((res: string) => {
+      this.isAddingAddress = !this.isAddingAddress;
+      this.saFormGroup.reset();
     });
 
   }
@@ -192,19 +226,27 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
   public triggerAddressForm() {
     this.isAddingAddress = !this.isAddingAddress;
     // reset addressSelected user may pick address then decide to add new address
-    this.addressSelected = null;
+    this.saAddressSelected = null;
     this.saFormGroup.reset();
   }
 
   public clickOnExistShippingAddress(address: AddressInfo) {
-    // if and only if use is not adding new address, then
-    // addressSelected will be updated
-    if (!this.isAddingAddress) {
-      this.addressSelected = address;
-      this.castAddressToForm(this.addressSelected);
-    } else {
-      this.addressSelected = null;
-      this.saFormGroup.reset();
-    }
+    this.isAddingAddress = false;
+    this.saAddressSelected = address;
+    this.castAddressToForm(this.saAddressSelected);
   }
+
+  editPayment() {
+    this.currentStep = checkoutStep.payment;
+  }
+
+  editBillingForm() {
+    this.currentStep = checkoutStep.billingAddress;
+  }
+
+  editShippingForm() {
+    this.currentStep = checkoutStep.shippingAddress;
+  }
+
+
 }

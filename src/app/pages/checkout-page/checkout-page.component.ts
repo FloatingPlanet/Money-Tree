@@ -51,6 +51,7 @@ export class CheckoutPageComponent implements AfterViewChecked, OnDestroy {
       shippingInfo: this.saFormGroup.value,
       trackingNumber: 'N/A',
       billingInfo: this.baFormGroup.value,
+
       products: this.orders.map(product => product.SKU),
       coupon: this.orderSummaryComponent.validatedCoupon ? this.orderSummaryComponent.validatedCoupon : null,
       totalPrice: this.orderSummaryComponent.total,

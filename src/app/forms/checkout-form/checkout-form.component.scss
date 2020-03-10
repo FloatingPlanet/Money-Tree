@@ -1,8 +1,57 @@
+@import "../../../styles.scss";
 p {
   margin: 0;
 }
+.title{
+  color: white;
+  font-size: larger;
+
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
 
 .proceed {
-  position: absolute;
-  right: 0;
+  margin:12px;
+  float:right;
+  background: white;
+  color: purple;
+}
+
+.example-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+
+}
+.Form{
+  margin:3px;
+  background: white;
+  padding:10px;
+
+}
+.Field{
+  overflow:auto;
+  background: $money-tree-gradient;
+  margin-bottom: 20px;
+}
+.Field-inactive{
+  overflow:auto;
+  opacity:0.7;
+  background:$money-tree-gradient;
+  margin-bottom: 20px;
+}
+
+.loggin-panel {
+margin-top: 40%;
+  .text{
+    font-size:larger;
+  }
+  .loggin{
+    background: $money-tree-gradient;
+    margin:1vh;
+    
+    color: white
+  }
 }
