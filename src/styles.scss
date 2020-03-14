@@ -8,24 +8,37 @@
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
 @include mat-core();
+$custom-typography: mat-typography-config(
+  $font-family: 'Muli, Roboto, "Helvetica Neue", sans-serif',
+  // h1
+  $headline: mat-typography-level(26px, 30px, 700),
+  // h2
+  $title: mat-typography-level(22x, 26px, 700),
+  // h3
+  $subheading-2: mat-typography-level(18px, 22px, 700),
+  // h4
+  $subheading-1: mat-typography-level(16px, 18px, 700),
+  $body-1: mat-typography-level(12px, 14px, 500)
+);
+// Override typography CSS classes (e.g., mat-h1, mat-display-1, mat-typography, etc.).
+@include mat-base-typography($custom-typography);
 
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
-$money-tree-primary: mat-palette($mat-indigo);
-$money-tree-accent: mat-palette($mat-pink, A200, A100, A400);
+// Override typography for a specific Angular Material components.
+@include mat-checkbox-typography($custom-typography);
 
-// The warn palette is optional (defaults to red).
-$money-tree-warn: mat-palette($mat-red);
+// Override typography for all Angular Material, including mat-base-typography and all components.
+@include angular-material-typography($custom-typography);
+
+// Override the typography in the core CSS.
+@include mat-core($custom-typography);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$money-tree-theme: mat-light-theme($money-tree-primary, $money-tree-accent, $money-tree-warn);
-$money-tree-gradient: linear-gradient(to left, rgba(204, 43, 94, 0.9), rgba(117, 58, 136, 0.9));
+$money-tree-gradient: linear-gradient(to right, rgba(43, 42, 94, 0.9), rgba(146, 60, 128, 0.9));
 $money-tree-button: #763568;
+$money-tree-theme-color: #763568;
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include angular-material-theme($money-tree-theme);
 
 /* You can add global styles to this file, and also import other style files */
 
@@ -36,7 +49,6 @@ html, body {
 
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
   background-color: #f5f5f5;
 }
 
@@ -161,20 +173,4 @@ body {
   outline: none !important;
   border:none !important;
   color: $money-tree-button !important;
-}
-
-@import '~@angular/material/theming';
-
-// Define a custom typography config that overrides the font-family as well as the
-// `headlines` and `body-1` levels.
-$custom-typography: mat-typography-config(
-  $font-family: 'Roboto, monospace',
-  $headline: mat-typography-level(16px, 18px, 700),
-  $body-1: mat-typography-level(12px, 14px, 500),
-  $title: mat-typography-level(8px, 10px, 500)
-);
-
-@include mat-core($custom-typography);
-.mat-radio-label-content{
-  width:100%
 }

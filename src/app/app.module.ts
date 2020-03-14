@@ -83,10 +83,9 @@ import {AddressService} from './services/address/address.service';
 import { MidBannerComponent } from './components/mid-banner/mid-banner.component';
 import { CategoriesBarComponent } from './components/categories-bar/categories-bar.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import { FooterComponent } from './components/footer/footer.component';
 import { CategoryProductsPageComponent } from './pages/category-products-page/category-products-page.component';
 import { CategoryProductsGridComponent } from './pages/category-products-page/category-products-grid/category-products-grid.component';
-import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {faSearch} from '@fortawesome/free-solid-svg-icons';
 
 @NgModule({
   declarations: [
@@ -122,6 +121,7 @@ import {faSearch} from '@fortawesome/free-solid-svg-icons';
     LoadingSpinnerComponent,
     CategoryProductsPageComponent,
     CategoryProductsGridComponent,
+    FooterComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -173,7 +173,6 @@ import {faSearch} from '@fortawesome/free-solid-svg-icons';
     MatBadgeModule,
     HttpClientModule,
     NgbModule,
-    FontAwesomeModule,
   ],
   providers: [
     FlashMessageService,
@@ -187,8 +186,7 @@ import {faSearch} from '@fortawesome/free-solid-svg-icons';
 })
 
 export class AppModule {
-  constructor(private library: FaIconLibrary) {
-    library.addIcons(faSearch);
+  constructor() {
   }
 }
 
