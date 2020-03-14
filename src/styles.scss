@@ -20,8 +20,9 @@ $money-tree-warn: mat-palette($mat-red);
 
 // Create the theme object (a Sass map containing all of the palettes).
 $money-tree-theme: mat-light-theme($money-tree-primary, $money-tree-accent, $money-tree-warn);
-$money-tree-gradient: linear-gradient(to left, rgba(204, 43, 94, 0.9), rgba(117, 58, 136, 0.9));
+$money-tree-gradient: linear-gradient(to right, rgba(43, 42, 94, 0.9), rgba(146, 60, 128, 0.9));
 $money-tree-button: #763568;
+$money-tree-theme-color: #763568;
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
@@ -161,20 +162,4 @@ body {
   outline: none !important;
   border:none !important;
   color: $money-tree-button !important;
-}
-
-@import '~@angular/material/theming';
-
-// Define a custom typography config that overrides the font-family as well as the
-// `headlines` and `body-1` levels.
-$custom-typography: mat-typography-config(
-  $font-family: 'Roboto, monospace',
-  $headline: mat-typography-level(16px, 18px, 700),
-  $body-1: mat-typography-level(12px, 14px, 500),
-  $title: mat-typography-level(8px, 10px, 500)
-);
-
-@include mat-core($custom-typography);
-.mat-radio-label-content{
-  width:100%
 }
