@@ -1,13 +1,15 @@
 <mat-toolbar>
   <mat-toolbar-row class="pt-2 pb-2">
-    <a [routerLink]="['/']"><img
-      src="../../../assets/logo_planet.png"
-      class="logo"></a>
-
+    <div style="margin-right:1vw">
+      <a [routerLink]="['/']"><img
+        src="../../../assets/logo_planet.png"
+        class="logo"></a>
+    </div>
     <!--      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
     <div class="mr-2 w-75 d-none d-sm-block ">
       <div class="input-group">
-        <input class="form-control py-2 border-right-0 border bg-transparent" type="search" placeholder="search thing up"
+        <input class="form-control py-2 border-right-0 border bg-transparent" type="search"
+               placeholder="search thing up"
                id="search-input" [(ngModel)]="keyword" (keyup.enter)="searchProduct()">
         <span class="input-group-append">
                     <div class="input-group-text bg-transparent">
@@ -18,18 +20,18 @@
       </div>
     </div>
 
-    <button [routerLink]="['/cart']" mat-icon-button aria-hidden="false" aria-label="Example log icon">
-      <mat-icon matBadge="{{this.itemInCart}}" matBadgePosition="after" matBadgeColor="warn" aria-hidden="false"
+    <button mat-icon-button class="icon-button-theme" [routerLink]="['/cart']" aria-hidden="false"
+            aria-label="Example log icon">
+      <mat-icon class="material-icons-outlined " matBadge="{{this.itemInCart}}" matBadgePosition="after"
+                matBadgeColor="warn" aria-hidden="false"
                 aria-label="Example cart icon">shopping_cart
       </mat-icon>
     </button>
 
     <span *ngIf="!this.logInfo?.authState; else logoutBlock">
-
-          <button [routerLink]="['/login']" mat-button aria-hidden="false" aria-label="Log in">
-            <mat-icon aria-hidden="false" aria-label="Example log icon">people</mat-icon>
-            &nbsp;
-            <span>Log in/Sign Up</span>
+          <button mat-icon-button class="icon-button-theme" [routerLink]="['/login']" aria-hidden="false"
+                  aria-label="Log in">
+            <mat-icon class="material-icons" aria-hidden="false" aria-label="Example log icon">face</mat-icon>
           </button>
         </span>
     <ng-template #logoutBlock>
@@ -41,7 +43,7 @@
         <button [routerLink]="['user/orders']" mat-menu-item>Orders</button>
       </mat-menu>
       <!-- </a> -->
-      <button mat-button (click)="logout()">Log Out</button>
+      <button mat-button class="button-theme" (click)="logout()">Log Out</button>
     </ng-template>
   </mat-toolbar-row>
 </mat-toolbar>
