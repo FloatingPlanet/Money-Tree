@@ -48,6 +48,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   }
 
   emailLogin() {
+    console.log("button clicked");
     this.submitted = true;
     if (this.loginForm.invalid) {
       return;
