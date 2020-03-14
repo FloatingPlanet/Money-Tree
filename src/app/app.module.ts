@@ -86,10 +86,6 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
 import { FooterComponent } from './components/footer/footer.component';
 import { CategoryProductsPageComponent } from './pages/category-products-page/category-products-page.component';
 import { CategoryProductsGridComponent } from './pages/category-products-page/category-products-grid/category-products-grid.component';
-import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {faSearch} from '@fortawesome/free-solid-svg-icons';
-import { faFacebookF, faTwitch, faGooglePlus, faLinkedinIn, faDribbble } from '@fortawesome/free-brands-svg-icons';
-
 
 @NgModule({
   declarations: [
@@ -177,7 +173,6 @@ import { faFacebookF, faTwitch, faGooglePlus, faLinkedinIn, faDribbble } from '@
     MatBadgeModule,
     HttpClientModule,
     NgbModule,
-    FontAwesomeModule,
   ],
   providers: [
     FlashMessageService,
@@ -191,8 +186,7 @@ import { faFacebookF, faTwitch, faGooglePlus, faLinkedinIn, faDribbble } from '@
 })
 
 export class AppModule {
-  constructor(private library: FaIconLibrary) {
-    library.addIcons(faSearch, faFacebookF, faTwitch, faGooglePlus, faLinkedinIn, faDribbble);
+  constructor() {
   }
 }
 
