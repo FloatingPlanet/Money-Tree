@@ -25,3 +25,10 @@
 .badge{
   position: absolute;
 }
+.image-style{
+  object-fit: cover;
+  transform: none;
+  position: static;
+  width:100%;
+  height: 100%;
+}

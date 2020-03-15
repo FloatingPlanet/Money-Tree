@@ -34,7 +34,7 @@ export class ProductFormComponent implements OnInit {
           productSummary: this.product.productSummary,
           productPrice: this.product.productPrice,
           productDescription: this.product.productDescription,
-          productImageUrls: this.product.productImageUrls,
+          productImageUrls: [this.product.productImageUrls],
           productAddedAt: this.product.productAddedAt,
           productQuantity: this.product.productQuantity,
           ratings: this.product.ratings,
