@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {ProductService} from 'src/app/services/product/product.service';
 import {UserService} from '../../services/user/user.service';
 import {Product} from '../../models/product';
@@ -13,6 +13,10 @@ export class MainPageComponent implements OnInit, OnDestroy {
   public products: Product[] = [];
   public path: string;
 
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    console.log(window.scrollY);
+  }
   constructor(public ps: ProductService,
               private us: UserService,
               private cs: CartService,
