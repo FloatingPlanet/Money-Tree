@@ -6,14 +6,18 @@
 <div>
 </div>
 <div class="container-fluid main-section-view-custom-width pt-3 pb-3">
-  <span class="text-monospace ">FEATURED PRODUCTS</span>
+  <span class="text-monospace ">
+    <h2>FEATURED PRODUCTS</h2>
+  </span>
   <button (click)="load()">LOAD MOTHERFUCKER!!!!!!!!!!!!!!!!!</button>
 
   <div class="container-fluid">
     <div class="card-deck">
-      <app-product-card class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-3" *ngFor="let product of this.products"
+      <app-product-card class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-3 no-padding"
+                        *ngFor="let product of this.products"
                         [product]="product" (productToBeAdded)="addToCart($event)">
       </app-product-card>
     </div>
   </div>
 </div>
+
