@@ -1,44 +1,56 @@
-<mat-card class="product">
-  <mat-card-content>
-    <div class="img-wrapper" (mouseenter)="this.buttonShow =!this.buttonShow"
-         (mouseleave)="this.buttonShow = !this.buttonShow">
-      <div>
-        <span class="badge badge-pill badge-danger">HOTs</span>
-        <img mat-card-image class="img-responsive" src="{{product.productImageUrls[0]}}" alt="productImg">
-      </div>
-      <div class="img-overlay">
-        <button *ngIf="this.buttonShow" type="button" class="btn btn-sm btn-secondary btn-block"
-                data-toggle="modal" data-target="#quickLook">
-          Quick Look
-        </button>
+<!-- Card group -->
+<div class="card-group">
+
+  <!-- Card -->
+  <div class="card">
+
+    <!-- Card image -->
+    <div>
+      <div class="img-wrapper" (mouseenter)="this.buttonShow =!this.buttonShow"
+           (mouseleave)="this.buttonShow = !this.buttonShow">
+        <div>
+          <img class="card-img-top" src="{{product.productImageUrls[0]}}" alt="Card image cap">
+          <a href="#!">
+            <div class="mask rgba-white-slight"></div>
+          </a>
+        </div>
+        <div class="img-overlay">
+          <button *ngIf="this.buttonShow" type="button" class="btn btn-sm btn-secondary btn-block button-theme-gradient"
+                  data-toggle="modal" data-target="#quickLook">
+            Quick Look
+          </button>
+        </div>
       </div>
     </div>
-    <mat-card-title class="title">{{product.productName}}</mat-card-title>
-    <mat-card-subtitle class="price">CAD ${{product.productPrice}}</mat-card-subtitle>
-  </mat-card-content>
-  <mat-card-actions class="d-flex justify-content-end">
-    <button mat-icon-button aria-label="add to cart" (click)="addToCart(product)" >
-      <mat-icon>add_shopping_cart
-      </mat-icon>
-    </button>
-    <button mat-icon-button color="warn" (click)="like=!like" *ngIf="like"
-            aria-label="add to favorite">
-      <mat-icon>favorite</mat-icon>
-    </button>
-    <button mat-icon-button (click)="like=!like" *ngIf="!like"
-            aria-label="remove from favorite">
-      <mat-icon>favorite_border</mat-icon>
-    </button>
-  </mat-card-actions>
-</mat-card>
 
 
-<div id="quickLook" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
-     aria-labelledby="myLargeModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <app-product-quick-look></app-product-quick-look>
+    <div class="card-body card-body-cascade text-center">
+      <span class="badge badge-pill badge-danger">HOTs</span>
+
+      <!-- Title -->
+      <h4 class="card-title subtitle-margin-ignore"><strong>{{product.productName}}</strong></h4>
+      <!-- Subtitle -->
+      <h5 class="blue-text pb-2 subtitle-margin-ignore"><strong>${{product.productPrice}}</strong></h5>
+
+      <button mat-icon-button aria-label="add to cart" (click)="addToCart(product)">
+        <mat-icon>add_shopping_cart
+        </mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="like=!like" *ngIf="like"
+              aria-label="add to favorite">
+        <mat-icon>favorite</mat-icon>
+      </button>
+      <button mat-icon-button (click)="like=!like" *ngIf="!like"
+              aria-label="remove from favorite">
+        <mat-icon>favorite_border</mat-icon>
+      </button>
+
     </div>
+
   </div>
+  <!-- Card -->
+
+  <!-- Card -->
+
 </div>
+<!-- Card group -->

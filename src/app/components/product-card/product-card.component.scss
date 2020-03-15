@@ -1,13 +1,3 @@
-.product {
-  min-width: 180px;
-  margin-bottom: 1vh; /* same as fxLayoutGap for even distribution */
-}
-
-.product img {
-  height: 200px;
-  object-fit: contain;
-}
-
 .img-wrapper {
   position: relative;
 }
@@ -30,7 +20,7 @@
   content: ' ';
   display: block;
   /* adjust 'height' to position overlay content vertically */
-  height: 70%;
+  height: 90%;
 }
 .badge{
   position: absolute;
