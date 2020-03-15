@@ -47,9 +47,15 @@
         <input matInput type="text" formControlName="productSeller" placeholder="Product Seller" value="NA">
       </mat-form-field>
     </label> <label>
-    <mat-form-field>
-      <input matInput type="text" formControlName="productImageUrls" placeholder="Product Image Url" value="NA">
-    </mat-form-field>
+    <div formArrayName="productImageUrls">
+      <div *ngFor="let url of getProductImageUrls.controls; let urlIndex = index" [formGroupName]="urlIndex">
+        <mat-form-field>
+          <input matInput type="text" formControlName="url" placeholder="Product Image Url" value="NA">
+        </mat-form-field>
+      </div>
+      <button type="button" (click)="addUrl()">Add Url</button>
+
+    </div>
   </label>
     <!--    <p>-->
     <!--      {{ productForm.value | json }}-->
