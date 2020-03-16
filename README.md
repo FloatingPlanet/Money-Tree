@@ -42,6 +42,7 @@
     - Modify orders
     - Chart/diagram allow user visualize its business
 4. Products
+    - ~~Responsive products card~~
     - Show products by different categories/constraints
     - Redesign user scheme, if admin change products details, products in user cart will not updated!!!!!!!!!
 
