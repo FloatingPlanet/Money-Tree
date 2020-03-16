@@ -1,53 +1,51 @@
+<!-- Card -->
+<div class="card mt-3 animated  bounceIn fast">
 
-
-  <!-- Card -->
-  <div class="card mt-3 animated  bounceIn fast">
-
-    <!-- Card image -->
-    <div>
-      <div class="img-wrapper" (mouseenter)="this.buttonShow =!this.buttonShow"
-           (mouseleave)="this.buttonShow = !this.buttonShow">
-        <div>
-          <img class="card-img-top image-style" src="{{product.productImageUrls[0]?.url}}" alt="Card image cap">
-          <a href="#!">
-            <div class="mask rgba-white-slight"></div>
-          </a>
-        </div>
-        <div class="img-overlay">
-          <button *ngIf="this.buttonShow" type="button" class="btn btn-sm btn-secondary btn-block button-theme-gradient"
-                  data-toggle="modal" data-target="#quickLook">
-            Quick Look
-          </button>
-        </div>
+  <!-- Card image -->
+  <div>
+    <div class="img-wrapper" (mouseenter)="this.buttonShow =!this.buttonShow"
+         (mouseleave)="this.buttonShow = !this.buttonShow">
+      <div>
+        <img class="card-img-top image-style" src="{{product.productImageUrls[0]?.url}}" alt="Card image cap">
+        <a href="#!">
+          <div class="mask rgba-white-slight"></div>
+        </a>
+      </div>
+      <div class="img-overlay">
+        <button *ngIf="this.buttonShow" type="button" class="btn btn-sm btn-secondary btn-block button-theme-gradient"
+                data-toggle="modal" data-target="#quickLook">
+          Quick Look
+        </button>
       </div>
     </div>
+  </div>
 
 
-    <div class="card-body card-body-cascade text-center">
-      <span class="badge badge-pill badge-danger">HOTs</span>
+  <div class="card-body card-body-cascade text-center">
+    <span class="badge badge-pill badge-danger">HOTs</span>
 
-      <!-- Title -->
-      <h4 class="card-title subtitle-margin-ignore"><strong>{{product.productName}}</strong></h4>
-      <!-- Subtitle -->
-      <h5 class="blue-text pb-2 subtitle-margin-ignore"><strong>${{product.productPrice}}</strong></h5>
+    <!-- Title -->
+    <h4 class="card-title subtitle-margin-ignore"><strong>{{product.productName}}</strong></h4>
+    <!-- Subtitle -->
+    <h5 class="blue-text pb-2 subtitle-margin-ignore"><strong>${{product.productPrice}}</strong></h5>
 
-      <button mat-icon-button aria-label="add to cart" (click)="addToCart(product)">
-        <mat-icon>add_shopping_cart
-        </mat-icon>
-      </button>
-      <button mat-icon-button color="warn" (click)="like=!like" *ngIf="like"
-              aria-label="add to favorite">
-        <mat-icon>favorite</mat-icon>
-      </button>
-      <button mat-icon-button (click)="like=!like" *ngIf="!like"
-              aria-label="remove from favorite">
-        <mat-icon>favorite_border</mat-icon>
-      </button>
-
-    </div>
+    <button mat-icon-button aria-label="add to cart" (click)="addToCart(product)">
+      <mat-icon>add_shopping_cart
+      </mat-icon>
+    </button>
+    <button mat-icon-button color="warn" (click)="like=!like" *ngIf="like"
+            aria-label="add to favorite">
+      <mat-icon>favorite</mat-icon>
+    </button>
+    <button mat-icon-button (click)="like=!like" *ngIf="!like"
+            aria-label="remove from favorite">
+      <mat-icon>favorite_border</mat-icon>
+    </button>
 
   </div>
-  <!-- Card -->
 
-  <!-- Card -->
+</div>
+<!-- Card -->
+
+<!-- Card -->
 

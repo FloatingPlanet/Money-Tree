@@ -9,6 +9,7 @@ import {CategoryService} from '../category/category.service';
 export class ProductService {
   public Products: AngularFirestoreCollection<Product>; // db ref
   public allProducts: Product[] = [];
+  public loading = true;
   private lastDoc: any;
   private productFetchQuery: Query;
 
@@ -22,7 +23,7 @@ export class ProductService {
   retrieve @limit products from firebase
    */
   private loadProducts() {
-    this.productFetchQuery = this.Products.ref.limit(4);
+    this.productFetchQuery = this.Products.ref.limit(12);
     this.productFetchQuery.get().then((products) => {
       products.forEach((doc) => {
         this.allProducts.push(doc.data() as Product);
@@ -34,15 +35,24 @@ export class ProductService {
   /*
   retrieve @limit more products from firebase
    */
-  public loadAnotherDocs() {
-    this.productFetchQuery = this.Products.ref.limit(4).startAfter(this.lastDoc);
-    this.productFetchQuery.get().then((products) => {
-      products.forEach((doc) => {
-        this.allProducts.push(doc.data() as Product);
-        this.lastDoc = doc;
-      });
+  public loadAnotherProducts() {
+    const lazyLoad = new Promise((res, rej) => {
+        this.loading = true;
+        setTimeout(() => {
+          this.productFetchQuery = this.Products.ref.limit(4).startAfter(this.lastDoc);
+          this.productFetchQuery.get().then((products) => {
+            products.forEach((doc) => {
+              this.allProducts.push(doc.data() as Product);
+              this.lastDoc = doc;
+            });
+          });
+        }, 1000);
+        res();
+      }
+    );
+    lazyLoad.then(() => {
+      this.loading = false;
     });
-
   }
 
   /*
@@ -55,7 +65,7 @@ export class ProductService {
   public addProduct(product: Product) {
     return new Promise((resolve, reject) => {
       product.productSummary = product.productCategory.join(' ');
-      this.Products.doc(product.SKU).ref.get().then((doc) => {
+      this.Products.doc(product.SKU).ref.get().then(() => {
         this.Products.doc(product.SKU)
           .set(product)
           .catch(error => {
@@ -76,7 +86,7 @@ export class ProductService {
    */
   public deleteProducts(sku: string) {
     return new Promise((resolve, reject) => {
-      this.Products.doc(sku).delete().then((res) => {
+      this.Products.doc(sku).delete().then(() => {
         resolve(`remove SKU ${sku} succeed`);
       }).catch((error) => {
         console.error(error);
