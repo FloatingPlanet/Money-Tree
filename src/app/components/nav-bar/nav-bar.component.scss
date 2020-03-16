@@ -1,9 +1,41 @@
+@import "../../../styles.scss";
 .form-control:focus {
   outline: 0 !important;
   border-color: initial;
   box-shadow: none;
+
 }
 
-.nav-avatar{
-  margin: 2px;
+.nav-avatar:hover{
+  cursor:pointer;
+}
+.card-avatar{
+  border-radius: 50%;
+}
+::ng-deep .mat-menu-content {
+  padding-top: 0px !important;
+}
+.example-card{
+  background: $money-tree-gradient;
+  border-radius:0% !important;
+  border: none !important ;
+  webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  padding-bottom:0.5vh;
+  .userName{
+    color:white;
+    font-weight: normal;
+  }
+  .userEmail{
+    padding-top:0.3vw;
+    color:white;
+    font-weight: 400;
+  }
+
+}
+.mat-menu-item{
+  outline:none !important;
+}
+.logout{
+  color: $money-tree-theme-color !important;
 }
