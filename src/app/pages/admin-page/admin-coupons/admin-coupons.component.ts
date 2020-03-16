@@ -1,10 +1,10 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Coupon} from '../../models/coupon';
+import {Coupon} from '../../../models/coupon';
 import * as moment from 'moment';
 import {SelectionModel} from '@angular/cdk/collections';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
-import {CouponsService} from '../../services/coupons/coupons.service';
+import {CouponsService} from '../../../services/coupons/coupons.service';
 import {Subscription} from 'rxjs';
 
 @Component({

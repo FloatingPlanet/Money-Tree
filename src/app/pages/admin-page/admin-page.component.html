@@ -1,24 +1,41 @@
-<mat-drawer-container class="admin-container" autosize>
-  <mat-drawer #drawer class="admin-sidenav" opened="true" mode="side">
-    <h1>
-      Admin
-    </h1>
-    <mat-list>
-      <button [routerLink]="['orders']" mat-button>
-        Orders
-      </button>
-      <mat-divider></mat-divider>
-      <button [routerLink]=" ['products']" mat-button>
-        Products
-      </button>
-      <mat-divider></mat-divider>
-      <button [routerLink]="['coupons']" mat-button>
-        Coupons
-      </button>
-    </mat-list>
+<div>
+  <mat-drawer-container class="admin-container " autosize>
+    <mat-drawer #drawer class="admin-sidenav" opened="true" mode="side">
+      <h1>
+        Admin
+      </h1>
+      <mat-list>
+        <button [routerLink]="['orders']" mat-button>
+          Orders
+        </button>
+        <mat-divider></mat-divider>
+        <button [routerLink]=" ['products']" mat-button>
+          Products
+        </button>
+        <mat-divider></mat-divider>
+        <button [routerLink]="['coupons']" mat-button>
+          Coupons
+        </button>
+      </mat-list>
+    </mat-drawer>
+    <div class="admin-sidenav-content">
+      <router-outlet></router-outlet>
+      <div class="toggle-button" [ngSwitch]="showFiller">
+        <div *ngSwitchCase=true>
+          <button type="button" mat-flat-button class="toggle-button button-theme"
+             (click)="drawer.toggle();this.showFiller=!this.showFiller">
+            <i class="fas fa-5x fa-caret-left"></i>
+          </button>
+        </div>
+        <div *ngSwitchCase=false>
+          <button type="button" mat-flat-button class="toggle-button button-theme"
+             (click)="drawer.toggle();this.showFiller=!this.showFiller">
+            <i class="fas fa-5x fa-caret-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
 
-  </mat-drawer>
-  <div class=" admin-sidenav-content">
-    <router-outlet></router-outlet>
-  </div>
-</mat-drawer-container>
+  </mat-drawer-container>
+
+</div>

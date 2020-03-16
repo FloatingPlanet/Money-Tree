@@ -13,10 +13,16 @@ export class MainPageComponent implements OnInit, OnDestroy {
   public products: Product[] = [];
   public path: string;
 
-  @HostListener('window:scroll', [])
+  @HostListener('window:scroll', [ ])
   onWindowScroll() {
-    console.log(window.scrollY);
+    const pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
+    const max = document.documentElement.scrollHeight;
+// pos/max will give you the distance between scroll bottom and and bottom of screen in percentage.
+    if (pos === max) {
+      console.log('end');
+    }
   }
+
   constructor(public ps: ProductService,
               private us: UserService,
               private cs: CartService,
@@ -36,7 +42,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
   }
 
   load() {
-    this.ps.loadAnotherDocs();
+    this.ps.loadAnotherProducts();
   }
 
   ngOnDestroy(): void {

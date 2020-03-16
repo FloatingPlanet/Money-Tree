@@ -1,7 +1,12 @@
 .img-wrapper {
   position: relative;
 }
-
+.img-div{
+  width:100%;
+  height:0px;
+  padding-bottom:100%;
+  position:relative;
+}
 .img-responsive {
   width: 110%;
   height: auto;
@@ -22,6 +27,17 @@
   /* adjust 'height' to position overlay content vertically */
   height: 90%;
 }
-.badge{
+
+.badge {
   position: absolute;
+}
+
+.image-style {
+  object-fit: cover;
+  transform: none;
+  position: absolute;
+  width:100%;
+  height:100%;
+  overflow: hidden;
+  margin: 0 auto;
 }
