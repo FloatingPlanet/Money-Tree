@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Subscription} from 'rxjs';
-import {AddressService} from '../../services/address/address.service';
-import {AddressInfo} from '../../models/addressInfo';
-import {UserService} from '../../services/user/user.service';
+import {AddressService} from '../../../services/address/address.service';
+import {AddressInfo} from '../../../models/addressInfo';
+import {UserService} from '../../../services/user/user.service';
 
 declare var Stripe;
 

@@ -16,7 +16,6 @@ import {BehaviorSubject} from 'rxjs';
 export class UserService {
   public authMetaData: FirebaseUser = null;
   public Users: AngularFirestoreCollection<User>;
-  public user: User;
   public isLogged: boolean;
   private dummyUser: User = {
     avatar: '',
@@ -57,7 +56,7 @@ export class UserService {
   /*
   return login observable
    */
-  get logInObservable(): any {
+  get logInObservable() {
     return this.logStatus$.asObservable();
   }
 
@@ -90,9 +89,9 @@ export class UserService {
    */
   public addProductToCart(product: Product) {
     return new Promise((res, rej) => {
-      this.logInObservable.subscribe((auth) => {
-        if (auth.status) {
-          this.Users.doc(auth.uid).update({
+      this.logInObservable.subscribe((status) => {
+        if (status) {
+          this.Users.doc(this.currentUserId).update({
             cart: firebase.firestore.FieldValue.arrayUnion(product)
           }).catch(r => {
             console.error(r);
@@ -115,7 +114,7 @@ export class UserService {
     return new Promise((res, rej) => {
       this.logInObservable.subscribe((auth) => {
         if (auth) {
-          const addresses = this.Users.doc(auth.uid).collection('addresses');
+          const addresses = this.Users.doc(this.currentUserId).collection('addresses');
           addresses.doc(address.addressId).set(address).then(() => {
             console.log(`Added ${address.addressId} to addresses.`);
             res(address.addressId);
@@ -137,7 +136,7 @@ export class UserService {
     return new Promise((res, rej) => {
       this.logInObservable.subscribe((auth) => {
         if (auth) {
-          const addresses = this.Users.doc(auth.uid).collection('addresses');
+          const addresses = this.Users.doc(this.currentUserId).collection('addresses');
           addresses.doc(id).delete().then(() => {
             console.log(`${id} is deleted`);
             res(`${id} is deleted`);
@@ -292,6 +291,7 @@ export class UserService {
     this.afAuth.auth.signOut().then(() => {
       this.isLogged = false;
       this.logStatus$.next(false);
+      this.userInfo$.next(this.dummyUser);
       this.fs.success('Log out', 'You\'ve been logged out');
     });
 

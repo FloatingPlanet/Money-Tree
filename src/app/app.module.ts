@@ -76,7 +76,7 @@ import {UserPageComponent} from './user/user-page/user-page.component';
 import {UserOrdersComponent} from './user/user-orders/user-orders.component';
 import {UserProfileComponent} from './user/user-profile/user-profile.component';
 import {MatBadgeModule} from '@angular/material/badge';
-import {CheckoutFormComponent} from './forms/checkout-form/checkout-form.component';
+import {CheckoutFormComponent} from './pages/checkout-page/checkout-form/checkout-form.component';
 import {ProductQuickLookComponent} from './components/product-quick-look/product-quick-look.component';
 import {HttpClientModule} from '@angular/common/http';
 import {AddressService} from './services/address/address.service';

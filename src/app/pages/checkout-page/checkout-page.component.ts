@@ -1,5 +1,5 @@
 import {AfterViewChecked, AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {CheckoutFormComponent} from '../../forms/checkout-form/checkout-form.component';
+import {CheckoutFormComponent} from './checkout-form/checkout-form.component';
 import {OrderSummaryComponent} from '../../components/order-summary/order-summary.component';
 import {Product} from '../../models/product';
 import {UserService} from '../../services/user/user.service';
