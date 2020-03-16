@@ -34,7 +34,7 @@ $custom-typography: mat-typography-config(
 // Create the theme object (a Sass map containing all of the palettes).
 $money-tree-gradient: linear-gradient(to right, rgba(43, 42, 94, 0.9), rgba(146, 60, 128, 0.9));
 $money-tree-button: #763568;
-$money-tree-theme-color: #763568;
+$money-tree-theme-color: c;
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.

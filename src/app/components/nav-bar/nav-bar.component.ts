@@ -12,6 +12,7 @@ import {CartService} from '../../services/cart/cart.service';
 export class NavBarComponent implements OnInit, OnChanges, OnDestroy {
   DEFAULT_AVATAR = '../../../assets/default-avatar.png';
   DEFAULT_NAME = 'Shady Individual';
+  DEFAULT_EMAIL = 'hellothere!@floatingp.com';
   public logInfo: any;
   public itemInCart: number;
   private logInObservable$: Subscription;
@@ -38,13 +39,18 @@ export class NavBarComponent implements OnInit, OnChanges, OnDestroy {
           });
           this.cs.clearAll();
         }
-
+        this.logInfo = {
+          avatarURL: auth ? this.us.authMetaData.photoURL : this.DEFAULT_AVATAR,
+          displayName: auth ? this.us.authMetaData.displayName : this.DEFAULT_NAME,
+          authState: !!auth
+        };
       } else {
         this.itemInCart = null;
       }
       this.logInfo = {
         avatarURL: auth ? this.us.currentUser?.photoURL : this.DEFAULT_AVATAR,
         displayName: auth ? this.us.currentUser?.displayName : this.DEFAULT_NAME,
+        displayEmail: auth ? this.us.currentUser?.email : this.DEFAULT_EMAIL,
         authState: auth
       };
     });
