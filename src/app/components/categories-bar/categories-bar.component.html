@@ -2,8 +2,11 @@
   <nav aria-label="breadcrumb" class = "nav-bar">
     <ol class="breadcrumb">
       <li class="breadcrumb-item" *ngFor="let cat of this.allCategories">
-        <a  [className]="this.route.url[3] == cat.category?'breadcrumb-item active': 'breadcrumb-item'" [routerLink]="['/category', cat.category]"
-           (click)="getProducts(cat.category)">{{cat?.category}}</a>
+        <a
+            [routerLink]="['/category', cat.category]"
+           (click)="getProducts(cat.category); setCurrentCat(cat.category) "
+            [ngClass]="currentCat==cat.category?'breadcrumb-item':'breadcrumb-item active'"
+        >{{cat?.category}}</a>
       </li>
     </ol>
   </nav>

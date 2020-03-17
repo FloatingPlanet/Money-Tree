@@ -15,13 +15,6 @@ export class CategoriesBarComponent implements OnInit {
   public currentCat: string;
 
   constructor(private cs: CategoryService,  public route: ActivatedRoute) {
-    this.route.params.subscribe((params) => {
-      // keep eye on route changes, if so re-render products
-      const cat = params.section;
-      console.log('this is ' + cat);
-      console.log('this is ' + this.currentCat);
-    });
-
     this.cs.categoriesObservable.subscribe((cats) => {
       this.allCategories = cats;
     });
@@ -32,7 +25,12 @@ export class CategoriesBarComponent implements OnInit {
 
   public getProducts(category: string) {
     this.cs.specificCategoryProductsObservable(category.toUpperCase()).subscribe((res: Product[]) => {
-      console.log(res);
+      // console.log(res);
     });
+  }
+
+  public setCurrentCat(category: string) {
+    this.currentCat = category;
+    console.log(this.currentCat);
   }
 }

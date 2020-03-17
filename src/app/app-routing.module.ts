@@ -17,8 +17,9 @@ import {UserPageComponent} from './user/user-page/user-page.component';
 import {UserOrdersComponent} from './user/user-orders/user-orders.component';
 import {UserProfileComponent} from './user/user-profile/user-profile.component';
 import {CheckoutPageComponent} from './pages/checkout-page/checkout-page.component';
-import {CategoryProductsPageComponent} from './pages/category-products-page/category-products-page.component';
-import {CategoryProductsGridComponent} from './pages/category-products-page/category-products-grid/category-products-grid.component';
+import {CategoryProductsPageComponent} from './pages/main-page/category-products-page/category-products-page.component';
+// tslint:disable-next-line:max-line-length
+import {CategoryProductsGridComponent} from './pages/main-page/category-products-page/category-products-grid/category-products-grid.component';
 
 
 const routes: Routes = [
