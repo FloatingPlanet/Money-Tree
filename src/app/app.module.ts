@@ -84,9 +84,9 @@ import { MidBannerComponent } from './components/mid-banner/mid-banner.component
 import { CategoriesBarComponent } from './components/categories-bar/categories-bar.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { CategoryProductsPageComponent } from './pages/main-page/category-products-page/category-products-page.component';
+import { CategoryProductsContentComponent } from './pages/main-page/category-products-content/category-products-content.component';
 // tslint:disable-next-line:max-line-length
-import { CategoryProductsGridComponent } from './pages/main-page/category-products-page/category-products-grid/category-products-grid.component';
+import { CategoryProductsGridComponent } from './pages/main-page/category-products-content/category-products-grid/category-products-grid.component';
 import { ScrollableDirective } from './scrollable/scrollable.directive';
 import { AvatarModule } from 'ngx-avatar';
 import { MainPageContentComponent } from './pages/main-page/main-page-content/main-page-content.component';
@@ -123,7 +123,7 @@ import { MainPageContentComponent } from './pages/main-page/main-page-content/ma
     MidBannerComponent,
     CategoriesBarComponent,
     LoadingSpinnerComponent,
-    CategoryProductsPageComponent,
+    CategoryProductsContentComponent,
     CategoryProductsGridComponent,
     FooterComponent,
     ScrollableDirective,

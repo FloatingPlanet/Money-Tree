@@ -5,9 +5,9 @@
         <a
             [routerLink]="['/category', cat.category]"
            (click)="getProducts(cat.category); setCurrentCat(cat.category) "
-            [ngClass]="currentCat==cat.category?'breadcrumb-item':'breadcrumb-item active'"
+            [ngClass]="currentCat==cat.category?'breadcrumb-item selected':'breadcrumb-item active'"
         >{{cat?.category}}</a>
       </li>
     </ol>
   </nav>
-ß</ul>
+</ul>

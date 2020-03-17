@@ -9,8 +9,8 @@
     font-weight: bold;
     color: $money-tree-theme-color;
   }
-  .breadcrumb-item:active{
-    color: #eeeeee;
+  .selected{
+    color: $money-tree-theme-color;
   }
 
 }

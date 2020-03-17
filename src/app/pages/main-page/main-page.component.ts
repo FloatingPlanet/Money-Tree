@@ -1,7 +1,4 @@
-import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
-import {ProductService} from 'src/app/services/product/product.service';
-import {UserService} from '../../services/user/user.service';
-import {Product} from '../../models/product';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {CartService} from '../../services/cart/cart.service';
 
 @Component({
@@ -9,11 +6,10 @@ import {CartService} from '../../services/cart/cart.service';
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.scss']
 })
-export class MainPageComponent implements OnInit, OnDestroy {
-  public products: Product[] = [];
-  public path: string;
+export class MainPageComponent implements OnInit {
 
-  @HostListener('window:scroll', [ ])
+
+  @HostListener('window:scroll', [])
   onWindowScroll() {
     const pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
     const max = document.documentElement.scrollHeight;
@@ -23,30 +19,18 @@ export class MainPageComponent implements OnInit, OnDestroy {
     }
   }
 
-  constructor(public ps: ProductService,
-              private us: UserService,
-              private cs: CartService,
+  constructor(
+    private cs: CartService,
   ) {
   }
 
   ngOnInit() {
-    this.products = this.ps.allProducts;
+
     // this.ps.productObservable.subscribe((prods: Product[]) => {
     //   this.products = prods;
     // });
   }
 
 
-  addToCart(product: Product) {
-    this.cs.addProduct(product);
-  }
-
-  load() {
-    this.ps.loadAnotherProducts();
-  }
-
-  ngOnDestroy(): void {
-
-  }
 }
 

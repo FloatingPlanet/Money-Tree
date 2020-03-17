@@ -14,9 +14,16 @@ export class CategoriesBarComponent implements OnInit {
   public cat: Category;
   public currentCat: string;
 
-  constructor(private cs: CategoryService,  public route: ActivatedRoute) {
+  constructor(private cs: CategoryService, public route: ActivatedRoute) {
     this.cs.categoriesObservable.subscribe((cats) => {
       this.allCategories = cats;
+    });
+    this.route.children.forEach((r) => {
+      r.children.forEach((c) => {
+        c.params.subscribe((res) => {
+          this.cat = res.section;
+        });
+      });
     });
   }
 
