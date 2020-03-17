@@ -1,4 +1,21 @@
+@import "../../../styles.scss";
 .container1 {
   overflow-x: auto;
   white-space: nowrap;
+}
+.breadcrumb{
+  background: none;
+  .breadcrumb-item:hover{
+    font-weight: bold;
+    color: $money-tree-theme-color;
+  }
+  .breadcrumb-item:active{
+    color: #eeeeee;
+  }
+
+}
+.breadcrumb > li + li:before {
+  color: #ccc;
+  content: "|";
+  padding-right: 1vw;
 }
