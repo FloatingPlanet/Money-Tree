@@ -21,7 +21,7 @@ export class CategoriesBarComponent implements OnInit {
     this.route.children.forEach((r) => {
       r.children.forEach((c) => {
         c.params.subscribe((res) => {
-          this.cat = res.section;
+          this.currentCat = res.section;
         });
       });
     });
