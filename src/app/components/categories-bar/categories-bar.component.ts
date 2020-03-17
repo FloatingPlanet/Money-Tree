@@ -13,7 +13,7 @@ export class CategoriesBarComponent implements OnInit {
   public cat: Category;
 
   constructor(private cs: CategoryService) {
-    this.cs.categoriesObservable.subscribe((cats) => {
+    this.cs.categoriesObservableAdmin.subscribe((cats) => {
       this.allCategories = cats;
     });
   }

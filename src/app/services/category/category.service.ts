@@ -22,15 +22,24 @@ export class CategoryService {
   retrieve all categories from firebase
    */
   public loadCategories() {
-    this.categoriesObservable.subscribe((data) => {
+    this.categoriesObservableAdmin.subscribe((data) => {
       this.allCategories = data;
     });
   }
 
   /*
+load specific products based on given category
+ */
+  public specificCategoryProductsObservable(C: string) {
+    return this.Categories
+      .doc(C.toUpperCase())
+      .collection('products').valueChanges();
+  }
+
+  /*
   return categories observable
    */
-  get categoriesObservable() {
+  get categoriesObservableAdmin() {
     return this.Categories.valueChanges();
   }
 
@@ -63,12 +72,5 @@ export class CategoryService {
     });
   }
 
-  /*
-  load specific products based on given category
-   */
-  public specificCategoryProductsObservable(C: string) {
-      return this.Categories
-        .doc(C.toUpperCase())
-        .collection('products').valueChanges();
-  }
+
 }
