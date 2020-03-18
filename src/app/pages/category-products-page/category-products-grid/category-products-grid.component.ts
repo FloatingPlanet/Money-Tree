@@ -12,7 +12,7 @@ import * as functions from 'firebase-functions';
 })
 
 export class CategoryProductsGridComponent implements OnInit, OnDestroy {
-  public allProducts: Product[];
+  public allProducts: Product[] = [];
 
   public specificCategoryProductsObservable$: Subscription;
 
@@ -20,18 +20,20 @@ export class CategoryProductsGridComponent implements OnInit, OnDestroy {
     this.route.params.subscribe((params) => {
       // keep eyes on route changes, if so re-render products
       const cat = params.section;
-      this.specificCategoryProductsObservable$ = this.cs.specificCategoryProductsObservable(cat)
-        .subscribe((res: Product[]) => {
-          // re-load products
-          this.allProducts = res;
-        });
+      this.cs.getProductsWithCategory(cat).then((res) => {
+        this.allProducts = this.cs.chosenCategoryProducts;
+      });
+      // re-load products
     });
   }
 
   ngOnInit() {
   }
 
+  public load() {
+    this.cs.loadAnotherProducts();
+  }
+
   ngOnDestroy(): void {
-    this.specificCategoryProductsObservable$.unsubscribe();
   }
 }

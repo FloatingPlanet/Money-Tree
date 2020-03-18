@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {
   AngularFirestore,
-  AngularFirestoreCollection,
+  AngularFirestoreCollection, Query,
 } from 'angularfire2/firestore';
 import {Category} from 'src/app/models/category';
 import {Product} from '../../models/product';
@@ -10,11 +10,23 @@ import {Product} from '../../models/product';
   providedIn: 'root'
 })
 export class CategoryService {
-  public Categories: AngularFirestoreCollection<Category>; // db ref
+  // reference for all categories
+  public CategoriesCollection: AngularFirestoreCollection<Category>; // db ref
+  public chosenCategoryCollection: AngularFirestoreCollection<Category>; // db ref
+  // all categories
   public allCategories = [];
+  // products for chosen category
+  public chosenCategoryProducts: Product[] = [];
+  // current chosen category
+  public chosenCategory: string;
+  public loading = false;
+  private lastDoc: any;
+  // query for lazing loading
+  private productFetchQuery: Query;
+
 
   constructor(private db: AngularFirestore) {
-    this.Categories = db.collection('Categories');
+    this.CategoriesCollection = db.collection('Categories');
     this.loadCategories();
   }
 
@@ -28,19 +40,48 @@ export class CategoryService {
   }
 
   /*
-load specific products based on given category
+retrieve specific products based on given category with @limit
  */
-  public specificCategoryProductsObservable(C: string) {
-    return this.Categories
-      .doc(C.toUpperCase())
-      .collection('products').valueChanges();
+  public getProductsWithCategory(C: string) {
+    return new Promise((res, rej) => {
+      this.chosenCategory = C;
+      this.chosenCategoryCollection = this.CategoriesCollection
+        .doc(this.chosenCategory.toUpperCase())
+        .collection('products');
+      this.productFetchQuery = this.chosenCategoryCollection.ref.limit(4);
+      this.productFetchQuery.get().then((products) => {
+        products.forEach((doc) => {
+          this.chosenCategoryProducts.push(doc.data() as Product);
+          this.lastDoc = doc;
+        });
+      });
+      res();
+    });
+  }
+
+  /*
+  * retrieve @limit more products from firebase
+   */
+  public loadAnotherProducts() {
+    const lazyLoad = new Promise((res, rej) => {
+      this.loading = true;
+      setTimeout(() => {
+        this.productFetchQuery = this.chosenCategoryCollection.ref.limit(4).startAfter(this.lastDoc);
+        this.productFetchQuery.get().then((products) => {
+          products.forEach((doc) => {
+            this.chosenCategoryProducts.push(doc.data() as Product);
+            this.lastDoc = doc;
+          });
+        });
+      }, 1000);
+    });
   }
 
   /*
   return categories observable
    */
   get categoriesObservableAdmin() {
-    return this.Categories.valueChanges();
+    return this.CategoriesCollection.valueChanges();
   }
 
   /*
@@ -48,7 +89,7 @@ load specific products based on given category
    */
   public addCategory(C: Category) {
     return new Promise((resolve, reject) => {
-      this.Categories.doc(C.category.toUpperCase().replace(/\s/g, ''))
+      this.CategoriesCollection.doc(C.category.toUpperCase().replace(/\s/g, ''))
         .set(C)
         .then((res) => {
           console.log('add Category: ' + C.category);
@@ -64,7 +105,7 @@ load specific products based on given category
   add product to its category collections
    */
   public addProductToCategory(C: string, P: Product) {
-    const subCategories = this.Categories.doc(C.toUpperCase().replace(/\s/g, '')).collection('products');
+    const subCategories = this.CategoriesCollection.doc(C.toUpperCase().replace(/\s/g, '')).collection('products');
     subCategories.doc(P.SKU).set(P).then((res) => {
       console.log(`add ${P.SKU} to Collection ${C} succeeded!`);
     }).catch((error) => {

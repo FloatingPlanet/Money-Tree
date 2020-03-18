@@ -21,9 +21,4 @@ export class CategoriesBarComponent implements OnInit {
   ngOnInit() {
   }
 
-  public getProducts(category: string) {
-    this.cs.specificCategoryProductsObservable(category.toUpperCase()).subscribe((res: Product[])=>{
-      console.log(res);
-    });
-  }
 }
