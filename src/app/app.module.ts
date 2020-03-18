@@ -87,6 +87,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { CategoryProductsPageComponent } from './pages/category-products-page/category-products-page.component';
 import { CategoryProductsGridComponent } from './pages/category-products-page/category-products-grid/category-products-grid.component';
 import { ScrollableDirective } from './scrollable/scrollable.directive';
+import { AvatarModule } from 'ngx-avatar';
 
 @NgModule({
   declarations: [
@@ -175,6 +176,7 @@ import { ScrollableDirective } from './scrollable/scrollable.directive';
     MatBadgeModule,
     HttpClientModule,
     NgbModule,
+    AvatarModule
   ],
   providers: [
     FlashMessageService,

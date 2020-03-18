@@ -35,14 +35,33 @@
         </span>
     <ng-template #logoutBlock>
       <!-- <a id="avatar-btn" class="nav-link"> -->
-      <img class="nav-avatar mr-1" width="18" height="18" [src]="logInfo?.avatarURL" alt="userAvatarURL"/>
-      &nbsp;<button mat-button [matMenuTriggerFor]="infoList">{{logInfo?.displayName}}</button>
-      <mat-menu #infoList="matMenu" xPosition="after">
-        <button [routerLink]="['user/profile']" mat-menu-item>Personal Profile</button>
-        <button [routerLink]="['user/orders']" mat-menu-item>Orders</button>
+      <ngx-avatar class="nav-avatar" name="{{logInfo?.displayName}}" size="30"
+                  [matMenuTriggerFor]="infoList"></ngx-avatar>
+
+      <mat-menu class = "menu" #infoList="matMenu" xPosition="after">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image">
+              <img class="card-avatar" width="100%" height="100%" [src]="logInfo?.avatarURL" alt="userAvatarURL"/>
+            </div>
+            <mat-card-title class = "userName mt-1">{{logInfo?.displayName}}</mat-card-title>
+            <mat-card-subtitle class = "userEmail">{{logInfo?.displayEmail}}</mat-card-subtitle>
+          </mat-card-header>
+
+        </mat-card>
+        <button class = "profile" [routerLink]="['user/profile']" mat-menu-item>
+          <mat-icon>portrait</mat-icon>
+          <span>Personal Profile</span>
+        </button>
+        <button class = "order" [routerLink]="['user/orders']" mat-menu-item>
+          <mat-icon>list_alt</mat-icon>
+          <span>Orders</span>
+        </button>
+        <button  mat-menu-item (click)="logout()"><span class = "logout">Log Out</span></button>
       </mat-menu>
+
       <!-- </a> -->
-      <button mat-button class="button-theme" (click)="logout()">Log Out</button>
+
     </ng-template>
   </mat-toolbar-row>
 </mat-toolbar>
