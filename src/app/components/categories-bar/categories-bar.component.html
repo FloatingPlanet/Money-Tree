@@ -4,7 +4,7 @@
       <li class="breadcrumb-item" *ngFor="let cat of this.allCategories">
         <a
             [routerLink]="['/category', cat.category]"
-           (click)="getProducts(cat.category); setCurrentCat(cat.category) "
+           (click)="setCurrentCat(cat.category) "
             [ngClass]="currentCat==cat.category?'breadcrumb-item selected':'breadcrumb-item active'"
         >{{cat?.category}}</a>
       </li>

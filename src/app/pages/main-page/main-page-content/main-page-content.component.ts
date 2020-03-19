@@ -27,6 +27,6 @@ export class MainPageContentComponent implements OnInit {
   }
 
   load() {
-    this.ps.loadAnotherDocs();
+    this.ps.loadAnotherProducts();
   }
 }
