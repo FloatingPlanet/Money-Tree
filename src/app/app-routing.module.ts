@@ -17,25 +17,33 @@ import {UserPageComponent} from './user/user-page/user-page.component';
 import {UserOrdersComponent} from './user/user-orders/user-orders.component';
 import {UserProfileComponent} from './user/user-profile/user-profile.component';
 import {CheckoutPageComponent} from './pages/checkout-page/checkout-page.component';
-import {CategoryProductsPageComponent} from './pages/category-products-page/category-products-page.component';
-import {CategoryProductsGridComponent} from './pages/category-products-page/category-products-grid/category-products-grid.component';
+import {CategoryProductsContentComponent} from './pages/main-page/category-products-content/category-products-content.component';
+// tslint:disable-next-line:max-line-length
+import {CategoryProductsGridComponent} from './pages/main-page/category-products-content/category-products-grid/category-products-grid.component';
+import {MainPageContentComponent} from './pages/main-page/main-page-content/main-page-content.component';
 
 
 const routes: Routes = [
-  {path: '', component: MainPageComponent},
+  {
+    path: '', component: MainPageComponent,
+    children: [
+      {path: '', component: MainPageContentComponent},
+      {
+        path: 'category', component: CategoryProductsContentComponent,
+        children: [
+          {path: ':section', component: CategoryProductsGridComponent},
+          {path: '**', component: PageNotFoundComponent},
+        ]
+      },
+    ]
+  },
   {path: 'login', component: LoginPageComponent},
   {path: 'signup', component: SignupPageComponent},
   {path: 'cart', component: ShoppingCartComponent},
   {path: 'checkout', component: CheckoutPageComponent},
   {path: 'no-access', component: NoAccessComponent},
   {path: 'info/:SKU', component: ProductInfoComponent},
-  {
-    path: 'category', component: CategoryProductsPageComponent,
-    children: [
-      {path: ':section', component: CategoryProductsGridComponent},
-      {path: '**', component: PageNotFoundComponent},
-    ]
-  },
+
   {
     path: 'admin', component: AdminPageComponent,
     children: [

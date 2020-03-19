@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Product} from 'src/app/models/product';
 import {User} from '../../models/user';
 
+
 @Component({
   selector: 'app-product-card',
   templateUrl: './product-card.component.html',

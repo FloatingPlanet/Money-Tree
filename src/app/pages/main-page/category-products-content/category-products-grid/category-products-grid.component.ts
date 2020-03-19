@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {CategoryService} from '../../../services/category/category.service';
+import {CategoryService} from '../../../../services/category/category.service';
 import {ActivatedRoute} from '@angular/router';
-import {Product} from '../../../models/product';
+import {Product} from '../../../../models/product';
 import {Subscription} from 'rxjs';
 import * as functions from 'firebase-functions';
 

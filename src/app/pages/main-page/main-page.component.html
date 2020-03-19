@@ -3,27 +3,6 @@
   <app-categories-bar></app-categories-bar>
   <app-mid-banner [path]="path"></app-mid-banner>
 </div>
-<div>
-</div>
-<div class="container-fluid main-section-view-custom-width pt-3 pb-3">
-  <span class="text-monospace ">
-    <h2>FEATURED PRODUCTS</h2>
-  </span>
+<router-outlet></router-outlet>
 
-  <div class="container-fluid">
-    <div class="card-deck">
-      <app-product-card class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-3 no-padding"
-                        *ngFor="let product of this.products"
-                        [product]="product" (productToBeAdded)="addToCart($event)">
-      </app-product-card>
-    </div>
-  </div>
-  <div class="container main-section-view-custom-width">
-
-    <button class="button-theme-gradient w-100 mt-3" (click)="load()">
-      <h4 class="subtitle-margin-ignore">LOAD MORE</h4>
-    </button>
-  </div>
-
-</div>
 
