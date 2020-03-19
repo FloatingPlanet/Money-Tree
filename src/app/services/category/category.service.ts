@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {
   AngularFirestore,
-  AngularFirestoreCollection, Query,
+  AngularFirestoreCollection,
 } from 'angularfire2/firestore';
 import {Category} from 'src/app/models/category';
 import {Product} from '../../models/product';
@@ -81,9 +81,11 @@ retrieve specific products based on given category with @limit
             this.productMap[C] = Object.assign({
               products: this.chosenCategoryProducts,
               collection: chosenCategoryCollection,
-              lastDoc: lastDoc
+              lastDoc
             });
           });
+        }).catch((err) => {
+          rej(err);
         });
       }
       res();
@@ -94,7 +96,7 @@ retrieve specific products based on given category with @limit
   * retrieve @limit more products from firebase
    */
   public loadAnotherProducts() {
-    const lazyLoad = new Promise((res, rej) => {
+    return new Promise((res, rej) => {
       this.loading = true;
       const chosenCategoryCollection = this.productMap[this.chosenCategory].collection;
       let lastDoc = this.productMap[this.chosenCategory].lastDoc;
@@ -107,8 +109,9 @@ retrieve specific products based on given category with @limit
             // update cursor for next lazy load
             this.productMap[this.chosenCategory].lastDoc = Object.assign(lastDoc);
           });
-        });
+        }).catch((err) => rej(err));
       }, 500);
+      res();
     });
   }
 
@@ -126,7 +129,7 @@ retrieve specific products based on given category with @limit
     return new Promise((resolve, reject) => {
       this.CategoriesCollection.doc(C.category.toUpperCase().replace(/\s/g, ''))
         .set(C)
-        .then((res) => {
+        .then(() => {
           console.log('add Category: ' + C.category);
           resolve(C.category);
         }).catch(error => {
@@ -141,7 +144,7 @@ retrieve specific products based on given category with @limit
    */
   public addProductToCategory(C: string, P: Product) {
     const subCategories = this.CategoriesCollection.doc(C.toUpperCase().replace(/\s/g, '')).collection('products');
-    subCategories.doc(P.SKU).set(P).then((res) => {
+    subCategories.doc(P.SKU).set(P).then(() => {
       console.log(`add ${P.SKU} to Collection ${C} succeeded!`);
     }).catch((error) => {
       console.error(error);
