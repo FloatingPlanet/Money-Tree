@@ -18,8 +18,11 @@ export class CategoriesBarComponent implements OnInit {
     this.cs.categoriesObservable.subscribe((cats) => {
       this.allCategories = cats;
     });
+    // iterate through each children's params
     this.route.children.forEach((r) => {
+      // iterate through each children's params
       r.children.forEach((c) => {
+        // now we are in grand children's route
         c.params.subscribe((res) => {
           this.currentCat = res.section;
         });
