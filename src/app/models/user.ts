@@ -18,4 +18,16 @@ export class User {
   shippingInfo: AddressInfo[];
   cart?: Product[];
   orders?: Order[];
+
+  constructor() {
+    this.uid = '';
+    this.username = '';
+    this.email = '';
+    this.phoneNumber = '';
+    this.verifiedEmail = false;
+    this.isAdmin = false;
+    this.avatar = '';
+    this.shippingInfo = [];
+  }
 }
+

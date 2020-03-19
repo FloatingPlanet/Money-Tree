@@ -17,13 +17,7 @@ export class UserService {
   public authMetaData: FirebaseUser = null;
   public Users: AngularFirestoreCollection<User>;
   public isLogged: boolean;
-  private dummyUser: User = {
-    avatar: '',
-    isAdmin: false,
-    shippingInfo: [],
-    verifiedEmail: false,
-    uid: 'na', username: 'na', email: 'na', phoneNumber: 'na'
-  };
+  private dummyUser: User = new User();
   public logStatus$ = new BehaviorSubject(false);
   public userInfo$ = new BehaviorSubject<User>(this.dummyUser);
 
