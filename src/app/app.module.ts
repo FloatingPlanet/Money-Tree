@@ -90,6 +90,8 @@ import { CategoryProductsGridComponent } from './pages/main-page/category-produc
 import { ScrollableDirective } from './scrollable/scrollable.directive';
 import { AvatarModule } from 'ngx-avatar';
 import { MainPageContentComponent } from './pages/main-page/main-page-content/main-page-content.component';
+import {StoreModule} from '@ngrx/store';
+import {reducer} from './store/reducers/user.reducer';
 
 @NgModule({
   declarations: [
@@ -179,7 +181,10 @@ import { MainPageContentComponent } from './pages/main-page/main-page-content/ma
     MatBadgeModule,
     HttpClientModule,
     NgbModule,
-    AvatarModule
+    AvatarModule,
+    StoreModule.forRoot({
+      user: reducer
+    })
   ],
   providers: [
     FlashMessageService,
