@@ -11,19 +11,32 @@ import {Product} from '../../models/product';
 })
 export class CategoryService {
   // reference for all categories
-  public CategoriesCollection: AngularFirestoreCollection<Category>; // db ref
-  public chosenCategoryCollection: AngularFirestoreCollection<Category>; // db ref
+  private CategoriesCollection: AngularFirestoreCollection<Category>; // db ref
+  // current chosen category
+  private chosenCategory: string;
+  // query for lazing loading
+
   // all categories
   public allCategories = [];
   // products for chosen category
   public chosenCategoryProducts: Product[] = [];
-  // current chosen category
-  public chosenCategory: string;
   public loading = false;
-  private lastDoc: any;
-  // query for lazing loading
-  private productFetchQuery: Query;
 
+  // beta testing
+  /*
+  * use map to store all loaded products, category : { products: Product[];
+  * lastDoc // this is the flag for lazy loading
+  * }
+  * so we dont have to retrieve products from firebase which will increase documents read
+   */
+
+  public productMap: {
+    [cat: string]: {
+      products: Product[];
+      collection: AngularFirestoreCollection<Category>;
+      lastDoc: any
+    }
+  } = {};
 
   constructor(private db: AngularFirestore) {
     this.CategoriesCollection = db.collection('Categories');
@@ -45,16 +58,34 @@ retrieve specific products based on given category with @limit
   public getProductsWithCategory(C: string) {
     return new Promise((res, rej) => {
       this.chosenCategory = C;
-      this.chosenCategoryCollection = this.CategoriesCollection
-        .doc(this.chosenCategory.toUpperCase())
-        .collection('products');
-      this.productFetchQuery = this.chosenCategoryCollection.ref.limit(4);
-      this.productFetchQuery.get().then((products) => {
-        products.forEach((doc) => {
-          this.chosenCategoryProducts.push(doc.data() as Product);
-          this.lastDoc = doc;
+      let chosenCategoryCollection: AngularFirestoreCollection<Category>;
+      let lastDoc: any;
+      // check if this category products has been loaded, if so grab it from map
+      if (this.productMap.hasOwnProperty(C)) {
+        // update local var
+        this.chosenCategoryProducts = this.productMap[C].products;
+        chosenCategoryCollection = this.productMap[C].collection;
+        lastDoc = this.productMap[C].lastDoc;
+      } else {
+        // clear chosenCategoryProducts when use switch around
+        this.chosenCategoryProducts = [];
+        chosenCategoryCollection = this.CategoriesCollection
+          .doc(this.chosenCategory.toUpperCase())
+          .collection('products');
+        const productFetchQuery = chosenCategoryCollection.ref.limit(4);
+        productFetchQuery.get().then((products) => {
+          products.forEach((doc) => {
+            this.chosenCategoryProducts.push(doc.data() as Product);
+            lastDoc = doc;
+            // create new entry in map
+            this.productMap[C] = Object.assign({
+              products: this.chosenCategoryProducts,
+              collection: chosenCategoryCollection,
+              lastDoc: lastDoc
+            });
+          });
         });
-      });
+      }
       res();
     });
   }
@@ -65,15 +96,19 @@ retrieve specific products based on given category with @limit
   public loadAnotherProducts() {
     const lazyLoad = new Promise((res, rej) => {
       this.loading = true;
+      const chosenCategoryCollection = this.productMap[this.chosenCategory].collection;
+      let lastDoc = this.productMap[this.chosenCategory].lastDoc;
       setTimeout(() => {
-        this.productFetchQuery = this.chosenCategoryCollection.ref.limit(4).startAfter(this.lastDoc);
-        this.productFetchQuery.get().then((products) => {
+        const productFetchQuery = chosenCategoryCollection.ref.limit(4).startAfter(lastDoc);
+        productFetchQuery.get().then((products) => {
           products.forEach((doc) => {
             this.chosenCategoryProducts.push(doc.data() as Product);
-            this.lastDoc = doc;
+            lastDoc = doc;
+            // update cursor for next lazy load
+            this.productMap[this.chosenCategory].lastDoc = Object.assign(lastDoc);
           });
         });
-      }, 1000);
+      }, 500);
     });
   }
 

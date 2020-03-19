@@ -46,7 +46,7 @@ export class ProductService {
               this.lastDoc = doc;
             });
           });
-        }, 1000);
+        }, 500);
         res();
       }
     );
