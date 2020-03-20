@@ -9,7 +9,7 @@
     <div class="card-deck">
       <app-product-card class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-3 no-padding"
                         *ngFor="let product of this.products"
-                        [product]="product" (productToBeAdded)="addToCart($event)">
+                        [product]="product">
       </app-product-card>
     </div>
   </div>

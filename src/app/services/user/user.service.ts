@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
-import {User} from '../../models/user';
+import {CartItem, User} from '../../models/user';
 import {AddressInfo} from '../../models/addressInfo';
 import {Product} from '../../models/product';
 import * as firebase from 'firebase';
@@ -17,9 +17,9 @@ export class UserService {
   public authMetaData: FirebaseUser = null;
   public Users: AngularFirestoreCollection<User>;
   public isLogged: boolean;
-  private dummyUser: User = new User();
+  private guest: User = new User();
   public logStatus$ = new BehaviorSubject(false);
-  public userInfo$ = new BehaviorSubject<User>(this.dummyUser);
+  public userInfo$ = new BehaviorSubject<User>(this.guest);
 
   constructor(private afAuth: AngularFireAuth,
               private db: AngularFirestore,
@@ -40,7 +40,7 @@ export class UserService {
         this.authMetaData = null;
         this.isLogged = false;
         this.logStatus$.next(false);
-        this.userInfo$.next(this.dummyUser);
+        this.userInfo$.next(this.guest);
         console.log('user out');
       }
 
@@ -86,7 +86,7 @@ export class UserService {
       this.logInObservable.subscribe((status) => {
         if (status) {
           this.Users.doc(this.currentUserId).update({
-            cart: firebase.firestore.FieldValue.arrayUnion(product)
+            cart: firebase.firestore.FieldValue.arrayUnion({count: 1, product})
           }).catch(r => {
             console.error(r);
           });
@@ -285,7 +285,7 @@ export class UserService {
     this.afAuth.auth.signOut().then(() => {
       this.isLogged = false;
       this.logStatus$.next(false);
-      this.userInfo$.next(this.dummyUser);
+      this.userInfo$.next(this.guest);
       this.fs.success('Log out', 'You\'ve been logged out');
     });
 
@@ -296,10 +296,16 @@ export class UserService {
   private updateUserData(): void {
     // Writes user name and email to realtime db
     // useful if your app displays information about users or for admin features
-    this.Users.doc(this.currentUserId).set({
-      email: this.currentUser.email,
-      username: this.currentUser.displayName
-    }, {merge: true});
+    this.Users.doc(this.currentUserId).ref.get().then((doc) => {
+      if (!doc.exists) {
+        this.Users.doc(this.currentUserId).set({
+          guest: false,
+          email: this.currentUser.email,
+          username: this.currentUser.displayName
+        }, {merge: true}).then(_ => {
+        });
+      }
+    });
   }
 }
 

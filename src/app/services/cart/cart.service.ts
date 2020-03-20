@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Product} from '../../models/product';
 import {UserService} from '../user/user.service';
-import {User} from '../../models/user';
+import {CartItem, User} from '../../models/user';
 import {Observable, Subject} from 'rxjs';
 
 @Injectable({
@@ -13,13 +13,13 @@ export class CartService {
   localCart_ is cart retrieve from localstorage
    */
   private localCart = JSON.parse(localStorage.getItem('anonymousCart'));
-  private cart: Product[];
-  public cartObservable: Observable<Product[]>;
-  private cartSubject: Subject<Product[]>;
+  private cart: CartItem[];
+  public cartObservable: Observable<CartItem[]>;
+  private cartSubject: Subject<CartItem[]>;
 
 
   constructor(private us: UserService) {
-    this.cartSubject = new Subject<Product[]>();
+    this.cartSubject = new Subject<CartItem[]>();
     this.cartObservable = this.cartSubject.asObservable();
     this.loadCartFromDB();
   }
@@ -46,7 +46,7 @@ export class CartService {
    */
   addProduct(product: Product) {
     if (this.us.authenticated) {
-      this.us.addProductToCart(product).then((res) => {
+      this.us.addProductToCart(product).then(() => {
       }).catch((e) => {
         console.error(e);
       });
@@ -65,11 +65,11 @@ export class CartService {
   /*
   return guest's cart
    */
-  public getLocalCart(): Product[] {
+  public getLocalCart(): CartItem[] {
     return this.localCart ? this.localCart.products : [];
   }
 
-  public getUserCart(): Product[] {
+  public getUserCart(): CartItem[] {
     return this.cart;
   }
 

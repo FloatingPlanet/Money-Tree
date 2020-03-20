@@ -1,9 +1,8 @@
-import {AfterViewChecked, AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterViewChecked, Component, OnDestroy, ViewChild} from '@angular/core';
 import {CheckoutFormComponent} from './checkout-form/checkout-form.component';
 import {OrderSummaryComponent} from '../../components/order-summary/order-summary.component';
-import {Product} from '../../models/product';
 import {UserService} from '../../services/user/user.service';
-import {User} from '../../models/user';
+import {CartItem, User} from '../../models/user';
 import {CartService} from '../../services/cart/cart.service';
 import {FormGroup} from '@angular/forms';
 import {OrderService} from '../../services/order/order.service';
@@ -17,7 +16,7 @@ import {Subscription} from 'rxjs';
 export class CheckoutPageComponent implements AfterViewChecked, OnDestroy {
   @ViewChild(CheckoutFormComponent, {static: false}) checkoutComponent: CheckoutFormComponent;
   @ViewChild(OrderSummaryComponent, {static: false}) orderSummaryComponent: OrderSummaryComponent;
-  public orders: Product[];
+  public orders: CartItem[];
   public saFormGroup: FormGroup;
   public baFormGroup: FormGroup;
   public ccFormGroup: FormGroup;
@@ -52,7 +51,7 @@ export class CheckoutPageComponent implements AfterViewChecked, OnDestroy {
       trackingNumber: 'N/A',
       billingInfo: this.baFormGroup.value,
 
-      products: this.orders.map(product => product.SKU),
+      products: this.orders.map(cartItem => cartItem.item.SKU),
       coupon: this.orderSummaryComponent.validatedCoupon ? this.orderSummaryComponent.validatedCoupon : null,
       totalPrice: this.orderSummaryComponent.total,
       purchaseDate: new Date(),

@@ -31,8 +31,8 @@ export class NavBarComponent implements OnInit, OnChanges, OnDestroy {
           this.itemInCart = res.cart ? res.cart.length : null;
         });
         if (this.cs.getLocalCart().length > 0) {
-          this.cs.getLocalCart().forEach(product => {
-            this.us.addProductToCart(product).then(() => {
+          this.cs.getLocalCart().forEach(item => {
+            this.us.addProductToCart(item.item).then(() => {
             }).catch((err) => {
               console.error(err);
             });
