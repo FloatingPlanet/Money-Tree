@@ -10,7 +10,7 @@
               [disabled]="!this.baFormGroup?.valid || !this.saFormGroup?.valid || !this.ccFormGroup?.valid"> Place
         Order
       </button>
-      <app-product-item *ngFor="let product of orders" [product]="product"></app-product-item>
+      <app-product-item *ngFor="let product of orders" [item]="product"></app-product-item>
     </div>
   </div>
 </div>
