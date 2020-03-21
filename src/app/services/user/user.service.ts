@@ -297,16 +297,16 @@ export class UserService {
   private updateUserData(): void {
     // Writes user name and email to realtime db
     // useful if your app displays information about users or for admin features
-    this.UsersCollection.doc(this.currentUserId).ref.get().then((doc) => {
-      if (!doc.exists) {
-        this.UsersCollection.doc(this.currentUserId).set({
-          guest: false,
-          email: this.currentUser.email,
-          username: this.currentUser.displayName
-        }, {merge: true}).then(_ => {
-        });
-      }
-    });
+    // this.UsersCollection.doc(this.currentUserId).ref.get().then((doc) => {
+    //   if (!doc.exists) {
+    //     this.UsersCollection.doc(this.currentUserId).set({
+    //       guest: false,
+    //       email: this.currentUser.email,
+    //       username: this.currentUser.displayName
+    //     }, {merge: true}).then(_ => {
+    //     });
+    //   }
+    // });
   }
 }
 
