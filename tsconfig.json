@@ -15,6 +15,7 @@
       "node_modules/@types"
     ],
     "lib": [
+      "esnext.asynciterable",
       "es2018",
       "dom"
     ],

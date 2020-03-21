@@ -85,6 +85,7 @@ export class UserService {
   public addProductToCart(product: Product) {
     return new Promise((res, rej) => {
       if (this.authenticated) {
+
         this.UsersCollection.doc(this.currentUserId).update({
           cart: firebase.firestore.FieldValue.arrayUnion({count: firebase.firestore.FieldValue.increment(1), product})
         }).catch(r => {

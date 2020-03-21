@@ -6,7 +6,12 @@
     "outDir": "lib",
     "sourceMap": true,
     "strict": true,
-    "target": "es2017"
+    "target": "es2017",
+    "lib": [
+      "esnext.asynciterable",
+      "es2018",
+      "dom"
+    ]
   },
   "compileOnSave": true,
   "include": [
