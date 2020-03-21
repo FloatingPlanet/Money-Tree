@@ -1,14 +1,14 @@
 <mat-card class="mt-2" role="main">
   <mat-card-content class="">
     <div class="media">
-      <img class="thumbNail" src="{{product.productImageUrls[0]}}"
+      <img class="thumbNail" src="{{item.item.productImageUrls[0].url}}"
            alt="Generic placeholder image" height="100">
       <div class="media-body">
-        <h5 class="mt-0 text">{{product.productName}}</h5>
-        <h6 class=" mt-0">CAD {{product.productPrice}}</h6>
-        <h6 class=" mt-0">{{product.SKU}}</h6>
-        <button mat-button [routerLink]="['/info/',product.SKU]">View details</button>
-        <button mat-button (click)="deleteFromCart(product.SKU)">Delete</button>
+        <h5 class="mt-0 text">{{item.item.productName}}</h5>
+        <h6 class=" mt-0">CAD {{item.item.productPrice}}</h6>
+        <h6 class=" mt-0">{{item.item.SKU}}</h6>
+        <button mat-button [routerLink]="['/info/',item.item.SKU]">View details</button>
+        <button mat-button (click)="deleteFromCart(item.item.SKU)">Delete</button>
         <!--TODO MODEL POP WINDOW SHOWS DETAIL  -->
       </div>
     </div>

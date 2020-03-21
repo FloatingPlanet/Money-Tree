@@ -1,7 +1,7 @@
 <div class="container-fluid main-section-view-custom-width pt-3 pb-3">
   <div class="row">
     <div class="col-10 col-sm-10 col-md-8 col-lg-8">
-      <app-product-item *ngFor="let product of this.cart" [product]="product"></app-product-item>
+      <app-product-item *ngFor="let product of this.cart" [item]="product"></app-product-item>
     </div>
     <div class="col-10 col-sm-10 col-md-4 col-lg-4">
       <app-order-summary [orders]="this.cart"></app-order-summary>

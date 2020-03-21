@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
-import { User} from '../../models/user';
+import {User} from '../../models/user';
 import {AddressInfo} from '../../models/addressInfo';
 import {Product} from '../../models/product';
 import * as firebase from 'firebase';
@@ -87,7 +87,7 @@ export class UserService {
       if (this.authenticated) {
 
         this.UsersCollection.doc(this.currentUserId).update({
-          cart: firebase.firestore.FieldValue.arrayUnion({count: 1, product})
+          cart: firebase.firestore.FieldValue.arrayUnion({count: 1, item: product})
         }).catch(r => {
           rej(r);
         });
@@ -99,7 +99,6 @@ export class UserService {
   }
 
   public deleteProduct(SKU: number) {
-
   }
 
   /*
