@@ -1,7 +1,7 @@
 <ul class="nav justify-content-center">
   <nav aria-label="breadcrumb" class = "nav-bar">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item" *ngFor="let cat of this.allCategories">
+      <li class="breadcrumb-item animated fadeInDown" *ngFor="let cat of this.allCategories">
         <a
             [routerLink]="['/category', cat.category]"
            (click)="setCurrentCat(cat.category) "
