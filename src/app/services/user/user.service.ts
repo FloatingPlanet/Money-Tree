@@ -10,12 +10,13 @@ import {FlashMessageService} from '../flashMessage/flash-message.service';
 import {map, mergeMap} from 'rxjs/operators';
 import {BehaviorSubject} from 'rxjs';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   public authMetaData: FirebaseUser = null;
-  public Users: AngularFirestoreCollection<User>;
+  public UsersCollection: AngularFirestoreCollection<User>;
   public isLogged: boolean;
   private guest: User = new User();
   public logStatus$ = new BehaviorSubject(false);
@@ -24,16 +25,16 @@ export class UserService {
   constructor(private afAuth: AngularFireAuth,
               private db: AngularFirestore,
               private fs: FlashMessageService) {
-    this.Users = this.db.collection('Users');
+    this.UsersCollection = this.db.collection('Users');
     this.afAuth.authState.subscribe((auth) => {
       if (auth) {
         this.authMetaData = auth;
         this.isLogged = true;
         this.logStatus$.next(true);
         if (this.currentUserId) {
-          this.Users.doc(this.currentUserId).valueChanges().subscribe((user: User) => {
+          this.UsersCollection.doc(this.currentUserId).valueChanges().subscribe((user: User) => {
             this.userInfo$.next(user);
-            console.log('user in');
+            console.log('user info updated');
           });
         }
       } else {
@@ -66,7 +67,7 @@ export class UserService {
    */
   get userAddressObservable() {
     if (this.isLogged) {
-      return this.Users.doc(this.authMetaData.uid).collection('addresses').valueChanges();
+      return this.UsersCollection.doc(this.authMetaData.uid).collection('addresses').valueChanges();
     }
   }
 
@@ -83,17 +84,16 @@ export class UserService {
    */
   public addProductToCart(product: Product) {
     return new Promise((res, rej) => {
-      this.logInObservable.subscribe((status) => {
-        if (status) {
-          this.Users.doc(this.currentUserId).update({
-            cart: firebase.firestore.FieldValue.arrayUnion({count: 1, product})
-          }).catch(r => {
-            console.error(r);
-          });
-        } else {
-          rej('user is logged out');
-        }
-      });
+      if (this.authenticated) {
+        this.UsersCollection.doc(this.currentUserId).update({
+          cart: firebase.firestore.FieldValue.arrayUnion({count: firebase.firestore.FieldValue.increment(1), product})
+        }).catch(r => {
+          rej(r);
+        });
+        res();
+      } else {
+        rej('user is logged out');
+      }
     });
   }
 
@@ -108,7 +108,7 @@ export class UserService {
     return new Promise((res, rej) => {
       this.logInObservable.subscribe((auth) => {
         if (auth) {
-          const addresses = this.Users.doc(this.currentUserId).collection('addresses');
+          const addresses = this.UsersCollection.doc(this.currentUserId).collection('addresses');
           addresses.doc(address.addressId).set(address).then(() => {
             console.log(`Added ${address.addressId} to addresses.`);
             res(address.addressId);
@@ -130,7 +130,7 @@ export class UserService {
     return new Promise((res, rej) => {
       this.logInObservable.subscribe((auth) => {
         if (auth) {
-          const addresses = this.Users.doc(this.currentUserId).collection('addresses');
+          const addresses = this.UsersCollection.doc(this.currentUserId).collection('addresses');
           addresses.doc(id).delete().then(() => {
             console.log(`${id} is deleted`);
             res(`${id} is deleted`);
@@ -296,9 +296,9 @@ export class UserService {
   private updateUserData(): void {
     // Writes user name and email to realtime db
     // useful if your app displays information about users or for admin features
-    this.Users.doc(this.currentUserId).ref.get().then((doc) => {
+    this.UsersCollection.doc(this.currentUserId).ref.get().then((doc) => {
       if (!doc.exists) {
-        this.Users.doc(this.currentUserId).set({
+        this.UsersCollection.doc(this.currentUserId).set({
           guest: false,
           email: this.currentUser.email,
           username: this.currentUser.displayName
