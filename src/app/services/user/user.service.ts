@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
-import {CartItem, User} from '../../models/user';
+import { User} from '../../models/user';
 import {AddressInfo} from '../../models/addressInfo';
 import {Product} from '../../models/product';
 import * as firebase from 'firebase';
@@ -87,7 +87,7 @@ export class UserService {
       if (this.authenticated) {
 
         this.UsersCollection.doc(this.currentUserId).update({
-          cart: firebase.firestore.FieldValue.arrayUnion({count: firebase.firestore.FieldValue.increment(1), product})
+          cart: firebase.firestore.FieldValue.arrayUnion({count: 1, product})
         }).catch(r => {
           rej(r);
         });
@@ -205,16 +205,15 @@ export class UserService {
   }
 
   private socialSignIn(provider: firebase.auth.AuthProvider) {
-    return this.afAuth.auth.signInWithPopup(provider)
-      .then((credential) => {
-        this.authMetaData = credential.user;
-        this.updateUserData();
-        this.fs.success('3rd party log in successful', 'You\'ve been logged in with ' + provider.providerId);
-      })
+    return firebase.auth().signInWithPopup(provider).then((credential) => {
+      this.authMetaData = credential.user;
+      this.fs.success('3rd party log in successful', 'You\'ve been logged in with ' + provider.providerId);
+    })
       .catch(error => {
         this.fs.error('3rd party login failed', error.message);
         console.log(error);
       });
+
   }
 
 
@@ -224,7 +223,6 @@ export class UserService {
     return this.afAuth.auth.signInAnonymously()
       .then((res: UserCredential) => {
         this.authMetaData = res.user;
-        this.updateUserData();
       })
       .catch(error => {
         console.log(error);
@@ -237,7 +235,6 @@ export class UserService {
     return this.afAuth.auth.createUserWithEmailAndPassword(login.email, login.password)
       .then((credential: UserCredential) => {
         this.authMetaData = credential.user;
-        this.updateUserData();
         this.afAuth.auth.currentUser.updateProfile({displayName: login.username});
         this.fs.success('Sign up success', 'You\'ve been logged in');
       })
@@ -258,7 +255,6 @@ export class UserService {
     return this.afAuth.auth.signInWithEmailAndPassword(login.email, login.password)
       .then((res: UserCredential) => {
         this.authMetaData = res.user;
-        this.updateUserData();
         this.fs.success('Log in', 'You\'ve been logged in');
       })
       .catch(error => {
@@ -292,21 +288,5 @@ export class UserService {
 
   }
 
-  //// Helpers ////
-
-  private updateUserData(): void {
-    // Writes user name and email to realtime db
-    // useful if your app displays information about users or for admin features
-    // this.UsersCollection.doc(this.currentUserId).ref.get().then((doc) => {
-    //   if (!doc.exists) {
-    //     this.UsersCollection.doc(this.currentUserId).set({
-    //       guest: false,
-    //       email: this.currentUser.email,
-    //       username: this.currentUser.displayName
-    //     }, {merge: true}).then(_ => {
-    //     });
-    //   }
-    // });
-  }
 }
 

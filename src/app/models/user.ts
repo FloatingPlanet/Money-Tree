@@ -23,12 +23,12 @@ export class User {
   };
   phoneNumber: string;
   verifiedEmail: boolean;
-  createdOn?: Date;
+  createdOn: Date;
   isAdmin: boolean;
   avatar: string;
   shippingInfo: AddressInfo[];
-  cart?: CartItem[];
-  orders?: Order[];
+  cart: CartItem[];
+  orders: Order[];
 
   constructor() {
     this.guest = true;
@@ -40,6 +40,9 @@ export class User {
     this.isAdmin = false;
     this.avatar = '';
     this.shippingInfo = [];
+    this.cart = [];
+    this.orders = [];
+    this.createdOn = new Date();
   }
 }
 

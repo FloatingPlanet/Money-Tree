@@ -2,7 +2,6 @@ import {FormGroup, Validators, FormBuilder} from '@angular/forms';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {FlashMessageService} from '../../services/flashMessage/flash-message.service';
-import {LocalstorageService} from '../../services/localStorage/localstorage.service';
 import {UserService} from '../../services/user/user.service';
 import {Subscription} from 'rxjs';
 
@@ -48,7 +47,6 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   }
 
   emailLogin() {
-    console.log("button clicked");
     this.submitted = true;
     if (this.loginForm.invalid) {
       return;
@@ -57,7 +55,8 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   }
 
   loginWithGoogle() {
-    this.us.googleLogin();
+    this.us.googleLogin().then(() => {
+    });
   }
 
   resetPassword() {

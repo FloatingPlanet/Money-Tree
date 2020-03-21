@@ -18,7 +18,9 @@ export const onUserCreate =
         guest: false,
         email: user.email,
         username: user.displayName,
-        cart: []
+        cart: [],
+        orders: [],
+        createOn: new Date(),
       }).catch((error) => {
         console.log(error);
       });

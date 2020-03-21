@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Product} from '../../models/product';
 import {UserService} from '../user/user.service';
-import {CartItem, User} from '../../models/user';
-import {Observable, Subject} from 'rxjs';
+import {CartItem} from '../../models/user';
+import { Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,31 +14,11 @@ export class CartService {
    */
   private localCart = JSON.parse(localStorage.getItem('anonymousCart'));
   private cart: CartItem[];
-  public cartObservable: Observable<CartItem[]>;
-  private cartSubject: Subject<CartItem[]>;
+  private cart$: Subject<CartItem[]>;
 
 
   constructor(private us: UserService) {
-    this.cartSubject = new Subject<CartItem[]>();
-    this.cartObservable = this.cartSubject.asObservable();
-    this.loadCartFromDB();
-  }
-
-
-  /*
-  load user's cart from firebase
-   */
-  loadCartFromDB() {
-    this.us.logInObservable.subscribe((auth) => {
-      console.log('login status changed');
-      if (auth) {
-        this.us.userObservable.subscribe((user) => {
-          console.log('user cart loaded ');
-          this.cart = (user as User).cart;
-          this.cartSubject.next(this.cart);
-        });
-      }
-    });
+    this.cart$ = new Subject<CartItem[]>();
   }
 
   /*

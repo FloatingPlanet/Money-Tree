@@ -28,7 +28,7 @@ export class NavBarComponent implements OnInit, OnChanges, OnDestroy {
       if (auth) {
         this.userObservable$ = this.us.userObservable.subscribe((res: User) => {
           console.log('shopping cart banner updated');
-          this.itemInCart = res.cart ? res.cart.length : null;
+          this.itemInCart = res.cart.length === 0 ? null : res.cart.length;
         });
         if (this.cs.getLocalCart().length > 0) {
           this.cs.getLocalCart().forEach(item => {
@@ -39,13 +39,8 @@ export class NavBarComponent implements OnInit, OnChanges, OnDestroy {
           });
           this.cs.clearAll();
         }
-        this.logInfo = {
-          avatarURL: auth ? this.us.authMetaData.photoURL : this.DEFAULT_AVATAR,
-          displayName: auth ? this.us.authMetaData.displayName : this.DEFAULT_NAME,
-          authState: !!auth
-        };
       } else {
-        this.itemInCart = null;
+        this.itemInCart = this.cs.getLocalCart().length === 0 ? null : this.cs.getLocalCart().length;
       }
       this.logInfo = {
         avatarURL: auth ? this.us.currentUser?.photoURL : this.DEFAULT_AVATAR,

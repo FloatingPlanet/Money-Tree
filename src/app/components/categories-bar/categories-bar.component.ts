@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CategoryService} from '../../services/category/category.service';
 import {Category} from '../../models/category';
-import {Product} from '../../models/product';
 import {ActivatedRoute} from '@angular/router';
 
 @Component({
@@ -36,6 +35,5 @@ export class CategoriesBarComponent implements OnInit {
 
   public setCurrentCat(category: string) {
     this.currentCat = category;
-    console.log(this.currentCat);
   }
 }
