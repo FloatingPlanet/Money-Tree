@@ -28,6 +28,7 @@ export class User {
   avatar: string;
   shippingInfo: AddressInfo[];
   cart: CartItem[];
+  cartSize: number;
   orders: Order[];
 
   constructor() {
@@ -43,6 +44,7 @@ export class User {
     this.cart = [];
     this.orders = [];
     this.createdOn = new Date();
+    this.cartSize = 0;
   }
 }
 

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
-import {User} from '../../models/user';
+import {CartItem, User} from '../../models/user';
 import {AddressInfo} from '../../models/addressInfo';
 import {Product} from '../../models/product';
 import * as firebase from 'firebase';
@@ -85,13 +85,34 @@ export class UserService {
   public addProductToCart(product: Product) {
     return new Promise((res, rej) => {
       if (this.authenticated) {
+        const collectionRef = this.UsersCollection.ref.doc(this.currentUserId).collection('cart');
 
-        this.UsersCollection.doc(this.currentUserId).update({
-          cart: firebase.firestore.FieldValue.arrayUnion({count: 1, item: product})
-        }).catch(r => {
-          rej(r);
+        // check if file exists if so, update count number, otherwise create new doc
+        collectionRef.doc(product.SKU).get().then((doc) => {
+
+          const item: CartItem = {
+            count: 1,
+            item: product
+          };
+          if (doc.exists) {
+            doc.ref.update({
+              count: firebase.firestore.FieldValue.increment(1)
+            }).then(() => {
+              res(`number of ${product.SKU} updated`);
+            });
+          } else {
+            // create new doc
+            collectionRef.doc(product.SKU).set(item).then(() => {
+              res(`${product.SKU} added to cart`);
+
+            }).catch((err) => {
+              rej(err);
+            });
+          }
+        }).catch((error) => {
+          rej(error);
         });
-        res();
+
       } else {
         rej('user is logged out');
       }

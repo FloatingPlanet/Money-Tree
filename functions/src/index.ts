@@ -21,6 +21,8 @@ export const onUserCreate =
         cart: [],
         orders: [],
         createOn: new Date(),
+      }).then(() => {
+        console.log(`${user.uid} have been created into database!`);
       }).catch((error) => {
         console.log(error);
       });
@@ -28,7 +30,16 @@ export const onUserCreate =
 
   });
 
-// export const onUserCartUpdate =
-//   functions.firestore.document('Users/{uid}').onUpdate((change) => {
-//
-//   });
+export const onUserCartUpdate =
+  functions.firestore.document('Users/{uid}/cart/{**}').onWrite((change, context) => {
+    const uid = context.auth?.uid;
+    const x = change.after.data();
+    return new Promise((res) => {
+      console.log(uid);
+      console.log(x);
+      res();
+    }).catch((error) => {
+      console.error(error);
+    });
+
+  });
