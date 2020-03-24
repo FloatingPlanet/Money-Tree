@@ -26,10 +26,8 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
       if (auth) {
         this.userObservable$ = this.us.userObservable.subscribe((user: User) => {
           if (user) {
-            this.us.userCartItems.then((docs) => {
-              docs.forEach((doc) => {
-                this.cart.push(doc.data() as CartItem);
-              });
+            this.us.userCartItems().then((items) => {
+              this.cart = items;
             });
           }
         });

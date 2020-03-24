@@ -17,7 +17,7 @@ import {BehaviorSubject} from 'rxjs';
 export class UserService {
   public authMetaData: FirebaseUser = null;
   public UsersCollection: AngularFirestoreCollection<User>;
-  public isLogged: boolean;
+  public isLogged = false;
   private guest: User = new User();
   public logStatus$ = new BehaviorSubject(false);
   public userInfo$ = new BehaviorSubject<User>(null);
@@ -115,8 +115,19 @@ export class UserService {
     });
   }
 
-  get userCartItems() {
-    return this.UsersCollection.ref.doc(this.currentUserId).collection('cart').get();
+  public userCartItems(): Promise<CartItem[]> {
+    return new Promise(((resolve, reject) => {
+      const cartItems: CartItem[] = [];
+      if (this.isLogged) {
+        this.UsersCollection.ref.doc(this.currentUserId).collection('cart').get().then((docs) => {
+          docs.forEach((doc) => {
+            cartItems.push(doc.data() as CartItem);
+          });
+        });
+      }
+      resolve(cartItems);
+    }));
+
   }
 
   public deleteProduct(SKU: number) {

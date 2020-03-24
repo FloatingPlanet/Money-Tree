@@ -27,7 +27,7 @@ export class OrderSummaryComponent implements OnChanges {
   public  coupon: Coupon;
   public totalItems: number;
   public validatedCoupon: Coupon;
-  constructor(private ps: ProductService, private cs: CouponsService, public router: Router
+  constructor( private cs: CouponsService, public router: Router
   ) {
   }
 
@@ -50,7 +50,6 @@ export class OrderSummaryComponent implements OnChanges {
   validateCoupon() {
     this.cs.validateCoupon(this.couponInput).then((result) => {
       this.coupon = result as Coupon;
-      // @ts-ignore
       if ((this.subtotal >= this.coupon.minimumSpend)
         && (this.currentDate >= new Date(this.coupon.from))
         && (this.currentDate <= new Date(this.coupon.to))
