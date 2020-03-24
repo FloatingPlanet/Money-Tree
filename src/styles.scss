@@ -32,7 +32,7 @@ $custom-typography: mat-typography-config(
 @include mat-core($custom-typography);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$money-tree-gradient: linear-gradient(to right, rgba(43, 42, 94, 0.9), rgba(146, 60, 128, 0.9));
+$money-tree-gradient: linear-gradient(to bottom right, rgba(43, 42, 94, 0.9), rgba(146, 60, 128, 0.9));
 $money-tree-button: #763568;
 $money-tree-theme-color: #763568;
 // Include theme styles for core and each component used in your app.
@@ -196,3 +196,18 @@ body {
 .subtitle-margin-ignore {
   margin-bottom: 0.5vh !important;
 }
+
+/*
+* disable arrow in number input box
+ */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+

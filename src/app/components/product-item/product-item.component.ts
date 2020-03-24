@@ -14,6 +14,7 @@ export class ProductItemComponent implements OnInit {
   }
 
   @Input() item: CartItem;
+  public newAmount: any;
 
   ngOnInit() {
   }
@@ -22,4 +23,11 @@ export class ProductItemComponent implements OnInit {
     this.cs.deleteFromCart(SKU);
   }
 
+  public increment(amount: number) {
+    console.log('lol')
+  }
+
+  public decrement(amount: number) {
+
+  }
 }
