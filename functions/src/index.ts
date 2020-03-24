@@ -33,17 +33,31 @@ export const onUserCreate =
 export const onUserCartUpdate =
   functions.firestore.document('Users/{uid}/cart/{any}').onWrite((change, context) => {
 
-    return new Promise((res) => {
+    return new Promise((res, rej) => {
       const uid = context.params.uid;
       const newState = change.after.data();
-      console.log(`${uid} update his shopping cart! Info : ${newState}`);
-      res();
-    }).catch((error) => {
-      console.error(error);
+      console.log(`updating ${uid} cart count`);
+      const userCartCollection = db.collection(`Users/${uid}/cart`);
+      userCartCollection.get().then((snapshot) => {
+        let newCount = 0;
+        snapshot.forEach((doc) => {
+          newCount += doc.data().count;
+        });
+        return db.doc(`Users/${uid}`).get().then((doc) => {
+          doc.ref.update({cartSize: newCount}).then(() => {
+            console.log(`user's cart size update: ${newCount}`);
+            res(newState);
+          }).catch((error) => {
+            console.error(error);
+            rej(error);
+          });
+        });
+      }).catch((error) => {
+        console.error(error);
+        rej(error);
+      });
     });
-
   });
-
 // .document('users/{userId}/{messageCollectionId}/{messageId}')
 //   .onWrite((change, context) => {
 // If we set `/users/marie/incoming_messages/134` to {body: "Hello"} then
