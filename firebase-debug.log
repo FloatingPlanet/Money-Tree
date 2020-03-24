@@ -1,0 +1,96 @@
+[debug] [2020-03-24T00:03:56.461Z] ----------------------------------------------------------------------
+[debug] [2020-03-24T00:03:56.462Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Erbo\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy --only functions
+[debug] [2020-03-24T00:03:56.462Z] CLI Version:   7.15.1
+[debug] [2020-03-24T00:03:56.462Z] Platform:      win32
+[debug] [2020-03-24T00:03:56.463Z] Node Version:  v12.16.1
+[debug] [2020-03-24T00:03:56.464Z] Time:          Mon Mar 23 2020 17:03:56 GMT-0700 (GMT-07:00)
+[debug] [2020-03-24T00:03:56.464Z] ----------------------------------------------------------------------
+[debug] [2020-03-24T00:03:56.464Z] 
+[debug] [2020-03-24T00:03:56.470Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-03-24T00:03:56.470Z] > authorizing via signed-in user
+[debug] [2020-03-24T00:03:56.470Z] [iam] checking project fake-money-tree for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2020-03-24T00:03:56.472Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2020-03-24T00:03:56.472Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2020-03-24T00:03:56.574Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-24T00:03:56.582Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/fake-money-tree:testIamPermissions  
+
+[debug] [2020-03-24T00:03:56.723Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'fake-money-tree'...
+[info] 
+[info] i  deploying functions
+[info] Running command: npm --prefix "$RESOURCE_DIR" run lint
+[info] Running command: npm --prefix "$RESOURCE_DIR" run build
+[info] +  functions: Finished running predeploy script.
+[debug] [2020-03-24T00:04:05.036Z] > [functions] package.json contents: {
+  "name": "functions",
+  "scripts": {
+    "lint": "tslint --project tsconfig.json",
+    "build": "tsc",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "8"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "firebase-admin": "^8.6.0",
+    "firebase-functions": "^3.3.0"
+  },
+  "devDependencies": {
+    "tslint": "^5.12.0",
+    "typescript": "^3.2.2",
+    "firebase-functions-test": "^0.1.6"
+  },
+  "private": true
+}
+[info] i  functions: ensuring necessary APIs are enabled...
+[debug] [2020-03-24T00:04:05.037Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/fake-money-tree/services/cloudfunctions.googleapis.com  
+ 
+[debug] [2020-03-24T00:04:05.037Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/fake-money-tree/services/runtimeconfig.googleapis.com  
+ 
+[debug] [2020-03-24T00:04:05.531Z] <<< HTTP RESPONSE 200
+[info] +  functions: all necessary APIs are enabled
+[debug] [2020-03-24T00:04:05.538Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-24T00:04:05.539Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/fake-money-tree/adminSdkConfig  
+ 
+[debug] [2020-03-24T00:04:05.688Z] <<< HTTP RESPONSE 200
+[info] i  functions: preparing functions directory for uploading...
+[debug] [2020-03-24T00:04:05.697Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/fake-money-tree/configs  
+ 
+[debug] [2020-03-24T00:04:06.283Z] <<< HTTP RESPONSE 200
+[info] i  functions: packaged functions (35.04 KB) for uploading
+[debug] [2020-03-24T00:04:06.666Z] >>> HTTP REQUEST POST https://cloudfunctions.googleapis.com/v1/projects/fake-money-tree/locations/us-central1/functions:generateUploadUrl  
+ 
+[debug] [2020-03-24T00:04:07.346Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-24T00:04:07.348Z] >>> HTTP REQUEST PUT https://storage.googleapis.com/gcf-upload-us-central1-39a17bc6-eaf8-4e50-8f79-3d6acfa9d4e2/4d241617-17c9-47ed-a93b-438e024d09ed.zip?GoogleAccessId=service-236698827163@gcf-admin-robot.iam.gserviceaccount.com&Expires=1585010046&Signature=fUTsRyYiy2tPGMtyv6rxZ4YBwFDwUAhzoEHrtIsQUMk9EcW2DAPO%2F8ttPFNlW8MvKatUTv1xzhtRkyiUpfPDs6sI4UhXM1doX35py1ckA7HQ0CmQBmoQwNfeRM8GIInswDPc%2FmSZYvPuCKeqxKRNlol7bH89aIPs%2FhLEA5t6P48OMMv9s%2BWE%2Fw37suw11bPzEWmnx7Zu1S4QrZXw53j1J9WSDJMyrhMdSsRg8NxmVvgqufokdxP%2FN%2FXxCEtg2hI5%2BtL4S3FBd4WhdUne4RWGztETd3bWE6bsDjgSuXjQW9gawJFtgtPuAwieuCQg2%2FxACoJ3xRGZOZp7PADR9XuX0A%3D%3D  
+ <request body omitted>
+[debug] [2020-03-24T00:04:07.541Z] <<< HTTP RESPONSE 200
+[info] +  functions: functions folder uploaded successfully
+[debug] [2020-03-24T00:04:07.543Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/projects/fake-money-tree/locations/-/functions  
+ 
+[debug] [2020-03-24T00:04:07.857Z] <<< HTTP RESPONSE 200
+[info] i  functions: updating Node.js 8 function onUserCreate(us-central1)...
+[debug] [2020-03-24T00:04:07.859Z] Trigger is:  {"eventTrigger":{"resource":"projects/fake-money-tree","eventType":"providers/firebase.auth/eventTypes/user.create","service":"firebaseauth.googleapis.com"}}
+[info] i  functions: updating Node.js 8 function onUserCartUpdate(us-central1)...
+[debug] [2020-03-24T00:04:07.860Z] Trigger is:  {"eventTrigger":{"resource":"projects/fake-money-tree/databases/(default)/documents/Users/{uid}/cart/{any}","eventType":"providers/cloud.firestore/eventTypes/document.write","service":"firestore.googleapis.com"}}
+[debug] [2020-03-24T00:04:07.860Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/fake-money-tree/services/cloudscheduler.googleapis.com  
+ 
+[debug] [2020-03-24T00:04:08.284Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-24T00:04:08.286Z] >>> HTTP REQUEST PATCH https://cloudfunctions.googleapis.com/v1/projects/fake-money-tree/locations/us-central1/functions/onUserCreate {"updateMask":"sourceUploadUrl,name,labels,runtime,eventTrigger.resource,eventTrigger.eventType,eventTrigger.service"} 
+
+[debug] [2020-03-24T00:04:08.286Z] >>> HTTP REQUEST PATCH https://cloudfunctions.googleapis.com/v1/projects/fake-money-tree/locations/us-central1/functions/onUserCartUpdate {"updateMask":"sourceUploadUrl,name,labels,runtime,eventTrigger.resource,eventTrigger.eventType,eventTrigger.service"} 
+
+[debug] [2020-03-24T00:04:08.791Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-24T00:04:08.864Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-24T00:04:08.865Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/ZmFrZS1tb25leS10cmVlL3VzLWNlbnRyYWwxL29uVXNlckNyZWF0ZS9MQW1xdV9jMzgzaw  
+ 
+[debug] [2020-03-24T00:04:08.865Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/ZmFrZS1tb25leS10cmVlL3VzLWNlbnRyYWwxL29uVXNlckNhcnRVcGRhdGUvZjRrcC1FSmdDOFk  
+ 
+[debug] [2020-03-24T00:04:09.061Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-24T00:04:09.067Z] <<< HTTP RESPONSE 200

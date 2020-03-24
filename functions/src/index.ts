@@ -31,15 +31,24 @@ export const onUserCreate =
   });
 
 export const onUserCartUpdate =
-  functions.firestore.document('Users/{uid}/cart/{**}').onWrite((change, context) => {
-    const uid = context.auth?.uid;
-    const x = change.after.data();
+  functions.firestore.document('Users/{uid}/cart/{any}').onWrite((change, context) => {
+
     return new Promise((res) => {
-      console.log(uid);
-      console.log(x);
+      const uid = context.params.uid;
+      const newState = change.after.data();
+      console.log(`${uid} update his shopping cart! Info : ${newState}`);
       res();
     }).catch((error) => {
       console.error(error);
     });
 
   });
+
+// .document('users/{userId}/{messageCollectionId}/{messageId}')
+//   .onWrite((change, context) => {
+// If we set `/users/marie/incoming_messages/134` to {body: "Hello"} then
+// context.params.userId == "marie";
+// context.params.messageCollectionId == "incoming_messages";
+// context.params.messageId == "134";
+// ... and ...
+// change.after.data() == {body: "Hello"}
