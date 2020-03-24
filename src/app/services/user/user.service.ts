@@ -20,7 +20,7 @@ export class UserService {
   public isLogged: boolean;
   private guest: User = new User();
   public logStatus$ = new BehaviorSubject(false);
-  public userInfo$ = new BehaviorSubject<User>(this.guest);
+  public userInfo$ = new BehaviorSubject<User>(null);
 
   constructor(private afAuth: AngularFireAuth,
               private db: AngularFirestore,
@@ -31,12 +31,9 @@ export class UserService {
         this.authMetaData = auth;
         this.isLogged = true;
         this.logStatus$.next(true);
-        if (this.currentUserId) {
-          this.UsersCollection.doc(this.currentUserId).valueChanges().subscribe((user: User) => {
-            this.userInfo$.next(user);
-            console.log('user info updated');
-          });
-        }
+        this.UsersCollection.doc(this.authMetaData.uid).valueChanges().subscribe((user: User) => {
+          this.userInfo$.next(user);
+        });
       } else {
         this.authMetaData = null;
         this.isLogged = false;
@@ -44,7 +41,6 @@ export class UserService {
         this.userInfo$.next(this.guest);
         console.log('user out');
       }
-
     });
   }
 
@@ -117,6 +113,10 @@ export class UserService {
         rej('user is logged out');
       }
     });
+  }
+
+  get userCartItems() {
+    return this.UsersCollection.ref.doc(this.currentUserId).collection('cart').get();
   }
 
   public deleteProduct(SKU: number) {

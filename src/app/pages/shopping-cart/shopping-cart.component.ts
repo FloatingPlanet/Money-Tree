@@ -11,7 +11,7 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./shopping-cart.component.scss']
 })
 export class ShoppingCartComponent implements OnInit, OnDestroy {
-  public cart: CartItem[];
+  public cart: CartItem[] = [];
   private logInObservable$: Subscription;
   private userObservable$: Subscription;
 
@@ -24,9 +24,14 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.logInObservable$ = this.us.logInObservable.subscribe((auth) => {
       if (auth) {
-        this.userObservable$ = this.us.userObservable.subscribe((res: User) => {
-          console.log('shopping cart updated');
-          this.cart = res.cart ? res.cart : [];
+        this.userObservable$ = this.us.userObservable.subscribe((user: User) => {
+          if (user) {
+            this.us.userCartItems.then((docs) => {
+              docs.forEach((doc) => {
+                this.cart.push(doc.data() as CartItem);
+              });
+            });
+          }
         });
       } else {
         this.cart = this.cs.getLocalCart();

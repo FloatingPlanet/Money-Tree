@@ -1,5 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {UserService} from './services/user/user.service';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +9,7 @@ export class AppComponent implements OnInit {
   title = 'FloatingPlanet';
   DEFAULT_AVATAR = '../../../assets/default-avatar.png';
   DEFAULT_NAME = 'Shady Individual';
-  constructor(private us: UserService) {
+  constructor() {
   }
 
   ngOnInit(): void {
