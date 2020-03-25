@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Product} from '../../models/product';
 import {UserService} from '../user/user.service';
 import {CartItem} from '../../models/user';
-import { Subject} from 'rxjs';
+import {Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -57,15 +57,19 @@ export class CartService {
   delete product from cart
    */
   public deleteFromCart(SKU: string) {
-    const products = this.localCart.products;
-    let newProducts = products.filter(x => {
-      return x.SKU !== SKU;
-    });
-    newProducts = {
-      products: newProducts
-    };
-    localStorage.setItem('anonymousCart', JSON.stringify(newProducts));
-    window.location.reload();
+    if (this.us.isLogged) {
+      this.us.removeItemFromCart(SKU);
+    } else {
+      const products = this.localCart.products;
+      let newProducts = products.filter(x => {
+        return x.SKU !== SKU;
+      });
+      newProducts = {
+        products: newProducts
+      };
+      localStorage.setItem('anonymousCart', JSON.stringify(newProducts));
+      window.location.reload();
+    }
   }
 
   /*

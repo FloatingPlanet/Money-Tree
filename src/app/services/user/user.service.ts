@@ -123,6 +123,8 @@ export class UserService {
           docs.forEach((doc) => {
             cartItems.push(doc.data() as CartItem);
           });
+        }).catch((error) => {
+          reject(error);
         });
       }
       resolve(cartItems);
@@ -130,7 +132,16 @@ export class UserService {
 
   }
 
-  public deleteProduct(SKU: number) {
+  public removeItemFromCart(SKU: string) {
+    return new Promise(((resolve, reject) => {
+      if (this.isLogged) {
+        this.UsersCollection.ref.doc(this.currentUserId).collection('cart').doc(SKU).delete().then((res) => {
+          resolve(res);
+        }).catch((error) => {
+          reject(error);
+        });
+      }
+    }));
   }
 
   /*
@@ -318,6 +329,7 @@ export class UserService {
     });
 
   }
+
 
 }
 
