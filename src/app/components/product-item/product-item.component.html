@@ -1,6 +1,6 @@
 <div class="mt-2 animated flipInX" role="main">
   <div class="row">
-    <div class="col-3">
+    <div class="col-2">
       <div class="img-wrapper">
         <div class="img-div">
           <img class="image-style" src="{{item.item.productImageUrls[0].url}}"
@@ -9,20 +9,20 @@
       </div>
 
     </div>
-    <div class="col-4">
+    <div class="col-6">
       <h4 class="mt-0 text">{{item.item.productName}}</h4>
-      <h6 class=" mt-0">CAD {{item.item.productPrice}}</h6>
-      <h6 class=" mt-0">{{item.item.SKU}}</h6>
+      <h5 class=" mt-0">CAD {{item.item.productPrice}}</h5>
+      <h5 class=" mt-0">{{item.item.SKU}}</h5>
       <button mat-button [routerLink]="['/info/',item.item.SKU]">View details</button>
       <button mat-button (click)="deleteFromCart(item.item.SKU)">Delete</button>
       <!--TODO MODEL POP WINDOW SHOWS DETAIL  -->
     </div>
-    <div class="col-5">
+    <div class="col-4">
       <div class="def-number-input number-input safari_only">
         <a (click)="decrement(newAmount)"><i class="fas fa-minus"></i></a>
 
         <label>
-          <input class="quantity" min="0" name="quantity" value="1" type="number" placeholder="{{item.count}}"
+          <input class="quantity" min="1" name="quantity" value="1" type="number" placeholder="{{item.count}}"
                  [(ngModel)]="newAmount">
         </label>
         <a (click)="increment(newAmount)"><i class="fas fa-plus"></i></a>
