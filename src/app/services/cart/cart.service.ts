@@ -57,19 +57,23 @@ export class CartService {
   delete product from cart
    */
   public deleteFromCart(SKU: string) {
-    if (this.us.isLogged) {
-      this.us.removeItemFromCart(SKU);
-    } else {
-      const products = this.localCart.products;
-      let newProducts = products.filter(x => {
-        return x.SKU !== SKU;
-      });
-      newProducts = {
-        products: newProducts
-      };
-      localStorage.setItem('anonymousCart', JSON.stringify(newProducts));
-      window.location.reload();
-    }
+    return new Promise(((resolve, reject) => {
+      if (this.us.isLogged) {
+        this.us.removeItemFromCart(SKU).then(() => resolve('deleted')).catch((error) => reject(error));
+      } else {
+        const products = this.localCart?.products;
+        let newProducts = products.filter(x => {
+          return x.SKU !== SKU;
+        });
+        newProducts = {
+          products: newProducts
+        };
+        localStorage.setItem('anonymousCart', JSON.stringify(newProducts));
+        resolve('deleted');
+        window.location.reload();
+      }
+    }));
+
   }
 
   /*

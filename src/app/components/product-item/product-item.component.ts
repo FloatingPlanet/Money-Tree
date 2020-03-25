@@ -24,7 +24,7 @@ export class ProductItemComponent implements OnInit {
   }
 
   public increment(amount: number) {
-    console.log('lol')
+    console.log('lol');
   }
 
   public decrement(amount: number) {
