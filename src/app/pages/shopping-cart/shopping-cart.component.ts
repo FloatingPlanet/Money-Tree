@@ -24,13 +24,9 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.logInObservable$ = this.us.logInObservable.subscribe((auth) => {
       if (auth) {
-        this.userObservable$ = this.us.userObservable.subscribe((user: User) => {
-          if (user) {
-            this.us.userCartItems().then((items) => {
+            this.us.userCartItems().subscribe((items: CartItem[]) => {
               this.cart = items;
             });
-          }
-        });
       } else {
         this.cart = this.cs.getLocalCart();
       }

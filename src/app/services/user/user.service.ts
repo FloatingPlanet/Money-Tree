@@ -115,20 +115,9 @@ export class UserService {
     });
   }
 
-  public userCartItems(): Promise<CartItem[]> {
-    return new Promise(((resolve, reject) => {
-      const cartItems: CartItem[] = [];
-      if (this.isLogged) {
-        this.UsersCollection.ref.doc(this.currentUserId).collection('cart').get().then((docs) => {
-          docs.forEach((doc) => {
-            cartItems.push(doc.data() as CartItem);
-          });
-        }).catch((error) => {
-          reject(error);
-        });
-      }
-      resolve(cartItems);
-    }));
+  public userCartItems()/*: Promise<CartItem[]> */{
+    return this.UsersCollection.doc(this.currentUserId).collection('cart').valueChanges();
+
 
   }
 
