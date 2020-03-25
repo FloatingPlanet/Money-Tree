@@ -1,25 +1,33 @@
-<mat-card class="mt-2 animated flipInX" role="main">
-  <mat-card-content class="">
-    <div class="media">
-      <img class="thumbNail" src="{{item.item.productImageUrls[0].url}}"
-           alt="Generic placeholder image" height="100">
-      <div class="media-body">
-        <h5 class="mt-0 text">{{item.item.productName}}</h5>
-        <h6 class=" mt-0">CAD {{item.item.productPrice}}</h6>
-        <h6 class=" mt-0">{{item.item.SKU}}</h6>
-        <button mat-button [routerLink]="['/info/',item.item.SKU]">View details</button>
-        <button mat-button (click)="deleteFromCart(item.item.SKU)">Delete</button>
-        <!--TODO MODEL POP WINDOW SHOWS DETAIL  -->
+<div class="mt-2 animated flipInX" role="main">
+  <div class="row">
+    <div class="col-3">
+      <div class="img-wrapper">
+        <div class="img-div">
+          <img class="image-style" src="{{item.item.productImageUrls[0].url}}"
+               alt="Generic placeholder image" height="100">
+        </div>
+      </div>
+
+    </div>
+    <div class="col-4">
+      <h4 class="mt-0 text">{{item.item.productName}}</h4>
+      <h6 class=" mt-0">CAD {{item.item.productPrice}}</h6>
+      <h6 class=" mt-0">{{item.item.SKU}}</h6>
+      <button mat-button [routerLink]="['/info/',item.item.SKU]">View details</button>
+      <button mat-button (click)="deleteFromCart(item.item.SKU)">Delete</button>
+      <!--TODO MODEL POP WINDOW SHOWS DETAIL  -->
+    </div>
+    <div class="col-5">
+      <div class="def-number-input number-input safari_only">
+        <a (click)="decrement(newAmount)"><i class="fas fa-minus"></i></a>
+
+        <label>
+          <input class="quantity" min="0" name="quantity" value="1" type="number" placeholder="{{item.count}}"
+                 [(ngModel)]="newAmount">
+        </label>
+        <a (click)="increment(newAmount)"><i class="fas fa-plus"></i></a>
       </div>
     </div>
-    <div class="def-number-input number-input safari_only">
-      <a (click)="decrement(newAmount)"><i class="fas fa-minus"></i></a>
 
-      <label>
-        <input class="quantity" min="0" name="quantity" value="1" type="number" placeholder="{{item.count}}"
-               [(ngModel)]="newAmount">
-      </label>
-      <a (click)="increment(newAmount)"><i class="fas fa-plus"></i></a>
-    </div>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>

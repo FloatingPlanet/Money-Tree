@@ -1,6 +1,21 @@
-.thumbNail {
-  width: 80px;
-  height: 80px;
+.img-wrapper {
+  position: relative;
+}
+.img-div{
+  width:100%;
+  height:0;
+  padding-bottom:100%;
+  position:relative;
+}
+
+.image-style {
+  object-fit: cover;
+  transform: none;
+  position: absolute;
+  width:100%;
+  height:100%;
+  overflow: hidden;
+  margin: 0 auto;
 }
 
 .text {
