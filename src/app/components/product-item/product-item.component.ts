@@ -15,12 +15,19 @@ export class ProductItemComponent implements OnInit {
 
   @Input() item: CartItem;
   public newAmount: any;
+  private loading = false;
 
   ngOnInit() {
   }
 
   public deleteFromCart(SKU: string) {
-    this.cs.deleteFromCart(SKU);
+    this.loading = true;
+    this.cs.deleteFromCart(SKU).then(() => {
+      this.loading = false;
+    }).catch((error) => {
+      this.loading = false;
+      console.error(error);
+    });
   }
 
   public increment(amount: number) {
