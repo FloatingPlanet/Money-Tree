@@ -218,3 +218,10 @@ input[type=number] {
   pointer-events: none;
   opacity: 0.2;
 }
+
+/*
+* override row class with not padding
+ */
+.no-padding{
+  padding: 0!important;
+}

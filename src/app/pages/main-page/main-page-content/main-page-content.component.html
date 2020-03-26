@@ -6,8 +6,8 @@
   <button (click)="load()">LOAD MORE</button>
 
   <div class="container-fluid">
-    <div class="card-deck">
-      <app-product-card class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-3 no-padding"
+    <div class="row no-padding">
+      <app-product-card class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-3  "
                         *ngFor="let product of this.products"
                         [product]="product">
       </app-product-card>
