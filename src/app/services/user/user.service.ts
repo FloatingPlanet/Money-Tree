@@ -125,7 +125,7 @@ export class UserService {
   /*
   * remove certain product from user's cart
    */
-  public removeItemFromCart(SKU: string) {
+  public deleteItemFromCart(SKU: string) {
     return new Promise(((resolve, reject) => {
       if (this.isLogged) {
         this.UsersCollection.ref.doc(this.currentUserId).collection('cart').doc(SKU).delete().then((res) => {
@@ -139,20 +139,35 @@ export class UserService {
 
   /*
   * increment amount of certain item in user's cart
+  * @forceUpdate is false by default, which means user click on button to change value
+  * if @forceUpdate is set to true, that means user input amount by themselves
    */
-  public changeAmount(SKU: string, change: number) {
+  public changeAmount(SKU: string, change: number, forceUpdate = false) {
     return new Promise(((resolve, reject) => {
       if (this.isLogged) {
-        this.UsersCollection.ref.doc(this.currentUserId).collection('cart').doc(SKU).update({
-          count: firebase.firestore.FieldValue.increment(change)
-        }).then((res) => {
-          resolve(res);
-        }).catch((error) => {
-          reject(error);
-        });
+        if (!forceUpdate) {
+          // update amount 1/-1
+          this.UsersCollection.ref.doc(this.currentUserId).collection('cart').doc(SKU).update({
+            count: firebase.firestore.FieldValue.increment(change)
+          }).then((res) => {
+            resolve(res);
+          }).catch((error) => {
+            reject(error);
+          });
+        } else {
+          // force update amount
+          this.UsersCollection.ref.doc(this.currentUserId).collection('cart').doc(SKU).update({
+            count: change
+          }).then((res) => {
+            resolve(res);
+          }).catch((error) => {
+            reject(error);
+          });
+        }
       } else {
         reject('user logged out');
       }
+
     }));
   }
 

@@ -59,7 +59,7 @@ export class CartService {
   public deleteFromCart(SKU: string) {
     return new Promise(((resolve, reject) => {
       if (this.us.isLogged) {
-        this.us.removeItemFromCart(SKU).then(() => resolve('deleted')).catch((error) => reject(error));
+        this.us.deleteItemFromCart(SKU).then(() => resolve('deleted')).catch((error) => reject(error));
       } else {
         const products = this.localCart?.products;
         let newProducts = products.filter(x => {

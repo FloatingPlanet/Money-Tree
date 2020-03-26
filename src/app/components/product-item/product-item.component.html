@@ -19,13 +19,13 @@
     </div>
     <div class="col-4">
       <div class="def-number-input number-input safari_only">
-        <a (click)="decrement(newAmount)"><i class="fas fa-minus"></i></a>
+        <a (click)="decrement()"><i class="fas fa-minus"></i></a>
 
         <label>
-          <input class="quantity" min="1" name="quantity" value="1" type="number" placeholder="{{item.count}}"
-                 [(ngModel)]="newAmount">
+          <input class="quantity" min="1" name="quantity" type="number" placeholder="{{item.count}}"
+                 [(ngModel)]="newAmount" (keydown.enter)="this.hotUpdate()">
         </label>
-        <a (click)="increment(newAmount)"><i class="fas fa-plus"></i></a>
+        <a (click)="increment()"><i class="fas fa-plus"></i></a>
       </div>
     </div>
 

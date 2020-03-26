@@ -32,22 +32,47 @@ export class ProductItemComponent implements OnInit {
     });
   }
 
-  public increment(amount: number) {
+  public increment() {
     this.loading = true;
     setTimeout(() => {
       this.us.changeAmount(this.item.item.SKU, 1).then(() => {
         this.loading = false;
       });
     }, 1000);
-
   }
 
-  public decrement(amount: number) {
+  public decrement() {
     this.loading = true;
     setTimeout(() => {
-      this.us.changeAmount(this.item.item.SKU, -1).then(() => {
-        this.loading = false;
-      });
+      if (this.item.count === 1) {
+        this.us.deleteItemFromCart(this.item.item.SKU).then(() => {
+          this.loading = false;
+        });
+      } else {
+        this.us.changeAmount(this.item.item.SKU, -1).then(() => {
+          this.loading = false;
+        });
+      }
     }, 1000);
+  }
+
+  public hotUpdate() {
+    this.loading = true;
+    setTimeout(() => {
+      if (this.newAmount === 0) {
+        this.us.deleteItemFromCart(this.item.item.SKU).then(() => {
+          this.loading = false;
+        }).catch((error) => {
+          console.error(error);
+        });
+      } else {
+        this.us.changeAmount(this.item.item.SKU, this.newAmount, true).then(() => {
+          this.loading = false;
+        }).catch((error) => {
+          console.error(error);
+        });
+      }
+    }, 1000);
+    console.log(this.newAmount);
   }
 }
