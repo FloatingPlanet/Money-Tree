@@ -195,7 +195,7 @@ body {
 }
 
 .subtitle-margin-ignore {
-  margin-bottom: 0.5vh !important;
+  margin-bottom: 0.0vh !important;
 }
 
 /*
@@ -224,4 +224,7 @@ input[type=number] {
  */
 .no-padding{
   padding: 0!important;
+}
+.mat-form-field.mat-focused .mat-form-field-ripple {
+  background-color: $money-tree-theme-color !important;
 }

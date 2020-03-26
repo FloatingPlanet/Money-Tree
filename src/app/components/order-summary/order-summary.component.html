@@ -1,34 +1,50 @@
 <div class="card animated fadeInRight">
   <header>
     <div class="card-body">
-      <h5 class="card-title">Order Summary</h5>
+      <h4 class="card-title">Order Summary</h4>
       <p class="card-text">Your Order Total</p>
       <p class="card-text">{{totalItems}} item(s)</p>
     </div>
   </header>
   <div>
 
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">Subtotal: {{this.subtotal}}</li>
-      <li class="list-group-item">Shipping: {{this.shipping}}</li>
-      <li class="list-group-item">Estimated Tax: {{this.estimatedTax}}</li>
-      <li class="list-group-item">Recycling fee: {{this.recyclingFee}}</li>
-      <li class="list-group-item">Your Total: {{this.total}}</li>
+    <ul class="list-group">
+      <li class="list-group-item">
+        <h5 class="subtitle-margin-ignore">Subtotal: {{this.subtotal}}
+        </h5>
+      </li>
+      <li class="list-group-item">
+        <h5 class="subtitle-margin-ignore">Shipping: {{this.shipping}}
+        </h5>
+      </li>
+      <li class="list-group-item">
+        <h5 class="subtitle-margin-ignore">Estimated Tax: {{this.estimatedTax}}
+        </h5>
+      </li>
+      <li class="list-group-item">
+        <h5 class="subtitle-margin-ignore">Recycling fee: {{this.recyclingFee}}
+        </h5>
+      </li>
+      <li class="list-group-item">
+        <h4 class="subtitle-margin-ignore">Your Total: {{this.total}}
+        </h4>
+      </li>
     </ul>
   </div>
   <div class="card-body product">
     <mat-card-content>
       <div class="input-group mb-3">
-        <label for="coupon">
-          <input type="text" class="form-control" placeholder="Enter Coupon"
-                 oninput="this.value = this.value.toUpperCase()" [(ngModel)]="couponInput" id="coupon"
-                 aria-describedby="basic-addon2">
-          <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button" [disabled]="!this.couponInput"
-                    (click)="validateCoupon()">Apply
-            </button>
-          </div>
-        </label>
+        <mat-form-field class="w-100">
+          <mat-label>Enter a coupon</mat-label>
+          <label>
+            <input matInput autocomplete="off" type="text" oninput="this.value = this.value.toUpperCase()"
+                   [(ngModel)]="this.couponInput">
+          </label>
+          <button style="display: inline-block"  type="button" class="btn btn-sm button-theme"
+                  *ngIf="this.couponInput" matSuffix (click)="validateCoupon()">
+            Apply
+          </button>
+        </mat-form-field>
         <p>
           {{this.getCoupon}}
         </p>

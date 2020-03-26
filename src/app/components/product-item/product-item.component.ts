@@ -17,7 +17,7 @@ export class ProductItemComponent implements OnInit {
 
   @Input() item: CartItem;
   public newAmount: number;
-  private loading = false;
+  public loading = false;
 
   ngOnInit() {
   }

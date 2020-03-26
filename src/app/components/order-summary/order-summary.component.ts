@@ -4,6 +4,7 @@ import {ProductService} from 'src/app/services/product/product.service';
 import {Coupon} from '../../models/coupon';
 import {CouponsService} from '../../services/coupons/coupons.service';
 import {Router} from 'node_modules/@angular/router';
+import {CartItem} from '../../models/user';
 
 @Component({
   selector: 'app-order-summary',
@@ -11,7 +12,7 @@ import {Router} from 'node_modules/@angular/router';
   styleUrls: ['./order-summary.component.scss']
 })
 export class OrderSummaryComponent implements OnChanges {
-  @Input() orders: Product[];
+  @Input() items: CartItem[];
   public getCoupon: string;
   public currentDate = new Date();
   // rate
@@ -36,10 +37,10 @@ export class OrderSummaryComponent implements OnChanges {
   }
 
   private calculateSummary(coupon: Coupon) {
-    if (this.orders) {
-      this.totalItems = this.orders.length;
+    if (this.items) {
+      this.totalItems = this.items.length;
       this.subtotal = coupon ? Math.ceil(this.subtotal * (1 - this.coupon.discount) * 10) / 10 :
-        this.orders.map(product => product.productPrice).reduceRight((prev, next) => prev + next, 0);
+        this.items.map(item => item.item.productPrice).reduceRight((prev, next) => prev + next, 0);
       this.estimatedTax = this.taxRate * (this.subtotal + this.shipping);
       this.recyclingFee = this.subtotal * this.recycleRate;
       this.total = Math.ceil((this.subtotal + this.shipping + this.estimatedTax + this.recyclingFee) * 10) / 10;
