@@ -140,11 +140,11 @@ export class UserService {
   /*
   * increment amount of certain item in user's cart
    */
-  public changeAmount(SKU: string, increment: number) {
+  public changeAmount(SKU: string, change: number) {
     return new Promise(((resolve, reject) => {
       if (this.isLogged) {
         this.UsersCollection.ref.doc(this.currentUserId).collection('cart').doc(SKU).update({
-          count: firebase.firestore.FieldValue.increment(increment)
+          count: firebase.firestore.FieldValue.increment(change)
         }).then((res) => {
           resolve(res);
         }).catch((error) => {

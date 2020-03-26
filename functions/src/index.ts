@@ -41,7 +41,15 @@ export const onUserCartUpdate =
       userCartCollection.get().then((snapshot) => {
         let newCount = 0;
         snapshot.forEach((doc) => {
-          newCount += doc.data().count;
+          if (doc.data().count < 1) {
+            doc.ref.delete().then(() => {
+              console.log(`${uid} remove item succeeded`);
+            }).catch((error) => {
+              console.error(error);
+            });
+          } else {
+            newCount += doc.data().count;
+          }
         });
         return db.doc(`Users/${uid}`).get().then((doc) => {
           doc.ref.update({cartSize: newCount}).then(() => {

@@ -1,5 +1,5 @@
-<div class="mt-2 animated flipInX" role="main">
-  <div class="row">
+<div class="mt-2" [ngClass]="{'disableDiv': this.loading, 'activeDiv':!this.loading}" role="main">
+  <div disabled="disabled" class="row">
     <div class="col-2">
       <div class="img-wrapper">
         <div class="img-div">

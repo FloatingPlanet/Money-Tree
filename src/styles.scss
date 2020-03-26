@@ -210,4 +210,10 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
-
+/*
+* disable div when it is loading
+ */
+.disableDiv{
+  pointer-events: none;
+  opacity: 0.2;
+}

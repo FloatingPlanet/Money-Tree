@@ -33,12 +33,21 @@ export class ProductItemComponent implements OnInit {
   }
 
   public increment(amount: number) {
-    this.us.changeAmount(this.item.item.SKU, 1).then(() => {
-    });
+    this.loading = true;
+    setTimeout(() => {
+      this.us.changeAmount(this.item.item.SKU, 1).then(() => {
+        this.loading = false;
+      });
+    }, 1000);
+
   }
 
   public decrement(amount: number) {
-    this.us.changeAmount(this.item.item.SKU, -1).then(() => {
-    });
+    this.loading = true;
+    setTimeout(() => {
+      this.us.changeAmount(this.item.item.SKU, -1).then(() => {
+        this.loading = false;
+      });
+    }, 1000);
   }
 }
