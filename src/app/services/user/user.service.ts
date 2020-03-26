@@ -115,12 +115,16 @@ export class UserService {
     });
   }
 
-  public userCartItems()/*: Promise<CartItem[]> */{
+  /*
+  * get user cart observable
+   */
+  public userCartItems()/*: Promise<CartItem[]> */ {
     return this.UsersCollection.doc(this.currentUserId).collection('cart').valueChanges();
-
-
   }
 
+  /*
+  * remove certain product from user's cart
+   */
   public removeItemFromCart(SKU: string) {
     return new Promise(((resolve, reject) => {
       if (this.isLogged) {
@@ -129,6 +133,25 @@ export class UserService {
         }).catch((error) => {
           reject(error);
         });
+      }
+    }));
+  }
+
+  /*
+  * increment amount of certain item in user's cart
+   */
+  public changeAmount(SKU: string, increment: number) {
+    return new Promise(((resolve, reject) => {
+      if (this.isLogged) {
+        this.UsersCollection.ref.doc(this.currentUserId).collection('cart').doc(SKU).update({
+          count: firebase.firestore.FieldValue.increment(increment)
+        }).then((res) => {
+          resolve(res);
+        }).catch((error) => {
+          reject(error);
+        });
+      } else {
+        reject('user logged out');
       }
     }));
   }

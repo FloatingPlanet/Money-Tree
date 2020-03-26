@@ -2,6 +2,8 @@ import {Component, OnInit, Input} from '@angular/core';
 import {Product} from 'src/app/models/product';
 import {CartService} from '../../services/cart/cart.service';
 import {CartItem} from '../../models/user';
+import {UserService} from '../../services/user/user.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-product-item',
@@ -10,11 +12,11 @@ import {CartItem} from '../../models/user';
 })
 export class ProductItemComponent implements OnInit {
 
-  constructor(private cs: CartService) {
+  constructor(private cs: CartService, private us: UserService) {
   }
 
   @Input() item: CartItem;
-  public newAmount: any;
+  public newAmount: number;
   private loading = false;
 
   ngOnInit() {
@@ -31,10 +33,12 @@ export class ProductItemComponent implements OnInit {
   }
 
   public increment(amount: number) {
-    console.log('lol');
+    this.us.changeAmount(this.item.item.SKU, 1).then(() => {
+    });
   }
 
   public decrement(amount: number) {
-
+    this.us.changeAmount(this.item.item.SKU, -1).then(() => {
+    });
   }
 }
