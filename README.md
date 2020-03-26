@@ -75,7 +75,7 @@
 17. ElasticSearch[Kibana](https://demo.elastic.co/app/kibana#/home?_g=())
 18. Search and Category bar shoube be removed in small screen size
 19. Move domain to floatingplanet.app, use floatingplanet.app to register gcp.
-
+20. Currently, we use firestore function to remove item whose count is less than 1 in user's cart, but the problem is that the response time is too long (500ms), need to come up a better approach later on.
 99. Remove all warnings and errors
 ##### CTO: [Otto hu](https://github.com/aWildOtto)
 ##### CEO: [Jiaran Yu](https://github.com/jiaranyu)
