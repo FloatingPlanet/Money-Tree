@@ -38,7 +38,7 @@ export class ProductItemComponent implements OnInit {
       this.us.changeAmount(this.item.item.SKU, 1).then(() => {
         this.loading = false;
       });
-    }, 1000);
+    }, 500);
   }
 
   public decrement() {
@@ -53,7 +53,7 @@ export class ProductItemComponent implements OnInit {
           this.loading = false;
         });
       }
-    }, 1000);
+    }, 500);
   }
 
   public hotUpdate() {
@@ -72,7 +72,7 @@ export class ProductItemComponent implements OnInit {
           console.error(error);
         });
       }
-    }, 1000);
+    }, 500);
     console.log(this.newAmount);
   }
 }
