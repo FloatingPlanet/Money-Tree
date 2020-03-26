@@ -225,6 +225,10 @@ input[type=number] {
 .no-padding{
   padding: 0!important;
 }
+
+/*
+* overwrite mat-input underline color
+ */
 .mat-form-field.mat-focused .mat-form-field-ripple {
   background-color: $money-tree-theme-color !important;
 }
