@@ -1,10 +1,13 @@
-<div class="container mb-3 box" [ngClass]="{'disableDiv': this.loading, 'activeDiv':!this.loading}" role="main">
+<div class="container-fluid mb-3 box" [ngClass]="{'disableDiv': this.loading, 'activeDiv':!this.loading}" role="main">
   <div class="row h-100 item">
     <div class="col-3 justify-content-center align-self-center">
       <div class="img-wrapper ">
         <div class="img-div">
-          <img class="image-style" src="{{item.item.productImageUrls[0].url}}"
-               alt="Generic placeholder image" height="100">
+          <a [routerLink]="['/info/',item.item.SKU]">
+            <img class="image-style" src="{{item.item.productImageUrls[0].url}}"
+                 alt="Generic placeholder image" height="100">
+          </a>
+
         </div>
       </div>
 
@@ -13,8 +16,6 @@
       <h4 class="mt-0 text">{{item.item.productName}}</h4>
       <h5 class=" mt-0">CAD {{item.item.productPrice}}</h5>
       <h5 class=" mt-0">{{item.item.SKU}}</h5>
-      <button mat-button [routerLink]="['/info/',item.item.SKU]">View details</button>
-      <button mat-button (click)="deleteFromCart(item.item.SKU)">Delete</button>
       <!--TODO MODEL POP WINDOW SHOWS DETAIL  -->
     </div>
     <div class="col-3 amount-wrapper justify-content-center align-self-center">
@@ -29,6 +30,8 @@
         <span class="item-amount-change-button" (click)="increment()">
           <i class="fas fa-plus"></i>
         </span>
+        <button mat-button (click)="deleteFromCart(item.item.SKU)">Delete</button>
+
       </div>
     </div>
   </div>
