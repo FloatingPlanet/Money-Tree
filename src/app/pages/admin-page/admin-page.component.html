@@ -20,22 +20,21 @@
     </mat-drawer>
     <div class="admin-sidenav-content">
       <router-outlet></router-outlet>
-      <div class="toggle-button" [ngSwitch]="showFiller">
-        <div *ngSwitchCase=true>
-          <button type="button" mat-flat-button class="toggle-button button-theme"
-             (click)="drawer.toggle();this.showFiller=!this.showFiller">
-            <i class="fas fa-5x fa-caret-left"></i>
-          </button>
-        </div>
-        <div *ngSwitchCase=false>
-          <button type="button" mat-flat-button class="toggle-button button-theme"
-             (click)="drawer.toggle();this.showFiller=!this.showFiller">
-            <i class="fas fa-5x fa-caret-right"></i>
-          </button>
-        </div>
+    </div>
+    <div class=" float-left" [ngSwitch]="showFiller">
+      <div *ngSwitchCase=true>
+        <button type="button" mat-flat-button class="toggle-button button-theme"
+                (click)="drawer.toggle();this.showFiller=!this.showFiller">
+          <i class="fas fa-5x fa-caret-left"></i>
+        </button>
+      </div>
+      <div *ngSwitchCase=false>
+        <button type="button" mat-flat-button class="toggle-button button-theme"
+                (click)="drawer.toggle();this.showFiller=!this.showFiller">
+          <i class="fas fa-5x fa-caret-right"></i>
+        </button>
       </div>
     </div>
-
   </mat-drawer-container>
 
 </div>
