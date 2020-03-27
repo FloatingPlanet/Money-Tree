@@ -8,7 +8,7 @@ import {User as FirebaseUser, UserCredential} from '@firebase/auth-types';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {FlashMessageService} from '../flashMessage/flash-message.service';
 import {map, mergeMap} from 'rxjs/operators';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 
 @Injectable({
@@ -47,14 +47,14 @@ export class UserService {
   /*
   return login observable
    */
-  get logInObservable() {
+  get logInObservable(): Observable<Boolean> {
     return this.logStatus$.asObservable();
   }
 
   /*
   return user info observable
    */
-  get userObservable() {
+  get userObservable(): Observable<User> {
     return this.userInfo$.asObservable();
   }
 

@@ -24,16 +24,17 @@ export class CheckoutPageComponent implements AfterViewChecked, OnDestroy {
   private userObservable$: Subscription;
 
   constructor(private us: UserService, private cs: CartService, private os: OrderService) {
-    this.logInObservable$ = this.us.logInObservable.subscribe((auth) => {
-      if (auth) {
-        this.userObservable$ = this.us.userObservable.subscribe((res) => {
-          const user = res as User;
-          this.orders = user.cart;
-        });
-      } else {
+
+    this.userObservable$ = this.us.userObservable.subscribe((user) => {
+      if (user.guest) {
         this.orders = this.cs.getLocalCart();
+
+      } else {
+        // TODO Grab shopping cart info AKA sub-collection
+        this.orders = user.cart;
       }
     });
+
   }
 
   ngAfterViewChecked() {
