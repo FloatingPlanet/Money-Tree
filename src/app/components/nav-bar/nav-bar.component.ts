@@ -3,6 +3,7 @@ import {User} from '../../models/user';
 import {UserService} from '../../services/user/user.service';
 import {Subscription} from 'rxjs';
 import {CartService} from '../../services/cart/cart.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
@@ -19,14 +20,11 @@ export class NavBarComponent implements OnInit, OnChanges, OnDestroy {
   private userObservable$: Subscription;
   @Input() keyword: string;
 
-  constructor(private us: UserService, private cs: CartService) {
-  }
-
-  ngOnInit() {
+  constructor(private us: UserService, private cs: CartService, private router: Router) {
     // TODO user logout and login data is not consistent, and shopping cart has same shit
     this.logInObservable$ = this.us.logInObservable.subscribe((auth) => {
       if (auth) {
-        this.userObservable$ = this.us.userObservable.subscribe((res: User) => {
+        this.userObservable$ = this.us.userObservable.subscribe((res) => {
           if (res) {
             console.log('cartSize updated', res.cartSize);
             this.itemInCart = res.cartSize === 0 ? null : res.cartSize;
@@ -54,8 +52,17 @@ export class NavBarComponent implements OnInit, OnChanges, OnDestroy {
     });
   }
 
-  logout() {
-    this.us.signOut();
+  ngOnInit() {
+
+  }
+
+  public logout() {
+    this.us.signOut().then(() => {
+      this.router.navigateByUrl('');
+    }).catch((error) => {
+      console.error(error);
+    });
+
   }
 
   ngOnChanges(): void {

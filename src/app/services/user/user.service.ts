@@ -30,10 +30,10 @@ export class UserService {
       if (loggedInUser) {
         this.authMetaData = loggedInUser;
         this.isLogged = true;
-        this.logStatus$.next(true);
         this.UsersCollection.doc(this.authMetaData.uid).valueChanges().subscribe((userInfo: User) => {
           this.userInfo$.next(userInfo);
         });
+        this.logStatus$.next(true);
       } else {
         this.authMetaData = null;
         this.isLogged = false;
@@ -73,16 +73,6 @@ export class UserService {
    */
 
   public isIn() {
-    console.log('???');
-    return new Promise(((resolve, reject) => {
-      firebase.auth().onAuthStateChanged((res) => {
-        if (res) {
-          resolve(res);
-        } else {
-          reject(res);
-        }
-      });
-    }));
   }
 
   /*
@@ -358,13 +348,18 @@ export class UserService {
 
   //// Sign Out ////
 
-  signOut(): void {
-    this.afAuth.auth.signOut().then(() => {
-      this.isLogged = false;
-      this.logStatus$.next(false);
-      this.userInfo$.next(this.guest);
-      this.fs.success('Log out', 'You\'ve been logged out');
-    });
+  signOut() {
+    return new Promise(((resolve, reject) => {
+      firebase.auth().signOut().then(() => {
+        this.isLogged = false;
+        this.logStatus$.next(false);
+        this.userInfo$.next(this.guest);
+        this.fs.success('Log out', 'You\'ve been logged out');
+        resolve();
+      }).catch((error) => {
+        reject(error);
+      });
+    }));
 
   }
 
