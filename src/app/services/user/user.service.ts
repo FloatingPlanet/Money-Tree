@@ -39,7 +39,7 @@ export class UserService {
         this.isLogged = false;
         this.logStatus$.next(false);
         this.userInfo$.next(this.guest);
-        console.log('user out');
+        console.log('user is not logged in');
       }
     });
 
