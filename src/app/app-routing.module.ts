@@ -9,7 +9,7 @@ import {ShoppingCartComponent} from './pages/shopping-cart/shopping-cart.compone
 import {AdminPageComponent} from './pages/admin-page/admin-page.component';
 import {AdminOrdersComponent} from './pages/admin-page/admin-orders/admin-orders.component';
 import {AdminProductsComponent} from './pages/admin-page/admin-products/admin-products.component';
-import {ModifyProductComponent} from './components/modify-product/modify-product.component';
+import {ModifyProductComponent} from './pages/admin-page/admin-products/modify-product/modify-product.component';
 import {ProductInfoComponent} from './components/product-info/product-info.component';
 import {AdminCouponsComponent} from './pages/admin-page/admin-coupons/admin-coupons.component';
 import {CouponFormComponent} from './pages/admin-page/admin-coupons/coupon-form/coupon-form.component';

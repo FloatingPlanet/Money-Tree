@@ -26,13 +26,13 @@ export class UserService {
               private db: AngularFirestore,
               private fs: FlashMessageService) {
     this.UsersCollection = this.db.collection('Users');
-    this.afAuth.authState.subscribe((auth) => {
-      if (auth) {
-        this.authMetaData = auth;
+    firebase.auth().onAuthStateChanged((loggedInUser) => {
+      if (loggedInUser) {
+        this.authMetaData = loggedInUser;
         this.isLogged = true;
         this.logStatus$.next(true);
-        this.UsersCollection.doc(this.authMetaData.uid).valueChanges().subscribe((user: User) => {
-          this.userInfo$.next(user);
+        this.UsersCollection.doc(this.authMetaData.uid).valueChanges().subscribe((userInfo: User) => {
+          this.userInfo$.next(userInfo);
         });
       } else {
         this.authMetaData = null;
@@ -42,12 +42,13 @@ export class UserService {
         console.log('user out');
       }
     });
+
   }
 
   /*
   return login observable
    */
-  get logInObservable(): Observable<Boolean> {
+  get logInObservable(): Observable<boolean> {
     return this.logStatus$.asObservable();
   }
 
@@ -67,12 +68,21 @@ export class UserService {
     }
   }
 
+  /*
+  * get login status
+   */
 
-  // TODO merge two observable
-  get userDataObservable() {
-    return this.logInObservable.pipe(
-      mergeMap(auth => this.userObservable.pipe(map(user => (user)))
-      ));
+  public isIn() {
+    console.log('???');
+    return new Promise(((resolve, reject) => {
+      firebase.auth().onAuthStateChanged((res) => {
+        if (res) {
+          resolve(res);
+        } else {
+          reject(res);
+        }
+      });
+    }));
   }
 
   /*
@@ -274,15 +284,16 @@ export class UserService {
   }
 
   private socialSignIn(provider: firebase.auth.AuthProvider) {
-    return firebase.auth().signInWithPopup(provider).then((credential) => {
-      this.authMetaData = credential.user;
-      this.fs.success('3rd party log in successful', 'You\'ve been logged in with ' + provider.providerId);
-    })
-      .catch(error => {
-        this.fs.error('3rd party login failed', error.message);
-        console.log(error);
+    return firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
+      return firebase.auth().signInWithPopup(provider).then((credential) => {
+        this.authMetaData = credential.user;
+        console.log('user in ');
+        this.fs.success('3rd party log in successful', 'You\'ve been logged in with ' + provider.providerId);
       });
-
+    }).catch(error => {
+      this.fs.error('3rd party login failed', error.message);
+      console.log(error);
+    });
   }
 
 
@@ -304,7 +315,7 @@ export class UserService {
     return this.afAuth.auth.createUserWithEmailAndPassword(login.email, login.password)
       .then((credential: UserCredential) => {
         this.authMetaData = credential.user;
-        this.afAuth.auth.currentUser.updateProfile({displayName: login.username});
+        this.afAuth.auth.currentUser.updateProfile({displayName: login.username}).then(r => console.log('email signed up'));
         this.fs.success('Sign up success', 'You\'ve been logged in');
       })
       .catch(error => {
