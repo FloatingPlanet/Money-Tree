@@ -16,6 +16,7 @@
 ## Important!!!!!!!!!!!! everything related to user'data, you have to check if user still loged in by using this.us.logInObservable()
 ## Important!!!!!!!!!!!! Objects and arrays are passed by references, so that we do not have to use observable to track changes
 ~~### new UI Framework: https://semantic-ui.com/elements/step.html#step~~
+### Admin page has been separated, find repo [here](https://github.com/FloatingPlanet/Admin-Money-Tree)
    #### why user gives up checkout
     61%: Extra costs (shipping, taxes, fees) were too high
     35%: Didn’t want to create an account
