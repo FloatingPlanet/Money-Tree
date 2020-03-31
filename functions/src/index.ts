@@ -1,8 +1,16 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
+import * as cors from 'cors';
 
 admin.initializeApp();
 const db = admin.firestore();
+cors.apply({
+  origin: '*',
+  allowedHeaders: ['Content-Type', 'Authorization', 'Content-Length', 'X-Requested-With', 'Accept'],
+  methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+});
+
 // // Start writing Firebase Functions
 // // https://firebase.google.com/docs/functions/typescript
 //
@@ -66,20 +74,21 @@ export const onUserCartUpdate =
       });
     });
   });
-exports.addAdminRole = functions.https.onCall((data, context) => {
+
+export const grantPermission = functions.https.onCall((data, context) => {
   // get user and add custom claim(admin)
   return admin.auth().getUserByEmail(data.email).then((user) => {
     return admin.auth().setCustomUserClaims(user.uid, {
       admin: true
-    })
+    });
   }).then(() => {
     console.log(`${data.email} added as Admin`);
     return {
       message: `Success! ${data.email} has been made as an admin`,
       set: true
-    }
+    };
   }).catch((error) => {
     console.error(error);
     return error;
-  })
-})
+  });
+});

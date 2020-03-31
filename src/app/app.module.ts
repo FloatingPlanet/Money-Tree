@@ -173,8 +173,6 @@ import { MainPageContentComponent } from './pages/main-page/main-page-content/ma
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    FormsModule,
-    ReactiveFormsModule,
     ModalModule.forRoot(),
     FlexModule,
     MatBadgeModule,
