@@ -12,7 +12,7 @@
   1. [MDB pro (pricy)](https://mdbootstrap.com/products/angular-ui-kit/)
   2. [Material Design for Bootstrap](https://github.com/FezVrasta/bootstrap-material-design)
   3. [Bootstrap](https://getbootstrap.com/docs/4.4/layout/overview/)
-
+  4. [Nebular](https://akveo.github.io/nebular/docs/components/components-overview)
 ## Important!!!!!!!!!!!! everything related to user'data, you have to check if user still loged in by using this.us.logInObservable()
 ## Important!!!!!!!!!!!! Objects and arrays are passed by references, so that we do not have to use observable to track changes
 ~~### new UI Framework: https://semantic-ui.com/elements/step.html#step~~
@@ -77,6 +77,8 @@
 18. Search and Category bar shoube be removed in small screen size
 19. Move domain to floatingplanet.app, use floatingplanet.app to register gcp.
 20. Currently, we use firestore function to remove item whose count is less than 1 in user's cart, but the problem is that the response time is too long (500ms), need to come up a better approach later on.
+21. #### Refactor all form and button to Nebular
+22. can we store nebular or other framework locally just in case dependencies decrepted 
 99. Remove all warnings and errors
 ##### CTO: [Otto hu](https://github.com/aWildOtto)
 ##### CEO: [Jiaran Yu](https://github.com/jiaranyu)
