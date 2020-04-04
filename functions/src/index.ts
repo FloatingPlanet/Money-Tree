@@ -98,13 +98,13 @@ export const validateCoupon = functions.https.onCall((coupon, context)=>{
       if(doc.exists){
         console.log(`someone tries to use coupon: "${coupon}"`);
         return {
-          message: 'valid coupon',
+          data: doc,
           valid: true
         }
       }else{
         console.error(`someone tries to use non-existing coupon: "${coupon}"`);
         return {
-          message: 'invalid coupon',
+          data: '',
           valid: false
         }
       }
