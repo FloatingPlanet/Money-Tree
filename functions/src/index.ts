@@ -92,3 +92,25 @@ export const grantPermission = functions.https.onCall((data, context) => {
     return error;
   });
 });
+
+export const validateCoupon = functions.https.onCall((coupon, context)=>{
+  return  db.collection('coupons').doc(`${coupon}`).get().then((doc)=>{
+      if(doc.exists){
+        console.log(`someone tries to use coupon: "${coupon}"`);
+        return {
+          message: 'valid coupon',
+          valid: true
+        }
+      }else{
+        console.error(`someone tries to use non-existing coupon: "${coupon}"`);
+        return {
+          message: 'invalid coupon',
+          valid: false
+        }
+      }
+    }).catch((error)=>{
+      console.error(error, 'validating coupon error!');
+      return error;
+  })
+});
+
