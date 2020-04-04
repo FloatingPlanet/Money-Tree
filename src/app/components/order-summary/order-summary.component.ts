@@ -49,6 +49,7 @@ export class OrderSummaryComponent implements OnChanges {
 
 
   validateCoupon() {
+    // TODO do we need to migrate this snippet of code to cloud functions?
     this.cs.validateCoupon(this.couponInput).then((result) => {
       this.coupon = result as Coupon;
       if ((this.subtotal >= this.coupon.minimumSpend)
