@@ -5,6 +5,7 @@ import {
 } from 'angularfire2/firestore';
 import {Category} from 'src/app/models/category';
 import {Product} from '../../models/product';
+import Query = firebase.firestore.Query;
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +34,7 @@ export class CategoryService {
   public productMap: {
     [cat: string]: {
       products: Product[];
-      collection: AngularFirestoreCollection<Category>;
+      query: Query;
       lastDoc: any
     }
   } = {};
@@ -58,21 +59,24 @@ retrieve specific products based on given category with @limit
   public getProductsWithCategory(C: string) {
     return new Promise((res, rej) => {
       this.chosenCategory = C;
-      let chosenCategoryCollection: AngularFirestoreCollection<Category>;
+      let chosenCategoryCollection: Query;
       let lastDoc: any;
       // check if this category products has been loaded, if so grab it from map
       if (this.productMap.hasOwnProperty(C)) {
         // update local var
         this.chosenCategoryProducts = this.productMap[C].products;
-        chosenCategoryCollection = this.productMap[C].collection;
+        chosenCategoryCollection = this.productMap[C].query;
         lastDoc = this.productMap[C].lastDoc;
       } else {
         // clear chosenCategoryProducts when use switch around
         this.chosenCategoryProducts = [];
-        chosenCategoryCollection = this.CategoriesCollection
-          .doc(this.chosenCategory.toUpperCase())
-          .collection('products');
-        const productFetchQuery = chosenCategoryCollection.ref.limit(4);
+        // chosenCategoryCollection = this.CategoriesCollection
+        //   .doc(this.chosenCategory.toUpperCase())
+        //   .collection('products');
+
+        // const productFetchQuery = chosenCategoryCollection.ref.limit(4);
+        const productFetchQuery = this.db.collection('Products').ref.
+        where('productCategory', 'array-contains', this.chosenCategory.toUpperCase()).limit(4);
         productFetchQuery.get().then((products) => {
           products.forEach((doc) => {
             this.chosenCategoryProducts.push(doc.data() as Product);
@@ -80,7 +84,7 @@ retrieve specific products based on given category with @limit
             // create new entry in map
             this.productMap[C] = Object.assign({
               products: this.chosenCategoryProducts,
-              collection: chosenCategoryCollection,
+              query: productFetchQuery,
               lastDoc
             });
           });
@@ -98,10 +102,10 @@ retrieve specific products based on given category with @limit
   public loadAnotherProducts() {
     return new Promise((res, rej) => {
       this.loading = true;
-      const chosenCategoryCollection = this.productMap[this.chosenCategory].collection;
+      const chosenCategoryCollection = this.productMap[this.chosenCategory].query;
       let lastDoc = this.productMap[this.chosenCategory].lastDoc;
       setTimeout(() => {
-        const productFetchQuery = chosenCategoryCollection.ref.limit(4).startAfter(lastDoc);
+        const productFetchQuery = chosenCategoryCollection.startAfter(lastDoc);
         productFetchQuery.get().then((products) => {
           products.forEach((doc) => {
             this.chosenCategoryProducts.push(doc.data() as Product);
