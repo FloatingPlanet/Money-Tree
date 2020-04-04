@@ -94,17 +94,17 @@ export const grantPermission = functions.https.onCall((data, context) => {
 });
 
 export const validateCoupon = functions.https.onCall((coupon, context)=>{
-  return  db.collection('coupons').doc(`${coupon}`).get().then((doc)=>{
+  return  db.collection('Coupons').doc(`${coupon}`).get().then((doc)=>{
       if(doc.exists){
         console.log(`someone tries to use coupon: "${coupon}"`);
         return {
-          data: doc,
+          doc: doc.data(),
           valid: true
         }
       }else{
         console.error(`someone tries to use non-existing coupon: "${coupon}"`);
         return {
-          data: '',
+          doc: '',
           valid: false
         }
       }

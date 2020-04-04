@@ -1,4 +1,6 @@
 import {Injectable} from '@angular/core';
+import * as firebase from 'firebase';
+
 import {
   AngularFirestore,
   AngularFirestoreCollection,
@@ -30,16 +32,17 @@ export class CouponsService {
   validate coupon @c with coupons in firebase
    */
   public validateCoupon(c: string) {
+    const functions = firebase.functions();
+    const validateCoupon = functions.httpsCallable('validateCoupon');
     return new Promise((resolve, reject) => {
-      this.Coupons.doc(c).ref.get().then((doc) => {
-        if (doc.exists) {
-          resolve(doc.data());
+      validateCoupon(c).then((res) => {
+        if (res.data.valid) {
+          resolve(res.data.doc);
         } else {
-          reject(`${c} does not exist`);
+          reject(`fetch doc ${c} failed`);
         }
       }).catch((error) => {
-        console.error(error);
-        reject(`fetch doc ${c} failed`);
+        reject(error);
       });
     });
   }
