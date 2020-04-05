@@ -77,40 +77,58 @@ export const onUserCartUpdate =
 
 export const grantPermission = functions.https.onCall((data, context) => {
   // get user and add custom claim(admin)
-  return admin.auth().getUserByEmail(data.email).then((user) => {
-    return admin.auth().setCustomUserClaims(user.uid, {
-      admin: true
+  if (context.auth?.token.admin) {
+    return admin.auth().getUserByEmail(data.granteeEmail).then((user) => {
+      return admin.auth().setCustomUserClaims(user.uid, {
+        admin: true
+      }).then(() => {
+        return db.collection('Admins').doc(`${data.granteeEmail}`).update({
+          granteeEmail: data.granteeEmail,
+          grantDate: Date.now(),
+          byWhom: data.granterEmail
+        }).then(() => {
+          console.log(`${data.granteeEmail} entry created!`);
+        }).catch((error) => {
+          console.error(error, `${data.granteeEmail} entry created failed!`);
+        });
+      });
+
+    }).then(() => {
+      console.log(`${data.granteeEmail} added as Admin`);
+      return {
+        message: `Success! ${data.granteeEmail} has been made as an admin`,
+        set: true
+      };
+    }).catch((error) => {
+      console.error(error);
+      return error;
     });
-  }).then(() => {
-    console.log(`${data.email} added as Admin`);
+  } else {
     return {
-      message: `Success! ${data.email} has been made as an admin`,
-      set: true
+      message: `Authentication failed`,
+      set: false
     };
-  }).catch((error) => {
-    console.error(error);
-    return error;
-  });
+  }
 });
 
-export const validateCoupon = functions.https.onCall((coupon, context)=>{
-  return  db.collection('Coupons').doc(`${coupon}`).get().then((doc)=>{
-      if(doc.exists){
-        console.log(`someone tries to use coupon: "${coupon}"`);
-        return {
-          doc: doc.data(),
-          valid: true
-        }
-      }else{
-        console.error(`someone tries to use non-existing coupon: "${coupon}"`);
-        return {
-          doc: '',
-          valid: false
-        }
-      }
-    }).catch((error)=>{
-      console.error(error, 'validating coupon error!');
-      return error;
-  })
+export const validateCoupon = functions.https.onCall((coupon, context) => {
+  return db.collection('Coupons').doc(`${coupon}`).get().then((doc) => {
+    if (doc.exists) {
+      console.log(`someone tries to use coupon: "${coupon}"`);
+      return {
+        doc: doc.data(),
+        valid: true
+      };
+    } else {
+      console.error(`someone tries to use non-existing coupon: "${coupon}"`);
+      return {
+        doc: '',
+        valid: false
+      };
+    }
+  }).catch((error) => {
+    console.error(error, 'validating coupon error!');
+    return error;
+  });
 });
 
