@@ -24,6 +24,7 @@
     "@angular/platform-browser-dynamic": "~9.0.4",
     "@angular/router": "~9.0.4",
     "@firebase/auth-types": "^0.9.4",
+    "@firebase/firestore": "^1.13.1",
     "@ng-bootstrap/ng-bootstrap": "^4.2.2",
     "@ng-bootstrap/schematics": "^2.0.0-alpha.1",
     "@ngrx/core": "^1.2.0",

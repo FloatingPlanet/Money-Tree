@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
-import {
-  AngularFirestore,
-  AngularFirestoreCollection,
-} from 'angularfire2/firestore';
+import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
+
 import {Category} from 'src/app/models/category';
 import {Product} from '../../models/product';
-import Query = firebase.firestore.Query;
+
+const INITIAL_LOAD_SIZE = 4;
+const EXPEND_LOAD_SIZE = 4;
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +34,7 @@ export class CategoryService {
   public productMap: {
     [cat: string]: {
       products: Product[];
-      query: Query;
+      query: any;
       lastDoc: any
     }
   } = {};
@@ -59,25 +59,22 @@ retrieve specific products based on given category with @limit
   public getProductsWithCategory(C: string) {
     return new Promise((res, rej) => {
       this.chosenCategory = C;
-      let chosenCategoryCollection: Query;
+      // let chosenCategoryQuery: AngularFirestoreCollection;
       let lastDoc: any;
       // check if this category products has been loaded, if so grab it from map
       if (this.productMap.hasOwnProperty(C)) {
         // update local var
         this.chosenCategoryProducts = this.productMap[C].products;
-        chosenCategoryCollection = this.productMap[C].query;
-        lastDoc = this.productMap[C].lastDoc;
+        // chosenCategoryQuery = this.productMap[C].query;
+        // lastDoc = this.productMap[C].lastDoc;
       } else {
         // clear chosenCategoryProducts when use switch around
         this.chosenCategoryProducts = [];
-        // chosenCategoryCollection = this.CategoriesCollection
-        //   .doc(this.chosenCategory.toUpperCase())
-        //   .collection('products');
 
         // const productFetchQuery = chosenCategoryCollection.ref.limit(4);
-        const productFetchQuery = this.db.collection('Products').ref.
-        where('productCategory', 'array-contains', this.chosenCategory.toUpperCase()).limit(4);
-        productFetchQuery.get().then((products) => {
+        const productFetchQuery =
+          this.db.collection('Products').ref.where('productCategory', 'array-contains', this.chosenCategory.toUpperCase());
+        productFetchQuery.limit(INITIAL_LOAD_SIZE).get().then((products) => {
           products.forEach((doc) => {
             this.chosenCategoryProducts.push(doc.data() as Product);
             lastDoc = doc;
@@ -102,19 +99,16 @@ retrieve specific products based on given category with @limit
   public loadAnotherProducts() {
     return new Promise((res, rej) => {
       this.loading = true;
-      const chosenCategoryCollection = this.productMap[this.chosenCategory].query;
+      const chosenCategoryQuery = this.productMap[this.chosenCategory].query;
       let lastDoc = this.productMap[this.chosenCategory].lastDoc;
-      setTimeout(() => {
-        const productFetchQuery = chosenCategoryCollection.startAfter(lastDoc);
-        productFetchQuery.get().then((products) => {
-          products.forEach((doc) => {
-            this.chosenCategoryProducts.push(doc.data() as Product);
-            lastDoc = doc;
-            // update cursor for next lazy load
-            this.productMap[this.chosenCategory].lastDoc = Object.assign(lastDoc);
-          });
-        }).catch((err) => rej(err));
-      }, 500);
+      chosenCategoryQuery.limit(EXPEND_LOAD_SIZE).startAfter(lastDoc).get().then((products) => {
+        products.forEach((doc) => {
+          this.chosenCategoryProducts.push(doc.data() as Product);
+          lastDoc = doc;
+          // update cursor for next lazy load
+          this.productMap[this.chosenCategory].lastDoc = Object.assign(lastDoc);
+        });
+      }).catch((err) => rej(err));
       res();
     });
   }
@@ -154,6 +148,4 @@ retrieve specific products based on given category with @limit
       console.error(error);
     });
   }
-
-
 }
