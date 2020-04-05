@@ -82,10 +82,11 @@ export const grantPermission = functions.https.onCall((data, context) => {
       return admin.auth().setCustomUserClaims(user.uid, {
         admin: true
       }).then(() => {
-        return db.collection('Admins').doc(`${data.granteeEmail}`).update({
+        return db.collection('Admins').doc(`${user.uid}`).set({
           granteeEmail: data.granteeEmail,
-          grantDate: Date.now(),
-          byWhom: data.granterEmail
+          grantDate: admin.firestore.Timestamp.now(),
+          byWhom: data.granterEmail,
+          grantLevel: 10
         }).then(() => {
           console.log(`${data.granteeEmail} entry created!`);
         }).catch((error) => {
