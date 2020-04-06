@@ -102,7 +102,7 @@ export const grantPermission = functions.https.onCall((data, context) => {
       };
     }).catch((error) => {
       console.error(error);
-      return error;
+      return {message: `${data.granteeEmail} does not exist in database`, set: false};
     });
   } else {
     return {
