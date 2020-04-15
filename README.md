@@ -18,7 +18,7 @@
 ## INITILIZE_APP allows website does some process before load the whole page. good for authentication phase
 ## CanActive is good for preventing user from certain pages
 ~~### new UI Framework: https://semantic-ui.com/elements/step.html#step~~
-### Admin page has been separated, find repo [here](https://github.com/FloatingPlanet/Admin-Money-Tree)
+### Admin page has been deprecated, find repo [here](https://github.com/FloatingPlanet/Admin-Money-Tree)
    #### why user gives up checkout
     61%: Extra costs (shipping, taxes, fees) were too high
     35%: Didn’t want to create an account
