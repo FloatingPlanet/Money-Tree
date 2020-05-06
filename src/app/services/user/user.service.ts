@@ -218,8 +218,7 @@ export class UserService {
 
   /* #########################################################################
   ############################################################################
-       Following functions are the examples how to write spaghetti code.
-       Do not delete them, 以儆效尤！
+       Do not delete them
   ############################################################################
   ############################################################################
    */
@@ -241,7 +240,6 @@ export class UserService {
   get currentUser(): any {
     return this.authenticated ? this.authMetaData : null;
   }
-
 
   // Returns current user UID
   get currentUserId(): string {
@@ -345,8 +343,6 @@ export class UserService {
       .catch((error) => console.log(error));
   }
 
-
-  //// Sign Out ////
 
   signOut() {
     return new Promise(((resolve, reject) => {
