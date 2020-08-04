@@ -8,17 +8,15 @@
 ### Implement a template for e-commerces, focus on basic functionalities by using angular, angular material, bootstrap design and firestore.
 ![header](https://github.com/shanerbo/project-money-tree/blob/master/forest%20peak.PNG)
 #### [Demo](https://silver-piggy-client.firebaseapp.com/) built by this template
-### Material Design Framework:
+#### Material Design Framework:
   1. [MDB pro (pricy)](https://mdbootstrap.com/products/angular-ui-kit/)
   2. [Material Design for Bootstrap](https://github.com/FezVrasta/bootstrap-material-design)
   3. [Bootstrap](https://getbootstrap.com/docs/4.4/layout/overview/)
   4. [Nebular](https://akveo.github.io/nebular/docs/components/components-overview)
-## Important!!!!!!!!!!!! everything related to user'data, you have to check if user still loged in by using this.us.logInObservable()
-## Important!!!!!!!!!!!! Objects and arrays are passed by references, so that we do not have to use observable to track changes
-## INITILIZE_APP allows website does some process before load the whole page. good for authentication phase
-## CanActive is good for preventing user from certain pages
+#### INITILIZE_APP allows website does some process before load the whole page. good for authentication phase
+#### CanActive is good for preventing user from certain pages
 ~~### new UI Framework: https://semantic-ui.com/elements/step.html#step~~
-### Admin page has been deprecated, find repo [here](https://github.com/FloatingPlanet/Admin-Money-Tree)
+#### Admin page has been deprecated, find repo [here](https://github.com/FloatingPlanet/Admin-Money-Tree)
    #### why user gives up checkout
     61%: Extra costs (shipping, taxes, fees) were too high
     35%: Didn’t want to create an account
@@ -31,7 +29,7 @@
     8%: Didn’t see their preferred method of payment
     .5%: Their credit card was declined
     
-## For multi-vendor website, each seller has its own admin page
+### For multi-vendor website, each seller has its own admin page
 #### TODO: 
 ![diagram](https://github.com/shanerbo/project-money-tree/blob/master/G390i.png)
 1. Third party payment service.
@@ -82,8 +80,6 @@
 21. #### Refactor all form and button to Nebular
 22. can we store nebular or other framework locally just in case dependencies decrepted 
 99. Remove all warnings and errors
-##### CTO: [Otto hu](https://github.com/aWildOtto)
-##### CEO: [Jiaran Yu](https://github.com/jiaranyu)
-##### Cleaner: [Erbo Shan](https://github.com/shanerbo)
-![money tree](https://github.com/shanerbo/project-money-tree/blob/master/rsz_money-tree.png)
+##### HTML/CSS/Date hook up: [Jiaran Yu](https://github.com/jiaranyu)
+##### Cook: [Erbo Shan](https://github.com/shanerbo)
  
