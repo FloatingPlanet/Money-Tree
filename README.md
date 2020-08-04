@@ -7,7 +7,7 @@
 # MONEY TREE
 ### Implement a template for e-commerces, focus on basic functionalities by using angular, angular material, bootstrap design and firestore.
 ![header](https://github.com/shanerbo/project-money-tree/blob/master/forest%20peak.PNG)
-
+#### [Demo](https://silver-piggy-client.firebaseapp.com/) built by this template
 ### Material Design Framework:
   1. [MDB pro (pricy)](https://mdbootstrap.com/products/angular-ui-kit/)
   2. [Material Design for Bootstrap](https://github.com/FezVrasta/bootstrap-material-design)
